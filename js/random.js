@@ -1,1 +1,1 @@
-var posts=["2023/03/28/docker-使用方法/","2023/03/25/hello-world/"];function toRandomPost(){window.open('/'+posts[Math.floor(Math.random() * posts.length)],"_self");};
+var posts=["2023/03/30/Linux桌面美化之音频频谱可视化-panon/","2023/03/28/docker-使用方法/","2023/03/25/hello-world/"];function toRandomPost(){window.open('/'+posts[Math.floor(Math.random() * posts.length)],"_self");};
