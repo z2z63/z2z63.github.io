@@ -1,1 +1,1 @@
-var posts=["2023/03/28/docker-tutorial/","2023/03/30/linux-desktop-widget-panon/","2023/04/01/linux-file-search/","2023/04/04/linux-terminal-shortcut/","2023/04/02/matplotlib-chinese-font/"];function toRandomPost(){window.open('/'+posts[Math.floor(Math.random() * posts.length)],"_self");};
+var posts=["2023/03/28/docker-tutorial/","2023/03/30/linux-desktop-widget-panon/","2023/04/04/linux-terminal-shortcut/","2023/04/01/linux-file-search/","2023/04/02/matplotlib-chinese-font/"];function toRandomPost(){window.open('/'+posts[Math.floor(Math.random() * posts.length)],"_self");};
