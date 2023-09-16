@@ -3,10 +3,14 @@ languageCode = 'zh-cn'
 title = "Virtualfutre's Blog"
 
 theme = "DoIt"
+summaryLength = 70
+hasCJKLanguage = true
 
 [params]
   # DoIt theme version
   version = "0.2.X"
+[params.math]
+  enable = true
 
 [menu]
   [[menu.main]]
@@ -43,3 +47,4 @@ theme = "DoIt"
   [markup.highlight]
     # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
     noClasses = false
+

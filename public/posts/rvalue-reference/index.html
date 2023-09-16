@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>右值引用 - Virtualfutre&#39;s Blog</title><meta name="Description" content=""><meta property="og:title" content="右值引用" />
+<meta property="og:description" content="C&#43;&#43;11后引入了右值引用等特性，用来支持移动语义和完美转发，在了解右值引用前，需要了解一些前置的概念 左值(lvalue) 左值字面意义是在等" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/rvalue-reference/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-29T22:20:02+00:00" />
+<meta property="article:modified_time" content="2023-05-29T22:20:02+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="右值引用"/>
+<meta name="twitter:description" content="C&#43;&#43;11后引入了右值引用等特性，用来支持移动语义和完美转发，在了解右值引用前，需要了解一些前置的概念 左值(lvalue) 左值字面意义是在等"/>
+<meta name="application-name" content="Virtualfutre&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Virtualfutre&#39;s Blog">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/rvalue-reference/" /><link rel="prev" href="http://example.org/posts/matlab-calculus/" /><link rel="next" href="http://example.org/posts/this-in-js/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "右值引用",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/rvalue-reference\/"
+        },"genre": "posts","keywords": "mordencpp","wordcount":  1981 ,
+        "url": "http:\/\/example.org\/posts\/rvalue-reference\/","datePublished": "2023-05-29T22:20:02+00:00","dateModified": "2023-05-29T22:20:02+00:00","publisher": {
+            "@type": "Organization",
+            "name": "Author"},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.2.0" defer type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
+</head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">右值引用</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">Author</a>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-29">2023-05-29</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-05-29">2023-05-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1981 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="content" id="content"><p>C++11后引入了右值引用等特性，用来支持移动语义和完美转发，在了解右值引用前，需要了解一些前置的概念</p>
+<ol>
+<li>左值(lvalue)
+左值字面意义是在等号左边的值，左值是寻址的，具名的，有标识符的<br>
+有一个特点是，所有声明的变量都是左值</li>
+<li>右值(rvalue)
+右值字面意义是在等号右边的值，右值不可寻址，不具名
+具体而言：
+<ul>
+<li>一个整数字面量是右值，因为它不对应一个内存存储位置，在汇编中，它存在于指令中的立即数字段</li>
+<li>一个临时对象是右值，临时对象是为了写连续的表达式而被编译器支持的，当有例如<code>func(obj())</code>时，首先建立一个obj对象，这个对象没有名字，它实际上有一个对于的内存存储位置，但在这行代码执行完后就会被销毁，所以它叫做临时对象</li>
+</ul>
+</li>
+</ol>
+<p>cpp对临时对象有一个限制，因为临时对象是马上就会被销毁的，所以对临时对象的修会被抛弃</p>
+<ul>
+<li><code>fn(int a)</code> 可以用<code>fn(a)</code>和<code>fn(1)</code>调用，但是会造成复制</li>
+<li><code>fn(int &amp;a)</code>不可以用<code>fn(1)</code>调用，因为cpp认为<code>int&amp;</code>是允许修改的，而如果修改一个字面量，因为找不到它的内存存储位置，所以无法修改</li>
+<li><code>fn(const int&amp; a)</code>可以用<code>fn(1)</code>调用，因为<code>fn</code>通过<code>const</code>关键字保证自己不会修改临时对象，所以允许传入字面量</li>
+</ul>
+<h1 id="左值引用" class="headerLink">
+    <a href="#%e5%b7%a6%e5%80%bc%e5%bc%95%e7%94%a8" class="header-mark"></a>左值引用</h1><p>左值常常被称为是变量的别名，为什么呢？<br>
+根据左值的概念，可以确定</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span><span class="o">&amp;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span></code></pre></div><p>从抽象的角度来看，a，b具有响应式的关系，修改一个，另一个也会改变<br>
+但实际上，a，b是对同一个地址的引用，换句话来说，a，b &lsquo;underlying&rsquo; 的对象只有一个，这里的对象并不是面向对象的对象<br>
+反汇编的结果也能证实这一观点</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">        int a = 5;
+</span></span><span class="line"><span class="cl">    1170:       c7 45 e4 05 00 00 00    movl   $0x5,-0x1c(%rbp)
+</span></span><span class="line"><span class="cl">        int &amp;b = a;
+</span></span><span class="line"><span class="cl">    1177:       48 8d 45 e4             lea    -0x1c(%rbp),%rax
+</span></span><span class="line"><span class="cl">    117b:       48 89 45 e8             mov    %rax,-0x18(%rbp)
+</span></span></code></pre></div><p>可见，<code>b</code>其实跟<code>*(&amp;a)</code>是同义的，而我们知道，<code>*</code>和<code>&amp;</code>效果刚好是相反的，也就说，<code>b</code>和<code>a</code>是同一个东西，这代表”b是a的别名“，也可以得出<code>&amp;b</code>和<code>&amp;a</code>是同一个东西，这代表”b和a &lsquo;underlying&rsquo;的对象是同一个“<br>
+当左值引用作为函数参数传递时，在汇编层面上，实际上传递的是地址<br>
+左值引用的初衷也是简化指针的使用，左值引用具有指针的优点：能在函数内修改外部的值，又规避了指针的缺点：错误的指针运算会导致野指针，也可以认为它是受约束的指针</p>
+<h1 id="右值引用" class="headerLink">
+    <a href="#%e5%8f%b3%e5%80%bc%e5%bc%95%e7%94%a8" class="header-mark"></a>右值引用</h1><p>当自己动手实现一个栈类时，会遇到这个问题</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Object</span> <span class="n">obj</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+</span></span></code></pre></div><p>当push的定义为<code>push(Obeject obj)</code>时，会造成复制行为<br>
+当push的定义为<code>push(Object&amp; obj)</code>时，虽然可以避免复制，但是又会产生一个新的问题</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">function</span><span class="p">(</span><span class="n">Vector</span><span class="o">&amp;</span> <span class="n">vector</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Object</span> <span class="n">obj</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="err">；</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这时，由于<code>obj</code>对象是分配在栈上的，当函数退出时，栈帧被清空，<code>obj</code>对象也就不存在了，然而<code>vector</code>还保留着对<code>obj</code>对象的引用<br>
+这种情况其实经常发生，它表现了资源移动时的矛盾：又要避免复制，又要避免引用的对象提前销毁<br>
+一个简单的方法是使用<code>new</code>，在堆上构造obj，这样obj的生命期就足够长，能够避免obj提前被销毁<br>
+然而<code>new</code>后还需要<code>delete</code>，而<code>new</code>和<code>delete</code>不在同一个上下文中，非常容易忘记<code>delete</code><br>
+这时我们就会想，有没有一个方法能够适当延长<code>obj</code>对象的生命期，又能让他自动销毁呢？<br>
+答案就是右值引用了，push定义为<code>push(Object&amp;&amp; obj)</code>时，编译器会延长obj对象的生命期，在这个例子中，会采用返回值优化（Return Value Optimization, RVO）或命名的返回值优化（Named Return Value Optimization, NRVO），通过把<code>obj</code>这个对象构造在调用者的栈上，避免退出函数时<code>obj</code>对象被销毁，从而延长了<code>obj</code>对象的生命期<br>
+下面这个例子进一步说明了右值引用延长了临时对象的生命期</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Object</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Object constructed&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">Object</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Object destroyed&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">processObject</span><span class="p">(</span><span class="n">Object</span><span class="o">&amp;&amp;</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Processing object&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 对临时对象进行处理，这里只是简单地输出信息}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Object</span><span class="o">&amp;&amp;</span> <span class="n">ref</span> <span class="o">=</span> <span class="n">Object</span><span class="p">();</span>  <span class="c1">// 将临时对象绑定到右值引用    
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Before function call&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">processObject</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">ref</span><span class="p">));</span>  <span class="c1">// 通过右值引用传递临时对象    
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;After function call&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>编译后输出为</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Object constructed
+</span></span><span class="line"><span class="cl">Before function call
+</span></span><span class="line"><span class="cl">Processing object
+</span></span><span class="line"><span class="cl">After function call
+</span></span><span class="line"><span class="cl">Object destroyed
+</span></span></code></pre></div><p>右值引用会延长临时对象的生命期直到右值引用绑定的对象的生命期结束</p>
+<p>回到之前的例子，如果一个函数又要接收左值作为参数，又要接受右值作为参数，可以用<code>fn(int&amp;&amp; a)</code>，同时能够在函数里修改a，但是对a作出的修改最终都会被抛弃<br>
+为什么对a作出的修改都会被抛弃呢？<br>
+因为右值是不具名的，即使它被改变了，也没有任何方法能够访问到它</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">fn</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">a</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span>  <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">a</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fn</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>输出为</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">5
+</span></span><span class="line"><span class="cl">4
+</span></span><span class="line"><span class="cl">3
+</span></span><span class="line"><span class="cl">2
+</span></span><span class="line"><span class="cl">1
+</span></span></code></pre></div><p>这个例子可能非常反直觉，当执行<code>a--</code>时，肯定有一个内存存储位置被赋值了，但是这个位置在哪里？
+反汇编后结果如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">int main(){
+</span></span><span class="line"><span class="cl">                    ...
+</span></span><span class="line"><span class="cl">        fn(5);
+</span></span><span class="line"><span class="cl">    11c4:       c7 45 f4 05 00 00 00    movl   $0x5,-0xc(%rbp)
+</span></span><span class="line"><span class="cl">    11cb:       48 8d 45 f4             lea    -0xc(%rbp),%rax
+</span></span><span class="line"><span class="cl">    11cf:       48 89 c7                mov    %rax,%rdi
+</span></span><span class="line"><span class="cl">    11d2:       e8 82 ff ff ff          call   1159 &lt;_Z2fnOi&gt;
+</span></span></code></pre></div><p>编译器居然为我们分配了一个变量！<br>
+汇编代码等效为</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></span></code></pre></div><p>如果把<code>fn</code>修改为<code>void fn(int a)</code>，相应的反汇编结果为</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">        fn(5);
+</span></span><span class="line"><span class="cl">    118e:       bf 05 00 00 00          mov    $0x5,%edi
+</span></span><span class="line"><span class="cl">    1193:       e8 b1 ff ff ff          call   1149 &lt;_Z2fni&gt;
+</span></span></code></pre></div></div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-05-29</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/mordencpp/">mordencpp</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/matlab-calculus/" class="prev" rel="prev" title="MATLAB微积分"><i class="fas fa-angle-left fa-fw"></i>MATLAB微积分</a>
+            <a href="/posts/this-in-js/" class="next" rel="next" title="JS中的this">JS中的this<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.118.2">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

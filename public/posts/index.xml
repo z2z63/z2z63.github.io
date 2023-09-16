@@ -1,0 +1,77 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - Virtualfutre&#39;s Blog</title>
+        <link>http://example.org/posts/</link>
+        <description>All Posts | Virtualfutre&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>推荐系统概述</title>
+    <link>http://example.org/posts/recsys-summary/</link>
+    <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/recsys-summary/</guid>
+    <description><![CDATA[recsys(推荐系统)的种类 collaborative filtering（协同过滤）根据相似用户的行为为用户推荐内容，推荐理由是“与你相似的人都喜欢xx”， 缺点是]]></description>
+</item><item>
+    <title>KDE折腾之自动化设置</title>
+    <link>http://example.org/posts/kde-setting-cli/</link>
+    <pubDate>Fri, 21 Jul 2023 13:14:56 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/kde-setting-cli/</guid>
+    <description><![CDATA[需求我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个]]></description>
+</item><item>
+    <title>JS中的this</title>
+    <link>http://example.org/posts/this-in-js/</link>
+    <pubDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/this-in-js/</guid>
+    <description><![CDATA[箭头函数和普通函数中的this const obj = { name: &#34;Alice&#34;, ptr:this, sayName: function () { console.log(this) }, sayNameArrow: () =&gt; { console.log(this) } }; const sayName = obj.sayName; const sayNameArrow = obj.sayNameArrow; obj.sayName(); sayName(); obj.sayNameArrow(); sayNameArrow(); 输出为 {name: &#39;Alice&#39;, ptr: Window, sayName: ƒ, sayNameArrow: ƒ} demo1.js:5 Window {window: Window, self: Window, document: document, name: &#39;&#39;,]]></description>
+</item><item>
+    <title>右值引用</title>
+    <link>http://example.org/posts/rvalue-reference/</link>
+    <pubDate>Mon, 29 May 2023 22:20:02 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/rvalue-reference/</guid>
+    <description><![CDATA[C++11后引入了右值引用等特性，用来支持移动语义和完美转发，在了解右值引用前，需要了解一些前置的概念 左值(lvalue) 左值字面意义是在等]]></description>
+</item><item>
+    <title>MATLAB微积分</title>
+    <link>http://example.org/posts/matlab-calculus/</link>
+    <pubDate>Fri, 26 May 2023 15:51:48 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/matlab-calculus/</guid>
+    <description><![CDATA[MATLAB数值求解微分方程所谓数值求解，也就是无法获得解的方程，只能获得y(x)函数在x取值范围内的近似值 所有MATALB的DOE solv]]></description>
+</item><item>
+    <title>Linux 神级文件管理器ranger</title>
+    <link>http://example.org/posts/file-manager-ranger/</link>
+    <pubDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/file-manager-ranger/</guid>
+    <description><![CDATA[ranger是linux的一个终端文件管理器，它的feature有 vi按键绑定 与shell环境完美结合，可以使用各种shell工具 在tty上]]></description>
+</item><item>
+    <title>函数传参的入栈顺序造成的一些细微影响</title>
+    <link>http://example.org/posts/function-parameters-push-stack-order/</link>
+    <pubDate>Thu, 06 Apr 2023 00:09:32 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/function-parameters-push-stack-order/</guid>
+    <description><![CDATA[最近遇到了一个函数传参造成的问题，于是来稍微研究一下这个东西 什么是函数传参顺序？ 一个简单例子 bar(foo(1), foo(2)); 为了准备bar函数需要的参数，需要先执行fo]]></description>
+</item><item>
+    <title>Linux shell常用快捷键</title>
+    <link>http://example.org/posts/linux-terminal-shortcut/</link>
+    <pubDate>Tue, 04 Apr 2023 23:33:26 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/linux-terminal-shortcut/</guid>
+    <description><![CDATA[在linux使用shell时常常会遇到一些使用场景需要大量重复敲击按键，带来了一些麻烦，所以学会一些快捷键是 必备的，但是有些快捷键几乎没用，]]></description>
+</item><item>
+    <title>matplotlib在linux平台上显示中文的解决方案</title>
+    <link>http://example.org/posts/matplotlib-chinese-font/</link>
+    <pubDate>Sun, 02 Apr 2023 22:12:22 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/matplotlib-chinese-font/</guid>
+    <description><![CDATA[matplotlib 是python的可视化库，但是如果在matplotlib的图表中使用了中文， 会找不到中文字体而显示乱码，网上有很多教程解决这个问题，但是在]]></description>
+</item><item>
+    <title>Linux搜索神器</title>
+    <link>http://example.org/posts/linux-file-search/</link>
+    <pubDate>Sat, 01 Apr 2023 23:35:22 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/linux-file-search/</guid>
+    <description><![CDATA[使用Linux时，常常需要在文件系统中快速搜索到内容，比如说 在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径 想找某个文件，但]]></description>
+</item></channel>
+</rss>

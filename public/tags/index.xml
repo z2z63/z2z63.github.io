@@ -1,0 +1,63 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - Tag - Virtualfutre&#39;s Blog</title>
+        <link>http://example.org/tags/</link>
+        <description>Tags - Tag - Virtualfutre&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Mechine Learning</title>
+    <link>http://example.org/tags/mechine-learning/</link>
+    <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/tags/mechine-learning/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Linux</title>
+    <link>http://example.org/tags/linux/</link>
+    <pubDate>Fri, 21 Jul 2023 13:14:56 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/tags/linux/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Linux Desktop</title>
+    <link>http://example.org/tags/linux-desktop/</link>
+    <pubDate>Fri, 21 Jul 2023 13:14:56 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/tags/linux-desktop/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>JS</title>
+    <link>http://example.org/tags/js/</link>
+    <pubDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/tags/js/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>mordencpp</title>
+    <link>http://example.org/tags/mordencpp/</link>
+    <pubDate>Mon, 29 May 2023 22:20:02 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/tags/mordencpp/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>科学计算</title>
+    <link>http://example.org/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
+    <pubDate>Fri, 26 May 2023 15:51:48 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Coding</title>
+    <link>http://example.org/tags/coding/</link>
+    <pubDate>Thu, 06 Apr 2023 00:09:32 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/tags/coding/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>汇编</title>
+    <link>http://example.org/tags/%E6%B1%87%E7%BC%96/</link>
+    <pubDate>Thu, 06 Apr 2023 00:09:32 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/tags/%E6%B1%87%E7%BC%96/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
+</rss>

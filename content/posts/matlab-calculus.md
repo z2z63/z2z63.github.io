@@ -2,11 +2,13 @@
 title: MATLAB微积分
 date: 2023-05-26 15:51:48
 tags: [科学计算]
-mathjax: true
+math:
+  enable: true
 ---
 ## MATLAB数值求解微分方程
 所谓数值求解，也就是无法获得解的方程，只能获得y(x)函数在x取值范围内的近似值
 所有MATALB的DOE solver都可以解决形如$\frac{\mathrm{d}y}{\mathrm{d}t}=f(t,y)$的微分方程，所以很多时候需要把待求解微分方程化成这种形式，这种形式有几种特点
+
 1. 导数在等号左边
 2. 只有两个变量
 3. 导数只有一阶

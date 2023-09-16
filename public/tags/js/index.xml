@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>JS - Tag - Virtualfutre&#39;s Blog</title>
+        <link>http://example.org/tags/js/</link>
+        <description>JS - Tag - Virtualfutre&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/js/" rel="self" type="application/rss+xml" /><item>
+    <title>JS中的this</title>
+    <link>http://example.org/posts/this-in-js/</link>
+    <pubDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/this-in-js/</guid>
+    <description><![CDATA[箭头函数和普通函数中的this const obj = { name: &#34;Alice&#34;, ptr:this, sayName: function () { console.log(this) }, sayNameArrow: () =&gt; { console.log(this) } }; const sayName = obj.sayName; const sayNameArrow = obj.sayNameArrow; obj.sayName(); sayName(); obj.sayNameArrow(); sayNameArrow(); 输出为 {name: &#39;Alice&#39;, ptr: Window, sayName: ƒ, sayNameArrow: ƒ} demo1.js:5 Window {window: Window, self: Window, document: document, name: &#39;&#39;,]]></description>
+</item></channel>
+</rss>

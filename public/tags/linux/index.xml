@@ -1,0 +1,56 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Linux - Tag - Virtualfutre&#39;s Blog</title>
+        <link>http://example.org/tags/linux/</link>
+        <description>Linux - Tag - Virtualfutre&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 21 Jul 2023 13:14:56 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>KDE折腾之自动化设置</title>
+    <link>http://example.org/posts/kde-setting-cli/</link>
+    <pubDate>Fri, 21 Jul 2023 13:14:56 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/kde-setting-cli/</guid>
+    <description><![CDATA[需求我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个]]></description>
+</item><item>
+    <title>Linux 神级文件管理器ranger</title>
+    <link>http://example.org/posts/file-manager-ranger/</link>
+    <pubDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/file-manager-ranger/</guid>
+    <description><![CDATA[ranger是linux的一个终端文件管理器，它的feature有 vi按键绑定 与shell环境完美结合，可以使用各种shell工具 在tty上]]></description>
+</item><item>
+    <title>Linux shell常用快捷键</title>
+    <link>http://example.org/posts/linux-terminal-shortcut/</link>
+    <pubDate>Tue, 04 Apr 2023 23:33:26 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/linux-terminal-shortcut/</guid>
+    <description><![CDATA[在linux使用shell时常常会遇到一些使用场景需要大量重复敲击按键，带来了一些麻烦，所以学会一些快捷键是 必备的，但是有些快捷键几乎没用，]]></description>
+</item><item>
+    <title>matplotlib在linux平台上显示中文的解决方案</title>
+    <link>http://example.org/posts/matplotlib-chinese-font/</link>
+    <pubDate>Sun, 02 Apr 2023 22:12:22 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/matplotlib-chinese-font/</guid>
+    <description><![CDATA[matplotlib 是python的可视化库，但是如果在matplotlib的图表中使用了中文， 会找不到中文字体而显示乱码，网上有很多教程解决这个问题，但是在]]></description>
+</item><item>
+    <title>Linux搜索神器</title>
+    <link>http://example.org/posts/linux-file-search/</link>
+    <pubDate>Sat, 01 Apr 2023 23:35:22 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/linux-file-search/</guid>
+    <description><![CDATA[使用Linux时，常常需要在文件系统中快速搜索到内容，比如说 在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径 想找某个文件，但]]></description>
+</item><item>
+    <title>Linux桌面美化之音频频谱可视化部件panon以及pulseaudio天坑</title>
+    <link>http://example.org/posts/linux-desktop-widget-panon/</link>
+    <pubDate>Thu, 30 Mar 2023 16:47:42 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/linux-desktop-widget-panon/</guid>
+    <description><![CDATA[panon是一个 KDE 的音频频谱可视化 widget(插件)先上效果图 如何使用 安装依赖 sudo pacman -S qt5-websockets \ python-docopt python-numpy python-pyaudio python-cffi python-websockets 在 KDE 桌面右键点击 “add Widget”，]]></description>
+</item><item>
+    <title>docker 使用方法</title>
+    <link>http://example.org/posts/docker-tutorial/</link>
+    <pubDate>Tue, 28 Mar 2023 23:21:19 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/docker-tutorial/</guid>
+    <description><![CDATA[docker是容器技术，是向管理复杂依赖关系的妥协，也是快速部署软件的方法 安装 首先用包管理器安装docker sudo pacma -S docker 然后启动docker de]]></description>
+</item></channel>
+</rss>

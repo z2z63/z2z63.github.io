@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Linux 神级文件管理器ranger - Virtualfutre&#39;s Blog</title><meta name="Description" content=""><meta property="og:title" content="Linux 神级文件管理器ranger" />
+<meta property="og:description" content="ranger是linux的一个终端文件管理器，它的feature有 vi按键绑定 与shell环境完美结合，可以使用各种shell工具 在tty上" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/file-manager-ranger/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-13T12:29:06+00:00" />
+<meta property="article:modified_time" content="2023-04-13T12:29:06+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux 神级文件管理器ranger"/>
+<meta name="twitter:description" content="ranger是linux的一个终端文件管理器，它的feature有 vi按键绑定 与shell环境完美结合，可以使用各种shell工具 在tty上"/>
+<meta name="application-name" content="Virtualfutre&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Virtualfutre&#39;s Blog">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/file-manager-ranger/" /><link rel="prev" href="http://example.org/posts/function-parameters-push-stack-order/" /><link rel="next" href="http://example.org/posts/matlab-calculus/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Linux 神级文件管理器ranger",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/file-manager-ranger\/"
+        },"genre": "posts","keywords": "Linux","wordcount":  3879 ,
+        "url": "http:\/\/example.org\/posts\/file-manager-ranger\/","datePublished": "2023-04-13T12:29:06+00:00","dateModified": "2023-04-13T12:29:06+00:00","publisher": {
+            "@type": "Organization",
+            "name": "Author"},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.2.0" defer type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
+</head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux 神级文件管理器ranger</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">Author</a>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-04-13">2023-04-13</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-04-13">2023-04-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3879 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="content" id="content"><p><a href="https://github.com/ranger/ranger" target="_blank" rel="noopener noreferrer">ranger</a>是linux的一个终端文件管理器，它的feature有</p>
+<ul>
+<li>vi按键绑定</li>
+<li>与shell环境完美结合，可以使用各种shell工具</li>
+<li>在tty上也能工作</li>
+<li>像vim一样的可扩展性</li>
+</ul>
+<p><figure><a class="lightgallery" href="https://i.328888.xyz/2023/04/13/igZp5X.png" title="ranger预览图" data-thumbnail="https://i.328888.xyz/2023/04/13/igZp5X.png">
+        <img
+            
+            loading="lazy"
+            src="https://i.328888.xyz/2023/04/13/igZp5X.png"
+            srcset="https://i.328888.xyz/2023/04/13/igZp5X.png, https://i.328888.xyz/2023/04/13/igZp5X.png 1.5x, https://i.328888.xyz/2023/04/13/igZp5X.png 2x"
+            sizes="auto"
+            alt="ranger预览图">
+    </a></figure>
+本文是为了帮助我记忆一些ranger常用的功能而写的</p>
+<h1 id="文件树中导航" class="headerLink">
+    <a href="#%e6%96%87%e4%bb%b6%e6%a0%91%e4%b8%ad%e5%af%bc%e8%88%aa" class="header-mark"></a>文件树中导航</h1><p><code>h</code>,<code>j</code>,<code>k</code>,<code>l</code>同vi按键绑定</p>
+<h1 id="删除" class="headerLink">
+    <a href="#%e5%88%a0%e9%99%a4" class="header-mark"></a>删除</h1><p><code>dD</code> 删除
+<code>dT</code> 移动到回收站</p>
+<h1 id="重命名" class="headerLink">
+    <a href="#%e9%87%8d%e5%91%bd%e5%90%8d" class="header-mark"></a>重命名</h1><p><code>a</code>或<code>A</code>重命名，自动移动光标到扩展名前，默认行为是不修改扩展名
+<code>cw</code>也可以重命名，这个按键在vim中代表改变单词（<strong>c</strong>hange <strong>w</strong>ord）,与<code>a</code>的区别是，<code>a</code>修改文件名是在原文件名的基础上修改的，而<code>cw</code>要输入完整的文件名</p>
+<h1 id="历史导航" class="headerLink">
+    <a href="#%e5%8e%86%e5%8f%b2%e5%af%bc%e8%88%aa" class="header-mark"></a>历史导航</h1><p>一般的文件管理器往往有一个左右的箭头，代表回到之前的目录/回到之前离开的目录，或者更简单点，类似于浏览器的历史导航功能
+<code>H</code>或<code>L</code>在历史中导航，同vi按键绑定</p>
+<h1 id="复制" class="headerLink">
+    <a href="#%e5%a4%8d%e5%88%b6" class="header-mark"></a>复制</h1><p><code>y</code>，按键绑定同vi，表示yank 复制，接下一个按键才能表示一个具体操作</p>
+<ul>
+<li><code>yy</code> 复制文件，如同vim的<code>yy</code>表示复制一行</li>
+<li><code>yn</code> 复制文件名，即<strong>y</strong>ank <strong>n</strong>ame</li>
+<li><code>y.</code> 复制不带扩展名的文件名，即 <strong>y</strong>ank name before <strong>.</strong></li>
+<li><code>yp</code> 复制文件路径 即<strong>y</strong>ank <strong>p</strong>ath</li>
+</ul>
+<p>另外， <code>dd</code>代表剪贴，也有复制的功能
+与其他文件管理器不同的是，ranger维护一个复制缓冲区，当已经复制一些文件后，可以向复制缓冲区中添加或删除文件</p>
+<ul>
+<li><code>ya</code> 向缓冲区中添加文件</li>
+<li><code>yr</code> 将文件从缓冲区中删除</li>
+</ul>
+<h1 id="粘贴" class="headerLink">
+    <a href="#%e7%b2%98%e8%b4%b4" class="header-mark"></a>粘贴</h1><p><code>pp</code> 粘贴一个已经复制的文件到当前目录，同vim按键绑定
+<code>po</code> 粘贴并覆盖，即<strong>p</strong>aste and <strong>o</strong>verwrite
+当出现重名文件时，会自动修改文件名<br>
+使用shell复制时，往往会遇到这种情况：复制大文件时，会阻塞终端，花费时间很长，而且没有进度条<br>
+而ranger可以在后台复制大文件，不阻塞当前操作，并且会在底栏显示任务进度
+可以输入<code>w</code>查看ranger在后台进行的任务
+<code>pP</code>和<code>pO</code>对应<code>pp</code>和<code>po</code>，但是会在后台完成</p>
+<h1 id="多tab" class="headerLink">
+    <a href="#%e5%a4%9atab" class="header-mark"></a>多tab</h1><p>众所周知有一个操作系统的默认文件管理系统在过去一直没有tab栏的功能，跨目录复制文件时，常常需要打开两个窗口<br>
+<code>alt+$i</code> 表示打开第<code>$i</code>个tab，<code>$i</code>可以是数字1-9，还有两个特殊的按键
+<code>alt+l</code> 表示移动到上一个tab 即 <strong>l</strong>eft tab
+<code>alt+r</code> 表示移动到下一个tab 即 <strong>r</strong>ight tab</p>
+<h1 id="查看文件元数据" class="headerLink">
+    <a href="#%e6%9f%a5%e7%9c%8b%e6%96%87%e4%bb%b6%e5%85%83%e6%95%b0%e6%8d%ae" class="header-mark"></a>查看文件元数据</h1><p>一般的文件管理器常常有查看文件创建日期，大小的功能，但是往往还有所不足，例如</p>
+<ol>
+<li>目录的大小往往不显示（需要花费时间统计）</li>
+<li>文件的权限，所有者往往隐藏在属性一栏里</li>
+<li>文件的种类往往要通过扩展名判断</li>
+</ol>
+<p>ranger作为一个神级文件管理器，这些功能自然都是有的</p>
+<ol>
+<li>对于文件，会在文件名的右侧显示出大小，对于文件，默认显示4K（因为linux的目录是一个抽象的文件，它占用一个block，一个block大小是4K，用来存储目录的元数据）
+可以用<code>du</code>命令统计文件大小，等效于执行<code>du --max-depth=1</code>，也可以用<code>dU</code>，会将<code>du</code>的输出按照大小排序</li>
+<li>ranger的底栏会显示当前文件的权限（rwx），所有者/组，大小，上次的修改日期，当前目录的所有文件大小总和，当前文件所在的磁盘的剩余空间，当前屏幕占所有内容的进度（类似于vim显示光标在文本中的百分比位置）</li>
+<li>类似于shell，文件会被高亮显示，可以根据颜色快速区分目录，图片，压缩包，适配，可执行，软链接等等</li>
+</ol>
+<h1 id="快速导航" class="headerLink">
+    <a href="#%e5%bf%ab%e9%80%9f%e5%af%bc%e8%88%aa" class="header-mark"></a>快速导航</h1><p>一般的文件管理器往往在左侧有一些常用的位置，可以快速到达，ranger也可以快速到达一些常用的位置<br>
+<code>g</code>即<strong>g</strong>o，可以用来快速到达一个位置</p>
+<ol>
+<li><code>gh</code> 即<strong>g</strong>o <strong>h</strong>ome 相当于执行<code>cd ~</code>，这应该是linux用户最常用的功能</li>
+<li><code>gp</code> 即<strong>g</strong>o /tm<strong>p</strong>，快速到达/tmp目录</li>
+<li><code>gi</code> 相当于执行 <code>fm.cd('/run/media/' + os.getenv('USER'))</code>，这个目录是用来mount用户的外接存储设备的，U盘，机械硬盘都会被mount到这里</li>
+<li><code>gg</code>和 <code>G</code> 类似与vim的按键绑定，快速到达当前目录的开头和结尾</li>
+<li>还有<code>g/</code>,<code>ge</code>,<code>go</code>等等，但是使用次数比较少，没有必要记忆</li>
+</ol>
+<h1 id="打开shell" class="headerLink">
+    <a href="#%e6%89%93%e5%bc%80shell" class="header-mark"></a>打开shell</h1><p>在图形化的文件管理器中寻找文件时，往往需要打开shell输入命令，一般的文件管理器都有打开shell的功能，例如Windows的Explore可以Shift+右键可以在右键菜单中看到Open in Terminal，而KDE的dolphin甚至可以在下方打开一个pannel，随时使用shell
+<figure><a class="lightgallery" href="" title="dolphin的shell" data-thumbnail="">
+        <img
+            
+            loading="lazy"
+            src=""
+            srcset=",  1.5x,  2x"
+            sizes="auto"
+            alt="dolphin的shell">
+    </a></figure>
+要快速执行一个shell命令，可以输入<code>!</code>或<code>s</code>在底栏输入shell命令，但是这种方式不会返回任何输出（实际上，当退出ranger后就能看到之前shell命令的输出）
+为了获得输出，可以输入<code>S</code>，会打开一个shell，要退出这个shell只需要像一般的终端一样输入<code>exit</code>或按下Ctrl+D，会返回到ranger</p>
+<h1 id="打开文件" class="headerLink">
+    <a href="#%e6%89%93%e5%bc%80%e6%96%87%e4%bb%b6" class="header-mark"></a>打开文件</h1><p>很多文件管理器都有一个功能，就是打开文件，比如在Windows上双击一个扩展名为txt的文件，就会用记事本打开它，但是一般的文件管理器提供的这种功能往往有所不足，比如</p>
+<ol>
+<li>文件无法预览</li>
+<li>文件类型未知</li>
+<li>要用其他方式打开文件，往往需要打开一个二级菜单</li>
+</ol>
+<p>而ranger利用linux的生态巧妙地解决了这三个问题</p>
+<h2 id="文件预览" class="headerLink">
+    <a href="#%e6%96%87%e4%bb%b6%e9%a2%84%e8%a7%88" class="header-mark"></a>文件预览</h2><p>预览就是在不打开文件的情况下（不使用默认软件打开它）快速查看文件内容<br>
+在windows上实现文件预览，可以打开Explore的预览功能，但是这种功能实际使用中比较鸡肋，因为它只能预览极少类型的文件（例如txt），而且还会占用窗口很大的空间
+实际上，日常使用中遇到的文件类型是非常复杂的，比如说纯文本的文件</p>
+<ul>
+<li>txt</li>
+<li>各种语言的源文件，例如c,cpp,h,py,java,js,html,css,cs&hellip;</li>
+<li>数据交换文件，例如json, xml, scv&hellip;</li>
+<li>配置文件,例如conf, ini, cfg, yaml&hellip;</li>
+<li>日志文件，例如log,out等</li>
+<li>没有扩展名的纯文本</li>
+<li>各种各样编码方式的纯文本</li>
+</ul>
+<p>可见纯文本文件的类型就有非常多种，而不同纯文本文件的用途不同，期望的显示方式也不同，比如说</p>
+<ul>
+<li>大部分文件都只需要开头十几行，不需要读取完整的文件造成过多的磁盘访问浪费性能</li>
+<li>各种语言的源文件、配置文件、数据交换文件最好能有语法高亮，并使用等宽字体显示</li>
+<li>日志文件，最好高亮显示Warning等信息</li>
+<li>即使没有扩展名，也最好能够识别出它是纯文本并预览</li>
+</ul>
+<p>另外，还有很多各种各样的文件类型需要使用不同的预览方式，例如</p>
+<ol>
+<li>office的doc/docx, ppt/pptx, xls/xlsx文件快速预览</li>
+<li>图片jpg, png, svg等等的预览</li>
+<li>html，md文件的预览</li>
+</ol>
+<p>最特殊的，二进制文件，类型非常多，常见的有</p>
+<ol>
+<li>各种平台上的可执行</li>
+<li>各种平台上的动态库，静态库</li>
+<li>数据文件（数据格式有约定）</li>
+<li>压缩文件，存档文件
+&hellip;</li>
+</ol>
+<p>可见种类实在是太多了，很多文件管理器往往只能做到预览一部分的文件<br>
+ranger通过简单的配置就能做到识别文件并预览大部分的文件，可以通过修改<code>%rangerdir/data/scope.sh</code>来启用纯文本文件以外的预览（预览二进制）
+<code>scope.sh</code>会自动寻找已经安装的其他软件并使用它，比如说</p>
+<ul>
+<li><code>file</code> 用于检测文件类型</li>
+<li><code>chardet</code> 一个python的模块，用于检测文件编码方式</li>
+<li><code>python-bidi</code> 用于显示从右到左书写的文字，例如阿拉伯语</li>
+<li><code>img2txt</code> 用于显示图片的ASCII字符画</li>
+<li><code>w3mimgdisplay</code> / <code>ueberzug</code> / <code>mpv</code> / <code>iTerm2</code> / <code>kitty</code> / <code>Terminology</code>等等，用于图片预览</li>
+<li><code>convert</code> 是<code>imagemagick</code>工具的一部分，用来自动旋转图片并预览svg图片</li>
+<li><code>ffmpegthumbnailer</code> 用于显示视频的封面（缩略图）</li>
+<li><code>highlight</code> / <code>bat</code> / <code>pygmentize</code> 用于代码的语法高亮</li>
+<li><code>atoll</code> / <code>bsdtar</code> / <code>unrar</code> / <code>unzip</code> / <code>zipinfo</code> / <code>sed</code>  / <code>tar</code> / <code>7z</code> 用来预览存档和压缩文件</li>
+<li><code>lynx</code> / <code>w3m</code> / <code>elinks </code>用来预览html文件（渲染html）</li>
+<li><code>pdftotext</code> / <code>mutool</code>预览pdf的文本，<code>pdftoppm</code>把pdf转成图片预览</li>
+<li><code>djvutxt</code> 预览文本类型的<a href="https://zh.wikipedia.org/wiki/DjVu" target="_blank" rel="noopener noreferrer">DjVu</a>文件, <code>ddjvu</code>把DjVu文件转成图片预览</li>
+<li><code>calibre</code> / <code>epub-thumbnailer</code> 预览epub文件（电子书文件格式）的图片</li>
+<li><code>transmission-show</code> 预览BitTorrent文件（种子文件）的信息</li>
+<li><code>mediainfo</code> / <code>exiftool</code> 预览媒体文件</li>
+<li><code>odt2txt</code> 预览<a href="https://zh.wikipedia.org/wiki/%E5%BC%80%E6%94%BE%E6%96%87%E6%A1%A3%E6%A0%BC%E5%BC%8F" target="_blank" rel="noopener noreferrer">Open Document</a>（开放文档格式，是文档格式的标准，office的word, ppt, excel也支持这些格式所以能预览）</li>
+<li><code>python</code> / <code>jq</code> 预览json文件</li>
+<li><code>fontimage</code> 预览字体文件</li>
+</ul>
+<p>这种机制的优点就是，只要有可以用的工具，ranger就会使用它来预览，而不需要任何额外配置，如果没有，ranger也能正常工作，只是少一个功能</p>
+<h2 id="打开文件-1" class="headerLink">
+    <a href="#%e6%89%93%e5%bc%80%e6%96%87%e4%bb%b6-1" class="header-mark"></a>打开文件</h2><p>当光标在一个文件时，可以输入<code>l</code>使用默认的方式打开一个文件，这个操作很符合vim的操作的直觉
+也可以输入<code>r</code>，它会弹出一个打开方式的列表，可以输入数字选择打开的方式，也可以直接回车代表默认方式
+此外，当光标处于目录时，输入<code>l</code>会进入这个目录，而输入<code>r</code>可以选择一个方式打开这个目录<!-- raw HTML omitted -->此时可以选择用dolphin打开这个目录<!-- raw HTML omitted --></p>
+<h1 id="高级功能" class="headerLink">
+    <a href="#%e9%ab%98%e7%ba%a7%e5%8a%9f%e8%83%bd" class="header-mark"></a>高级功能</h1><h2 id="过滤" class="headerLink">
+    <a href="#%e8%bf%87%e6%bb%a4" class="header-mark"></a>过滤</h2><p>linux的shell在文件系统中导航时，使用tab进行补全是很方便的，比如说一个文件特别长，我不想完整输入，只需要输入前面几个字符，再按tab，就能自动补全了，这也是shell好用的一个重要原因<br>
+类似地，ranger也有根据文件名的前几个字符快速确定文件的功能
+输入<code>f</code>，开始查找文件，只需要输入文件的一部分字符，ranger会自动把光标移动到搜索到的文件上，如果能够唯一确定文件，ranger会直接打开它（打开文件或目录），熟练使用这个功能，可以快速在文件树中导航！<br>
+如果<code>f</code>查找的结果不唯一，可以用<code>n</code>到达下一个搜索结果，用<code>N</code>到达上一个搜索结果<br>
+如果<code>f</code>搜索的结果有很多，跳转起来也是相当麻烦的，而且有些情况下，需要查看一类文件，例如</p>
+<ol>
+<li>找到同一扩展名的文件</li>
+<li>找到命名具有同一规律的文件
+这种时候可以输入<code>zz</code>，开启模糊查找模式，它跟<code>f</code>的区别就是，会过滤掉不匹配的结果，而且不会自动进入目录<br>
+有了<code>zz</code>和<code>f</code>这两个命令，就能快速在一个十分复杂的文件系统中导航<br>
+此外，shell还可以在任何一个地方使用cd命令快速到达另一个地方，而不管这两个地方相隔多远，ranger也可以直接输入cd，然后输入路径，就能到达指定的路径，这个功能就像<code>g</code>这个按键一样，可以迅速离开当前位置而不经过它的上级目录</li>
+</ol>
+<h2 id="占坑" class="headerLink">
+    <a href="#%e5%8d%a0%e5%9d%91" class="header-mark"></a>占坑</h2></div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-04-13</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/function-parameters-push-stack-order/" class="prev" rel="prev" title="函数传参的入栈顺序造成的一些细微影响"><i class="fas fa-angle-left fa-fw"></i>函数传参的入栈顺序造成的一些细微影响</a>
+            <a href="/posts/matlab-calculus/" class="next" rel="next" title="MATLAB微积分">MATLAB微积分<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.118.2">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>
