@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Font - Tag - Virtualfutre&#39;s Blog</title>
+        <link>http://example.org/tags/font/</link>
+        <description>Font - Tag - Virtualfutre&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/font/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux字体</title>
+    <link>http://example.org/posts/linux-font/</link>
+    <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/linux-font/</guid>
+    <description><![CDATA[之前安装archlinux，随便配置的中文字体，显示中文时总有一些奇奇怪怪的字形，最近翻了archlinux的文档，把字体配置搞清楚了 字体是]]></description>
+</item></channel>
+</rss>

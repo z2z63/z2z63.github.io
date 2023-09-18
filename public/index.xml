@@ -3,9 +3,16 @@
         <title>Virtualfutre&#39;s Blog</title>
         <link>http://example.org/</link>
         <description>Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Linux字体</title>
+    <link>http://example.org/posts/linux-font/</link>
+    <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/linux-font/</guid>
+    <description><![CDATA[之前安装archlinux，随便配置的中文字体，显示中文时总有一些奇奇怪怪的字形，最近翻了archlinux的文档，把字体配置搞清楚了 字体是]]></description>
+</item><item>
     <title>推荐系统概述</title>
     <link>http://example.org/posts/recsys-summary/</link>
     <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
@@ -68,12 +75,5 @@
         <name>Author</name>
     </author><guid>http://example.org/posts/matplotlib-chinese-font/</guid>
     <description><![CDATA[matplotlib 是python的可视化库，但是如果在matplotlib的图表中使用了中文， 会找不到中文字体而显示乱码，网上有很多教程解决这个问题，但是在]]></description>
-</item><item>
-    <title>Linux搜索神器</title>
-    <link>http://example.org/posts/linux-file-search/</link>
-    <pubDate>Sat, 01 Apr 2023 23:35:22 &#43;0000</pubDate><author>
-        <name>Author</name>
-    </author><guid>http://example.org/posts/linux-file-search/</guid>
-    <description><![CDATA[使用Linux时，常常需要在文件系统中快速搜索到内容，比如说 在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径 想找某个文件，但]]></description>
 </item></channel>
 </rss>

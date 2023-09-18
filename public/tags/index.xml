@@ -3,26 +3,33 @@
         <title>Tags - Tag - Virtualfutre&#39;s Blog</title>
         <link>http://example.org/tags/</link>
         <description>Tags - Tag - Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>Mechine Learning</title>
-    <link>http://example.org/tags/mechine-learning/</link>
-    <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Font</title>
+    <link>http://example.org/tags/font/</link>
+    <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
         <name>Author</name>
-    </author><guid>http://example.org/tags/mechine-learning/</guid>
+    </author><guid>http://example.org/tags/font/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Linux</title>
     <link>http://example.org/tags/linux/</link>
-    <pubDate>Fri, 21 Jul 2023 13:14:56 &#43;0000</pubDate><author>
+    <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
         <name>Author</name>
     </author><guid>http://example.org/tags/linux/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Linux Desktop</title>
     <link>http://example.org/tags/linux-desktop/</link>
-    <pubDate>Fri, 21 Jul 2023 13:14:56 &#43;0000</pubDate><author>
+    <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
         <name>Author</name>
     </author><guid>http://example.org/tags/linux-desktop/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Mechine Learning</title>
+    <link>http://example.org/tags/mechine-learning/</link>
+    <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/tags/mechine-learning/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>JS</title>
