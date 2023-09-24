@@ -2,11 +2,12 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>http://example.org/posts/linux-vmware-setup/</loc><lastmod>2023-09-24T19:55:45&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/</loc><lastmod>2023-09-24T19:55:45&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/</loc><lastmod>2023-09-24T19:55:45&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/idea-java-configuration/</loc><lastmod>2023-09-20T15:29:39&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/java/</loc><lastmod>2023-09-20T15:29:39&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/posts/</loc><lastmod>2023-09-20T15:29:39&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/</loc><lastmod>2023-09-20T15:29:39&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/</loc><lastmod>2023-09-20T15:29:39&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/font/</loc><lastmod>2023-09-18T12:17:41&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/linux/</loc><lastmod>2023-09-18T12:17:41&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/linux-desktop/</loc><lastmod>2023-09-18T12:17:41&#43;08:00</lastmod></url><url>

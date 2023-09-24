@@ -3,9 +3,16 @@
         <title>Virtualfutre&#39;s Blog</title>
         <link>http://example.org/</link>
         <description>Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 24 Sep 2023 19:55:45 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Linux使用VMware</title>
+    <link>http://example.org/posts/linux-vmware-setup/</link>
+    <pubDate>Sun, 24 Sep 2023 19:55:45 &#43;0800</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/linux-vmware-setup/</guid>
+    <description><![CDATA[为了完成课程的任务，折腾了很久终于搞好了VMware。 安装VMwareVMware分为个人使用免费的player和商用付费的workstat]]></description>
+</item><item>
     <title>Idea配置java项目</title>
     <link>http://example.org/posts/idea-java-configuration/</link>
     <pubDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</pubDate><author>
@@ -68,12 +75,5 @@
         <name>Author</name>
     </author><guid>http://example.org/posts/function-parameters-push-stack-order/</guid>
     <description><![CDATA[最近遇到了一个函数传参造成的问题，于是来稍微研究一下这个东西 什么是函数传参顺序？ 一个简单例子 bar(foo(1), foo(2)); 为了准备bar函数需要的参数，需要先执行fo]]></description>
-</item><item>
-    <title>Linux shell常用快捷键</title>
-    <link>http://example.org/posts/linux-terminal-shortcut/</link>
-    <pubDate>Tue, 04 Apr 2023 23:33:26 &#43;0000</pubDate><author>
-        <name>Author</name>
-    </author><guid>http://example.org/posts/linux-terminal-shortcut/</guid>
-    <description><![CDATA[在linux使用shell时常常会遇到一些使用场景需要大量重复敲击按键，带来了一些麻烦，所以学会一些快捷键是 必备的，但是有些快捷键几乎没用，]]></description>
 </item></channel>
 </rss>
