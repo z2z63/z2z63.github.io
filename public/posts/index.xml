@@ -3,7 +3,14 @@
         <title>All Posts - Virtualfutre&#39;s Blog</title>
         <link>http://example.org/posts/</link>
         <description>All Posts | Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Idea配置java项目</title>
+    <link>http://example.org/posts/idea-java-configuration/</link>
+    <pubDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/idea-java-configuration/</guid>
+    <description><![CDATA[IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑 声明一下所说的运行配置是指]]></description>
+</item><item>
     <title>Linux字体</title>
     <link>http://example.org/posts/linux-font/</link>
     <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
@@ -66,12 +73,5 @@
         <name>Author</name>
     </author><guid>http://example.org/posts/linux-terminal-shortcut/</guid>
     <description><![CDATA[在linux使用shell时常常会遇到一些使用场景需要大量重复敲击按键，带来了一些麻烦，所以学会一些快捷键是 必备的，但是有些快捷键几乎没用，]]></description>
-</item><item>
-    <title>matplotlib在linux平台上显示中文的解决方案</title>
-    <link>http://example.org/posts/matplotlib-chinese-font/</link>
-    <pubDate>Sun, 02 Apr 2023 22:12:22 &#43;0000</pubDate><author>
-        <name>Author</name>
-    </author><guid>http://example.org/posts/matplotlib-chinese-font/</guid>
-    <description><![CDATA[matplotlib 是python的可视化库，但是如果在matplotlib的图表中使用了中文， 会找不到中文字体而显示乱码，网上有很多教程解决这个问题，但是在]]></description>
 </item></channel>
 </rss>

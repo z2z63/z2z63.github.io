@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Java - Tag - Virtualfutre&#39;s Blog</title>
+        <link>http://example.org/tags/java/</link>
+        <description>Java - Tag - Virtualfutre&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/java/" rel="self" type="application/rss+xml" /><item>
+    <title>Idea配置java项目</title>
+    <link>http://example.org/posts/idea-java-configuration/</link>
+    <pubDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/idea-java-configuration/</guid>
+    <description><![CDATA[IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑 声明一下所说的运行配置是指]]></description>
+</item></channel>
+</rss>
