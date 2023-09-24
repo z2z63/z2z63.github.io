@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/linux-vmware-setup\/"
-        },"genre": "posts","wordcount":  580 ,
+        },"genre": "posts","wordcount":  587 ,
         "url": "http:\/\/example.org\/posts\/linux-vmware-setup\/","datePublished": "2023-09-24T19:55:45+08:00","dateModified": "2023-09-24T19:55:45+08:00","publisher": {
             "@type": "Organization",
             "name": "Author"},"author": {
@@ -91,7 +91,7 @@
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">Author</a>
                 </span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-24">2023-09-24</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-09-24">2023-09-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;580 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-24">2023-09-24</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-09-24">2023-09-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;587 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="content" id="content"><p>为了完成课程的任务，折腾了很久终于搞好了VMware。</p>
 <h1 id="安装vmware" class="headerLink">
     <a href="#%e5%ae%89%e8%a3%85vmware" class="header-mark"></a>安装VMware</h1><p>VMware分为个人使用免费的player和商用付费的workstation，archlinux可以在<a href="https://aur.archlinux.org/packages/vmware-workstation" target="_blank" rel="noopener noreferrer">aur</a>中找到vmware并安装。
@@ -103,7 +103,7 @@
 <h2 id="加载内核模块" class="headerLink">
     <a href="#%e5%8a%a0%e8%bd%bd%e5%86%85%e6%a0%b8%e6%a8%a1%e5%9d%97" class="header-mark"></a>加载内核模块</h2><p>需要加载vmw_vmci和vmmon这两个模块</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo modprobe -a vmw_vmci vmmon
-</span></span></code></pre></div><p>然而很有可能无法加载，输出为找不到模块，这是因为对于比较新的内核，需要自己编译这两个模块
+</span></span></code></pre></div><p>然而很有可能无法加载，输出为找不到模块，这是因为对于比较新的内核，需要自己编译这两个模块<br>
 找到这个<a href="https://github.com/mkubecek/vmware-host-modules" target="_blank" rel="noopener noreferrer">仓库</a>，拉下来，根据INSTALL中的方法，首先根据workstation的版本，切换到对应分支</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/mkubecek/vmware-host-modules
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> vmware-host-modules
@@ -132,7 +132,12 @@ aur中的VMware workstation包将<code>vmware-netcfg</code>软链接到<code>/us
 设置开机自启，再重启</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> vmware-networks.service
 </span></span><span class="line"><span class="cl">reboot
-</span></span></code></pre></div><p>至此就完成了最基础的设置，已经可以在VMware虚拟机中连接网络了</p>
+</span></span></code></pre></div><h2 id="至此就完成了最基础的设置已经可以在vmware虚拟机中连接网络了" class="headerLink">
+    <a href="#%e8%87%b3%e6%ad%a4%e5%b0%b1%e5%ae%8c%e6%88%90%e4%ba%86%e6%9c%80%e5%9f%ba%e7%a1%80%e7%9a%84%e8%ae%be%e7%bd%ae%e5%b7%b2%e7%bb%8f%e5%8f%af%e4%bb%a5%e5%9c%a8vmware%e8%99%9a%e6%8b%9f%e6%9c%ba%e4%b8%ad%e8%bf%9e%e6%8e%a5%e7%bd%91%e7%bb%9c%e4%ba%86" class="header-mark"></a>至此就完成了最基础的设置，已经可以在VMware虚拟机中连接网络了</h2><p>参考：
+<a href="https://communities.vmware.com/t5/Workstation-2023-Tech-Preview/Linux-Kernel-6-5-rc-vmmon-compile-fails/td-p/2981003" target="_blank" rel="noopener noreferrer">https://communities.vmware.com/t5/Workstation-2023-Tech-Preview/Linux-Kernel-6-5-rc-vmmon-compile-fails/td-p/2981003</a><br>
+<a href="https://github.com/mkubecek/vmware-host-modules/issues" target="_blank" rel="noopener noreferrer">https://github.com/mkubecek/vmware-host-modules/issues</a><br>
+<a href="https://aur.archlinux.org/packages/vmware-workstation" target="_blank" rel="noopener noreferrer">https://aur.archlinux.org/packages/vmware-workstation</a><br>
+<a href="https://segmentfault.com/a/1190000042268631" target="_blank" rel="noopener noreferrer">https://segmentfault.com/a/1190000042268631</a></p>
 </div>
 
         <div class="post-footer" id="post-footer">

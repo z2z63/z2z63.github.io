@@ -15,7 +15,7 @@ archlinux的更新是滚动更新，而更新了linux内核后需要重启才能
 ```bash
 sudo modprobe -a vmw_vmci vmmon
 ```
-然而很有可能无法加载，输出为找不到模块，这是因为对于比较新的内核，需要自己编译这两个模块
+然而很有可能无法加载，输出为找不到模块，这是因为对于比较新的内核，需要自己编译这两个模块  
 找到这个[仓库](https://github.com/mkubecek/vmware-host-modules)，拉下来，根据INSTALL中的方法，首先根据workstation的版本，切换到对应分支
 ```bash
 git clone https://github.com/mkubecek/vmware-host-modules
@@ -50,3 +50,9 @@ reboot
 ```
 
 至此就完成了最基础的设置，已经可以在VMware虚拟机中连接网络了
+---
+参考：
+<https://communities.vmware.com/t5/Workstation-2023-Tech-Preview/Linux-Kernel-6-5-rc-vmmon-compile-fails/td-p/2981003>  
+<https://github.com/mkubecek/vmware-host-modules/issues>  
+<https://aur.archlinux.org/packages/vmware-workstation>  
+<https://segmentfault.com/a/1190000042268631>  
