@@ -50,9 +50,9 @@ reboot
 ```
 
 至此就完成了最基础的设置，已经可以在VMware虚拟机中连接网络了
----
-参考：
+___
+参考：  
 <https://communities.vmware.com/t5/Workstation-2023-Tech-Preview/Linux-Kernel-6-5-rc-vmmon-compile-fails/td-p/2981003>  
-<https://github.com/mkubecek/vmware-host-modules/issues>  
+<https://github.com/mkubecek/vmware-host-modules/issues/11>  
 <https://aur.archlinux.org/packages/vmware-workstation>  
 <https://segmentfault.com/a/1190000042268631>  
