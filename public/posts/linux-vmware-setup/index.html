@@ -116,7 +116,7 @@
 </span></span></code></pre></div><h2 id="设置网络" class="headerLink">
     <a href="#%e8%ae%be%e7%bd%ae%e7%bd%91%e7%bb%9c" class="header-mark"></a>设置网络</h2><p>执行</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl start  vmware-networks.service
-</span></span></code></pre></div><p>有可能会失败，根据systemctl的日志，需要先配置网络
+</span></span></code></pre></div><p>有可能会失败，根据systemctl的日志，需要先配置网络<br>
 aur中的VMware workstation包将<code>vmware-netcfg</code>软链接到<code>/usr/bin</code>所以可以直接使用</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo vmware-netcfg
 </span></span></code></pre></div><p>在弹出的界面中配置网络

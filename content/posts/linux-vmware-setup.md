@@ -36,7 +36,7 @@ sudo modprobe -a vmw_vmci vmmon
 ```bash
 sudo systemctl start  vmware-networks.service
 ```
-有可能会失败，根据systemctl的日志，需要先配置网络
+有可能会失败，根据systemctl的日志，需要先配置网络  
 aur中的VMware workstation包将`vmware-netcfg`软链接到`/usr/bin`所以可以直接使用
 ```bash
 sudo vmware-netcfg
