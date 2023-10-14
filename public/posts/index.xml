@@ -3,7 +3,14 @@
         <title>All Posts - Virtualfutre&#39;s Blog</title>
         <link>http://example.org/posts/</link>
         <description>All Posts | Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 24 Sep 2023 19:55:45 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 14 Oct 2023 16:08:58 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>coreutils之hash table</title>
+    <link>http://example.org/posts/coreutils_hash/</link>
+    <pubDate>Sat, 14 Oct 2023 16:08:58 &#43;0800</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/coreutils_hash/</guid>
+    <description><![CDATA[最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现 字符串哈希函数coreutils中内置了对字符串的哈希函数 size_t hash_string (const char *string,]]></description>
+</item><item>
     <title>Linux使用VMware</title>
     <link>http://example.org/posts/linux-vmware-setup/</link>
     <pubDate>Sun, 24 Sep 2023 19:55:45 &#43;0800</pubDate><author>
@@ -66,12 +73,5 @@
         <name>Author</name>
     </author><guid>http://example.org/posts/file-manager-ranger/</guid>
     <description><![CDATA[ranger是linux的一个终端文件管理器，它的feature有 vi按键绑定 与shell环境完美结合，可以使用各种shell工具 在tty上]]></description>
-</item><item>
-    <title>函数传参的入栈顺序造成的一些细微影响</title>
-    <link>http://example.org/posts/function-parameters-push-stack-order/</link>
-    <pubDate>Thu, 06 Apr 2023 00:09:32 &#43;0000</pubDate><author>
-        <name>Author</name>
-    </author><guid>http://example.org/posts/function-parameters-push-stack-order/</guid>
-    <description><![CDATA[最近遇到了一个函数传参造成的问题，于是来稍微研究一下这个东西 什么是函数传参顺序？ 一个简单例子 bar(foo(1), foo(2)); 为了准备bar函数需要的参数，需要先执行fo]]></description>
 </item></channel>
 </rss>

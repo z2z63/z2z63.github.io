@@ -1,0 +1,175 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>coreutils之hash table - Virtualfutre&#39;s Blog</title><meta name="Description" content=""><meta property="og:title" content="coreutils之hash table" />
+<meta property="og:description" content="最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现 字符串哈希函数coreutils中内置了对字符串的哈希函数 size_t hash_string (const char *string," />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/coreutils_hash/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-14T16:08:58+08:00" />
+<meta property="article:modified_time" content="2023-10-14T16:08:58+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="coreutils之hash table"/>
+<meta name="twitter:description" content="最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现 字符串哈希函数coreutils中内置了对字符串的哈希函数 size_t hash_string (const char *string,"/>
+<meta name="application-name" content="Virtualfutre&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Virtualfutre&#39;s Blog">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/coreutils_hash/" /><link rel="prev" href="http://example.org/posts/linux-vmware-setup/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "coreutils之hash table",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/coreutils_hash\/"
+        },"genre": "posts","wordcount":  803 ,
+        "url": "http:\/\/example.org\/posts\/coreutils_hash\/","datePublished": "2023-10-14T16:08:58+08:00","dateModified": "2023-10-14T16:08:58+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Author"},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.2.0" defer type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
+</head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">coreutils之hash table</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">Author</a>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-10-14">2023-10-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-10-14">2023-10-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;803 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="content" id="content"><p>最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现</p>
+<h2 id="字符串哈希函数" class="headerLink">
+    <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%93%88%e5%b8%8c%e5%87%bd%e6%95%b0" class="header-mark"></a>字符串哈希函数</h2><p>coreutils中内置了对字符串的哈希函数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">size_t</span>
+</span></span><span class="line"><span class="cl"><span class="nf">hash_string</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">string</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">n_buckets</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">size_t</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">ch</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(;</span> <span class="p">(</span><span class="n">ch</span> <span class="o">=</span> <span class="o">*</span><span class="n">string</span><span class="p">);</span> <span class="n">string</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="mi">31</span> <span class="o">+</span> <span class="n">ch</span><span class="p">)</span> <span class="o">%</span> <span class="n">n_buckets</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>用法为</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">char</span><span class="o">*</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&#34;a demo string&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span> <span class="n">hash_code</span> <span class="o">=</span> <span class="nf">hash_string</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span></code></pre></div><p>可以看出计算哈希的部分就是</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(;</span> <span class="p">(</span><span class="n">ch</span> <span class="o">=</span> <span class="o">*</span><span class="n">string</span><span class="p">);</span> <span class="n">string</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="mi">31</span> <span class="o">+</span> <span class="n">ch</span><span class="p">)</span> <span class="o">%</span> <span class="n">n_buckets</span><span class="p">;</span>
+</span></span></code></pre></div><p>一个好的哈希函数，应该做到把输入数据均匀的映射到哈希表的所有槽，也就是每个槽的概率应该是接近的。<br>
+还可以说，一个好的哈希函数应该充分受到输入数据的每一位的影响，最好的情况就是，当输入数据的其中一位发生改变，计算出的哈希码中多位发生改变<br>
+31这个数字非常巧妙，因为
+$$
+31 = 32 - 1 = 2^0 + 2^1 + 2^2 + 2^3 + 2^4
+$$
+而计算机是二进制的，也就是说<code>a * pow(2, x)</code>等于<code>a &lt;&lt; x</code>
+假设<code>value==19</code>，那么<code>value * 31</code>可以表示为</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">    10011
+</span></span><span class="line"><span class="cl">   10011
+</span></span><span class="line"><span class="cl">  10011
+</span></span><span class="line"><span class="cl"> 10011
+</span></span><span class="line"><span class="cl">10011
+</span></span><span class="line"><span class="cl">——————————
+</span></span><span class="line"><span class="cl">1001001101
+</span></span></code></pre></div><p>可以看出<code>value * 31</code>每一位都会受到<code>value</code>中每一位的影响，<code>value</code>中任意一位发生变动，<code>value * 31</code>每一位也必须重新计算。然后<code>value * 31 + ch</code>会添加上<code>ch</code>造成的影响，<code>(value * 31 + ch) % n_buckets</code>约束结果的范围<br>
+取余操作肯定影响了哈希码的随机性，假设<code>n_buckets==8</code>，<code>value * 31 + ch</code>就只会保留低三位，大大降低了哈希码的随机性.<br>
+我的理解是，当哈希表长度小时，每个槽插入数据的概率也会增加。例如哈希表长为10，那么哈希表中每个槽的插入数据概率为$\frac{1}{10}$，当插入两个数据时碰撞的概率为$\frac{10}{10\times10}=\frac{1}{10}$，当哈希表长为11时， 插入两个数据碰撞的概率为$\frac{11}{11\times11}=\frac{1}{11}$，当然当插入数据越多时，两者差距会越来越大。所以哈希表规模较小时碰撞本来就是很容易发生的。而我们关注的也只是规模较大时哈希表的性能，规模较小时哈希表和其他查询结构也没有明显优势</p>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-14</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/linux-vmware-setup/" class="prev" rel="prev" title="Linux使用VMware"><i class="fas fa-angle-left fa-fw"></i>Linux使用VMware</a></div>
+</div>
+</article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.119.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>
