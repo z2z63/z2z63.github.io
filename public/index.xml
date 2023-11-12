@@ -3,9 +3,16 @@
         <title>Virtualfutre&#39;s Blog</title>
         <link>http://example.org/</link>
         <description>Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 14 Oct 2023 16:08:58 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 12 Nov 2023 18:34:39 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>SIMD&amp;SIMT</title>
+    <link>http://example.org/posts/simd_vs_simt/</link>
+    <pubDate>Sun, 12 Nov 2023 18:34:39 &#43;0800</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/simd_vs_simt/</guid>
+    <description><![CDATA[SIMD SIMD是什么SIMD即为Single Instruction, Multiple Data，单指令多数据。传统的指令最多只能处理少量的数据，而SIMD能做到在一条指令内指定多条数]]></description>
+</item><item>
     <title>coreutils之hash table</title>
     <link>http://example.org/posts/coreutils_hash/</link>
     <pubDate>Sat, 14 Oct 2023 16:08:58 &#43;0800</pubDate><author>
@@ -68,12 +75,5 @@
         <name>Author</name>
     </author><guid>http://example.org/posts/matlab-calculus/</guid>
     <description><![CDATA[MATLAB数值求解微分方程所谓数值求解，也就是无法获得解的方程，只能获得y(x)函数在x取值范围内的近似值 所有MATALB的DOE solv]]></description>
-</item><item>
-    <title>Linux 神级文件管理器ranger</title>
-    <link>http://example.org/posts/file-manager-ranger/</link>
-    <pubDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</pubDate><author>
-        <name>Author</name>
-    </author><guid>http://example.org/posts/file-manager-ranger/</guid>
-    <description><![CDATA[ranger是linux的一个终端文件管理器，它的feature有 vi按键绑定 与shell环境完美结合，可以使用各种shell工具 在tty上]]></description>
 </item></channel>
 </rss>
