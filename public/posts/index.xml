@@ -3,7 +3,14 @@
         <title>All Posts - Virtualfutre&#39;s Blog</title>
         <link>http://example.org/posts/</link>
         <description>All Posts | Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 12 Nov 2023 18:34:39 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 15 Dec 2023 15:02:39 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux释放磁盘空间</title>
+    <link>http://example.org/posts/linux-space-release/</link>
+    <pubDate>Fri, 15 Dec 2023 15:02:39 &#43;0800</pubDate><author>
+        <name>Author</name>
+    </author><guid>http://example.org/posts/linux-space-release/</guid>
+    <description><![CDATA[主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止]]></description>
+</item><item>
     <title>SIMD&amp;SIMT</title>
     <link>http://example.org/posts/simd_vs_simt/</link>
     <pubDate>Sun, 12 Nov 2023 18:34:39 &#43;0800</pubDate><author>
@@ -66,12 +73,5 @@
         <name>Author</name>
     </author><guid>http://example.org/posts/rvalue-reference/</guid>
     <description><![CDATA[C++11后引入了右值引用等特性，用来支持移动语义和完美转发，在了解右值引用前，需要了解一些前置的概念 左值(lvalue) 左值字面意义是在等]]></description>
-</item><item>
-    <title>MATLAB微积分</title>
-    <link>http://example.org/posts/matlab-calculus/</link>
-    <pubDate>Fri, 26 May 2023 15:51:48 &#43;0000</pubDate><author>
-        <name>Author</name>
-    </author><guid>http://example.org/posts/matlab-calculus/</guid>
-    <description><![CDATA[MATLAB数值求解微分方程所谓数值求解，也就是无法获得解的方程，只能获得y(x)函数在x取值范围内的近似值 所有MATALB的DOE solv]]></description>
 </item></channel>
 </rss>

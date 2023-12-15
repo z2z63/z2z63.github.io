@@ -2,9 +2,10 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://example.org/posts/</loc><lastmod>2023-11-12T18:34:39&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/linux-space-release/</loc><lastmod>2023-12-15T15:02:39&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/</loc><lastmod>2023-12-15T15:02:39&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/</loc><lastmod>2023-12-15T15:02:39&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/simd_vs_simt/</loc><lastmod>2023-11-12T18:34:39&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/</loc><lastmod>2023-11-12T18:34:39&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/coreutils_hash/</loc><lastmod>2023-10-14T16:08:58&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/linux-vmware-setup/</loc><lastmod>2023-09-24T19:55:45&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/idea-java-configuration/</loc><lastmod>2023-09-20T15:29:39&#43;08:00</lastmod></url><url>
