@@ -34,7 +34,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/linux-space-release\/"
-        },"genre": "posts","wordcount":  1999 ,
+        },"genre": "posts","wordcount":  2563 ,
         "url": "http:\/\/example.org\/posts\/linux-space-release\/","datePublished": "2023-12-15T15:02:39+08:00","dateModified": "2023-12-15T15:02:39+08:00","publisher": {
             "@type": "Organization",
             "name": "Author"},"author": {
@@ -92,7 +92,7 @@
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">Author</a>
                 </span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-15">2023-12-15</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-15">2023-12-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1999 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-15">2023-12-15</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-15">2023-12-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2563 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="content" id="content"><p>主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止用户数据的增长，所以清理
 也主要是清理用户数据</p>
 <h1 id="查看磁盘使用率" class="headerLink">
@@ -174,9 +174,9 @@ du -h --max-depth=0 ~/.npm
 可以选择删除不需要的表，或者不需要的数据库</p>
 <h1 id="普通软件" class="headerLink">
     <a href="#%e6%99%ae%e9%80%9a%e8%bd%af%e4%bb%b6" class="header-mark"></a>普通软件</h1><h2 id="微信" class="headerLink">
-    <a href="#%e5%be%ae%e4%bf%a1" class="header-mark"></a>微信</h2><h2 id="最好的方法是打开微信删除指定聊天的数据" class="headerLink">
-    <a href="#%e6%9c%80%e5%a5%bd%e7%9a%84%e6%96%b9%e6%b3%95%e6%98%af%e6%89%93%e5%bc%80%e5%be%ae%e4%bf%a1%e5%88%a0%e9%99%a4%e6%8c%87%e5%ae%9a%e8%81%8a%e5%a4%a9%e7%9a%84%e6%95%b0%e6%8d%ae" class="header-mark"></a>微信在linux并没有一个完美的解决方案，我曾经使用过运行在wine中的微信，时间一长，微信就会不知廉耻的膨胀到几十G，这其中很多是收到的文件<br>
-最好的方法是打开微信，删除指定聊天的数据</h2><p>然而或许我们不需要直接使用微信这样的毒瘤软件，可以选择将微信的消息转发到telegram，telegram不会自动下载文件，文件能在服务器上保存很久，
+    <a href="#%e5%be%ae%e4%bf%a1" class="header-mark"></a>微信</h2><p>微信在linux并没有一个完美的解决方案，我曾经使用过运行在wine中的微信，时间一长，微信就会不知廉耻的膨胀到几十G，这其中很多是收到的文件<br>
+最好的方法是打开微信，删除指定聊天的数据</p>
+<p>然而或许我们不需要直接使用微信这样的毒瘤软件，可以选择将微信的消息转发到telegram，telegram不会自动下载文件，文件能在服务器上保存很久，
 使用3个月后telegram的占用也只有600M，完爆微信<br>
 如何部署微信转发telegrame见<a href="https://www.v2ex.com/t/908436" target="_blank" rel="noopener noreferrer">https://www.v2ex.com/t/908436</a></p>
 <h2 id="短期不需要的软件" class="headerLink">
@@ -194,8 +194,8 @@ du -h --max-depth=0 ~/.npm
             alt="https://raw.githubusercontent.com/z2z63/image/main/img20231215155732.png">
     </a></figure>
 选择近期不需要的删除<br>
-注意也会删除cookie，导致登录状态退出，而且某些网站删除缓存数据后下次进入还会重新生成，导致加载速度变慢<br>
-作为一个每天都使用的软件，chrome的缓存不应该删除太多</p>
+注意也会删除cookie，导致登录的网站退出登录，而且某些网站删除缓存数据后下次进入还会重新生成，导致加载速度变慢<br>
+作为一个每天都使用的软件，chrome的缓存不应该删除太多，否则会降低网页加载速度</p>
 <h1 id="一点技巧" class="headerLink">
     <a href="#%e4%b8%80%e7%82%b9%e6%8a%80%e5%b7%a7" class="header-mark"></a>一点技巧</h1><h2 id="download目录" class="headerLink">
     <a href="#download%e7%9b%ae%e5%bd%95" class="header-mark"></a>Download目录</h2><p>Download目录全是用户数据，可以按照大小排序，然后删除比较大，又不需要的</p>
@@ -208,6 +208,21 @@ du -h --max-depth=0 ~/.npm
 <h2 id="删除孤儿包" class="headerLink">
     <a href="#%e5%88%a0%e9%99%a4%e5%ad%a4%e5%84%bf%e5%8c%85" class="header-mark"></a>删除孤儿包</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo pacman -Rns <span class="k">$(</span>pacman -Qtdq<span class="k">)</span>
 </span></span></code></pre></div><p>大部分时候都没有孤儿包，偶尔删除一下即可</p>
+<h1 id="关于缓存" class="headerLink">
+    <a href="#%e5%85%b3%e4%ba%8e%e7%bc%93%e5%ad%98" class="header-mark"></a>关于缓存</h1><p>根据cache的定义，它的作用是加快存取速度，从前面提到的很多软件的缓存可以看出它的使用场景<br>
+在实践中cache（缓存）和buffer（缓冲）往往是混用的，缓冲的目地是缓解通过接口相连的两个系统之间速度不对等情况，实践中缓冲往往也能发挥缓存的作用<br>
+缓存删除后不可避免会造成速度变慢，一个软件正常运行中也会自动产生缓存，那么为什么要删除缓存呢？</p>
+<p>在我看来，可以套用操作系统的知识解释
+在计算机中的缓存往往有两个限制，一个是失效时间，一个是缓存容量<br>
+例如TLB，绝大部分替换策略都会导致一个TLB表项无法永远保留在TLB中，而TLB作为硬件实现也一定是固定容量而且容量有限<br>
+然而，在软件层面的缓存就不太一样了，软件管理缓存，主要是通过指定缓存容量和缓存失效时间，策略大概有</p>
+<ol>
+<li>放仍不管，仍其增长</li>
+<li>提供管理缓存的接口供用户使用，但不主动操作缓存，将管理缓存的部分工作交给用户</li>
+<li>通过定时任务或者后台进程定期清理</li>
+</ol>
+<p>这三种方式都能找到对应的软件，很遗憾的是，采用第三种方式的软件很少，这也就导致了用户必须承担管理缓存的工作，否则他就需要承担购买更多存储器的工作<br>
+缓存替换策略完成的工作是保证在缓存中的是最常用的，而用户定期清理缓存与缓存替换策略完成的工作类似，在定期的删除中，那些低频使用或者短期内高频使用的缓存最终都被删除了</p>
 </div>
 
         <div class="post-footer" id="post-footer">
