@@ -58,6 +58,6 @@
     <pubDate>Tue, 28 Mar 2023 23:21:19 &#43;0000</pubDate><author>
         <name>Author</name>
     </author><guid>http://example.org/posts/docker-tutorial/</guid>
-    <description><![CDATA[docker是容器技术，是向管理复杂依赖关系的妥协，也是快速部署软件的方法 安装 首先用包管理器安装docker sudo pacma -S docker 然后启动docker de]]></description>
+    <description><![CDATA[前置概念 docker架构docker采用server-client架构，docker deamon（即dockerd）完成构建容器，运行容器等]]></description>
 </item></channel>
 </rss>

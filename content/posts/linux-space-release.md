@@ -81,7 +81,7 @@ du -h --max-depth=0 ~/.npm
 ```
 
 ## docker
-docker的镜像也会占用不少的空间而且平时很难注意到
+docker的镜像也会占用不少的空间而且平时很难注意到  
 查看容器
 ```shell
 docker ps -a
