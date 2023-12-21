@@ -2,7 +2,7 @@
 title: Linux 神级文件管理器ranger
 author: z2z63
 date: 2023-04-13 12:29:06
-tags: [Linux]
+tags: [Linux, Shell]
 ---
 [ranger](https://github.com/ranger/ranger)是linux的一个终端文件管理器，它的feature有
 - vi按键绑定

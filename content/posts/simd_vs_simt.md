@@ -2,7 +2,7 @@
 title: "SIMD&SIMT"
 author: z2z63
 date: 2023-11-12T18:34:39+08:00
-draft: false
+draft: true
 ---
 # SIMD
 ## SIMD是什么

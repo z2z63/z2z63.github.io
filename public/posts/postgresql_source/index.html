@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>PostgreSQL源码阅读报告 - Virtualfutre&#39;s Blog</title><meta name="Description" content=""><meta property="og:title" content="PostgreSQL源码阅读报告" />
+<meta property="og:description" content="这篇文章是数据库系统原理课程的任务“阅读postgresql源码“的报告 如何编译首先声明一点，网上大部分的教程都不太合理，因为对环境的影响太" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/postgresql_source/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-21T18:27:09+08:00" />
+<meta property="article:modified_time" content="2023-12-21T18:27:09+08:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="PostgreSQL源码阅读报告"/>
+<meta name="twitter:description" content="这篇文章是数据库系统原理课程的任务“阅读postgresql源码“的报告 如何编译首先声明一点，网上大部分的教程都不太合理，因为对环境的影响太"/>
+<meta name="application-name" content="Virtualfutre&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Virtualfutre&#39;s Blog">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/postgresql_source/" /><link rel="prev" href="http://example.org/posts/docker-tutorial/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "PostgreSQL源码阅读报告",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/postgresql_source\/"
+        },"genre": "posts","keywords": "C\/C\u002b\u002b","wordcount":  4329 ,
+        "url": "http:\/\/example.org\/posts\/postgresql_source\/","datePublished": "2023-12-21T18:27:09+08:00","dateModified": "2023-12-21T18:27:09+08:00","publisher": {
+            "@type": "Organization",
+            "name": "z2z63"},"author": {
+                "@type": "Person",
+                "name": "z2z63"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.2.0" defer type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
+</head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#内存管理">内存管理</a></li>
+    <li><a href="#pg使用的数据结构">pg使用的数据结构</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#解析">解析</a>
+      <ul>
+        <li><a href="#词法解析">词法解析</a></li>
+        <li><a href="#语法解析">语法解析</a></li>
+        <li><a href="#分析">分析</a></li>
+      </ul>
+    </li>
+    <li><a href="#重写">重写</a></li>
+    <li><a href="#规划">规划</a></li>
+    <li><a href="#执行器">执行器</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#c的缺点">C的缺点</a></li>
+    <li><a href="#读后感">读后感</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">PostgreSQL源码阅读报告</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-21">2023-12-21</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-21">2023-12-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;4329 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;9 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#内存管理">内存管理</a></li>
+    <li><a href="#pg使用的数据结构">pg使用的数据结构</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#解析">解析</a>
+      <ul>
+        <li><a href="#词法解析">词法解析</a></li>
+        <li><a href="#语法解析">语法解析</a></li>
+        <li><a href="#分析">分析</a></li>
+      </ul>
+    </li>
+    <li><a href="#重写">重写</a></li>
+    <li><a href="#规划">规划</a></li>
+    <li><a href="#执行器">执行器</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#c的缺点">C的缺点</a></li>
+    <li><a href="#读后感">读后感</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>这篇文章是数据库系统原理课程的任务“阅读postgresql源码“的报告</p>
+<h1 id="如何编译" class="headerLink">
+    <a href="#%e5%a6%82%e4%bd%95%e7%bc%96%e8%af%91" class="header-mark"></a>如何编译</h1><p>首先声明一点，网上大部分的教程都不太合理，因为对环境的影响太大，权限约束不够严格
+作为开源自由软件，pg使用GNU工具链编译，包括<code>autoconf</code>,<code>makefile</code>，<code>gcc</code>等
+进入pg项目，在<code>build</code>目录下编译</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build
+</span></span><span class="line"><span class="cl"><span class="c1"># 完成configure，指定-g编译参数,禁用优化，指定安装路径</span>
+</span></span><span class="line"><span class="cl">../configure --enable-debug <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&#34;O0&#34;</span> --prefix<span class="o">=</span>/home/arch/src/postgres/build <span class="c1"># 路径需要使用build目录的绝对路径</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 编译安装</span>
+</span></span><span class="line"><span class="cl">make <span class="o">&amp;&amp;</span> make install
+</span></span></code></pre></div><p>安装到<code>build</code>目录是比较合理的！因为默认的安装位置<code>/usr/local</code>需要root权限才能写入，没必要给root权限，也完全没必要安装到这个地方
+执行完之后，可能需要设置<code>LD_LIBRARY_PATH</code>环境变量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/home/arch/src/postgres/build/lib   <span class="c1"># 指定build/lib目录，同样需要绝对路径</span>
+</span></span></code></pre></div><p><code>LD_LIBRARY_PATH</code>告诉linux在哪里找动态链接库，以上方式设置后，只在当前终端生效。没有必要写入<code>~/.bashrc</code>
+可以使用<code>ldd</code>命令查看一个可执行需要加载哪些动态库</p>
+<h1 id="调试的方法" class="headerLink">
+    <a href="#%e8%b0%83%e8%af%95%e7%9a%84%e6%96%b9%e6%b3%95" class="header-mark"></a>调试的方法</h1><p>首先，在使用<code>configure</code>时，指定参数<code>--enable-debug</code>，以<code>-g</code>选项编译pg
+<code>make</code>命令生成的可执行有多个，需要确定调试的可执行，以及它的入口函数<code>main</code>所在的位置
+启动pg后，通过<code>ps aux | grep postgres</code>可以看到，pg有多个进程协作</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">➜  postgres git:(master) ✗ ps aux | grep postgres
+</span></span><span class="line"><span class="cl">arch      140029  0.0  0.1 205168 21652 ?        Ss   22:04   0:00 /home/arch/src/postgres/build/bin/postgres -D data
+</span></span><span class="line"><span class="cl">arch      140202  0.0  0.0 205316  8276 ?        Ss   22:05   0:00 postgres: checkpointer
+</span></span><span class="line"><span class="cl">arch      140203  0.0  0.0 205300  7764 ?        Ss   22:05   0:00 postgres: background writer
+</span></span><span class="line"><span class="cl">arch      140225  0.0  0.0 205336 10588 ?        Ss   22:05   0:00 postgres: walwriter
+</span></span><span class="line"><span class="cl">arch      140226  0.0  0.0 206844  8156 ?        Ss   22:05   0:00 postgres: autovacuum launcher
+</span></span><span class="line"><span class="cl">arch      140227  0.0  0.0 206788  7644 ?        Ss   22:05   0:00 postgres: logical replication launcher
+</span></span><span class="line"><span class="cl">arch      140264  0.0  0.0 207788 11612 ?        Ss   22:06   0:00 postgres: arch test [local] idle
+</span></span></code></pre></div><p>可以看出，<code> arch test [local] idle</code>是pg为处理客户端的连接而创建的进程，所以可以知道一条sql语句执行的全部流程都在这个进程中完成。
+在linux上，进程是通过<code>fork</code>系统调用创建的。gdb对<code>fork</code>有一个限制，<code>fork</code>执行结束后，有一个父进程和子进程，然而gdb只能跟踪一个进程。
+gdb默认跟踪父进程，导致无法进入子进程调试，可以通过<code>set follow-fork-mod child</code>改变这种行为。
+然而，这种方式我在使用时发现会导致gdb立刻退出，而pg进程还在后台运行
+于是，我尝试使用gdb的attach功能调试<code> arch test [local] idle</code>进程
+首先，要让gdb能够attach上pg的进程，需要修改<code>ptrace</code>的安全策略</p>
+<pre tabindex="0"><code class="language-shel" data-lang="shel">sudo bash -c &#39;echo 0 &gt; /proc/sys/kernel/yama/ptrace_scope&#39;
+</code></pre><p>然后，在<code>arch test [local] idle</code>进程执行的代码中打上断点，attach上这个进程，成功进入这个进程开始调试</p>
+<h1 id="pg的其他特性" class="headerLink">
+    <a href="#pg%e7%9a%84%e5%85%b6%e4%bb%96%e7%89%b9%e6%80%a7" class="header-mark"></a>pg的其他特性</h1><h2 id="内存管理" class="headerLink">
+    <a href="#%e5%86%85%e5%ad%98%e7%ae%a1%e7%90%86" class="header-mark"></a>内存管理</h2><p>常规的程序使用C标准库提供的<code>malloc</code>和<code>free</code>函数管理内存，如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">OBJ</span><span class="o">*</span> <span class="n">o</span> <span class="o">=</span> <span class="nf">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">OBJ</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// ... 一些操作
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">free</span><span class="p">(</span><span class="n">o</span><span class="p">);</span>
+</span></span></code></pre></div><p>这种方式的缺点有</p>
+<ol>
+<li>需要跟踪大量小对象的生存期，心智负担大，不仅容易忘记释放内存，还降低了性能</li>
+<li>必须保持申请的内存的引用，否则将永远无法回收内存</li>
+</ol>
+<p>pg使用<code>MemoryContext</code>管理内存，所有需要在一定时间后才能释放对象的都使用<code>MemoryContext</code>机制。它的优点是</p>
+<ol>
+<li>能够满足大量小块内存的情况，又能一次性释放，不必跟踪每一个对象的生存期</li>
+<li>不必保持申请的内存的引用</li>
+</ol>
+<h2 id="pg使用的数据结构" class="headerLink">
+    <a href="#pg%e4%bd%bf%e7%94%a8%e7%9a%84%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" class="header-mark"></a>pg使用的数据结构</h2><p>pg在对sql语句处理的各个阶段都需要存储一些数据，使用的是一种被称为<code>List</code>的数据结构，然而这个称呼实际上不准确，是历史遗留的称呼，因为pg最开始有一部分是用Lisp语言写的，那时使用的是Lisp的<code>cons-cell list</code>，相当于链表
+在使用C重写原来的Lisp部分时，由于性能问题，在经过多次重构后，最终使用了动态数组实现了这种可以动态增长的线性表结构，而List这种称呼就遗留了下来</p>
+<h1 id="一条sql语句执行的全过程" class="headerLink">
+    <a href="#%e4%b8%80%e6%9d%a1sql%e8%af%ad%e5%8f%a5%e6%89%a7%e8%a1%8c%e7%9a%84%e5%85%a8%e8%bf%87%e7%a8%8b" class="header-mark"></a>一条sql语句执行的全过程</h1><p>单条SQL语句在<code>exec_simple_query</code>函数完成执行的过程，见<code>src/backend/tcop/postgres.c</code></p>
+<pre class="mermaid">graph LR
+    A[客户端/应用程序] --SQL语句--> B[解析器]
+    B --查询树--> C[重写器]
+    C --重写后的查询树--> D[规划器]
+    D --执行计划--> E[执行器]
+    E --执行结果--> F[客户端/应用程序]
+</pre><p>或者</p>
+<pre class="mermaid">graph LR
+    A[客户端/应用程序] --原始字符串--> B
+    subgraph 核心 
+        B["解析（parse）"] --> C["`prepared statement`"]
+        C --> D["bind（绑定）"]
+        D --> E["`portal`"]
+        E --> F[执行]
+    end
+    F --结果--> G[客户端/应用程序]
+</pre><h2 id="解析" class="headerLink">
+    <a href="#%e8%a7%a3%e6%9e%90" class="header-mark"></a>解析</h2><p>解析有三个过程，词法解析，语法解析，分析<br>
+解析由<code>pg_parse_query</code>函数完成，见<code>src/backend/tcop/postgres.c</code></p>
+<h3 id="词法解析" class="headerLink">
+    <a href="#%e8%af%8d%e6%b3%95%e8%a7%a3%e6%9e%90" class="header-mark"></a>词法解析</h3><p>flex完成词法解析，只需要定义<code>TOKEN</code>(词法单元)，flex会自动生成C代码完成词法解析的任务。词法解析完成后，词法信息存储在词法树中，并准备传递给语法解析器<br>
+flex可以快速定义一个词法解析器，可以使用表则表达式，还能指定匹配优先级</p>
+<h3 id="语法解析" class="headerLink">
+    <a href="#%e8%af%ad%e6%b3%95%e8%a7%a3%e6%9e%90" class="header-mark"></a>语法解析</h3><p>bison完成语法解析，通过定义生成式，可以精确的描述各种复杂的语法结构（更多语法解析的知识参见编译原理）<br>
+bison非常灵活，可以将语法定义和动作结合在一起，并支持多种描述语法的方式，例如上下文无关文法（Context-Free Grammar，CFG），扩展巴克斯范式（Extended Backus-Naur Form，EBNF）等<br>
+bison将定义语法的源文件转换成C代码，编译后可以得到一个语法解析器。</p>
+<p>最终，pg通过调用flex和bison，得到了一个解析树（Parse Tree），这样的结构方便后续对它进行操作。任何错误的SQL语法都会在语法解析阶段被检测并处理</p>
+<h3 id="分析" class="headerLink">
+    <a href="#%e5%88%86%e6%9e%90" class="header-mark"></a>分析</h3><p>检查SQL语句中是否出现了非语法错误，例如试图查询一个不存在的表，或者不存在的字段，这个过程将解析树转换成查询树(Query Tree)
+查询树由<code>Query</code>结构体表示(见<code>src/include/nodes/parsenodes.h</code>)，它包括了一次查询的所有信息，例如语句类型，<code>from</code>子句的列表，
+<code>group by</code>子句的列表，是否有<code>with</code>语句等等<br>
+分析由<code>parse_analyze_fixedparams</code>函数完成，见<code>src/backend/parser/analyze.c</code></p>
+<h2 id="重写" class="headerLink">
+    <a href="#%e9%87%8d%e5%86%99" class="header-mark"></a>重写</h2><p>根据预先制定的规则对查询树进行重写<br>
+同一个目地的查询，它的关系代数表达式有很多种，然而他们的执行效率是不同的，执行效率高的关系代数表达式具有某些特征。<br>
+重写的规则就是执行效率高的关系代数表达式的特征<br>
+Postgres支持视图(View)，任何对视图的查询都会在这个阶段被重写成对基表(Base Table)的查询<br>
+工具类的语句不会被重写<br>
+常见的重写规则有</p>
+<ul>
+<li>视图展开（View Expansion）</li>
+<li>谓词下推（Predicate Pushdown）</li>
+<li>连接消除（Join Elimination）</li>
+<li>常量折叠（Constant Folding）</li>
+<li>子查询优化（Subquery Optimization）</li>
+<li>列裁剪（Column Pruning）</li>
+</ul>
+<p>重写由<code>pg_rewrite_query</code>函数完成，见<code>src/backend/tcop/postgres.c</code></p>
+<h2 id="规划" class="headerLink">
+    <a href="#%e8%a7%84%e5%88%92" class="header-mark"></a>规划</h2><p>规划查询器会根据已有的信息估计每条路径的成本，选择成本最低的路径，生成执行计划<br>
+例如一个<code>SELECT</code>语句，有两条路径可以到达相同的目标，一是全表扫描，二是利用索引。这时规划查询器会估计每个路径的成本<br>
+索引并不是在任何情况下都能加快查询，在查询结果在全表中占比较大时，使用索引的成本更高，因为对于每条记录，利用索引都需要多次IO<br>
+规划由<code>pg_plan_query</code>函数完成，见<code>src/backend/tcop/postgres.c</code><br>
+其中，查找所有路径由<code>subquery_planner</code>函数完成，见<code>src/backend/optimizer/plan/planner.c</code><br>
+<code>subquery_planner</code>返回了一个<code>PlannerInfo</code>结构体，它表示了规划路径时生成的所有信息<br>
+随后，<code>get_cheapest_fractional_path</code>从其中选择出成本最低的路径，见<code>src/backend/optimizer/plan/planner.c</code></p>
+<h2 id="执行器" class="headerLink">
+    <a href="#%e6%89%a7%e8%a1%8c%e5%99%a8" class="header-mark"></a>执行器</h2><p>执行器拿到执行计划后，构造一个对象，叫做<code>portal</code>，它表示了一次准备好了的执行。对于<code>SELECT</code>语句，它相当于一个打开的游标<br>
+准备<code>portal</code>的过程包括</p>
+<ol>
+<li>根据查询计划构造<code>portal</code>，由<code>PortalDefineQuery</code>完成</li>
+<li>开启<code>portal</code>，由<code>PortalStart</code>完成</li>
+<li>设置返回结果的格式，由<code>PortalSetResultFormat</code>完成</li>
+<li>打开并设置接受结果的通道</li>
+</ol>
+<p>随后，调用<code>PortalRun</code>函数完成最终的执行，见<code>src/backend/tcop/pquery.c</code></p>
+<h1 id="连接管理" class="headerLink">
+    <a href="#%e8%bf%9e%e6%8e%a5%e7%ae%a1%e7%90%86" class="header-mark"></a>连接管理</h1><p>pg是一个支持多种操作系统的软件，不同操作系统的对异步IO的支持程度不同，在较新的linux上，它会使用<code>epoll</code>机制<br>
+linux的IO机制主要的进化过程如下</p>
+<pre class="mermaid">graph LR
+    A[常规阻塞IO] --> B[select]
+    B --> C[poll]
+    C --> D[epoll]
+</pre><p><code>epoll</code>是一个现代的异步IO机制，它是高性能服务器必不可少的一部分<br>
+简单来说，<code>epoll</code>机制有三个主要的函数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">epoll_create</span> <span class="p">(</span><span class="kt">int</span> <span class="n">__size</span><span class="p">);</span>  <span class="c1">// 创建epoll对象，返回一个文件描述符指向epoll实例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 对监听的文件描述符集合进行操作，可以增加，修改，删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">epoll_ctl</span> <span class="p">(</span><span class="kt">int</span> <span class="n">__epfd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">__op</span><span class="p">,</span> <span class="kt">int</span> <span class="n">__fd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">epoll_event</span> <span class="o">*</span><span class="n">__event</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 调用时阻塞直到监听的文件描述符集合中有事件发生，返回发生事件的文件描述符集合
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">extern</span> <span class="kt">int</span> <span class="nf">epoll_wait</span> <span class="p">(</span><span class="kt">int</span> <span class="n">__epfd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">epoll_event</span> <span class="o">*</span><span class="n">__events</span><span class="p">,</span><span class="kt">int</span> <span class="n">__maxevents</span><span class="p">,</span> <span class="kt">int</span> <span class="n">__timeout</span><span class="p">)</span>
+</span></span></code></pre></div><p>pg主进程启动时，会创建一系列的辅助进程，包括后台写进程，压缩进程等等，随后它会创建一个<code>epoll</code>实例，然后进入循环，不断等待<code>epoll</code>事件发生、
+处理事件、继续等待<br>
+当pg从<code>epoll_wait</code>中返回时，它会处理发生的所有事件，如果是客户端的连接，它会通过<code>BackendStartup</code>函数创建一个进程处理客户端的请求<br>
+采用这样的模型，在没有客户端连接时，pg主进程长时间阻塞，几乎不占用CPU，在高负载时，<code>epoll_wait</code>一次能返回多个事件，性能也非常好</p>
+<h1 id="总结" class="headerLink">
+    <a href="#%e6%80%bb%e7%bb%93" class="header-mark"></a>总结</h1><h2 id="c的缺点" class="headerLink">
+    <a href="#c%e7%9a%84%e7%bc%ba%e7%82%b9" class="header-mark"></a>C的缺点</h2><p>在pg这个项目中可以看出很多C的缺点，然而有些缺点是编译型语言的，所以这里只列出了相比C++，以及Rust的缺点</p>
+<ol>
+<li>抽象程度不及C++，虽然C也有一定的抽象，但是还是不能屏蔽足够的细节，在一个有140万行源码的项目中体现非常明显</li>
+<li>缺少命名空间机制，在一个140万行源码中的项目考虑一个不会重复的函数难度还是有点高的，其次导致了标识符的名字普遍非常长</li>
+<li>异常处理机制太过原始，使用<code>sigsetjmp</code>和<code>siglongjmp</code>，本质上只是全局goto，不易调试和理解</li>
+<li>语言没有常见数据结构的标准库，导致开发一个大型项目的一个必不可少的工作就是重新造轮子</li>
+</ol>
+<h2 id="读后感" class="headerLink">
+    <a href="#%e8%af%bb%e5%90%8e%e6%84%9f" class="header-mark"></a>读后感</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">➜  postgres git:(master) ✗ fd -e c -e h | xargs wc -l | tail -n 1
+</span></span><span class="line"><span class="cl"> 1562969 total
+</span></span></code></pre></div><p>PostgreSQL源码非常大，有150万行，本次课程任务也只是看到了其中冰山一角中的一角，许多内容由于能力有限精力有限，并没有深入研究。<br>
+它向我们展示了一个关系型数据库理论的丰富和深厚，以及一个大型开源项目的复杂性，这对我今后的学习和工作都有很大的帮助。</p>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-21</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/c/c&#43;&#43;/">C/C&#43;&#43;</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/docker-tutorial/" class="prev" rel="prev" title="docker 使用方法"><i class="fas fa-angle-left fa-fw"></i>docker 使用方法</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.121.1">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: (window.theme === 'dark' ? 'dark' : 'default') });
+</script><div class="assets"><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2023-12-21T18:27:09+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"PostgreSQL源码阅读报告"}}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/js/gitalk.min.js" defer></script></div>
+</body>
+
+</html>

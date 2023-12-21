@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/function-parameters-push-stack-order\/"
-        },"genre": "posts","keywords": "Coding, 汇编","wordcount":  1022 ,
+        },"genre": "posts","keywords": "Coding, assemble","wordcount":  1022 ,
         "url": "http:\/\/example.org\/posts\/function-parameters-push-stack-order\/","datePublished": "2023-04-06T00:09:32+00:00","dateModified": "2023-04-06T00:09:32+00:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
@@ -87,12 +87,43 @@
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-            <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">函数传参的入栈顺序造成的一些细微影响</h1><div class="post-meta">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#为了研究函数传参的顺序到底是从左到右还是从右到左我做了以下实验">为了研究函数传参的顺序到底是从左到右还是从右到左，我做了以下实验</a>
+      <ul>
+        <li><a href="#c">C</a></li>
+        <li><a href="#python">Python</a></li>
+        <li><a href="#占坑">占坑</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">函数传参的入栈顺序造成的一些细微影响</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-04-06">2023-04-06</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-04-06">2023-04-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1022 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
-        </div><div class="content" id="content"><p>最近遇到了一个函数传参造成的问题，于是来稍微研究一下这个东西<br>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#为了研究函数传参的顺序到底是从左到右还是从右到左我做了以下实验">为了研究函数传参的顺序到底是从左到右还是从右到左，我做了以下实验</a>
+      <ul>
+        <li><a href="#c">C</a></li>
+        <li><a href="#python">Python</a></li>
+        <li><a href="#占坑">占坑</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>最近遇到了一个函数传参造成的问题，于是来稍微研究一下这个东西<br>
 什么是函数传参顺序？
 一个简单例子</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">bar</span><span class="p">(</span><span class="nf">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nf">foo</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
@@ -203,7 +234,7 @@
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/coding/">Coding</a>,&nbsp;<a href="/tags/%E6%B1%87%E7%BC%96/">汇编</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/coding/">Coding</a>,&nbsp;<a href="/tags/assemble/">assemble</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>

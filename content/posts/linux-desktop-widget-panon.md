@@ -3,6 +3,7 @@ title: Linux桌面美化之音频频谱可视化部件panon以及pulseaudio天�
 author: z2z63
 date: 2023-03-30 16:47:42
 tags: [Linux, Linux Desktop]
+draft: true
 ---
 
 ## [panon](https://github.com/rbn42/panon)是一个 KDE 的音频频谱可视化 widget(插件)

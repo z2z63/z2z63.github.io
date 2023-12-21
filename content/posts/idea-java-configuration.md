@@ -2,7 +2,7 @@
 title: "Idea配置java项目"
 author: z2z63
 date: 2023-09-20T15:29:39+08:00
-tags: [Java]
+tags: [Java, Jetbrains IDE]
 ---
 IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑  
 声明一下所说的运行配置是指Run/Debug Configuration

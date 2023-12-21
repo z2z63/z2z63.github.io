@@ -21,7 +21,7 @@
 
 <meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/linux-space-release/" /><link rel="prev" href="http://example.org/posts/simd_vs_simt/" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/linux-space-release/" /><link rel="prev" href="http://example.org/posts/coreutils_hash/" /><link rel="next" href="http://example.org/posts/docker-tutorial/" />
 <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/linux-space-release\/"
-        },"genre": "posts","wordcount":  2618 ,
+        },"genre": "posts","keywords": "Linux","wordcount":  2618 ,
         "url": "http:\/\/example.org\/posts\/linux-space-release\/","datePublished": "2023-12-15T15:02:39+08:00","dateModified": "2023-12-15T15:02:39+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
@@ -87,12 +87,109 @@
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-            <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux释放磁盘空间</h1><div class="post-meta">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#jetbrains-ide">jetbrains IDE</a></li>
+    <li><a href="#vscode">VScode</a></li>
+    <li><a href="#python">Python</a>
+      <ul>
+        <li><a href="#anaconda虚拟环境">anaconda虚拟环境</a></li>
+        <li><a href="#pip缓存">pip缓存</a></li>
+        <li><a href="#数据文件">数据文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#java">Java</a>
+      <ul>
+        <li><a href="#maven缓存">maven缓存</a></li>
+        <li><a href="#gradle缓存">gradle缓存</a></li>
+      </ul>
+    </li>
+    <li><a href="#cc">C/C++</a>
+      <ul>
+        <li><a href="#编译产物">编译产物</a></li>
+        <li><a href="#本地安装的软件">本地安装的软件</a></li>
+      </ul>
+    </li>
+    <li><a href="#js">JS</a>
+      <ul>
+        <li><a href="#npm">npm</a></li>
+      </ul>
+    </li>
+    <li><a href="#docker">docker</a></li>
+    <li><a href="#数据库">数据库</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#微信">微信</a></li>
+    <li><a href="#短期不需要的软件">短期不需要的软件</a></li>
+    <li><a href="#chrome">chrome</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#download目录">Download目录</a></li>
+    <li><a href="#仓库盘">仓库盘</a></li>
+    <li><a href="#打包与压缩">打包与压缩</a></li>
+    <li><a href="#删除孤儿包">删除孤儿包</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux释放磁盘空间</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-15">2023-12-15</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-15">2023-12-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2618 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
-        </div><div class="content" id="content"><p>主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止用户数据的增长，所以清理
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#jetbrains-ide">jetbrains IDE</a></li>
+    <li><a href="#vscode">VScode</a></li>
+    <li><a href="#python">Python</a>
+      <ul>
+        <li><a href="#anaconda虚拟环境">anaconda虚拟环境</a></li>
+        <li><a href="#pip缓存">pip缓存</a></li>
+        <li><a href="#数据文件">数据文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#java">Java</a>
+      <ul>
+        <li><a href="#maven缓存">maven缓存</a></li>
+        <li><a href="#gradle缓存">gradle缓存</a></li>
+      </ul>
+    </li>
+    <li><a href="#cc">C/C++</a>
+      <ul>
+        <li><a href="#编译产物">编译产物</a></li>
+        <li><a href="#本地安装的软件">本地安装的软件</a></li>
+      </ul>
+    </li>
+    <li><a href="#js">JS</a>
+      <ul>
+        <li><a href="#npm">npm</a></li>
+      </ul>
+    </li>
+    <li><a href="#docker">docker</a></li>
+    <li><a href="#数据库">数据库</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#微信">微信</a></li>
+    <li><a href="#短期不需要的软件">短期不需要的软件</a></li>
+    <li><a href="#chrome">chrome</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#download目录">Download目录</a></li>
+    <li><a href="#仓库盘">仓库盘</a></li>
+    <li><a href="#打包与压缩">打包与压缩</a></li>
+    <li><a href="#删除孤儿包">删除孤儿包</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止用户数据的增长，所以清理
 也主要是清理用户数据</p>
 <h1 id="查看磁盘使用率" class="headerLink">
     <a href="#%e6%9f%a5%e7%9c%8b%e7%a3%81%e7%9b%98%e4%bd%bf%e7%94%a8%e7%8e%87" class="header-mark"></a>查看磁盘使用率</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">df -h
@@ -240,13 +337,14 @@ du -h --max-depth=0 ~/.npm
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/simd_vs_simt/" class="prev" rel="prev" title="SIMD&amp;SIMT"><i class="fas fa-angle-left fa-fw"></i>SIMD&amp;SIMT</a></div>
+    <div class="post-nav"><a href="/posts/coreutils_hash/" class="prev" rel="prev" title="coreutils之hash table"><i class="fas fa-angle-left fa-fw"></i>coreutils之hash table</a>
+            <a href="/posts/docker-tutorial/" class="next" rel="next" title="docker 使用方法">docker 使用方法<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.

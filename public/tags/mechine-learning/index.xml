@@ -4,11 +4,11 @@
         <link>http://example.org/tags/mechine-learning/</link>
         <description>Mechine Learning - Tag - Virtualfutre&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/mechine-learning/" rel="self" type="application/rss+xml" /><item>
-    <title>推荐系统概述</title>
+    <title>推荐系统简单介绍</title>
     <link>http://example.org/posts/recsys-summary/</link>
     <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/recsys-summary/</guid>
-    <description><![CDATA[recsys(推荐系统)的种类 collaborative filtering（协同过滤）根据相似用户的行为为用户推荐内容，推荐理由是“与你相似的人都喜欢xx”， 缺点是]]></description>
+    <description><![CDATA[这篇文章是wikipedia的recsys词条的翻译以及简化版本，原文见https://en.wikipedia.org/wiki/Reco]]></description>
 </item></channel>
 </rss>

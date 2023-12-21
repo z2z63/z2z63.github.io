@@ -87,12 +87,75 @@
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-            <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux字体</h1><div class="post-meta">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#字体配置模块">字体配置模块</a>
+      <ul>
+        <li><a href="#字体匹配模块">字体匹配模块</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#衬线与非衬线">衬线与非衬线</a></li>
+    <li><a href="#等宽与比例">等宽与比例</a></li>
+    <li><a href="#cjk">CJK</a></li>
+    <li><a href="#emoji">Emoji</a></li>
+    <li><a href="#patched-font">Patched font</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#解决wps-office打开文档时字体显示异常">解决WPS Office打开文档时字体显示异常</a></li>
+    <li><a href="#查看fallback到的字体">查看fallback到的字体</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#fc-list">fc-list</a></li>
+    <li><a href="#fc-match">fc-match</a></li>
+    <li><a href="#fc-cache">fc-cache</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux字体</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-18">2023-09-18</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-09-18">2023-09-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2914 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
-        </div><div class="content" id="content"><p>之前安装archlinux，随便配置的中文字体，显示中文时总有一些奇奇怪怪的字形，最近翻了archlinux的文档，把字体配置搞清楚了</p>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#字体配置模块">字体配置模块</a>
+      <ul>
+        <li><a href="#字体匹配模块">字体匹配模块</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#衬线与非衬线">衬线与非衬线</a></li>
+    <li><a href="#等宽与比例">等宽与比例</a></li>
+    <li><a href="#cjk">CJK</a></li>
+    <li><a href="#emoji">Emoji</a></li>
+    <li><a href="#patched-font">Patched font</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#解决wps-office打开文档时字体显示异常">解决WPS Office打开文档时字体显示异常</a></li>
+    <li><a href="#查看fallback到的字体">查看fallback到的字体</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#fc-list">fc-list</a></li>
+    <li><a href="#fc-match">fc-match</a></li>
+    <li><a href="#fc-cache">fc-cache</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>之前安装archlinux，随便配置的中文字体，显示中文时总有一些奇奇怪怪的字形，最近翻了archlinux的文档，把字体配置搞清楚了</p>
 <h1 id="字体是什么" class="headerLink">
     <a href="#%e5%ad%97%e4%bd%93%e6%98%af%e4%bb%80%e4%b9%88" class="header-mark"></a>字体是什么</h1><p>简单来说，字体告诉屏幕如何显示一个字，字体常见的格式有Bitmap和Outline，大致区别就是Bitmap直接指定了每一个像素，有点类似于字模，而Outline指定的是字的轮廓，至于具体怎么显示还需要根据屏幕分辨率，字号等信息来计算。很明显，Outline格式是更加现代的格式，所以此文就忽略Bitmap<br>
 Outline格式有以下几种格式</p>
@@ -341,7 +404,7 @@ Outline格式有以下几种格式</p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/recsys-summary/" class="prev" rel="prev" title="推荐系统概述"><i class="fas fa-angle-left fa-fw"></i>推荐系统概述</a>
+    <div class="post-nav"><a href="/posts/recsys-summary/" class="prev" rel="prev" title="推荐系统简单介绍"><i class="fas fa-angle-left fa-fw"></i>推荐系统简单介绍</a>
             <a href="/posts/idea-java-configuration/" class="next" rel="next" title="Idea配置java项目">Idea配置java项目<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>

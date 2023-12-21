@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>docker - Tag - Virtualfutre&#39;s Blog</title>
+        <link>http://example.org/tags/docker/</link>
+        <description>docker - Tag - Virtualfutre&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/docker/" rel="self" type="application/rss+xml" /><item>
+    <title>docker 使用方法</title>
+    <link>http://example.org/posts/docker-tutorial/</link>
+    <pubDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/docker-tutorial/</guid>
+    <description><![CDATA[这篇文章是完成docker的get started guide后的总结，见https://docs.docker.com/get-started/ 前置概念 d]]></description>
+</item></channel>
+</rss>

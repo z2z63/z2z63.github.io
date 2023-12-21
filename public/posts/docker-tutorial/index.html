@@ -8,20 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
     <title>docker 使用方法 - Virtualfutre&#39;s Blog</title><meta name="Description" content=""><meta property="og:title" content="docker 使用方法" />
-<meta property="og:description" content="前置概念 docker架构docker采用server-client架构，docker deamon（即dockerd）完成构建容器，运行容器等" />
+<meta property="og:description" content="这篇文章是完成docker的get started guide后的总结，见https://docs.docker.com/get-started/ 前置概念 d" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/posts/docker-tutorial/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-03-28T23:21:19+00:00" />
-<meta property="article:modified_time" content="2023-03-28T23:21:19+00:00" />
+<meta property="article:published_time" content="2023-12-16T18:21:19+00:00" />
+<meta property="article:modified_time" content="2023-12-16T18:21:19+00:00" />
 
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="docker 使用方法"/>
-<meta name="twitter:description" content="前置概念 docker架构docker采用server-client架构，docker deamon（即dockerd）完成构建容器，运行容器等"/>
+<meta name="twitter:description" content="这篇文章是完成docker的get started guide后的总结，见https://docs.docker.com/get-started/ 前置概念 d"/>
 <meta name="application-name" content="Virtualfutre&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="Virtualfutre&#39;s Blog">
 
 <meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/docker-tutorial/" /><link rel="next" href="http://example.org/posts/linux-desktop-widget-panon/" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/docker-tutorial/" /><link rel="prev" href="http://example.org/posts/linux-space-release/" /><link rel="next" href="http://example.org/posts/postgresql_source/" />
 <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
@@ -33,8 +33,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/docker-tutorial\/"
-        },"genre": "posts","keywords": "Linux","wordcount":  2376 ,
-        "url": "http:\/\/example.org\/posts\/docker-tutorial\/","datePublished": "2023-03-28T23:21:19+00:00","dateModified": "2023-03-28T23:21:19+00:00","publisher": {
+        },"genre": "posts","keywords": "Linux, docker","wordcount":  2441 ,
+        "url": "http:\/\/example.org\/posts\/docker-tutorial\/","datePublished": "2023-12-16T18:21:19+00:00","dateModified": "2023-12-16T18:21:19+00:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
                 "@type": "Person",
@@ -87,12 +87,108 @@
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-            <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">docker 使用方法</h1><div class="post-meta">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#docker架构">docker架构</a></li>
+    <li><a href="#image与container">image与container</a></li>
+    <li><a href="#docker的进程模型">docker的进程模型</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#工作流1使用docker-hub提供的镜像">工作流1——使用docker hub提供的镜像</a>
+      <ul>
+        <li><a href="#启动容器">启动容器</a></li>
+        <li><a href="#查看容器状态">查看容器状态</a></li>
+        <li><a href="#交互式操作">交互式操作</a></li>
+        <li><a href="#exec">exec</a></li>
+        <li><a href="#attach">attach</a></li>
+        <li><a href="#管理容器">管理容器</a></li>
+      </ul>
+    </li>
+    <li><a href="#工作流2通过镜像协同工作">工作流2——通过镜像协同工作</a>
+      <ul>
+        <li><a href="#创建镜像">创建镜像</a></li>
+        <li><a href="#分享给其他人">分享给其他人</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#数据持久化">数据持久化</a>
+      <ul>
+        <li><a href="#volume">volume</a></li>
+        <li><a href="#bind">bind</a></li>
+      </ul>
+    </li>
+    <li><a href="#dokcer的网络">dokcer的网络</a>
+      <ul>
+        <li><a href="#端口映射">端口映射</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#关于参数">关于参数</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">docker 使用方法</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-03-28">2023-03-28</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-03-28">2023-03-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2376 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
-        </div><div class="content" id="content"><h1 id="前置概念" class="headerLink">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-16">2023-12-16</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-16">2023-12-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2441 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#docker架构">docker架构</a></li>
+    <li><a href="#image与container">image与container</a></li>
+    <li><a href="#docker的进程模型">docker的进程模型</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#工作流1使用docker-hub提供的镜像">工作流1——使用docker hub提供的镜像</a>
+      <ul>
+        <li><a href="#启动容器">启动容器</a></li>
+        <li><a href="#查看容器状态">查看容器状态</a></li>
+        <li><a href="#交互式操作">交互式操作</a></li>
+        <li><a href="#exec">exec</a></li>
+        <li><a href="#attach">attach</a></li>
+        <li><a href="#管理容器">管理容器</a></li>
+      </ul>
+    </li>
+    <li><a href="#工作流2通过镜像协同工作">工作流2——通过镜像协同工作</a>
+      <ul>
+        <li><a href="#创建镜像">创建镜像</a></li>
+        <li><a href="#分享给其他人">分享给其他人</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#数据持久化">数据持久化</a>
+      <ul>
+        <li><a href="#volume">volume</a></li>
+        <li><a href="#bind">bind</a></li>
+      </ul>
+    </li>
+    <li><a href="#dokcer的网络">dokcer的网络</a>
+      <ul>
+        <li><a href="#端口映射">端口映射</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#关于参数">关于参数</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>这篇文章是完成docker的get started guide后的总结，见<a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener noreferrer">https://docs.docker.com/get-started/</a></p>
+<h1 id="前置概念" class="headerLink">
     <a href="#%e5%89%8d%e7%bd%ae%e6%a6%82%e5%bf%b5" class="header-mark"></a>前置概念</h1><h2 id="docker架构" class="headerLink">
     <a href="#docker%e6%9e%b6%e6%9e%84" class="header-mark"></a>docker架构</h2><p>docker采用server-client架构，docker deamon（即dockerd）完成构建容器，运行容器等工作，docker client与docker deamon通过REST API或UNIX socket或网卡通信<br>
 docker client可以是</p>
@@ -242,7 +338,7 @@ docker compose需要额外安装</p>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-03-28</span>
+                <span>Updated on 2023-12-16</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -253,14 +349,14 @@ docker compose需要额外安装</p>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/docker/">docker</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav">
-            <a href="/posts/linux-desktop-widget-panon/" class="next" rel="next" title="Linux桌面美化之音频频谱可视化部件panon以及pulseaudio天坑">Linux桌面美化之音频频谱可视化部件panon以及pulseaudio天坑<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/linux-space-release/" class="prev" rel="prev" title="Linux释放磁盘空间"><i class="fas fa-angle-left fa-fw"></i>Linux释放磁盘空间</a>
+            <a href="/posts/postgresql_source/" class="next" rel="next" title="PostgreSQL源码阅读报告">PostgreSQL源码阅读报告<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -279,7 +375,7 @@ docker compose需要额外安装</p>
         </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
             <i class="fas fa-comment fa-fw"></i>
         </a>
-    </div><div class="assets"><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2023-03-28T23:21:19Z","owner":"z2z63","repo":"z2z63.github.io","title":"docker 使用方法"}}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/js/gitalk.min.js" defer></script></div>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2023-12-16T18:21:19Z","owner":"z2z63","repo":"z2z63.github.io","title":"docker 使用方法"}}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/js/gitalk.min.js" defer></script></div>
 </body>
 
 </html>

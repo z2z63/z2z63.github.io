@@ -2,7 +2,7 @@
 title: Linux shell常用快捷键
 author: z2z63
 date: 2023-04-04 23:33:26
-tags: [Linux]
+tags: [Linux, Shell]
 ---
 在linux使用shell时常常会遇到一些使用场景需要大量重复敲击按键，带来了一些麻烦，所以学会一些快捷键是
 必备的，但是有些快捷键几乎没用，也没用记忆的必要  

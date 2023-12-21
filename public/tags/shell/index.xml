@@ -1,0 +1,28 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Shell - Tag - Virtualfutre&#39;s Blog</title>
+        <link>http://example.org/tags/shell/</link>
+        <description>Shell - Tag - Virtualfutre&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/shell/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux 神级文件管理器ranger</title>
+    <link>http://example.org/posts/file-manager-ranger/</link>
+    <pubDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/file-manager-ranger/</guid>
+    <description><![CDATA[ranger是linux的一个终端文件管理器，它的feature有 vi按键绑定 与shell环境完美结合，可以使用各种shell工具 在tty上]]></description>
+</item><item>
+    <title>Linux shell常用快捷键</title>
+    <link>http://example.org/posts/linux-terminal-shortcut/</link>
+    <pubDate>Tue, 04 Apr 2023 23:33:26 &#43;0000</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/linux-terminal-shortcut/</guid>
+    <description><![CDATA[在linux使用shell时常常会遇到一些使用场景需要大量重复敲击按键，带来了一些麻烦，所以学会一些快捷键是 必备的，但是有些快捷键几乎没用，]]></description>
+</item><item>
+    <title>Linux搜索神器</title>
+    <link>http://example.org/posts/linux-file-search/</link>
+    <pubDate>Sat, 01 Apr 2023 23:35:22 &#43;0000</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/linux-file-search/</guid>
+    <description><![CDATA[使用Linux时，常常需要在文件系统中快速搜索到内容，比如说 在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径 想找某个文件，但]]></description>
+</item></channel>
+</rss>

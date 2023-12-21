@@ -2,6 +2,7 @@
 title: "coreutils之hash table"
 author: z2z63
 date: 2023-10-14T16:08:58+08:00
+tags: [C/C++]
 math:
   enable: true
 ---

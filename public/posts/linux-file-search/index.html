@@ -21,7 +21,7 @@
 
 <meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/linux-file-search/" /><link rel="prev" href="http://example.org/posts/linux-desktop-widget-panon/" /><link rel="next" href="http://example.org/posts/matplotlib-chinese-font/" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/linux-file-search/" /><link rel="next" href="http://example.org/posts/matplotlib-chinese-font/" />
 <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/linux-file-search\/"
-        },"genre": "posts","keywords": "Linux","wordcount":  2220 ,
+        },"genre": "posts","keywords": "Linux, Shell","wordcount":  2220 ,
         "url": "http:\/\/example.org\/posts\/linux-file-search\/","datePublished": "2023-04-01T23:35:22+00:00","dateModified": "2023-04-01T23:35:22+00:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
@@ -87,12 +87,41 @@
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-            <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux搜索神器</h1><div class="post-meta">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#需求1-根据文件名搜索路径--find">需求1: 根据文件名搜索路径&ndash;<code>find</code></a></li>
+        <li><a href="#需求2全局搜索文件--locate">需求2:全局搜索文件&ndash;<code>locate</code></a></li>
+        <li><a href="#需求3搜索文件内容--grepagdelackdel">需求3:搜索文件内容&ndash;<code>grep</code>,<code>ag</code>,<!-- raw HTML omitted --><code>ack</code><!-- raw HTML omitted --></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux搜索神器</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-04-01">2023-04-01</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-04-01">2023-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2220 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
-        </div><div class="content" id="content"><p>使用Linux时，常常需要在文件系统中快速搜索到内容，比如说</p>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#需求1-根据文件名搜索路径--find">需求1: 根据文件名搜索路径&ndash;<code>find</code></a></li>
+        <li><a href="#需求2全局搜索文件--locate">需求2:全局搜索文件&ndash;<code>locate</code></a></li>
+        <li><a href="#需求3搜索文件内容--grepagdelackdel">需求3:搜索文件内容&ndash;<code>grep</code>,<code>ag</code>,<!-- raw HTML omitted --><code>ack</code><!-- raw HTML omitted --></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>使用Linux时，常常需要在文件系统中快速搜索到内容，比如说</p>
 <ol>
 <li>在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径</li>
 <li>想找某个文件，但是完全不知道它在哪里，需要全局搜索</li>
@@ -190,13 +219,13 @@ Like grep or ack, but faster.
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/shell/">Shell</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/linux-desktop-widget-panon/" class="prev" rel="prev" title="Linux桌面美化之音频频谱可视化部件panon以及pulseaudio天坑"><i class="fas fa-angle-left fa-fw"></i>Linux桌面美化之音频频谱可视化部件panon以及pulseaudio天坑</a>
+    <div class="post-nav">
             <a href="/posts/matplotlib-chinese-font/" class="next" rel="next" title="matplotlib在linux平台上显示中文的解决方案">matplotlib在linux平台上显示中文的解决方案<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>

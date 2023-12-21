@@ -1,9 +1,10 @@
 ---
 title: docker 使用方法
 author: z2z63
-date: 2023-03-28 23:21:19
-tags: [Linux]
+date: 2023-12-16 18:21:19
+tags: [Linux, docker]
 ---
+这篇文章是完成docker的get started guide后的总结，见<https://docs.docker.com/get-started/>
 # 前置概念
 ## docker架构
 docker采用server-client架构，docker deamon（即dockerd）完成构建容器，运行容器等工作，docker client与docker deamon通过REST API或UNIX socket或网卡通信  

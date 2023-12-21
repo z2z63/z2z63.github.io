@@ -2,7 +2,7 @@
 title: Linux搜索神器
 author: z2z63
 date: 2023-04-01 23:35:22
-tags: [Linux]
+tags: [Linux, Shell]
 ---
 使用Linux时，常常需要在文件系统中快速搜索到内容，比如说
 1. 在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径

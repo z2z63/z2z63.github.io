@@ -87,12 +87,53 @@
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-            <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">KDE折腾之自动化设置</h1><div class="post-meta">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#xrandr">xrandr</a></li>
+    <li><a href="#kscreen-doctor">kscreen-doctor</a></li>
+    <li><a href="#qt_screen_scale_factors">QT_SCREEN_SCALE_FACTORS</a></li>
+    <li><a href="#寻找kde设置文件">寻找KDE设置文件</a></li>
+    <li><a href="#监控读写文件">监控读写文件</a>
+      <ul>
+        <li><a href="#通过文件修改时间监控文件写入">通过文件修改时间监控文件写入</a></li>
+        <li><a href="#更简单的做法">更简单的做法</a></li>
+      </ul>
+    </li>
+    <li><a href="#修改配置文件">修改配置文件</a></li>
+    <li><a href="#命令行注销">命令行注销</a></li>
+    <li><a href="#检测外置屏幕连接状态">检测外置屏幕连接状态</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">KDE折腾之自动化设置</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-07-21">2023-07-21</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-07-21">2023-07-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3319 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;7 minutes&nbsp;</div>
-        </div><div class="content" id="content"><h1 id="需求" class="headerLink">
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#xrandr">xrandr</a></li>
+    <li><a href="#kscreen-doctor">kscreen-doctor</a></li>
+    <li><a href="#qt_screen_scale_factors">QT_SCREEN_SCALE_FACTORS</a></li>
+    <li><a href="#寻找kde设置文件">寻找KDE设置文件</a></li>
+    <li><a href="#监控读写文件">监控读写文件</a>
+      <ul>
+        <li><a href="#通过文件修改时间监控文件写入">通过文件修改时间监控文件写入</a></li>
+        <li><a href="#更简单的做法">更简单的做法</a></li>
+      </ul>
+    </li>
+    <li><a href="#修改配置文件">修改配置文件</a></li>
+    <li><a href="#命令行注销">命令行注销</a></li>
+    <li><a href="#检测外置屏幕连接状态">检测外置屏幕连接状态</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="需求" class="headerLink">
     <a href="#%e9%9c%80%e6%b1%82" class="header-mark"></a>需求</h1><p>我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个配置：</p>
 <ul>
 <li>内置屏幕：缩放比例150%，字体DPI 144</li>
@@ -258,7 +299,7 @@
     </div>
 
     <div class="post-nav"><a href="/posts/this-in-js/" class="prev" rel="prev" title="JS中的this"><i class="fas fa-angle-left fa-fw"></i>JS中的this</a>
-            <a href="/posts/recsys-summary/" class="next" rel="next" title="推荐系统概述">推荐系统概述<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/posts/recsys-summary/" class="next" rel="next" title="推荐系统简单介绍">推荐系统简单介绍<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.

@@ -1,9 +1,10 @@
 ---
-title: 推荐系统概述
+title: 推荐系统简单介绍
 author: z2z63
 date: 2023-08-04 15:26:51
 tags: [Mechine Learning]
 ---
+这篇文章是wikipedia的recsys词条的翻译以及简化版本，原文见<https://en.wikipedia.org/wiki/Recommender_system>
 recsys(推荐系统)的种类
 
 - collaborative filtering（协同过滤）根据相似用户的行为为用户推荐内容，推荐理由是“与你相似的人都喜欢xx”，

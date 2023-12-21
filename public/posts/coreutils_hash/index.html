@@ -21,7 +21,7 @@
 
 <meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/coreutils_hash/" /><link rel="prev" href="http://example.org/posts/linux-vmware-setup/" /><link rel="next" href="http://example.org/posts/simd_vs_simt/" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/coreutils_hash/" /><link rel="prev" href="http://example.org/posts/linux-vmware-setup/" /><link rel="next" href="http://example.org/posts/linux-space-release/" />
 <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/coreutils_hash\/"
-        },"genre": "posts","wordcount":  803 ,
+        },"genre": "posts","keywords": "C\/C\u002b\u002b","wordcount":  803 ,
         "url": "http:\/\/example.org\/posts\/coreutils_hash\/","datePublished": "2023-10-14T16:08:58+08:00","dateModified": "2023-10-14T16:08:58+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
@@ -87,12 +87,29 @@
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-            <div class="container"><article class="page single"><h1 class="single-title animate__animated animate__flipInX">coreutils之hash table</h1><div class="post-meta">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#字符串哈希函数">字符串哈希函数</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">coreutils之hash table</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-10-14">2023-10-14</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-10-14">2023-10-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;803 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
-        </div><div class="content" id="content"><p>最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现</p>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#字符串哈希函数">字符串哈希函数</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现</p>
 <h2 id="字符串哈希函数" class="headerLink">
     <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%93%88%e5%b8%8c%e5%87%bd%e6%95%b0" class="header-mark"></a>字符串哈希函数</h2><p>coreutils中内置了对字符串的哈希函数</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">size_t</span>
@@ -146,14 +163,14 @@ $$
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/c/c&#43;&#43;/">C/C&#43;&#43;</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
     <div class="post-nav"><a href="/posts/linux-vmware-setup/" class="prev" rel="prev" title="Linux使用VMware"><i class="fas fa-angle-left fa-fw"></i>Linux使用VMware</a>
-            <a href="/posts/simd_vs_simt/" class="next" rel="next" title="SIMD&amp;SIMT">SIMD&amp;SIMT<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/posts/linux-space-release/" class="next" rel="next" title="Linux释放磁盘空间">Linux释放磁盘空间<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
