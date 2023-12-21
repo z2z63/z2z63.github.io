@@ -65,3 +65,11 @@ hasCJKLanguage = true
     # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
     noClasses = false
 
+# 网站分析配置
+[params.analytics]
+  enable = true
+  # Google Analytics
+  [params.analytics.google]
+    id = "G-48XH0QHHK3"
+    # 是否匿名化用户 IP
+    anonymizeIP = false

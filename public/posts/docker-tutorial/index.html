@@ -225,8 +225,8 @@ docker client可以是</p>
 </span></span></code></pre></div><p>docker会随机给这个容器随机生成一个名字，也可以指定名字</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker create --name mycontainer ubuntu
 </span></span></code></pre></div><p>创建后，启动容器</p>
-<pre tabindex="0"><code>docker start mycontainer
-</code></pre><hr>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker start mycontainer
+</span></span></code></pre></div><hr>
 <p>docker提供了一个更简单的命令<code>run</code>来简化这个流程</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run ubuntu <span class="c1"># 同样可以通过--name指定容器名</span>
 </span></span></code></pre></div><p><code>run</code>命令会自动拉取镜像（如果本地没有），创建容器，启动容器</p>
@@ -375,7 +375,10 @@ docker compose需要额外安装</p>
         </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
             <i class="fas fa-comment fa-fw"></i>
         </a>
-    </div><div class="assets"><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2023-12-16T18:21:19Z","owner":"z2z63","repo":"z2z63.github.io","title":"docker 使用方法"}}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/js/gitalk.min.js" defer></script></div>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2023-12-16T18:21:19Z","owner":"z2z63","repo":"z2z63.github.io","title":"docker 使用方法"}}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/js/gitalk.min.js" defer></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-48XH0QHHK3');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-48XH0QHHK3" async></script></div>
 </body>
 
 </html>

@@ -52,7 +52,7 @@ docker会随机给这个容器随机生成一个名字，也可以指定名字
 docker create --name mycontainer ubuntu
 ```
 创建后，启动容器
-```
+```shell
 docker start mycontainer
 ```
 ---
