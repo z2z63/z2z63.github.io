@@ -1,5 +1,6 @@
 baseURL = 'http://example.org/'
-languageCode = 'zh-cn'
+defaultContentLanguage = "en"
+languageCode = 'zh-CN'
 title = "Virtualfutre's Blog"
 
 theme = "DoIt"
@@ -11,6 +12,15 @@ hasCJKLanguage = true
   version = "0.2.X"
 [params.math]
   enable = true
+[params.page.comment]
+ enable = true
+  # Gitalk 评论系统设置
+  [params.page.comment.gitalk]
+    enable = true
+    owner = "z2z63"
+    repo = "z2z63.github.io"
+    clientId = "7156e4335b80dc5f38c0"
+    clientSecret = "f6118f46792df390e800c05b52300a8da0114474"
 
 [menu]
   [[menu.main]]
