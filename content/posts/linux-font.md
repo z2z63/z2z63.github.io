@@ -1,5 +1,6 @@
 ---
 title: "Linux字体"
+author: z2z63
 date: 2023-09-18T12:17:41+08:00
 tags: [Linux, Linux Desktop, Font]
 ---

@@ -1,5 +1,6 @@
 ---
 title: JS中的this
+author: z2z63
 date: 2023-07-16 00:18:01
 tags: [JS]
 ---

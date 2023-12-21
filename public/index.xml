@@ -9,70 +9,70 @@
     <title>Linux释放磁盘空间</title>
     <link>http://example.org/posts/linux-space-release/</link>
     <pubDate>Fri, 15 Dec 2023 15:02:39 &#43;0800</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-space-release/</guid>
     <description><![CDATA[主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止]]></description>
 </item><item>
     <title>SIMD&amp;SIMT</title>
     <link>http://example.org/posts/simd_vs_simt/</link>
     <pubDate>Sun, 12 Nov 2023 18:34:39 &#43;0800</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/simd_vs_simt/</guid>
     <description><![CDATA[SIMD SIMD是什么SIMD即为Single Instruction, Multiple Data，单指令多数据。传统的指令最多只能处理少量的数据，而SIMD能做到在一条指令内指定多条数]]></description>
 </item><item>
     <title>coreutils之hash table</title>
     <link>http://example.org/posts/coreutils_hash/</link>
     <pubDate>Sat, 14 Oct 2023 16:08:58 &#43;0800</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/coreutils_hash/</guid>
     <description><![CDATA[最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现 字符串哈希函数coreutils中内置了对字符串的哈希函数 size_t hash_string (const char *string,]]></description>
 </item><item>
     <title>Linux使用VMware</title>
     <link>http://example.org/posts/linux-vmware-setup/</link>
     <pubDate>Sun, 24 Sep 2023 19:55:45 &#43;0800</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-vmware-setup/</guid>
     <description><![CDATA[为了完成课程的任务，折腾了很久终于搞好了VMware。 安装VMwareVMware分为个人使用免费的player和商用付费的workstat]]></description>
 </item><item>
     <title>Idea配置java项目</title>
     <link>http://example.org/posts/idea-java-configuration/</link>
     <pubDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/idea-java-configuration/</guid>
     <description><![CDATA[IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑 声明一下所说的运行配置是指]]></description>
 </item><item>
     <title>Linux字体</title>
     <link>http://example.org/posts/linux-font/</link>
     <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-font/</guid>
     <description><![CDATA[之前安装archlinux，随便配置的中文字体，显示中文时总有一些奇奇怪怪的字形，最近翻了archlinux的文档，把字体配置搞清楚了 字体是]]></description>
 </item><item>
     <title>推荐系统概述</title>
     <link>http://example.org/posts/recsys-summary/</link>
     <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/recsys-summary/</guid>
     <description><![CDATA[recsys(推荐系统)的种类 collaborative filtering（协同过滤）根据相似用户的行为为用户推荐内容，推荐理由是“与你相似的人都喜欢xx”， 缺点是]]></description>
 </item><item>
     <title>KDE折腾之自动化设置</title>
     <link>http://example.org/posts/kde-setting-cli/</link>
     <pubDate>Fri, 21 Jul 2023 13:14:56 &#43;0000</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/kde-setting-cli/</guid>
     <description><![CDATA[需求我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个]]></description>
 </item><item>
     <title>JS中的this</title>
     <link>http://example.org/posts/this-in-js/</link>
     <pubDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/this-in-js/</guid>
     <description><![CDATA[箭头函数和普通函数中的this const obj = { name: &#34;Alice&#34;, ptr:this, sayName: function () { console.log(this) }, sayNameArrow: () =&gt; { console.log(this) } }; const sayName = obj.sayName; const sayNameArrow = obj.sayNameArrow; obj.sayName(); sayName(); obj.sayNameArrow(); sayNameArrow(); 输出为 {name: &#39;Alice&#39;, ptr: Window, sayName: ƒ, sayNameArrow: ƒ} demo1.js:5 Window {window: Window, self: Window, document: document, name: &#39;&#39;,]]></description>
 </item><item>
     <title>右值引用</title>
     <link>http://example.org/posts/rvalue-reference/</link>
     <pubDate>Mon, 29 May 2023 22:20:02 &#43;0000</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/rvalue-reference/</guid>
     <description><![CDATA[C++11后引入了右值引用等特性，用来支持移动语义和完美转发，在了解右值引用前，需要了解一些前置的概念 左值(lvalue) 左值字面意义是在等]]></description>
 </item></channel>

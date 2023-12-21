@@ -1,5 +1,6 @@
 ---
 title: 右值引用
+author: z2z63
 date: 2023-05-29 22:20:02
 tags: [mordencpp]
 ---

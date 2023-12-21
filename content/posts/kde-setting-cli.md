@@ -1,5 +1,6 @@
 ---
 title: KDE折腾之自动化设置
+author: z2z63
 date: 2023-07-21 13:14:56
 tags: [Linux ,Linux Desktop]
 ---

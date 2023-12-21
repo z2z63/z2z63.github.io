@@ -1,5 +1,6 @@
 ---
 title: matplotlib在linux平台上显示中文的解决方案
+author: z2z63
 date: 2023-04-02 22:12:22
 tags: [Linux, 科学计算]
 ---

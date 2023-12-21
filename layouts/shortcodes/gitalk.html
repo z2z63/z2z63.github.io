@@ -1,0 +1,14 @@
+<div id="gitalk-container"></div>
+<script>
+    const gitalk = new Gitalk({
+    clientID: '7156e4335b80dc5f38c0',
+    clientSecret: 'f6118f46792df390e800c05b52300a8da0114474',
+    repo: 'https://github.com/z2z63/z2z63.github.io',      // The repository of store comments,
+    owner: 'z2z63',
+    admin: ['z2z63'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  
+  gitalk.render('gitalk-container')
+</script>

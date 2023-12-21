@@ -1,5 +1,6 @@
 ---
 title: "Linux使用VMware"
+author: z2z63
 date: 2023-09-24T19:55:45+08:00
 ---
 为了完成课程的任务，折腾了很久终于搞好了VMware。

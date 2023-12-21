@@ -1,5 +1,6 @@
 ---
 title: Linux搜索神器
+author: z2z63
 date: 2023-04-01 23:35:22
 tags: [Linux]
 ---

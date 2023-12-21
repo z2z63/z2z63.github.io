@@ -1,5 +1,6 @@
 ---
 title: Linux 神级文件管理器ranger
+author: z2z63
 date: 2023-04-13 12:29:06
 tags: [Linux]
 ---

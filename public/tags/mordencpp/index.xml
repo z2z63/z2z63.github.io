@@ -7,7 +7,7 @@
     <title>右值引用</title>
     <link>http://example.org/posts/rvalue-reference/</link>
     <pubDate>Mon, 29 May 2023 22:20:02 &#43;0000</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/rvalue-reference/</guid>
     <description><![CDATA[C++11后引入了右值引用等特性，用来支持移动语义和完美转发，在了解右值引用前，需要了解一些前置的概念 左值(lvalue) 左值字面意义是在等]]></description>
 </item></channel>

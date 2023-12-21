@@ -1,5 +1,6 @@
 ---
 title: MATLAB微积分
+author: z2z63
 date: 2023-05-26 15:51:48
 tags: [科学计算]
 math:

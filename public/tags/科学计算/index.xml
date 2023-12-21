@@ -7,14 +7,14 @@
     <title>MATLAB微积分</title>
     <link>http://example.org/posts/matlab-calculus/</link>
     <pubDate>Fri, 26 May 2023 15:51:48 &#43;0000</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/matlab-calculus/</guid>
     <description><![CDATA[MATLAB数值求解微分方程所谓数值求解，也就是无法获得解的方程，只能获得y(x)函数在x取值范围内的近似值 所有MATALB的DOE solv]]></description>
 </item><item>
     <title>matplotlib在linux平台上显示中文的解决方案</title>
     <link>http://example.org/posts/matplotlib-chinese-font/</link>
     <pubDate>Sun, 02 Apr 2023 22:12:22 &#43;0000</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/matplotlib-chinese-font/</guid>
     <description><![CDATA[matplotlib 是python的可视化库，但是如果在matplotlib的图表中使用了中文， 会找不到中文字体而显示乱码，网上有很多教程解决这个问题，但是在]]></description>
 </item></channel>

@@ -1,5 +1,6 @@
 ---
 title: Linux shell常用快捷键
+author: z2z63
 date: 2023-04-04 23:33:26
 tags: [Linux]
 ---

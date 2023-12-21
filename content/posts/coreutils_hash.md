@@ -1,8 +1,9 @@
 ---
 title: "coreutils之hash table"
+author: z2z63
 date: 2023-10-14T16:08:58+08:00
-math:
-  enable: true
+# math:
+#   enable: true
 ---
 最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现
 ## 字符串哈希函数

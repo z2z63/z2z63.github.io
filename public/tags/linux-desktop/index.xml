@@ -7,21 +7,21 @@
     <title>Linux字体</title>
     <link>http://example.org/posts/linux-font/</link>
     <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-font/</guid>
     <description><![CDATA[之前安装archlinux，随便配置的中文字体，显示中文时总有一些奇奇怪怪的字形，最近翻了archlinux的文档，把字体配置搞清楚了 字体是]]></description>
 </item><item>
     <title>KDE折腾之自动化设置</title>
     <link>http://example.org/posts/kde-setting-cli/</link>
     <pubDate>Fri, 21 Jul 2023 13:14:56 &#43;0000</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/kde-setting-cli/</guid>
     <description><![CDATA[需求我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个]]></description>
 </item><item>
     <title>Linux桌面美化之音频频谱可视化部件panon以及pulseaudio天坑</title>
     <link>http://example.org/posts/linux-desktop-widget-panon/</link>
     <pubDate>Thu, 30 Mar 2023 16:47:42 &#43;0000</pubDate><author>
-        <name>Author</name>
+        <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-desktop-widget-panon/</guid>
     <description><![CDATA[panon是一个 KDE 的音频频谱可视化 widget(插件)先上效果图 如何使用 安装依赖 sudo pacman -S qt5-websockets \ python-docopt python-numpy python-pyaudio python-cffi python-websockets 在 KDE 桌面右键点击 “add Widget”，]]></description>
 </item></channel>
