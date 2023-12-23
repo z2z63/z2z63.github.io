@@ -3,9 +3,16 @@
         <title>Virtualfutre&#39;s Blog</title>
         <link>http://example.org/</link>
         <description>Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 23 Dec 2023 15:45:44 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Linux Desktop Widget Pano</title>
+    <link>http://example.org/posts/linux-desktop-widget-pano/</link>
+    <pubDate>Sat, 23 Dec 2023 15:45:44 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/linux-desktop-widget-pano/</guid>
+    <description><![CDATA[这篇文章描述了如何在KDE桌面环境使用一个名为pano的音频可视化widget 效果图 KDE如何安装widget占坑 如何安装panopano仓]]></description>
+</item><item>
     <title>PostgreSQL源码阅读报告</title>
     <link>http://example.org/posts/postgresql_source/</link>
     <pubDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</pubDate><author>
@@ -68,12 +75,5 @@
         <name>z2z63</name>
     </author><guid>http://example.org/posts/kde-setting-cli/</guid>
     <description><![CDATA[需求我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个]]></description>
-</item><item>
-    <title>JS中的this</title>
-    <link>http://example.org/posts/this-in-js/</link>
-    <pubDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/this-in-js/</guid>
-    <description><![CDATA[箭头函数和普通函数中的this const obj = { name: &#34;Alice&#34;, ptr:this, sayName: function () { console.log(this) }, sayNameArrow: () =&gt; { console.log(this) } }; const sayName = obj.sayName; const sayNameArrow = obj.sayNameArrow; obj.sayName(); sayName(); obj.sayNameArrow(); sayNameArrow(); 输出为 {name: &#39;Alice&#39;, ptr: Window, sayName: ƒ, sayNameArrow: ƒ} demo1.js:5 Window {window: Window, self: Window, document: document, name: &#39;&#39;,]]></description>
 </item></channel>
 </rss>

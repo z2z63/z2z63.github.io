@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Linux Desktop Widget Pano - Virtualfutre&#39;s Blog</title><meta name="Description" content=""><meta property="og:title" content="Linux Desktop Widget Pano" />
+<meta property="og:description" content="这篇文章描述了如何在KDE桌面环境使用一个名为pano的音频可视化widget 效果图 KDE如何安装widget占坑 如何安装panopano仓" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/linux-desktop-widget-pano/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-23T15:45:44+08:00" />
+<meta property="article:modified_time" content="2023-12-23T15:45:44+08:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Linux Desktop Widget Pano"/>
+<meta name="twitter:description" content="这篇文章描述了如何在KDE桌面环境使用一个名为pano的音频可视化widget 效果图 KDE如何安装widget占坑 如何安装panopano仓"/>
+<meta name="application-name" content="Virtualfutre&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Virtualfutre&#39;s Blog">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/linux-desktop-widget-pano/" /><link rel="prev" href="http://example.org/posts/postgresql_source/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Linux Desktop Widget Pano",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/linux-desktop-widget-pano\/"
+        },"genre": "posts","wordcount":  809 ,
+        "url": "http:\/\/example.org\/posts\/linux-desktop-widget-pano\/","datePublished": "2023-12-23T15:45:44+08:00","dateModified": "2023-12-23T15:45:44+08:00","publisher": {
+            "@type": "Organization",
+            "name": "z2z63"},"author": {
+                "@type": "Person",
+                "name": "z2z63"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.2.0" defer type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
+</head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装依赖">安装依赖</a></li>
+    <li><a href="#解决一个bug">解决一个bug</a></li>
+    <li><a href="#安装后的设置">安装后的设置</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux Desktop Widget Pano</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-23">2023-12-23</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-23">2023-12-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;809 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装依赖">安装依赖</a></li>
+    <li><a href="#解决一个bug">解决一个bug</a></li>
+    <li><a href="#安装后的设置">安装后的设置</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>这篇文章描述了如何在KDE桌面环境使用一个名为pano的音频可视化widget<br>
+效果图
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/z2z63/image/main/imgphoto_2023-12-23_16-20-39.jpg" title="https://raw.githubusercontent.com/z2z63/image/main/imgphoto_2023-12-23_16-20-39.jpg" data-thumbnail="https://raw.githubusercontent.com/z2z63/image/main/imgphoto_2023-12-23_16-20-39.jpg">
+        <img
+            
+            loading="lazy"
+            src="https://raw.githubusercontent.com/z2z63/image/main/imgphoto_2023-12-23_16-20-39.jpg"
+            srcset="https://raw.githubusercontent.com/z2z63/image/main/imgphoto_2023-12-23_16-20-39.jpg, https://raw.githubusercontent.com/z2z63/image/main/imgphoto_2023-12-23_16-20-39.jpg 1.5x, https://raw.githubusercontent.com/z2z63/image/main/imgphoto_2023-12-23_16-20-39.jpg 2x"
+            sizes="auto"
+            alt="https://raw.githubusercontent.com/z2z63/image/main/imgphoto_2023-12-23_16-20-39.jpg">
+    </a></figure></p>
+<h1 id="kde如何安装widget" class="headerLink">
+    <a href="#kde%e5%a6%82%e4%bd%95%e5%ae%89%e8%a3%85widget" class="header-mark"></a>KDE如何安装widget</h1><p>占坑</p>
+<h1 id="如何安装pano" class="headerLink">
+    <a href="#%e5%a6%82%e4%bd%95%e5%ae%89%e8%a3%85pano" class="header-mark"></a>如何安装pano</h1><p>pano仓库见<a href="https://github.com/rbn42/panon" target="_blank" rel="noopener noreferrer">https://github.com/rbn42/panon</a>，仓库已经两年没有更新了，在比较新的系统上可能会出现一些问题，所以必须手动修改部分源码再重新编译</p>
+<h2 id="安装依赖" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85%e4%be%9d%e8%b5%96" class="header-mark"></a>安装依赖</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo pacman -S qt5-websockets <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    python-docopt python-numpy python-pyaudio python-cffi python-websockets 
+</span></span></code></pre></div><p>其他发行版见README</p>
+<h2 id="解决一个bug" class="headerLink">
+    <a href="#%e8%a7%a3%e5%86%b3%e4%b8%80%e4%b8%aabug" class="header-mark"></a>解决一个bug</h2><p>因为python的<code>collection.Iterable</code>在3.10弃用，移动到了<code>collection.abc.Iterable</code>，导致pano在python系统解释器版本比较高的情况下会出现无法显示音频的情况，
+详见<a href="https://github.com/rbn42/panon/pull/108#issuecomment-1568908093" target="_blank" rel="noopener noreferrer">https://github.com/rbn42/panon/pull/108#issuecomment-1568908093</a><br>
+先拉取pano源码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git clone https://github.com/rbn42/panon.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> panon
+</span></span><span class="line"><span class="cl">git submodule update --init
+</span></span></code></pre></div><p>然后修改<code>./third_party/SoundCard/soundcard/pulseaudio.py</code>，将所有使用到<code>collection.Iterable</code>的部分换成<code>collection.abc.Iterable</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="line"><span class="cl"><span class="gd">-import collections
+</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+import collections.abc
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span><span class="gd">-         if isinstance(self.channels, collections.Iterable):
+</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+         if isinstance(self.channels, collections.abc.Iterable):
+</span></span></span><span class="line"><span class="cl"><span class="gi"></span><span class="gd">-         if isinstance(self.channels, collections.Iterable):
+</span></span></span><span class="line"><span class="cl"><span class="gd"></span><span class="gi">+         if isinstance(self.channels, collections.abc.Iterable):
+</span></span></span></code></pre></div><p>然后构建widget</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># Build translations (optional)</span>
+</span></span><span class="line"><span class="cl">mkdir build
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
+</span></span><span class="line"><span class="cl">cmake ../translations
+</span></span><span class="line"><span class="cl">make install <span class="nv">DESTDIR</span><span class="o">=</span>../plasmoid/contents/locale
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># To install</span>
+</span></span><span class="line"><span class="cl">kpackagetool5 -t Plasma/Applet --install plasmoid
+</span></span></code></pre></div><h2 id="安装后的设置" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85%e5%90%8e%e7%9a%84%e8%ae%be%e7%bd%ae" class="header-mark"></a>安装后的设置</h2><p>将pano放到任务栏后，需要设置采集音频的来源<br>
+对于比较新的linux，基本使用<code>pulseaudio</code>提供音频服务，<code>pulseaudio</code>有很多前端可以快速的配置一些音频的选项，这里使用<code>pavucontrol</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo pacman -S pavucontrol
+</span></span></code></pre></div><p>pavucontrol提供一个简单的GUI前端，打开application launcher搜索pulseaudio，设置ALSA plugin-in的采集来源，如果设置为麦克风，则pano会显示麦克风录音的音频，
+然而正常情况下应该是采集耳机中播放的音乐的音频然后可视化
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/z2z63/image/main/imgimage_2023-12-23_16-13-53.png" title="https://raw.githubusercontent.com/z2z63/image/main/imgimage_2023-12-23_16-13-53.png" data-thumbnail="https://raw.githubusercontent.com/z2z63/image/main/imgimage_2023-12-23_16-13-53.png">
+        <img
+            
+            loading="lazy"
+            src="https://raw.githubusercontent.com/z2z63/image/main/imgimage_2023-12-23_16-13-53.png"
+            srcset="https://raw.githubusercontent.com/z2z63/image/main/imgimage_2023-12-23_16-13-53.png, https://raw.githubusercontent.com/z2z63/image/main/imgimage_2023-12-23_16-13-53.png 1.5x, https://raw.githubusercontent.com/z2z63/image/main/imgimage_2023-12-23_16-13-53.png 2x"
+            sizes="auto"
+            alt="https://raw.githubusercontent.com/z2z63/image/main/imgimage_2023-12-23_16-13-53.png">
+    </a></figure>
+pano默认的特效有点丑，可以选择其他的特效，最终就能达到上述的效果</p>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-23</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/postgresql_source/" class="prev" rel="prev" title="PostgreSQL源码阅读报告"><i class="fas fa-angle-left fa-fw"></i>PostgreSQL源码阅读报告</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.121.1">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2023-12-23T15:45:44+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"Linux Desktop Widget Pano"}}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/js/gitalk.min.js" defer></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-48XH0QHHK3');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-48XH0QHHK3" async></script></div>
+</body>
+
+</html>
