@@ -169,7 +169,7 @@ CJK就是Chinese Japan Korea的缩写，表示中日韩文字。作为一个arch
 ## Patched font
 Patched font即为打了补丁的字体，有一些TUI(Textual User Interface)可能需要这些字体，用于显示一些特殊的符号
 # 小技巧
-## 解决WPS Office打开文档时字体显示异常
+## 解决WPS Office打开文档时字体显示过粗
 ![](https://raw.githubusercontent.com/z2z63/image/main/img20230918182036.png)
 可以鼠标选中显示异常的字体，发现字体是微软雅黑，我的电脑上没有安装微软雅黑，所以fallback到了其他字体，然而使用其他字体显示微软雅黑多少有点瑕疵。例如字体加粗部分就会显得非常粗
 解决办法有两个
@@ -177,6 +177,12 @@ Patched font即为打了补丁的字体，有一些TUI(Textual User Interface)�
 2. 安装windows字体
 
 因为windows字体非常多，可能导致一句中文使用了不同字体渲染，非常丑，可以指定字体优先级来避免
+
+---
+office中文用户常常会有使用了各种字体的office文档，每个都下载不仅占用空间，而且往往只能知道字体的中文名而不知道它的英文名，不方便从AUR安装，手动安装也有点麻烦  
+解决方案见[archlinux中文维基](https://wiki.archlinuxcn.org/zh/WPS_Office#%E5%AD%97%E4%BD%93%E5%A4%AA%E7%B2%97)，将freetype2降级即可
+
+
 ## 查看fallback到的字体
 使用Chrome浏览器查看，打开网页[https://c.runoob.com/front-end/61/](https://c.runoob.com/front-end/61/)在线编辑HTML，在CSS中指定字体，然后F12打开浏览器开发者工具，选中元素，点击Computed，就能看到实际渲染使用的字体
 ![](https://raw.githubusercontent.com/z2z63/image/main/img20230918183157.png)

@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/linux-font\/"
-        },"genre": "posts","keywords": "Linux, Linux Desktop, Font","wordcount":  2914 ,
+        },"genre": "posts","keywords": "Linux, Linux Desktop, Font","wordcount":  3033 ,
         "url": "http:\/\/example.org\/posts\/linux-font\/","datePublished": "2023-09-18T12:17:41+08:00","dateModified": "2023-09-18T12:17:41+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
@@ -107,7 +107,7 @@
   </ul>
 
   <ul>
-    <li><a href="#解决wps-office打开文档时字体显示异常">解决WPS Office打开文档时字体显示异常</a></li>
+    <li><a href="#解决wps-office打开文档时字体显示过粗">解决WPS Office打开文档时字体显示过粗</a></li>
     <li><a href="#查看fallback到的字体">查看fallback到的字体</a></li>
   </ul>
 
@@ -121,7 +121,7 @@
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-18">2023-09-18</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-09-18">2023-09-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2914 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-18">2023-09-18</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-09-18">2023-09-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3033 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -145,7 +145,7 @@
   </ul>
 
   <ul>
-    <li><a href="#解决wps-office打开文档时字体显示异常">解决WPS Office打开文档时字体显示异常</a></li>
+    <li><a href="#解决wps-office打开文档时字体显示过粗">解决WPS Office打开文档时字体显示过粗</a></li>
     <li><a href="#查看fallback到的字体">查看fallback到的字体</a></li>
   </ul>
 
@@ -332,8 +332,8 @@ Outline格式有以下几种格式</p>
 <h2 id="patched-font" class="headerLink">
     <a href="#patched-font" class="header-mark"></a>Patched font</h2><p>Patched font即为打了补丁的字体，有一些TUI(Textual User Interface)可能需要这些字体，用于显示一些特殊的符号</p>
 <h1 id="小技巧" class="headerLink">
-    <a href="#%e5%b0%8f%e6%8a%80%e5%b7%a7" class="header-mark"></a>小技巧</h1><h2 id="解决wps-office打开文档时字体显示异常" class="headerLink">
-    <a href="#%e8%a7%a3%e5%86%b3wps-office%e6%89%93%e5%bc%80%e6%96%87%e6%a1%a3%e6%97%b6%e5%ad%97%e4%bd%93%e6%98%be%e7%a4%ba%e5%bc%82%e5%b8%b8" class="header-mark"></a>解决WPS Office打开文档时字体显示异常</h2><p><figure><a class="lightgallery" href="https://raw.githubusercontent.com/z2z63/image/main/img20230918182036.png" title="https://raw.githubusercontent.com/z2z63/image/main/img20230918182036.png" data-thumbnail="https://raw.githubusercontent.com/z2z63/image/main/img20230918182036.png">
+    <a href="#%e5%b0%8f%e6%8a%80%e5%b7%a7" class="header-mark"></a>小技巧</h1><h2 id="解决wps-office打开文档时字体显示过粗" class="headerLink">
+    <a href="#%e8%a7%a3%e5%86%b3wps-office%e6%89%93%e5%bc%80%e6%96%87%e6%a1%a3%e6%97%b6%e5%ad%97%e4%bd%93%e6%98%be%e7%a4%ba%e8%bf%87%e7%b2%97" class="header-mark"></a>解决WPS Office打开文档时字体显示过粗</h2><p><figure><a class="lightgallery" href="https://raw.githubusercontent.com/z2z63/image/main/img20230918182036.png" title="https://raw.githubusercontent.com/z2z63/image/main/img20230918182036.png" data-thumbnail="https://raw.githubusercontent.com/z2z63/image/main/img20230918182036.png">
         <img
             
             loading="lazy"
@@ -349,6 +349,9 @@ Outline格式有以下几种格式</p>
 <li>安装windows字体</li>
 </ol>
 <p>因为windows字体非常多，可能导致一句中文使用了不同字体渲染，非常丑，可以指定字体优先级来避免</p>
+<hr>
+<p>office中文用户常常会有使用了各种字体的office文档，每个都下载不仅占用空间，而且往往只能知道字体的中文名而不知道它的英文名，不方便从AUR安装，手动安装也有点麻烦<br>
+解决方案见<a href="https://wiki.archlinuxcn.org/zh/WPS_Office#%E5%AD%97%E4%BD%93%E5%A4%AA%E7%B2%97" target="_blank" rel="noopener noreferrer">archlinux中文维基</a>，将freetype2降级即可</p>
 <h2 id="查看fallback到的字体" class="headerLink">
     <a href="#%e6%9f%a5%e7%9c%8bfallback%e5%88%b0%e7%9a%84%e5%ad%97%e4%bd%93" class="header-mark"></a>查看fallback到的字体</h2><p>使用Chrome浏览器查看，打开网页<a href="https://c.runoob.com/front-end/61/" target="_blank" rel="noopener noreferrer">https://c.runoob.com/front-end/61/</a>在线编辑HTML，在CSS中指定字体，然后F12打开浏览器开发者工具，选中元素，点击Computed，就能看到实际渲染使用的字体
 <figure><a class="lightgallery" href="https://raw.githubusercontent.com/z2z63/image/main/img20230918183157.png" title="https://raw.githubusercontent.com/z2z63/image/main/img20230918183157.png" data-thumbnail="https://raw.githubusercontent.com/z2z63/image/main/img20230918183157.png">
