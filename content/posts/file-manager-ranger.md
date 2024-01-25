@@ -4,7 +4,7 @@ author: z2z63
 date: 2023-04-13 12:29:06
 tags: [Linux, Shell]
 ---
-[ranger](https://github.com/ranger/ranger)是linux的一个终端文件管理器，它的feature有
+[ranger](https://github.com/ranger/ranger)是linux的一个终端文件管理器<!--more-->，它的feature有
 - vi按键绑定
 - 与shell环境完美结合，可以使用各种shell工具
 - 在tty上也能工作

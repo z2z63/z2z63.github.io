@@ -9,6 +9,6 @@
     <pubDate>Thu, 06 Apr 2023 00:09:32 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/function-parameters-push-stack-order/</guid>
-    <description><![CDATA[最近遇到了一个函数传参造成的问题，于是来稍微研究一下这个东西 什么是函数传参顺序？ 一个简单例子 bar(foo(1), foo(2)); 为了准备bar函数需要的参数，需要先执行fo]]></description>
+    <description><![CDATA[<p>最近遇到了一个函数传参造成的问题，于是来稍微研究一下这个东西</p>]]></description>
 </item></channel>
 </rss>

@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>逐渐向右移动的类型——静态类型成为新语言的趋势 - Virtualfutre&#39;s Blog</title><meta name="Description" content=""><meta property="og:title" content="逐渐向右移动的类型——静态类型成为新语言的趋势" />
+<meta property="og:description" content="许多新语言(2000之后发明的语言)大多有一个偏好：类型后置" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/type-move-to-right/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-25T19:33:40+08:00" />
+<meta property="article:modified_time" content="2024-01-25T19:33:40+08:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="逐渐向右移动的类型——静态类型成为新语言的趋势"/>
+<meta name="twitter:description" content="许多新语言(2000之后发明的语言)大多有一个偏好：类型后置"/>
+<meta name="application-name" content="Virtualfutre&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Virtualfutre&#39;s Blog">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/type-move-to-right/" /><link rel="prev" href="http://example.org/posts/null-safety/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "逐渐向右移动的类型——静态类型成为新语言的趋势",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/type-move-to-right\/"
+        },"genre": "posts","wordcount":  1541 ,
+        "url": "http:\/\/example.org\/posts\/type-move-to-right\/","datePublished": "2024-01-25T19:33:40+08:00","dateModified": "2024-01-25T19:33:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "z2z63"},"author": {
+                "@type": "Person",
+                "name": "z2z63"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.2.0" defer type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
+</head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#js">JS</a></li>
+    <li><a href="#python">python</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">逐渐向右移动的类型——静态类型成为新语言的趋势</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-01-25">2024-01-25</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-01-25">2024-01-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1541 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#js">JS</a></li>
+    <li><a href="#python">python</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>许多新语言(2000之后发明的语言)大多有一个偏好：类型后置</p>
+<p><figure><a class="lightgallery" href="https://pic1.zhimg.com/v2-a476982529c75f87f01c8f41423aa69e_r.jpg?source=1def8aca" title="https://pic1.zhimg.com/v2-a476982529c75f87f01c8f41423aa69e_r.jpg?source=1def8aca" data-thumbnail="https://pic1.zhimg.com/v2-a476982529c75f87f01c8f41423aa69e_r.jpg?source=1def8aca">
+        <img
+            
+            loading="lazy"
+            src="https://pic1.zhimg.com/v2-a476982529c75f87f01c8f41423aa69e_r.jpg?source=1def8aca"
+            srcset="https://pic1.zhimg.com/v2-a476982529c75f87f01c8f41423aa69e_r.jpg?source=1def8aca, https://pic1.zhimg.com/v2-a476982529c75f87f01c8f41423aa69e_r.jpg?source=1def8aca 1.5x, https://pic1.zhimg.com/v2-a476982529c75f87f01c8f41423aa69e_r.jpg?source=1def8aca 2x"
+            sizes="auto"
+            alt="https://pic1.zhimg.com/v2-a476982529c75f87f01c8f41423aa69e_r.jpg?source=1def8aca">
+    </a></figure></p>
+<ul>
+<li>rust:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span>: <span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>go:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">a</span> <span class="p">[]</span><span class="kt">string</span>
+</span></span></code></pre></div></li>
+<li>kotlin:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="cl"><span class="k">var</span> <span class="py">language</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;French&#34;</span>
+</span></span></code></pre></div></li>
+<li>TypeScript:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-TS" data-lang="TS"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">x</span> : <span class="kt">number</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+</ul>
+<p>在我看来，有以下几个原因</p>
+<h1 id="动态类型不可取" class="headerLink">
+    <a href="#%e5%8a%a8%e6%80%81%e7%b1%bb%e5%9e%8b%e4%b8%8d%e5%8f%af%e5%8f%96" class="header-mark"></a>动态类型不可取</h1><p>说到动态类型不得不提JS和python，从它们的发展过程来看动态类型存在很多问题</p>
+<h2 id="js" class="headerLink">
+    <a href="#js" class="header-mark"></a>JS</h2><p>ECMAscript规定它是动态类型，弱类型的语言，使得JS非常灵活，但也带来很多问题。不提ES2015之前的JS，JS写下一个变量不知道它的类型，它的类型可以在运行时随意改变，甚至ECMAscript规定JS可以自动转型，例如</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JS" data-lang="JS"><span class="line"><span class="cl"><span class="mi">1</span> <span class="o">+</span> <span class="s2">&#34;1&#34;</span>
+</span></span></code></pre></div><p>JS发现类型不匹配后，会自动将<code>1</code>转型以执行<code>+</code>运算符</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;myoutput1&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;myoutput2&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;(()=&gt;{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;#myoutput1&#34;</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;#myoutput2&#34;</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">})();</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>在线HTML执行后输出为</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">11
+</span></span><span class="line"><span class="cl">0
+</span></span></code></pre></div><hr>
+<p>这样灵活的JS为前端工程化带来了很大的麻烦，于是microsoft提出了Typescript，实现了静态类型约束。不过TS也带来了一些新的问题，比如经常被调侃为做‘类型体操’</p>
+<h2 id="python" class="headerLink">
+    <a href="#python" class="header-mark"></a>python</h2><p>python和JS的定位都是脚本语言，自然也是动态类型的语言，不过相比JS，python是强类型的，不会自动转型。不过pyton同样因为过于灵活，开发大型项目时力不从心。大型项目更需要的是严谨刻板，茴香豆的茴即使有四种写法，也会规定只能使用一种。</p>
+<p>从python3.5开始，逐渐引入了type hint。有了type hint，不仅language server能从其中受益，开发者也能使用像pyright, mypy这类静态类检查器来检查代码中潜在的错误，不过python引入type hint是渐进的，目前（python3.12）type hint虽然支持了许多功能，但仍然有很多第三方库没有提供type hint或者没有提供完整的type hint，此外python的静态类型检查器也并不完善，有些时候还是只增加许多琐碎的代码来通过静态类型检查，或者在某处禁用静态类型检查</p>
+<h1 id="静态类型的痛" class="headerLink">
+    <a href="#%e9%9d%99%e6%80%81%e7%b1%bb%e5%9e%8b%e7%9a%84%e7%97%9b" class="header-mark"></a>静态类型的痛</h1><p>从JS和python的发展历程可以看出动态类型的问题很严重，虽然天生泛型，但是一门面向工业面向生产的语言，必须选择静态类型，不过静态类型也有一些问题</p>
+<ol>
+<li>语言更繁琐</li>
+<li>需要实现泛型</li>
+</ol>
+<p>从JS和python所处的年代，那时选择动态类型是很合理的，被C++折磨太多，突然抛弃类型就会非常轻松。</p>
+<p>对于静态类型带来的疼痛，新语言往往使用了对应的’止痛药‘：省略类型</p>
+<p>所谓类型推导，也就是编译器提供了强大的类型推导能力，能够在很多时候省略掉类型声明，减少静态类型带来的疼痛，例如rust在大部分时候都不需要声明类型，编译器会自动根据右值推导，例如根据数值范围推导是<code>i32</code>还是<code>i64</code>，根据函数返回类型推导，
+甚至还能根据return语句自动推导函数返回类型。这反映出编译技术的不断进步，给开发者带来了不少便利，开发者再也不需要像以前使用C/C++时到处写类型了</p>
+<p>于是类型在大部分时候可以省略，一个变量的声明中类型成了可选，如果不写类型，怎么知道这个语句到底是声明还是赋值呢？<br>
+有两种方案</p>
+<ul>
+<li>类型前置，使用<code>auto</code>，<code>var</code>等在省略类型时占位
+C++11后可以使用<code>auto</code>让编译器推导类型，java也可以使用<code>var</code>省略类型
+另外，同样是新语言的dart采用了<code>var</code></li>
+<li>类型后置，使用<code>let</code>，<code>var</code>等标志变量声明
+TS，rust，kotlin都采用这种方式省略类型</li>
+</ul>
+<p>那么为什么选择类型后置呢，大概是为了整齐，众所周知C++有这种风格</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">string</span> 
+</span></span><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="s">&#34;xxxx&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><p>这是为了避免类型名称长度不一致，长短交错，增加阅读难度</p>
+<p>如果使用类型后置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">url</span><span class="w"> </span>:<span class="nb">String</span> <span class="o">=</span><span class="w"> </span><span class="s">&#34;https://google.com&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">res</span><span class="w"> </span>:<span class="nc">Response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reqwest</span>::<span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">body</span><span class="w"> </span>:<span class="nb">String</span> <span class="o">=</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="n">text</span><span class="p">().</span><span class="k">await</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 以上类型都可以省略
+</span></span></span></code></pre></div><p>更加整齐</p>
+<hr>
+<p>此外还有一个因素，如果使用IDE的virtual text功能，可以在<code>let url = &quot;https://google.com&quot;</code>的<code>url | =</code>光标所在的位置增加一个虚拟文本，标注出类型，就能避免大量省略类型造成类型不清晰
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/z2z63/image/main/Screenshot_20240125_213022.jpg" title="https://raw.githubusercontent.com/z2z63/image/main/Screenshot_20240125_213022.jpg" data-thumbnail="https://raw.githubusercontent.com/z2z63/image/main/Screenshot_20240125_213022.jpg">
+        <img
+            
+            loading="lazy"
+            src="https://raw.githubusercontent.com/z2z63/image/main/Screenshot_20240125_213022.jpg"
+            srcset="https://raw.githubusercontent.com/z2z63/image/main/Screenshot_20240125_213022.jpg, https://raw.githubusercontent.com/z2z63/image/main/Screenshot_20240125_213022.jpg 1.5x, https://raw.githubusercontent.com/z2z63/image/main/Screenshot_20240125_213022.jpg 2x"
+            sizes="auto"
+            alt="https://raw.githubusercontent.com/z2z63/image/main/Screenshot_20240125_213022.jpg">
+    </a></figure></p></div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-01-25</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/null-safety/" class="prev" rel="prev" title="现代语言的空安全"><i class="fas fa-angle-left fa-fw"></i>现代语言的空安全</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.121.2">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2024-01-25T19:33:40+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"逐渐向右移动的类型——静态类型成为新语言的趋势"}}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/js/gitalk.min.js" defer></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-48XH0QHHK3');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-48XH0QHHK3" async></script></div>
+</body>
+
+</html>

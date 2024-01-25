@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>现代语言的空安全 - Virtualfutre&#39;s Blog</title><meta name="Description" content=""><meta property="og:title" content="现代语言的空安全" />
+<meta property="og:description" content="所谓空安全，也就是null safety，它是部分现代语言具有的新特性，如dart和kotlin，既然它是现代语言才具备的特性，说明之前的语言往往没有，例如java" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/null-safety/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-25T18:04:12+08:00" />
+<meta property="article:modified_time" content="2024-01-25T18:04:12+08:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="现代语言的空安全"/>
+<meta name="twitter:description" content="所谓空安全，也就是null safety，它是部分现代语言具有的新特性，如dart和kotlin，既然它是现代语言才具备的特性，说明之前的语言往往没有，例如java"/>
+<meta name="application-name" content="Virtualfutre&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Virtualfutre&#39;s Blog">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/null-safety/" /><link rel="prev" href="http://example.org/posts/linux-desktop-widget-pano/" /><link rel="next" href="http://example.org/posts/type-move-to-right/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "现代语言的空安全",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/null-safety\/"
+        },"genre": "posts","wordcount":  2285 ,
+        "url": "http:\/\/example.org\/posts\/null-safety\/","datePublished": "2024-01-25T18:04:12+08:00","dateModified": "2024-01-25T18:04:12+08:00","publisher": {
+            "@type": "Organization",
+            "name": "z2z63"},"author": {
+                "@type": "Person",
+                "name": "z2z63"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.2.0" defer type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
+</head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents"></nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">现代语言的空安全</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-01-25">2024-01-25</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-01-25">2024-01-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2285 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>所谓空安全，也就是null safety，它是部分现代语言具有的新特性，如dart和kotlin，既然它是现代语言才具备的特性，说明之前的语言往往没有，例如java</p>
+<h1 id="java的空值不安全" class="headerLink">
+    <a href="#java%e7%9a%84%e7%a9%ba%e5%80%bc%e4%b8%8d%e5%ae%89%e5%85%a8" class="header-mark"></a>java的空值不安全</h1><p>众所周知，java只有原始类型和引用类型，而所有引用类型都是<code>Object</code>类的子类或<code>Object</code>类它自己，而java的空值不安全，也就出现在引用类型上。<br>
+java的引用类型本质上就是指针，而作为深受C++影响的语言，它的引用类型也继承了C++的指针的问题——空指针问题</p>
+<p>在java中定义的任何一个类，都是<code>Obecjt</code>的子类，任何一个类的对象，都可以为空，也就是为<code>null</code>，也就是说，引用类型包含了<code>null</code>!</p>
+<hr>
+<p>所谓‘包含’，这又涉及一个概念，可以把一个类型看作一个集合，而这个类型的任何一个值看作这个集合中的一个元素，例如：</p>
+<ul>
+<li><code>int</code>类型表示集合 $\Set{ x | x \in Z \land -2^{31} \le x \le 2^{31} - 1 } $ ，即所有<code>int</code>值的集合</li>
+<li><code>float</code>类型表示的集合比较复杂，首先<code>float</code>是离散的，能表示的值范围有限而且精度有限，而且不是等间距的，还包括了IEEE定义的inf，-inf，以及NaN</li>
+<li><code>Object</code>类型表示的集合更复杂，但可以任何是程序运行过程中可能创建的所有<code>Obejct</code>对象以及它的子类的对象</li>
+</ul>
+<p>而null值可以作为任意引用类型的对象的值，这在数学上造成了一个漏洞，造成了以下问题</p>
+<ol>
+<li>null值属于什么类型？<br>
+因为null可以作为任意引用类型的对象的值，所以null是任何引用类型的一个实例或它的子类的实例，但很明显这样的值是不能存在的</li>
+<li>在类中定义的方法和属性，在类的实例（对象）上不一定可用<br>
+java的<code>Object</code>对象有一个方法<code>toString()</code>，然而你不能在null上调用这种方法，否则会抛出异常，严格来说，在使用<code>toString()</code>前应该先判断这个对象是否为null</li>
+</ol>
+<p>这样的漏洞都可以使用引用类型来解释，因为引用类型的所有值都代表对某个对象的引用，所以这个值可以为空，表示没有引用任何对象</p>
+<h1 id="c的空值安全" class="headerLink">
+    <a href="#c%e7%9a%84%e7%a9%ba%e5%80%bc%e5%ae%89%e5%85%a8" class="header-mark"></a>C++的空值安全？</h1><p>C++的空值安全比较复杂，分为指针和引用两种类型<br>
+指针很明显空值不安全，java的空值不安全本质上还是指针的空值不安全<br>
+引用最大的优点就是，不存在空引用，也就是说，它缓解了C++的空指针问题，在合适的场合使用引用代替指针，可以减少空指针出现的情况</p>
+<h1 id="python的空值安全" class="headerLink">
+    <a href="#python%e7%9a%84%e7%a9%ba%e5%80%bc%e5%ae%89%e5%85%a8" class="header-mark"></a>python的空值安全</h1><p>python相比java和JS，有一个很明显的特点：一切皆对象，也就是说，python中的所有值都是对象，也就是<code>object</code>类的实例，自然<code>None</code>也是<code>object</code>的实例<br>
+然而，<code>None</code>是<code>NoneType</code>类的直接对象，也就是说，任何<code>NoneType</code>类以外的对象，都不可能为<code>None</code>，这么看来，python的空值设计比较合理</p>
+<pre class="mermaid">graph TD
+    object --> NoneType --唯一实例--> None
+    object --> str
+    object --> int
+    object --> ...
+</pre><p>但问题在于，python是动态类型语言，也就是说变量运行时类型可以随意改变，在使用type hint之前，python并不能从空值安全的设计中受益<br>
+如果使用type hint，并引入严格的静态类型检查，python就是空值安全的。</p>
+<ul>
+<li>假设你需要使用一个字符串变量，并且它可能为<code>None</code>，就应该写成
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&#34;....&#34;</span>
+</span></span></code></pre></div>如果你需要使用字符串的<code>strip</code>方法：
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span></code></pre></div>这样的写法并不会通过诸如mypy这样的静态类型检查器，需要使用&rsquo;type guard&rsquo;保证<code>x</code>的类型为<code>str</code>而不是<code>str | None</code>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">assert</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 或</span>
+</span></span><span class="line"><span class="cl"><span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 或</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span></code></pre></div></li>
+<li>假设你需要使用一个字符串，而且它不可能为空，应该写成
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;....&#34;</span>
+</span></span></code></pre></div>尝试给它赋值<code>None</code>，可以运行但是无法通过静态类型检查
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># mypy报错</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 或</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;....&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="kc">None</span>    <span class="c1"># mypy报错</span>
+</span></span></code></pre></div></li>
+</ul>
+<h1 id="dart的类型安全" class="headerLink">
+    <a href="#dart%e7%9a%84%e7%b1%bb%e5%9e%8b%e5%ae%89%e5%85%a8" class="header-mark"></a>dart的类型安全</h1><p>dart3.0引入了一个新特性：类型安全<br>
+dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</code>类，一个是<code>Object</code>类。从语言的底层设计就能看出dart对空值的态度<br>
+<figure><a class="lightgallery" href="https://dart.dev/assets/img/null-safety/understanding-null-safety/hierarchy-after.png" title="https://dart.dev/assets/img/null-safety/understanding-null-safety/hierarchy-after.png" data-thumbnail="https://dart.dev/assets/img/null-safety/understanding-null-safety/hierarchy-after.png">
+        <img
+            
+            loading="lazy"
+            src="https://dart.dev/assets/img/null-safety/understanding-null-safety/hierarchy-after.png"
+            srcset="https://dart.dev/assets/img/null-safety/understanding-null-safety/hierarchy-after.png, https://dart.dev/assets/img/null-safety/understanding-null-safety/hierarchy-after.png 1.5x, https://dart.dev/assets/img/null-safety/understanding-null-safety/hierarchy-after.png 2x"
+            sizes="auto"
+            alt="https://dart.dev/assets/img/null-safety/understanding-null-safety/hierarchy-after.png">
+    </a></figure></p>
+<ul>
+<li>如果一个变量不能为空</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kt">String</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">&#34;....&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 不能为空的变量必须在声明时赋初值，如果是类的属性，则必须在构造函数中赋值
+</span></span></span></code></pre></div><ul>
+<li>如果可能为空</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kt">String</span><span class="o">?</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 可空的变量，默认初值为null
+</span></span></span></code></pre></div><p><code>String?</code>不是任何传统的类型，而是两种类型的组合，类似python的<code>str | None</code>，如果使用前文提及的集合的观点，这种类型属于<code>String</code>类型和<code>Null</code>类型的集合并集，只不过dart并没有提供使用<code>class</code>关键字定义这个类的语法能力</p>
+<p>此外dart是静态类型的语言，还拥有强大的类型推断能力(type inference)，又提供了null相关的语法糖，能够避免写下很多琐碎的类型断言（例如python的<code>assert x is not None</code>）
+<code>null</code>相关语法糖使用了 <code>!</code>和<code>?</code>，并和dart其他特性配合，组合出非常多的使用方式，例如在级联操作符中使用，在pattern中使用等等，例如</p>
+<ul>
+<li>null-aware
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kt">String</span><span class="o">?</span> <span class="n">notAString</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">print</span><span class="p">(</span><span class="n">notAString</span><span class="o">?</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
+</span></span></code></pre></div>如果<code>notAString</code>为<code>null</code>，不报错，表达式返回<code>null</code></li>
+<li>null-aware短路
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="n">showGizmo</span><span class="p">(</span><span class="n">Thing</span><span class="o">?</span> <span class="n">thing</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print</span><span class="p">(</span><span class="n">thing</span><span class="o">?</span><span class="p">.</span><span class="n">doohickey</span><span class="p">.</span><span class="n">gizmo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>如果<code>thing</code>为<code>null</code>，不会评估表达式后面的部分，直接返回，避免写下<code>thing?.doohickey?.gizmo</code>这样繁琐的表达式</li>
+<li>null-aware与下标运算符
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="n">receiver</span><span class="o">?</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>null-aware与<a href="https://dart.dev/language/operators#cascade-notation" target="_blank" rel="noopener noreferrer">级联运算符</a>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="n">receiver</span><span class="o">?</span><span class="p">..</span><span class="n">method</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>null assert
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kt">String</span> <span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">code</span> <span class="o">==</span> <span class="m">200</span><span class="p">)</span> <span class="k">return</span> <span class="s1">&#39;OK&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;ERROR </span><span class="si">$</span><span class="n">code</span><span class="s1"> </span><span class="si">${</span><span class="n">error</span><span class="o">!</span><span class="p">.</span><span class="n">toUpperCase</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>一旦error的运行时类型为<code>null</code>，就会出现转型错误（cast error），抛出运行时异常</li>
+<li>与<a href="https://dart.dev/language/patterns" target="_blank" rel="noopener noreferrer">pattern</a>配合
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="kt">String</span><span class="o">?</span> <span class="n">maybeString</span> <span class="o">=</span> <span class="s1">&#39;nullable with base type String&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="n">maybeString</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="kd">var</span> <span class="n">s</span><span class="o">?:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// &#39;s&#39; has type non-nullable String here.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">?&gt;</span> <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="kc">null</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="kd">var</span> <span class="n">name</span><span class="o">!</span><span class="p">]</span><span class="o">:</span> <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// &#39;name&#39; is a non-nullable string here.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dart" data-lang="dart"><span class="line"><span class="cl"><span class="p">(</span><span class="kt">int</span><span class="o">?</span><span class="p">,</span> <span class="kt">int</span><span class="o">?</span><span class="p">)</span> <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="p">(</span><span class="n">x</span><span class="o">!</span><span class="p">,</span> <span class="n">y</span><span class="o">!</span><span class="p">)</span> <span class="o">=</span> <span class="n">position</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+</ul>
+<p>dart的null safety有一个特点：一个变量，只要编译器确定了它不为空，那么它永远不可能为<code>null</code>，这种特性被称为sound null safety</p></div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-01-25</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/linux-desktop-widget-pano/" class="prev" rel="prev" title="KDE桌面部件pano"><i class="fas fa-angle-left fa-fw"></i>KDE桌面部件pano</a>
+            <a href="/posts/type-move-to-right/" class="next" rel="next" title="逐渐向右移动的类型——静态类型成为新语言的趋势">逐渐向右移动的类型——静态类型成为新语言的趋势<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.121.2">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: (window.theme === 'dark' ? 'dark' : 'default') });
+</script><div class="assets"><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2024-01-25T18:04:12+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"现代语言的空安全"}},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/js/gitalk.min.js" defer></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-48XH0QHHK3');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-48XH0QHHK3" async></script></div>
+</body>
+
+</html>

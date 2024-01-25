@@ -9,14 +9,14 @@
     <pubDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/postgresql_source/</guid>
-    <description><![CDATA[这篇文章是数据库系统原理课程的任务“阅读postgresql源码“的报告 如何编译首先声明一点，网上大部分的教程都不太合理，因为对环境的影响太]]></description>
+    <description><![CDATA[<p>这篇文章是数据库系统原理课程的任务“阅读postgresql源码“的报告</p>]]></description>
 </item><item>
     <title>coreutils之hash table</title>
     <link>http://example.org/posts/coreutils_hash/</link>
     <pubDate>Sat, 14 Oct 2023 16:08:58 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/coreutils_hash/</guid>
-    <description><![CDATA[最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现 字符串哈希函数coreutils中内置了对字符串的哈希函数 size_t hash_string (const char *string,]]></description>
+    <description><![CDATA[<p>最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现</p>]]></description>
 </item><item>
     <title>右值引用</title>
     <link>http://example.org/posts/rvalue-reference/</link>

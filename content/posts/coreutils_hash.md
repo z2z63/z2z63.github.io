@@ -7,6 +7,7 @@ math:
   enable: true
 ---
 最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现
+<!--more-->
 ## 字符串哈希函数
 coreutils中内置了对字符串的哈希函数
 ```c

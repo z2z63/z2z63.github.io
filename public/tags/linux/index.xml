@@ -9,21 +9,22 @@
     <pubDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/docker-tutorial/</guid>
-    <description><![CDATA[这篇文章是完成docker的get started guide后的总结，见https://docs.docker.com/get-started/ 前置概念 d]]></description>
+    <description><![CDATA[<p>这篇文章是完成docker的get started guide后的总结，见<a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener noreferrer">https://docs.docker.com/get-started/</a></p>]]></description>
 </item><item>
     <title>Linux释放磁盘空间</title>
     <link>http://example.org/posts/linux-space-release/</link>
     <pubDate>Fri, 15 Dec 2023 15:02:39 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-space-release/</guid>
-    <description><![CDATA[主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止]]></description>
+    <description><![CDATA[<p>主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止用户数据的增长，所以清理
+也主要是清理用户数据</p>]]></description>
 </item><item>
     <title>Linux使用VMware</title>
     <link>http://example.org/posts/linux-vmware-setup/</link>
     <pubDate>Sun, 24 Sep 2023 19:55:45 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-vmware-setup/</guid>
-    <description><![CDATA[为了完成课程的任务，折腾了很久终于搞好了VMware。 安装VMwareVMware分为个人使用免费的player和商用付费的workstat]]></description>
+    <description><![CDATA[<p>为了完成课程的任务，折腾了很久终于搞好了VMware。</p>]]></description>
 </item><item>
     <title>Linux字体</title>
     <link>http://example.org/posts/linux-font/</link>
@@ -44,7 +45,7 @@
     <pubDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/file-manager-ranger/</guid>
-    <description><![CDATA[ranger是linux的一个终端文件管理器，它的feature有 vi按键绑定 与shell环境完美结合，可以使用各种shell工具 在tty上]]></description>
+    <description><![CDATA[<p><a href="https://github.com/ranger/ranger" target="_blank" rel="noopener noreferrer">ranger</a>是linux的一个终端文件管理器</p>]]></description>
 </item><item>
     <title>Linux shell常用快捷键</title>
     <link>http://example.org/posts/linux-terminal-shortcut/</link>

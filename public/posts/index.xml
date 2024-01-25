@@ -3,55 +3,70 @@
         <title>All Posts - Virtualfutre&#39;s Blog</title>
         <link>http://example.org/posts/</link>
         <description>All Posts | Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 23 Dec 2023 15:45:44 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Linux Desktop Widget Pano</title>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 25 Jan 2024 19:33:40 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>逐渐向右移动的类型——静态类型成为新语言的趋势</title>
+    <link>http://example.org/posts/type-move-to-right/</link>
+    <pubDate>Thu, 25 Jan 2024 19:33:40 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/type-move-to-right/</guid>
+    <description><![CDATA[<p>许多新语言(2000之后发明的语言)大多有一个偏好：类型后置</p>]]></description>
+</item><item>
+    <title>现代语言的空安全</title>
+    <link>http://example.org/posts/null-safety/</link>
+    <pubDate>Thu, 25 Jan 2024 18:04:12 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/null-safety/</guid>
+    <description><![CDATA[<p>所谓空安全，也就是null safety，它是部分现代语言具有的新特性，如dart和kotlin，既然它是现代语言才具备的特性，说明之前的语言往往没有，例如java</p>]]></description>
+</item><item>
+    <title>KDE桌面部件pano</title>
     <link>http://example.org/posts/linux-desktop-widget-pano/</link>
     <pubDate>Sat, 23 Dec 2023 15:45:44 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-desktop-widget-pano/</guid>
-    <description><![CDATA[这篇文章描述了如何在KDE桌面环境使用一个名为pano的音频可视化widget 效果图 KDE如何安装widget占坑 如何安装panopano仓]]></description>
+    <description><![CDATA[<p>这篇文章描述了如何在KDE桌面环境使用一个名为pano的音频可视化widget</p>]]></description>
 </item><item>
     <title>PostgreSQL源码阅读报告</title>
     <link>http://example.org/posts/postgresql_source/</link>
     <pubDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/postgresql_source/</guid>
-    <description><![CDATA[这篇文章是数据库系统原理课程的任务“阅读postgresql源码“的报告 如何编译首先声明一点，网上大部分的教程都不太合理，因为对环境的影响太]]></description>
+    <description><![CDATA[<p>这篇文章是数据库系统原理课程的任务“阅读postgresql源码“的报告</p>]]></description>
 </item><item>
     <title>docker 使用方法</title>
     <link>http://example.org/posts/docker-tutorial/</link>
     <pubDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/docker-tutorial/</guid>
-    <description><![CDATA[这篇文章是完成docker的get started guide后的总结，见https://docs.docker.com/get-started/ 前置概念 d]]></description>
+    <description><![CDATA[<p>这篇文章是完成docker的get started guide后的总结，见<a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener noreferrer">https://docs.docker.com/get-started/</a></p>]]></description>
 </item><item>
     <title>Linux释放磁盘空间</title>
     <link>http://example.org/posts/linux-space-release/</link>
     <pubDate>Fri, 15 Dec 2023 15:02:39 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-space-release/</guid>
-    <description><![CDATA[主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止]]></description>
+    <description><![CDATA[<p>主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止用户数据的增长，所以清理
+也主要是清理用户数据</p>]]></description>
 </item><item>
     <title>coreutils之hash table</title>
     <link>http://example.org/posts/coreutils_hash/</link>
     <pubDate>Sat, 14 Oct 2023 16:08:58 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/coreutils_hash/</guid>
-    <description><![CDATA[最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现 字符串哈希函数coreutils中内置了对字符串的哈希函数 size_t hash_string (const char *string,]]></description>
+    <description><![CDATA[<p>最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现</p>]]></description>
 </item><item>
     <title>Linux使用VMware</title>
     <link>http://example.org/posts/linux-vmware-setup/</link>
     <pubDate>Sun, 24 Sep 2023 19:55:45 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-vmware-setup/</guid>
-    <description><![CDATA[为了完成课程的任务，折腾了很久终于搞好了VMware。 安装VMwareVMware分为个人使用免费的player和商用付费的workstat]]></description>
+    <description><![CDATA[<p>为了完成课程的任务，折腾了很久终于搞好了VMware。</p>]]></description>
 </item><item>
     <title>Idea配置java项目</title>
     <link>http://example.org/posts/idea-java-configuration/</link>
     <pubDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/idea-java-configuration/</guid>
-    <description><![CDATA[IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑 声明一下所说的运行配置是指]]></description>
+    <description><![CDATA[<p>IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑</p>]]></description>
 </item><item>
     <title>Linux字体</title>
     <link>http://example.org/posts/linux-font/</link>
@@ -59,19 +74,5 @@
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-font/</guid>
     <description><![CDATA[之前安装archlinux，随便配置的中文字体，显示中文时总有一些奇奇怪怪的字形，最近翻了archlinux的文档，把字体配置搞清楚了 字体是]]></description>
-</item><item>
-    <title>推荐系统简单介绍</title>
-    <link>http://example.org/posts/recsys-summary/</link>
-    <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/recsys-summary/</guid>
-    <description><![CDATA[这篇文章是wikipedia的recsys词条的翻译以及简化版本，原文见https://en.wikipedia.org/wiki/Reco]]></description>
-</item><item>
-    <title>KDE折腾之自动化设置</title>
-    <link>http://example.org/posts/kde-setting-cli/</link>
-    <pubDate>Fri, 21 Jul 2023 13:14:56 &#43;0000</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/kde-setting-cli/</guid>
-    <description><![CDATA[需求我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个]]></description>
 </item></channel>
 </rss>

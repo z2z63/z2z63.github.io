@@ -9,6 +9,6 @@
     <pubDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/docker-tutorial/</guid>
-    <description><![CDATA[这篇文章是完成docker的get started guide后的总结，见https://docs.docker.com/get-started/ 前置概念 d]]></description>
+    <description><![CDATA[<p>这篇文章是完成docker的get started guide后的总结，见<a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener noreferrer">https://docs.docker.com/get-started/</a></p>]]></description>
 </item></channel>
 </rss>

@@ -4,7 +4,7 @@ author: z2z63
 date: 2023-09-24T19:55:45+08:00
 tags: [Linux]
 ---
-为了完成课程的任务，折腾了很久终于搞好了VMware。
+为了完成课程的任务，折腾了很久终于搞好了VMware。<!--more-->
 # 安装VMware
 VMware分为个人使用免费的player和商用付费的workstation，archlinux可以在[aur](https://aur.archlinux.org/packages/vmware-workstation)中找到vmware并安装。
 非archlinux可以在官网找到安装包

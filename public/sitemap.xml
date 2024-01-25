@@ -2,9 +2,11 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>http://example.org/posts/</loc><lastmod>2024-01-25T19:33:40&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/</loc><lastmod>2024-01-25T19:33:40&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/type-move-to-right/</loc><lastmod>2024-01-25T19:33:40&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/null-safety/</loc><lastmod>2024-01-25T18:04:12&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/linux-desktop-widget-pano/</loc><lastmod>2023-12-23T15:45:44&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/posts/</loc><lastmod>2023-12-23T15:45:44&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/</loc><lastmod>2023-12-23T15:45:44&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/postgresql_source/</loc><lastmod>2023-12-21T18:27:09&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/docker/</loc><lastmod>2023-12-16T18:21:19&#43;00:00</lastmod></url><url>
             <loc>http://example.org/posts/docker-tutorial/</loc><lastmod>2023-12-16T18:21:19&#43;00:00</lastmod></url><url>

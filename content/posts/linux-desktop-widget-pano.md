@@ -1,9 +1,10 @@
 ---
-title: "Linux Desktop Widget Pano"
+title: KDE桌面部件pano
 author: z2z63
 date: 2023-12-23T15:45:44+08:00
 ---
 这篇文章描述了如何在KDE桌面环境使用一个名为pano的音频可视化widget  
+<!--more-->
 效果图
 ![](https://raw.githubusercontent.com/z2z63/image/main/imgphoto_2023-12-23_16-20-39.jpg)
 # KDE如何安装widget

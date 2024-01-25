@@ -8,14 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
     <title>Linux释放磁盘空间 - Virtualfutre&#39;s Blog</title><meta name="Description" content=""><meta property="og:title" content="Linux释放磁盘空间" />
-<meta property="og:description" content="主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止" />
+<meta property="og:description" content="主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止用户数据的增长，所以清理
+也主要是清理用户数据" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/posts/linux-space-release/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-15T15:02:39+08:00" />
 <meta property="article:modified_time" content="2023-12-15T15:02:39+08:00" />
 
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Linux释放磁盘空间"/>
-<meta name="twitter:description" content="主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止"/>
+<meta name="twitter:description" content="主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止用户数据的增长，所以清理
+也主要是清理用户数据"/>
 <meta name="application-name" content="Virtualfutre&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="Virtualfutre&#39;s Blog">
 
@@ -319,8 +321,7 @@ du -h --max-depth=0 ~/.npm
 <li>通过定时任务或者后台进程定期清理</li>
 </ol>
 <p>这三种方式都能找到对应的软件，很遗憾的是，采用第三种方式的软件很少，这也就导致了用户必须承担管理缓存的工作，否则他就需要承担购买更多存储器的工作<br>
-缓存替换策略完成的工作是保证在缓存中的是最常用的，而用户定期清理缓存与缓存替换策略完成的工作类似，在定期的删除中，那些低频使用或者短期内高频使用的缓存最终都被删除了</p>
-</div>
+缓存替换策略完成的工作是保证在缓存中的是最常用的，而用户定期清理缓存与缓存替换策略完成的工作类似，在定期的删除中，那些低频使用或者短期内高频使用的缓存最终都被删除了</p></div>
 
         <div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -351,8 +352,8 @@ du -h --max-depth=0 ~/.npm
             </noscript></div></article></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.121.1">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.121.2">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">
             </div>

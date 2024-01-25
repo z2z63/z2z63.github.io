@@ -9,7 +9,7 @@
     <pubDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/file-manager-ranger/</guid>
-    <description><![CDATA[ranger是linux的一个终端文件管理器，它的feature有 vi按键绑定 与shell环境完美结合，可以使用各种shell工具 在tty上]]></description>
+    <description><![CDATA[<p><a href="https://github.com/ranger/ranger" target="_blank" rel="noopener noreferrer">ranger</a>是linux的一个终端文件管理器</p>]]></description>
 </item><item>
     <title>Linux shell常用快捷键</title>
     <link>http://example.org/posts/linux-terminal-shortcut/</link>
