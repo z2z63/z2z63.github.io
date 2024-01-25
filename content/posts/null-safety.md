@@ -76,7 +76,7 @@ graph TD
     x = None    # mypy报错
     ```
 # dart的类型安全
-dart3.0引入了一个新特性：类型安全  
+dart3.0引入了一个新特性：空值安全  
 dart也是一切皆对象，而dart只有两类类型，一个是`Null`类，一个是`Object`类。从语言的底层设计就能看出dart对空值的态度  
 ![](https://dart.dev/assets/img/null-safety/understanding-null-safety/hierarchy-after.png)
 - 如果一个变量不能为空
