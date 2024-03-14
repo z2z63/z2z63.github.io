@@ -2,16 +2,18 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://example.org/posts/</loc><lastmod>2024-01-25T19:33:40&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/</loc><lastmod>2024-01-25T19:33:40&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/</loc><lastmod>2024-03-14T22:14:18&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/</loc><lastmod>2024-03-14T22:14:18&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/apue-chapter1-fileio/</loc><lastmod>2024-02-11T22:56:30&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/type-move-to-right/</loc><lastmod>2024-01-25T19:33:40&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/null-safety/</loc><lastmod>2024-01-25T18:04:12&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/linux-desktop-widget-pano/</loc><lastmod>2023-12-23T15:45:44&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/c/c&#43;&#43;/</loc><lastmod>2023-12-21T18:27:09&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/postgresql_source/</loc><lastmod>2023-12-21T18:27:09&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/tags/</loc><lastmod>2023-12-21T18:27:09&#43;08:00</lastmod></url><url>
             <loc>http://example.org/tags/docker/</loc><lastmod>2023-12-16T18:21:19&#43;00:00</lastmod></url><url>
             <loc>http://example.org/posts/docker-tutorial/</loc><lastmod>2023-12-16T18:21:19&#43;00:00</lastmod></url><url>
             <loc>http://example.org/tags/linux/</loc><lastmod>2023-12-16T18:21:19&#43;00:00</lastmod></url><url>
-            <loc>http://example.org/tags/</loc><lastmod>2023-12-16T18:21:19&#43;00:00</lastmod></url><url>
             <loc>http://example.org/posts/linux-space-release/</loc><lastmod>2023-12-15T15:02:39&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/coreutils_hash/</loc><lastmod>2023-10-14T16:08:58&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/linux-vmware-setup/</loc><lastmod>2023-09-24T19:55:45&#43;08:00</lastmod></url><url>
@@ -37,5 +39,4 @@
             <loc>http://example.org/posts/linux-terminal-shortcut/</loc><lastmod>2023-04-04T23:33:26&#43;00:00</lastmod></url><url>
             <loc>http://example.org/posts/matplotlib-chinese-font/</loc><lastmod>2023-04-02T22:12:22&#43;00:00</lastmod></url><url>
             <loc>http://example.org/posts/linux-file-search/</loc><lastmod>2023-04-01T23:35:22&#43;00:00</lastmod></url><url>
-            <loc>http://example.org/tags/c/c&#43;&#43;/</loc></url><url>
             <loc>http://example.org/categories/</loc></url></urlset>

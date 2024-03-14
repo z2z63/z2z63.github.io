@@ -28,7 +28,8 @@ jetbrains全家桶长期使用会产生不少缓存，可以使用jetbrains tool
 ## VScode
 VScode的扩展可以把二进制也打包进去，导致有的扩展并不小，可以选择卸载短期不会使用的扩展
 ## Python
-### anaconda虚拟环境
+### anaconda
+#### 删除虚拟环境
 查看conda虚拟环境  
 ```shell
 conda env list
@@ -36,6 +37,16 @@ conda env list
 鉴于某些不留requirements.txt的项目的环境真不好装，可以先生成requirements.txt再删除，日后也能恢复
 ```shell
 conda list -e > requirements.txt
+```
+删除某个虚拟环境
+```shell
+conda remove --name xxx --all
+```
+#### 删除conda缓存
+conda下载包后会保存`tar`或`zst`，下次安装时就不需要重复下载  
+删除conda包缓存
+```shell
+conda clean --all
 ```
 ### pip缓存
 pip也会缓存下载过的包，可以手动删除

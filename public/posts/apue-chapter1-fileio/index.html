@@ -1,0 +1,551 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>APUE第三章总结：文件IO - Virtualfutre&#39;s Blog</title><meta name="Description" content=""><meta property="og:title" content="APUE第三章总结：文件IO" />
+<meta property="og:description" content="这是APUE（Advanced Programming in the UNIX Environment，UINX环境高级编程）阅读笔记系列文章" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/apue-chapter1-fileio/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-11T22:56:30+08:00" />
+<meta property="article:modified_time" content="2024-02-11T22:56:30+08:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="APUE第三章总结：文件IO"/>
+<meta name="twitter:description" content="这是APUE（Advanced Programming in the UNIX Environment，UINX环境高级编程）阅读笔记系列文章"/>
+<meta name="application-name" content="Virtualfutre&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Virtualfutre&#39;s Blog">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/apue-chapter1-fileio/" /><link rel="prev" href="http://example.org/posts/type-move-to-right/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "APUE第三章总结：文件IO",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/apue-chapter1-fileio\/"
+        },"genre": "posts","wordcount":  3069 ,
+        "url": "http:\/\/example.org\/posts\/apue-chapter1-fileio\/","datePublished": "2024-02-11T22:56:30+08:00","dateModified": "2024-02-11T22:56:30+08:00","publisher": {
+            "@type": "Organization",
+            "name": "z2z63"},"author": {
+                "@type": "Person",
+                "name": "z2z63"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.2.0" defer type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
+</head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#file是操作系统管理的底层资源">File是操作系统管理的底层资源</a></li>
+    <li><a href="#file-descriptor是file的引用">file descriptor是File的引用</a></li>
+    <li><a href="#stdin-stdout-stderror只是约定">stdin, stdout, stderror只是约定</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#open">open</a>
+      <ul>
+        <li><a href="#oflag">oflag</a></li>
+      </ul>
+    </li>
+    <li><a href="#close">close</a></li>
+    <li><a href="#creat-vs-open"><code>creat</code> vs <code>open</code></a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#read">read</a></li>
+    <li><a href="#write">write</a></li>
+    <li><a href="#lseek">lseek</a>
+      <ul>
+        <li><a href="#lseek常见用法">lseek常见用法</a></li>
+        <li><a href="#文件打洞">文件打洞</a></li>
+      </ul>
+    </li>
+    <li><a href="#dup系列函数">dup系列函数</a>
+      <ul>
+        <li><a href="#dup">dup</a></li>
+        <li><a href="#dup2">dup2</a></li>
+      </ul>
+    </li>
+    <li><a href="#sync系列函数">sync系列函数</a></li>
+    <li><a href="#fcntl函数">fcntl函数</a></li>
+    <li><a href="#ioctl函数">ioctl函数</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#devfd">/dev/fd/*</a></li>
+    <li><a href="#devstd系列文件">/dev/std**系列文件</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">APUE第三章总结：文件IO</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-02-11">2024-02-11</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-02-11">2024-02-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3069 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#file是操作系统管理的底层资源">File是操作系统管理的底层资源</a></li>
+    <li><a href="#file-descriptor是file的引用">file descriptor是File的引用</a></li>
+    <li><a href="#stdin-stdout-stderror只是约定">stdin, stdout, stderror只是约定</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#open">open</a>
+      <ul>
+        <li><a href="#oflag">oflag</a></li>
+      </ul>
+    </li>
+    <li><a href="#close">close</a></li>
+    <li><a href="#creat-vs-open"><code>creat</code> vs <code>open</code></a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#read">read</a></li>
+    <li><a href="#write">write</a></li>
+    <li><a href="#lseek">lseek</a>
+      <ul>
+        <li><a href="#lseek常见用法">lseek常见用法</a></li>
+        <li><a href="#文件打洞">文件打洞</a></li>
+      </ul>
+    </li>
+    <li><a href="#dup系列函数">dup系列函数</a>
+      <ul>
+        <li><a href="#dup">dup</a></li>
+        <li><a href="#dup2">dup2</a></li>
+      </ul>
+    </li>
+    <li><a href="#sync系列函数">sync系列函数</a></li>
+    <li><a href="#fcntl函数">fcntl函数</a></li>
+    <li><a href="#ioctl函数">ioctl函数</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#devfd">/dev/fd/*</a></li>
+    <li><a href="#devstd系列文件">/dev/std**系列文件</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>这是APUE（Advanced Programming in the UNIX Environment，UINX环境高级编程）阅读笔记系列文章</p>
+<p>首先参考一个简单的类UINX操作系统实现——<a href="https://pdos.csail.mit.edu/6.828/2021/schedule.html" target="_blank" rel="noopener noreferrer">xv6</a>，了解操作系统是如何组织文件资源的</p>
+<h1 id="xv6的file-io实现" class="headerLink">
+    <a href="#xv6%e7%9a%84file-io%e5%ae%9e%e7%8e%b0" class="header-mark"></a>xv6的File IO实现</h1><h2 id="file是操作系统管理的底层资源" class="headerLink">
+    <a href="#file%e6%98%af%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e7%ae%a1%e7%90%86%e7%9a%84%e5%ba%95%e5%b1%82%e8%b5%84%e6%ba%90" class="header-mark"></a>File是操作系统管理的底层资源</h2><p>在xv6中，<code>file</code>结构体是对管道，<code>inode</code>（表示常规文件），设备的抽象。xv6没有内核内存分配器，只是静态分配了一个固定大小的<code>file</code>数组，用于存放内核打开的所有<code>file</code></p>
+<h2 id="file-descriptor是file的引用" class="headerLink">
+    <a href="#file-descriptor%e6%98%affile%e7%9a%84%e5%bc%95%e7%94%a8" class="header-mark"></a>file descriptor是File的引用</h2><p>file descriptor(简称fd)在xv6中，是通过PCB（进程控制块）中的一个固定大小的数组存储的，这表明了两点：</p>
+<ol>
+<li>fd是process local的，表示进程对内核资源的引用</li>
+<li>一个进程能够打开的文件是有最大数量限制的</li>
+</ol>
+<p>fd和windows的handler很相似，它是为了避免直接使用指针引用内核数据，优点如下</p>
+<ol>
+<li>避免内核数据结构暴露在进程中
+如果直接将<code>file</code>结构体的指针交给进程使用，进程就能知道<code>file</code>的内存地址，虽然进程一般无法读写这块地址，但不代表这是足够安全的</li>
+<li>防止恶意进程提供错误指针误导内核
+假设进程提供的指针是非法指针，并不指向<code>file</code>结构体，这种情况在xv6中能够通过判断指针是否在数组中越界来确定<br>
+然而，如果进程提供的指针指向其他进程打开的文件，就有机会滥用其他进程的资源<br>
+换而言之，指针是全局的，而fd是process local的</li>
+<li>向进程屏蔽<code>file</code>结构体的实现细节
+众所周知随着内核版本的迭代，内核使用的某些数据结构会发生改变，例如添加新功能，需要在原有的结构体上添加新的字段<br>
+这样的细节对进程是无用的，还会导致编译后的二进制依赖于某个特定版本的内核实现</li>
+</ol>
+<h2 id="stdin-stdout-stderror只是约定" class="headerLink">
+    <a href="#stdin-stdout-stderror%e5%8f%aa%e6%98%af%e7%ba%a6%e5%ae%9a" class="header-mark"></a>stdin, stdout, stderror只是约定</h2><p>通常一个程序开始运行时，已经有三个文件打开了：0，1，2，分别表示stdin, stdout, stderror<br>
+在xv6的实现中，内核并没有对0,1,2特殊处理，因为它只是shell的约定。xv6在用户态下提供了一个shell程序，片段如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="nf">open</span><span class="p">(</span><span class="s">&#34;console&#34;</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mknod</span><span class="p">(</span><span class="s">&#34;console&#34;</span><span class="p">,</span> <span class="n">CONSOLE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">open</span><span class="p">(</span><span class="s">&#34;console&#34;</span><span class="p">,</span> <span class="n">O_RDWR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">dup</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>  <span class="c1">// stdout
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">dup</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>  <span class="c1">// stderr
+</span></span></span></code></pre></div><p>可以看出shell打开了终端设备文件，并通过<code>dup</code>使得0，1，2指向同一个终端设备文件。而在shell中运行的程序fork自shell程序，所以继承了shell程序的0，1，2文件描述符<br>
+换而言之，一个程序运行时，0，1，2不一定是已经打开的文件！！！</p>
+<h1 id="文件打开关闭" class="headerLink">
+    <a href="#%e6%96%87%e4%bb%b6%e6%89%93%e5%bc%80%e5%85%b3%e9%97%ad" class="header-mark"></a>文件打开，关闭</h1><h2 id="open" class="headerLink">
+    <a href="#open" class="header-mark"></a>open</h2><p>open函数打开一个文件，返回fd</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">open</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">__file</span><span class="p">,</span> <span class="kt">int</span> <span class="n">__oflag</span><span class="p">,</span> <span class="p">...)</span>
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__file</td>
+<td>文件路径</td>
+</tr>
+<tr>
+<td>__oflag</td>
+<td>打开方式，通过比特掩码传递flags</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>只有在创建文件时才会使用，用于设置创建的文件的权限，类型为mode_t</td>
+</tr>
+<tr>
+<td>返回</td>
+<td>文件描述符，<code>-1</code>表示打开失败，并设置<code>erron</code>，其他情况返回文件描述符</td>
+</tr>
+</tbody>
+</table>
+<p>返回的fd总是未使用的fd中最小的一个，利用这个特性可以重定向标准输入，标准输出，标准错误</p>
+<h3 id="oflag" class="headerLink">
+    <a href="#oflag" class="header-mark"></a>oflag</h3><p>常用oflag</p>
+<table>
+<thead>
+<tr>
+<th>宏</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O_RDONLY</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>O_WRONLY</td>
+<td>只写</td>
+</tr>
+<tr>
+<td>O_RDWD</td>
+<td>可读可写</td>
+</tr>
+<tr>
+<td>O_EXEC</td>
+<td>执行</td>
+</tr>
+<tr>
+<td>O_APPNED</td>
+<td>写入内容附加到末尾</td>
+</tr>
+<tr>
+<td>O_CLOEXEC</td>
+<td>执行exec系列函数时自动关闭，防止子进程继承到父进程的该文件</td>
+</tr>
+<tr>
+<td>O_CREATE</td>
+<td>如果文件不存在，自动创建</td>
+</tr>
+<tr>
+<td>O_EXCL</td>
+<td>和O_CREATE配合使用，如果文件存在，则返回错误</td>
+</tr>
+<tr>
+<td>O_TRUNC</td>
+<td>如果文件能够以可读方式打开，则将文件大小设置为0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="close" class="headerLink">
+    <a href="#close" class="header-mark"></a>close</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">close</span> <span class="p">(</span><span class="kt">int</span> <span class="n">__fd</span><span class="p">)</span>
+</span></span></code></pre></div><p>进程结束时，操作系统会自动关闭进程打开的文件，所以在一些场合下，可以不调用<code>close</code>关闭文件</p>
+<h2 id="creat-vs-open" class="headerLink">
+    <a href="#creat-vs-open" class="header-mark"></a><code>creat</code> vs <code>open</code></h2><p>考虑<code>creat</code>函数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">creat</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">__file</span><span class="p">,</span> <span class="kt">mode_t</span> <span class="n">__mode</span><span class="p">)</span>
+</span></span></code></pre></div><p>相比<code>open</code>，只能创建文件
+打开文件时，如果需要自动创建文件，有两种方式</p>
+<ol>
+<li>使用<code>open</code>带<code>O_CREATE</code></li>
+<li>使用<code>open</code>带<code>O_CREATE|O_EXCL</code>判断文件是否存在，如果不存在则使用<code>creat</code>创建。之后再打开文件</li>
+</ol>
+<p>这两种方式的不同在于，在并发环境下，先判断一个条件是否成立再执行某个操作，这样的流程是线程不安全的，有可能在判断条件成立后，内核剥夺CPU，重新被调度时条件已经不成立。
+使用<code>open</code>带<code>O_CREATE</code>，判断文件是否存在和创建文件两个步骤是原子操作，保证不会出现竞态条件</p>
+<h1 id="文件操作" class="headerLink">
+    <a href="#%e6%96%87%e4%bb%b6%e6%93%8d%e4%bd%9c" class="header-mark"></a>文件操作</h1><p>xv6实现中，<code>file</code>字段有一个属性，用于记录文件偏移</p>
+<h2 id="read" class="headerLink">
+    <a href="#read" class="header-mark"></a>read</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">ssize_t</span> <span class="nf">read</span> <span class="p">(</span><span class="kt">int</span> <span class="n">__fd</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">__buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">__nbytes</span><span class="p">)</span>
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fd</code></td>
+<td>必须是可读的文件描述符，可以是常规文件，终端设备，网络套接字等</td>
+</tr>
+<tr>
+<td><code>__buf</code></td>
+<td>进程准备的缓冲数组，内核会将读取到的文件内容存放到这里</td>
+</tr>
+<tr>
+<td><code>__nbytes</code></td>
+<td>进程期望一次最多读取的字节数量</td>
+</tr>
+<tr>
+<td>返回</td>
+<td>实际读取的字节数，<code>-1</code>表示遇到错误，<code>0</code>表示遇到<code>EOF</code></td>
+</tr>
+</tbody>
+</table>
+<p>如果实际读取的字节数小于<code>__nbytes</code>,表明发生了如下情况</p>
+<ul>
+<li>如果读取常规文件，则表示读取<code>__nbytes</code>个字节时遇到了<code>EOF</code></li>
+<li>如果从终端设备中读取，通常一次读取一行，返回这一行的字节数</li>
+<li>如果从网络套接字中读取，网络缓冲可能导致小于<code>__nbytes</code>个字节读取</li>
+<li>如果从管道中读取，而管道中剩余字节数小于<code>__nbytes</code></li>
+<li>etc&hellip;</li>
+</ul>
+<p>读取后，文件偏移向前移动实际读取的字节数</p>
+<h2 id="write" class="headerLink">
+    <a href="#write" class="header-mark"></a>write</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">ssize_t</span> <span class="nf">write</span> <span class="p">(</span><span class="kt">int</span> <span class="n">__fd</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">__buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">__n</span><span class="p">)</span>
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fd</code></td>
+<td>同<code>read</code></td>
+</tr>
+<tr>
+<td><code>__buf</code></td>
+<td>进程准备的缓冲数组，内核会读取这个缓冲数组中的字节并写入文件</td>
+</tr>
+<tr>
+<td><code>__nbytes</code></td>
+<td>进程期望一次最多写入的字节数量</td>
+</tr>
+<tr>
+<td>返回</td>
+<td>大部分情况下等于<code>__nbytes</code></td>
+</tr>
+</tbody>
+</table>
+<p>如果返回值不等于<code>__nbytes</code>，表明错误发生，可能是磁盘已满，或者用户磁盘使用超过配额<br>
+读取后，文件偏移向前移动实际写入的字节数<br>
+为了提高IO性能，内核不会立刻将数据写入磁盘，而是先写入内存中的IO缓冲区，随后（保证一定时间内）写入磁盘
+如果打开文件时使用了<code>O_SYNC</code>，会阻塞直到数据落盘<br>
+如果打开文件时使用了<code>O_APPEND</code>，会先将文件偏移移动到文件末尾，再写入</p>
+<h2 id="lseek" class="headerLink">
+    <a href="#lseek" class="header-mark"></a>lseek</h2><p><code>lseek</code>函数用于修改文件偏移</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">__off_t</span> <span class="nf">lseek</span> <span class="p">(</span><span class="kt">int</span> <span class="n">__fd</span><span class="p">,</span> <span class="n">__off_t</span> <span class="n">__offset</span><span class="p">,</span> <span class="kt">int</span> <span class="n">__whence</span><span class="p">)</span>
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__fd</td>
+<td>文件描述符</td>
+</tr>
+<tr>
+<td>__offset</td>
+<td>新的文件偏移</td>
+</tr>
+<tr>
+<td>__whence</td>
+<td>宏，表示相对位置</td>
+</tr>
+<tr>
+<td>返回</td>
+<td>lseek调用后的文件偏移</td>
+</tr>
+</tbody>
+</table>
+<p><code>__whence</code>使用的宏</p>
+<ol>
+<li><code>SEEK_SET</code>，相对文件开头寻址</li>
+<li><code>SEEK_CUR</code>，相对当前位置寻址</li>
+<li><code>SEEK_END</code>，相对文件末尾寻址</li>
+</ol>
+<p><code>lseek</code>中的<code>l</code>表示long integer，在引入<code>__off_t</code>前，<code>lseek</code>返回类型是<code>long</code></p>
+<p><code>off_t</code>是有符号数，在极特殊情况下可能是负数，而返回<code>-1</code>又代表错误，所以应该使用<code>==-1</code>判断是否出现错误而不是<code>&lt;0</code></p>
+<p>不是所有类型的文件都能使用<code>lseek</code>，对管道，套接字，FIFO使用<code>lseek</code>会返回<code>-1</code>表示错误</p>
+<h3 id="lseek常见用法" class="headerLink">
+    <a href="#lseek%e5%b8%b8%e8%a7%81%e7%94%a8%e6%b3%95" class="header-mark"></a>lseek常见用法</h3><ul>
+<li>判断文件是否可寻址
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span><span class="n">SEEK_CUR</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>获取当前文件偏移
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">off_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="nf">lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span><span class="n">SEEK_CUR</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>获取文件大小
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">off_t</span> <span class="n">size</span> <span class="o">=</span> <span class="nf">lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span><span class="n">SEEK_END</span><span class="p">);</span>
+</span></span></code></pre></div><code>lseek</code>只修改文件偏移，不会产生IO操作，可以使用<code>lseek</code>获取大文件的大小</li>
+</ul>
+<h3 id="文件打洞" class="headerLink">
+    <a href="#%e6%96%87%e4%bb%b6%e6%89%93%e6%b4%9e" class="header-mark"></a>文件打洞</h3><p><code>lseek</code>允许将文件偏移设置到EOF之后，随后调用<code>write</code>，就能在文件中间打一个洞<br>
+文件打洞后，空洞范围内使用<code>read</code>读取到的值是<code>0</code>（<code>'\0'</code>），空洞不会增加文件大小，部分文件系统不会存储空洞中重复的数据</p>
+<h2 id="dup系列函数" class="headerLink">
+    <a href="#dup%e7%b3%bb%e5%88%97%e5%87%bd%e6%95%b0" class="header-mark"></a>dup系列函数</h2><p>dup系列函数用于实现<code>file</code>对象的共享，也就是两个fd指向同一个资源，因此，也会共享<code>file</code>对象的属性，比如<code>file</code>标志位，文件偏移等等</p>
+<h3 id="dup" class="headerLink">
+    <a href="#dup" class="header-mark"></a>dup</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">dup</span> <span class="p">(</span><span class="kt">int</span> <span class="n">__fd</span><span class="p">)</span>
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__fd</td>
+<td>文件描述符</td>
+</tr>
+<tr>
+<td>返回</td>
+<td>一个新的文件描述符，和<code>__fd</code>指向相同的资源</td>
+</tr>
+</tbody>
+</table>
+<p><code>dup</code>返回的fd总是未使用的fd中最小的一个</p>
+<h3 id="dup2" class="headerLink">
+    <a href="#dup2" class="header-mark"></a>dup2</h3><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">dup2</span> <span class="p">(</span><span class="kt">int</span> <span class="n">__fd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">__fd2</span><span class="p">)</span>
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__fd</td>
+<td>文件描述符</td>
+</tr>
+<tr>
+<td>__fd2</td>
+<td>期望dup文件描述符的位置</td>
+</tr>
+</tbody>
+</table>
+<p>如果<code>__fd2</code>是已经打开的文件描述符，则自动关闭，然后再执行dup操作<br>
+如果<code>__fd == __fd2</code>，则直接返回<code>__fd</code><br>
+如果<code>__fd2</code>未使用，则<code>dup2</code>执行完毕后，<code>__fd2</code>的<code>FD_CLOEXEC</code>标志位被清除，方便与<code>fork</code>配合实现管道通信</p>
+<h4 id="dup2-vs-close-open" class="headerLink">
+    <a href="#dup2-vs-close-open" class="header-mark"></a><code>dup2</code> vs <code>close</code>-<code>open</code></h4><p>重定向标准输入，也就是在0处打开其他文件，有两种做法
+1.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">close</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">open</span><span class="p">(</span><span class="s">&#34;path/to/file&#34;</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+</span></span></code></pre></div><ol start="2">
+<li></li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;path/to/file&#34;</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><p>区别是，使用<code>dup2</code>可以明显地表达意图，可读性更好</p>
+<h2 id="sync系列函数" class="headerLink">
+    <a href="#sync%e7%b3%bb%e5%88%97%e5%87%bd%e6%95%b0" class="header-mark"></a>sync系列函数</h2><h2 id="fcntl函数" class="headerLink">
+    <a href="#fcntl%e5%87%bd%e6%95%b0" class="header-mark"></a>fcntl函数</h2><h2 id="ioctl函数" class="headerLink">
+    <a href="#ioctl%e5%87%bd%e6%95%b0" class="header-mark"></a>ioctl函数</h2><h1 id="dev下的文件" class="headerLink">
+    <a href="#dev%e4%b8%8b%e7%9a%84%e6%96%87%e4%bb%b6" class="header-mark"></a>/dev下的文件</h1><h2 id="devfd" class="headerLink">
+    <a href="#devfd" class="header-mark"></a>/dev/fd/*</h2><h2 id="devstd系列文件" class="headerLink">
+    <a href="#devstd%e7%b3%bb%e5%88%97%e6%96%87%e4%bb%b6" class="header-mark"></a>/dev/std**系列文件</h2></div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-02-11</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/type-move-to-right/" class="prev" rel="prev" title="逐渐向右移动的类型——静态类型成为新语言的趋势"><i class="fas fa-angle-left fa-fw"></i>逐渐向右移动的类型——静态类型成为新语言的趋势</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.123.8">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2024-02-11T22:56:30+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"APUE第三章总结：文件IO"}}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/js/gitalk.min.js" defer></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-48XH0QHHK3');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-48XH0QHHK3" async></script></div>
+</body>
+
+</html>

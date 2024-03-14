@@ -3,9 +3,16 @@
         <title>Virtualfutre&#39;s Blog</title>
         <link>http://example.org/</link>
         <description>Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 25 Jan 2024 19:33:40 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 14 Mar 2024 22:14:18 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>APUE第三章总结：文件IO</title>
+    <link>http://example.org/posts/apue-chapter1-fileio/</link>
+    <pubDate>Sun, 11 Feb 2024 22:56:30 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/apue-chapter1-fileio/</guid>
+    <description><![CDATA[<p>这是APUE（Advanced Programming in the UNIX Environment，UINX环境高级编程）阅读笔记系列文章</p>]]></description>
+</item><item>
     <title>逐渐向右移动的类型——静态类型成为新语言的趋势</title>
     <link>http://example.org/posts/type-move-to-right/</link>
     <pubDate>Thu, 25 Jan 2024 19:33:40 &#43;0800</pubDate><author>
@@ -69,12 +76,5 @@
         <name>z2z63</name>
     </author><guid>http://example.org/posts/idea-java-configuration/</guid>
     <description><![CDATA[<p>IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑</p>]]></description>
-</item><item>
-    <title>Linux字体</title>
-    <link>http://example.org/posts/linux-font/</link>
-    <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/linux-font/</guid>
-    <description><![CDATA[之前安装archlinux，随便配置的中文字体，显示中文时总有一些奇奇怪怪的字形，最近翻了archlinux的文档，把字体配置搞清楚了 字体是]]></description>
 </item></channel>
 </rss>
