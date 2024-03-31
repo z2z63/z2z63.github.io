@@ -3,11 +3,11 @@ title: "fctix5-rime设置配色方案"
 author: z2z63
 date: 2024-03-30T23:43:03+08:00
 ---
-在网上搜了许多配色方案的方法，在我的fctix5-rime上都不适用，下面说一下解决方案<!--more-->
+rime是一个开源、高度可定制、多平台支持的输入法框架，然而在配置fctix5-rime的配色方案时我又踩了坑，记录一下解决方案<!--more-->
 # fctix5不支持rime配色
 网上许多rime教程都是用的鼠须管或者小狼毫，分别是rime的macOS和windows发行版，中州韵很少遇到，此外即使遇到了中州韵，往往也是用的ibus，  
 然而在2024年的今天，fctix5明显是一个更优的选择  
-fctix5和ibus的一个不同点就是，配色方案不是rime的，而是fctix5的，所以网上抄的各种配色方案都不会生效，例如我抄了一个[仿微信输入法的配色方案](https://git.kuraa.cc/kura/SquirrelConfig/src/commit/5b8482722e392ab496d1d74fed7a21f15eeaa3a4/squirrel.yaml#L148)，然后试了无数次都无法生效！  
+fctix5和ibus的一个不同点就是，配色方案不是rime的，而是fctix5的，另外在fctix5是主题（theme）而不是rime的配色方案（color style），所以网上抄的各种配色方案都不会生效，例如我抄了一个[仿微信输入法的配色方案](https://git.kuraa.cc/kura/SquirrelConfig/src/commit/5b8482722e392ab496d1d74fed7a21f15eeaa3a4/squirrel.yaml#L148)，然后试了无数次都无法生效！  
 # 正确的做法
 首先参考[arch wiki](https://wiki.archlinux.org/title/Fcitx5#Themes_and_appearance)，在github我找到了一个看起来不错的[仿macOS的主题](https://github.com/thep0y/fcitx5-themes?tab=readme-ov-file#3%E4%BB%BF-macos)
 ![mac-light.png](https://github.com/thep0y/fcitx5-themes/raw/main/images/mac-dark.png)

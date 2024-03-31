@@ -11,7 +11,7 @@
     <pubDate>Sat, 30 Mar 2024 23:43:03 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/fcitx5_rime_color_style/</guid>
-    <description><![CDATA[<p>在网上搜了许多配色方案的方法，在我的fctix5-rime上都不适用，下面说一下解决方案</p>]]></description>
+    <description><![CDATA[<p>rime是一个开源、高度可定制、多平台支持的输入法框架，然而在配置fctix5-rime的配色方案时我又踩了坑，记录一下解决方案</p>]]></description>
 </item><item>
     <title>APUE第三章总结：文件IO</title>
     <link>http://example.org/posts/apue-chapter1-fileio/</link>
