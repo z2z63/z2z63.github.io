@@ -74,7 +74,7 @@ rime的windows发行版名字为小狼毫，对应的配置文件为`squirrel.ya
 - default.custom.yaml
     ```yaml
     patch:
-    "switcher/option_list_separator": '|'
+    "switcher/option_list_separator": '|~
     "switcher/caption": "[方案列表]"
     "switcher/hotkeys":
         - Control+grave

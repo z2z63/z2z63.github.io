@@ -3,7 +3,14 @@
         <title>All Posts - Virtualfutre&#39;s Blog</title>
         <link>http://example.org/posts/</link>
         <description>All Posts | Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 30 Mar 2024 23:43:03 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 10 Apr 2024 16:35:31 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Hash_dos_and_python_hash</title>
+    <link>http://example.org/posts/hash_dos_and_python_hash/</link>
+    <pubDate>Wed, 10 Apr 2024 16:35:31 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/hash_dos_and_python_hash/</guid>
+    <description><![CDATA[这篇文章讨论了哈希函数的安全问题和python的哈希实现 Hash DOS所谓Hash DOS即利用hash碰撞增加服务器负担、使其无法响应正常用户的请]]></description>
+</item><item>
     <title>fctix5-rime设置配色方案</title>
     <link>http://example.org/posts/fcitx5_rime_color_style/</link>
     <pubDate>Sat, 30 Mar 2024 23:43:03 &#43;0800</pubDate><author>
@@ -67,12 +74,5 @@
         <name>z2z63</name>
     </author><guid>http://example.org/posts/coreutils_hash/</guid>
     <description><![CDATA[<p>最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现</p>]]></description>
-</item><item>
-    <title>Linux使用VMware</title>
-    <link>http://example.org/posts/linux-vmware-setup/</link>
-    <pubDate>Sun, 24 Sep 2023 19:55:45 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/linux-vmware-setup/</guid>
-    <description><![CDATA[<p>为了完成课程的任务，折腾了很久终于搞好了VMware。</p>]]></description>
 </item></channel>
 </rss>
