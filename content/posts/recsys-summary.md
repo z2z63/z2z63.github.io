@@ -52,7 +52,7 @@ item-to-item collaborative filtering（基于物的协同过滤）也是协同�
 
 为了创建用户偏好资料，推荐系统集中于两种信息
 
-- 用户偏好的模型
+- xxxxxxxxxx         fn(5);    118e:       bf 05 00 00 00          mov    $0x5,%edi    1193:       e8 b1 ff ff ff          call   1149 <_Z2fni>text
 - 用户与推荐系统交互的历史
 
 为了获取物的特征，推荐系统常用TF-IDF（又称向量空间表示）算法  

@@ -3,9 +3,16 @@
         <title>Virtualfutre&#39;s Blog</title>
         <link>http://example.org/</link>
         <description>Virtualfutre&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 10 Apr 2024 16:35:31 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 07 Jun 2024 15:15:14 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>浏览器小技巧总结</title>
+    <link>http://example.org/posts/browser_tricks/</link>
+    <pubDate>Fri, 07 Jun 2024 15:15:14 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/browser_tricks/</guid>
+    <description><![CDATA[最近发现身边有些同学并不知道在我看来入门级别的浏览器小技巧，所以专门写一篇文章介绍和总结一下我使用的浏览器小技巧 Ctrl+F 搜索Ctrl+F弹出的搜索]]></description>
+</item><item>
     <title>Hash_dos_and_python_hash</title>
     <link>http://example.org/posts/hash_dos_and_python_hash/</link>
     <pubDate>Wed, 10 Apr 2024 16:35:31 &#43;0800</pubDate><author>
@@ -69,12 +76,5 @@
     </author><guid>http://example.org/posts/linux-space-release/</guid>
     <description><![CDATA[<p>主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止用户数据的增长，所以清理
 也主要是清理用户数据</p>]]></description>
-</item><item>
-    <title>coreutils之hash table</title>
-    <link>http://example.org/posts/coreutils_hash/</link>
-    <pubDate>Sat, 14 Oct 2023 16:08:58 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/coreutils_hash/</guid>
-    <description><![CDATA[<p>最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现</p>]]></description>
 </item></channel>
 </rss>

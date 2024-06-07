@@ -2,9 +2,10 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>http://example.org/posts/</loc><lastmod>2024-06-07T15:15:14&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/</loc><lastmod>2024-06-07T15:15:14&#43;08:00</lastmod></url><url>
+            <loc>http://example.org/posts/browser_tricks/</loc><lastmod>2024-06-07T15:15:14&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/hash_dos_and_python_hash/</loc><lastmod>2024-04-10T16:35:31&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/posts/</loc><lastmod>2024-04-10T16:35:31&#43;08:00</lastmod></url><url>
-            <loc>http://example.org/</loc><lastmod>2024-04-10T16:35:31&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/fcitx5_rime_color_style/</loc><lastmod>2024-03-30T23:43:03&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/apue-chapter1-fileio/</loc><lastmod>2024-02-11T22:56:30&#43;08:00</lastmod></url><url>
             <loc>http://example.org/posts/type-move-to-right/</loc><lastmod>2024-01-25T19:33:40&#43;08:00</lastmod></url><url>
