@@ -37,7 +37,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/week1\/"
-        },"genre": "posts","wordcount":  5407 ,
+        },"genre": "posts","wordcount":  5405 ,
         "url": "http:\/\/example.org\/posts\/week1\/","datePublished": "2024-06-17T19:36:40+08:00","dateModified": "2024-06-17T19:36:40+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
@@ -98,7 +98,7 @@
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;5407 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;11 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-06-17">2024-06-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;5405 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;11 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -117,7 +117,7 @@
             sizes="auto"
             alt="https://raw.githubusercontent.com/z2z63/image/main/202406172000587.png">
     </a></figure>
-需要使用归并排序算法，准确的说是external merge sort，即在内存有限的情况下，利用外存辅助排序，其核心思想是一种经典的算法：分治法（分而治之，divide-and-conquer）。<br>
+需要使用归并排序算法，准确的说是external merge sort，即在内存有限的情况下，利用外存辅助排序，其核心思想是一种经典的算法：分治法（分而治之，divide-and-conquer）<br>
 假设内存只能使用1G（大致范围，不考虑细枝末节），而需要排序10G的记录，归并排序的步骤是</p>
 <ol>
 <li>将10G内存分十次读取到内存，在内存中完成1G记录的排序（可以使用常见的排序算法，例如快速排序），排序结果写入总共10个文件</li>
@@ -153,7 +153,7 @@
 我的猜测是，cpp首先favour zero cost abstraction(青睐零开销抽象)，让每个对象仅仅因为OOP的需要就带上一个绝大多数场合下都不会使用的object header，是不可接受的<br>
 其次，cpp相比其他传统OOP语言，有很多不同的地方</p>
 <ol>
-<li>cpp的对象和原始类型不存在鸿沟，反而是可以密切配合的，对象可以轻易取其地址，<code>malloc</code>和<code>new</code>的区别也仅仅是<code>new</code>相比<code>malloc</code>多做了类的构造函数，而传统OOP语言，对象和原始对象存在鸿沟，互操作时需要包装类，例如java需要使用繁琐的wrapper box，而JS会自动完成原始类型和对象的转换。</li>
+<li>cpp的对象和原始类型不存在鸿沟，反而是可以密切配合的，对象可以轻易取其地址，<code>malloc</code>和<code>new</code>的区别也仅仅是<code>new</code>相比<code>malloc</code>多做了类的构造函数，而传统OOP语言，对象和原始对象存在鸿沟，互操作时需要包装类，例如java需要使用繁琐的wrapper box，而JS会自动完成原始类型和对象的转换</li>
 <li>cpp的对象和原始类型可以随意放在堆上或者栈上，而传统OOP则将对象放在堆上而原始类型放在栈上</li>
 <li>cpp的多态必须使用指针，并且必须有虚拟类</li>
 </ol>
@@ -161,9 +161,9 @@
 <h1 id="runtime" class="headerLink">
     <a href="#runtime" class="header-mark"></a>runtime</h1><p>上文出现的两个运行时，分别使用了两个不同的含义。</p>
 <ol>
-<li>含义一：程序的时态
+<li>含义一：程序的时态<br>
 程序的时态，可以包括开发时，编译时，链接时，装载时，运行时等等，这也是从字面意义上理解runtime</li>
-<li>含义二：runtime system的缩写
+<li>含义二：runtime system的缩写<br>
 runtime system提供了程序运行的环境。就算是汇编语言也需要相应的环境才能运行，C的运行时提供以下运行时支持
 <ol>
 <li>栈<br>
@@ -172,11 +172,11 @@ runtime system提供了程序运行的环境。就算是汇编语言也需要相
 包含C标准定义的函数，有与操作系统交互的函数，也有字符串处理函数</li>
 <li>dynamic linker<br>
 动态链接器用于将多个目标文件中的代码段，数据段等链接起来，于是在运行时能够调用其他目标文件中的函数，linker完成了elf装载完成后bootstrap的过程，bootstrap先于<code>__start</code>函数的执行，而<code>__start</code>函数先于<code>main</code>函数的执行</li>
-<li>多线程支持
+<li>多线程支持<br>
 例如线程私有变量，线程安全版本的函数，多线程环境下的<code>exit</code></li>
-<li>内存分配系统
+<li>内存分配系统<br>
 C标准中提供的<code>malloc</code>系列函数，提供了内置的内存分配系统，用于管理堆区</li>
-<li>IO缓冲
+<li>IO缓冲<br>
 libc在操作系统IO操作原语基础上，提供了带缓冲的IO，例如<code>fread</code>,<code>fwrite</code>等等，并提供了三种缓冲选项（无缓冲，行缓冲，全缓冲），用于在大部分场合下，提高应用程序IO速度，并减小开发者心智负担</li>
 </ol>
 </li>
@@ -216,8 +216,8 @@ POSIX.1 引入了<code>size_t</code>表示数据的大小，于是<code>unsigned
 <li>不同系统对POSIX的支持程度不一样，POSIX提供一系列Feature test macros供开发者检测POSIX特性的支持，并对不同的支持情况作出反应（使用#ifdef条件编译），这种方法只能处理编译时<code>limit</code></li>
 </ol>
 <h1 id="标准与扩展" class="headerLink">
-    <a href="#%e6%a0%87%e5%87%86%e4%b8%8e%e6%89%a9%e5%b1%95" class="header-mark"></a>标准与扩展</h1><p>Unix，C/C++，Web都是多家vender，一个标准。vendor往往为了自己的利益，或者自己的需要，提供超过标准要求的功能，并推进这些功能加入标准<br>
-这一方面是因为标准往往为了中立而非常谨慎，甚至有时候可以说是不作为，导致标准提供的功能不足以覆盖部分需求，另一方面，编译器的vender往往也是操作系统的vender，例如Microsft的Windows和Visual c++，Apple的iOS,MacOS和clang，以及GNU与Linux。造操作系统是一个非常艰巨的任务，vendor往往也会造自己的编译器以满足开发操作系统的需求</p>
+    <a href="#%e6%a0%87%e5%87%86%e4%b8%8e%e6%89%a9%e5%b1%95" class="header-mark"></a>标准与扩展</h1><p>Unix，C/C++，Web都是多家vendor，一个标准。vendor往往为了自己的利益，或者自己的需要，提供超过标准要求的功能，并推进这些功能加入标准<br>
+这一方面是因为标准往往为了中立而非常谨慎，甚至有时候可以说是不作为，导致标准提供的功能不足以覆盖部分需求，另一方面，编译器的vendor往往也是操作系统的vendor，例如Microsft的Windows和Visual c++，Apple的iOS,MacOS和clang，以及GNU与Linux。造操作系统是一个非常艰巨的任务，vendor往往也会造自己的编译器以满足开发操作系统的需求</p>
 <p>举一个我打数据库比赛时遇到的情况，我希望对记录进行排序，记录为一块内存，大小在运行时获得，比较函数取出记录中的属性（基址+偏移，数据类型长度）然后比较属性大小，要使用哪个属性参与比较，也是运行时动态取得的
 ，考虑cpp提供的<code>std::sort</code>，它的数据长度依赖于类型，而类型是编译常量，所以无法做到。考虑来自C的<code>std::qsort</code>，它的原型如下</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">qsort</span><span class="p">(</span><span class="kt">void</span> <span class="n">base</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">nmemb</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">compar</span><span class="p">)(</span><span class="k">const</span> <span class="kt">void</span> <span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="p">))</span>
@@ -227,14 +227,14 @@ POSIX.1 引入了<code>size_t</code>表示数据的大小，于是<code>unsigned
 </span></span></code></pre></div><p>这是glibc提供的C标准的GNU扩展，也就是说只有glibc才有，换而言之只能在linux使用（关于OS, libc以后有机会单独讲）
 这个函数传入一个额外的<code>void *arg</code>，然后它将<code>arg</code>作为第三个参数传入<code>compar</code>，就能实现动态的比较属性</p>
 <p>如何使用<code>qsort_r</code>？</p>
-<p>因为<code>qosrt_r</code>是GNU扩展，man手册如是描述</p>
+<p>因为<code>qsort_r</code>是GNU扩展，man手册如是描述</p>
 <blockquote>
 <p>Feature Test Macro Requirements for glibc (see feature_test_macros(7)):</p>
 <pre><code> qsort_r():
      _GNU_SOURCE
 </code></pre>
 </blockquote>
-<p>要使用<code>qsort_c</code>，首先要定义<code>_GNU_SOURCE</code>，然后引入声明了<code>qsort_r</code>的头文件<code>&lt;stdlib.h&gt;</code></p>
+<p>要使用<code>qsort_r</code>，首先要定义<code>_GNU_SOURCE</code>，然后引入声明了<code>qsort_r</code>的头文件<code>&lt;stdlib.h&gt;</code></p>
 <p>然后查看gcc预定义的宏</p>
 <pre tabindex="0"><code>➜  bin git:(p6-merge-join) ✗  echo | g++ -dM -E -x c++ - | grep _GNU_SOURCE
 #define _GNU_SOURCE 1
