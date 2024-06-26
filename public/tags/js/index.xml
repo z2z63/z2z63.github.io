@@ -9,6 +9,6 @@
     <pubDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/this-in-js/</guid>
-    <description><![CDATA[箭头函数和普通函数中的this const obj = { name: &#34;Alice&#34;, ptr:this, sayName: function () { console.log(this) }, sayNameArrow: () =&gt; { console.log(this) } }; const sayName = obj.sayName; const sayNameArrow = obj.sayNameArrow; obj.sayName(); sayName(); obj.sayNameArrow(); sayNameArrow(); 输出为 {name: &#39;Alice&#39;, ptr: Window, sayName: ƒ, sayNameArrow: ƒ} demo1.js:5 Window {window: Window, self: Window, document: document, name: &#39;&#39;,]]></description>
+    <description><![CDATA[箭头函数和普通函数中的this js const obj = { name: &#34;Alice&#34;, ptr:this, sayName: function () { console.log(this) }, sayNameArrow: () =&gt; { console.log(this) } }; const sayName = obj.sayName; const sayNameArrow = obj.sayNameArrow; obj.sayName(); sayName(); obj.sayNameArrow(); sayNameArrow(); 输出为 text {name: &#39;Alice&#39;, ptr: Window, sayName: ƒ, sayNameArrow: ƒ} demo1.js:5 Window {window: Window, self: Window, document: document,]]></description>
 </item></channel>
 </rss>
