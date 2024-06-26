@@ -96,7 +96,7 @@ k值一般不会很大，经典值有8，16。虽然k很小，但因为取出每
 1. 分清节点编号和选手编号（在这篇文章中我特意使用字母ABC表示选手编号，而使用数字123表示节点编号，但实现时，使用的都是数字类型）
 2. 堆模拟的败者树消除了败者树的优势：直接从父节点获取败者，因为堆访问兄弟节点非常方便，而且没有额外的空间开销。此外败者树非常不直观，如果使用堆模拟，可以考虑胜者树
    
-最终实现见[`external_merge_sort.h`](https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h)，在木兰宽松许可证下开源
+最终实现见[external_merge_sort.h](https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h)，在木兰宽松许可证下开源
 
 # exit
 在对比`fread`，`fwrite`和`std::fstream`时，看到有篇回答提及，如果程序异常退出，`std::fstream`可能来不及把缓冲区的内容落盘
@@ -182,7 +182,7 @@ int main() {
 
 这个特性在其他语言中很少出现，因为C++无GC，对象销毁时机是完全确定的，而GC语言即使提供了析构函数，因为无法确定对象销毁时机，实现某些对销毁时机非常敏感的特性（例如RAII的锁）时，会出现很多无法预料的情况
 
-> libc在进程退出和`exit`时会自动将所有`FILE`缓冲区残留的数据落盘，并释放缓冲区  
+> libc在进程退出和`exit`时会自动将所有`FILE`缓冲区残留的数据落盘，并释放缓冲区    
 > linux在进程exit系统调用时会自动关闭进程未关闭的文件，并释放进程的内存
 
 ## 无法自动关闭的特殊情况

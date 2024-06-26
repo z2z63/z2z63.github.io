@@ -239,7 +239,7 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 <li>分清节点编号和选手编号（在这篇文章中我特意使用字母ABC表示选手编号，而使用数字123表示节点编号，但实现时，使用的都是数字类型）</li>
 <li>堆模拟的败者树消除了败者树的优势：直接从父节点获取败者，因为堆访问兄弟节点非常方便，而且没有额外的空间开销。此外败者树非常不直观，如果使用堆模拟，可以考虑胜者树</li>
 </ol>
-<p>最终实现见<a href="https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h" target="_blank" rel="noopener noreferrer"><code>external_merge_sort.h</code></a>，在木兰宽松许可证下开源</p>
+<p>最终实现见<a href="https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h" target="_blank" rel="noopener noreferrer">external_merge_sort.h</a>，在木兰宽松许可证下开源</p>
 <h1 id="exit" class="headerLink">
     <a href="#exit" class="header-mark"></a>exit</h1><p>在对比<code>fread</code>，<code>fwrite</code>和<code>std::fstream</code>时，看到有篇回答提及，如果程序异常退出，<code>std::fstream</code>可能来不及把缓冲区的内容落盘</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
@@ -321,7 +321,7 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 </span></span><span class="line"><span class="cl"><span class="c1">// 此处已经关闭
 </span></span></span></code></pre></div><p>这个特性在其他语言中很少出现，因为C++无GC，对象销毁时机是完全确定的，而GC语言即使提供了析构函数，因为无法确定对象销毁时机，实现某些对销毁时机非常敏感的特性（例如RAII的锁）时，会出现很多无法预料的情况</p>
 <blockquote>
-<p>libc在进程退出和<code>exit</code>时会自动将所有<code>FILE</code>缓冲区残留的数据落盘，并释放缓冲区<br>
+<p>libc在进程退出和<code>exit</code>时会自动将所有<code>FILE</code>缓冲区残留的数据落盘，并释放缓冲区 <br>
 linux在进程exit系统调用时会自动关闭进程未关闭的文件，并释放进程的内存</p>
 </blockquote>
 <h2 id="无法自动关闭的特殊情况" class="headerLink">
@@ -472,7 +472,7 @@ linux在进程exit系统调用时会自动关闭进程未关闭的文件，并�
             </noscript></div></article></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.127.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.128.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">
