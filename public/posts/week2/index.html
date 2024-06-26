@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>第二周：败者树、范式与反范式 - Virtualfutre&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://example.org/posts/week2/">
+  <meta property="og:site_name" content="Virtualfutre&#39;s Blog">
+  <meta property="og:title" content="第二周：败者树、范式与反范式">
+  <meta property="og:description" content="新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情 归并排序与败者树上篇文章提到的归并">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-06-25T23:35:03+08:00">
+    <meta property="article:modified_time" content="2024-06-25T23:35:03+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="第二周：败者树、范式与反范式">
+  <meta name="twitter:description" content="新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情 归并排序与败者树上篇文章提到的归并">
+<meta name="application-name" content="Virtualfutre&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Virtualfutre&#39;s Blog">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://example.org/posts/week2/" /><link rel="prev" href="http://example.org/posts/week1/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "第二周：败者树、范式与反范式",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/week2\/"
+        },"genre": "posts","wordcount":  6624 ,
+        "url": "http:\/\/example.org\/posts\/week2\/","datePublished": "2024-06-25T23:35:03+08:00","dateModified": "2024-06-25T23:35:03+08:00","publisher": {
+            "@type": "Organization",
+            "name": "z2z63"},"author": {
+                "@type": "Person",
+                "name": "z2z63"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.2.0" defer type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
+</head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Virtualfutre&#39;s Blog">Virtualfutre&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#io">IO</a></li>
+    <li><a href="#k路归并排序">k路归并排序</a></li>
+    <li><a href="#胜者树">胜者树</a></li>
+    <li><a href="#败者树">败者树</a></li>
+    <li><a href="#实现">实现</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#fstream自动关闭"><code>fstream</code>自动关闭</a></li>
+    <li><a href="#无法自动关闭的特殊情况">无法自动关闭的特殊情况</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#分层">分层</a></li>
+    <li><a href="#关系型数据库六范式">关系型数据库六范式</a></li>
+    <li><a href="#唯一事实原则">唯一事实原则</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#附加条件a猝发生产而b持续消费">附加条件：A猝发生产而B持续消费</a></li>
+    <li><a href="#附件条件a反复消费相同数据">附件条件：A反复消费相同数据</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">第二周：败者树、范式与反范式</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-06-25">2024-06-25</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-06-25">2024-06-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;6624 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;14 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#io">IO</a></li>
+    <li><a href="#k路归并排序">k路归并排序</a></li>
+    <li><a href="#胜者树">胜者树</a></li>
+    <li><a href="#败者树">败者树</a></li>
+    <li><a href="#实现">实现</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#fstream自动关闭"><code>fstream</code>自动关闭</a></li>
+    <li><a href="#无法自动关闭的特殊情况">无法自动关闭的特殊情况</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#分层">分层</a></li>
+    <li><a href="#关系型数据库六范式">关系型数据库六范式</a></li>
+    <li><a href="#唯一事实原则">唯一事实原则</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#附加条件a猝发生产而b持续消费">附加条件：A猝发生产而B持续消费</a></li>
+    <li><a href="#附件条件a反复消费相同数据">附件条件：A反复消费相同数据</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情</p>
+<h1 id="归并排序与败者树" class="headerLink">
+    <a href="#%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f%e4%b8%8e%e8%b4%a5%e8%80%85%e6%a0%91" class="header-mark"></a>归并排序与败者树</h1><p>上篇文章提到的归并排序，经过两次重构已经很完善了，最终的结果是一个归并排序类<code>ExternalMergeSorter</code>，通过一个头文件引入<a href="https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h" target="_blank" rel="noopener noreferrer"><code>external_merge_sort.h</code></a>, 非常优雅地隔离了归并排序的细节，只需要给<code>sorter</code>提供记录，然后指示<code>sorter</code>开始排序，最后依次从<code>sorter</code>中取出记录，取出的记录已经是有序的了</p>
+<h2 id="io" class="headerLink">
+    <a href="#io" class="header-mark"></a>IO</h2><p>关于IO的方式也考虑了很多，<code>mmap</code>，<code>read</code>， <code>fread</code>，<code>std::fstrean</code>都能实现需要的功能，最终选择了<code>std::fstream</code></p>
+<ul>
+<li>
+<p>mmap<br>
+效率很高，读入文件时，相比<code>read</code>少了一次内核数据复制<br>
+read时： 外存中的文件 &ndash;&gt; 内核维护的缓冲区 &ndash;&gt; 进程维护的缓冲区
+mmap时： 外存中的文件 &ndash;&gt; 内核分配给进程的页</p>
+<p>mmap分配的页是惰性分配的，<code>mmap</code>调用返回时，分配的页仍然是用户地址空间非法的页，进程第一次访问时，陷入内核态（因为访问了非法的页），然后内核完成页的分配，并填入正确的数据</p>
+<p>此外，mmap分配的页也会正常的换出换入内存，实际内存使用量不会很高</p>
+<blockquote>
+<p>Q：为什么<code>read</code>读取文件时有内核维护的缓冲区和进程维护的缓冲区？
+A: 内核维护的缓冲区是对进程隐藏的，进程无法访问（在进程的地址空间中不存在），这是为了防止恶意进程破坏操作系统</p>
+</blockquote>
+<blockquote>
+<p>部署数据库的服务器可能会关闭内存交换功能，此时操作系统不会将近期不使用的页换出外存</p>
+</blockquote>
+<p>不过缺点也很明显，需要手动维护读写指针，而且如果设置了每次mmap的页（不是操作系统的页）的大小，还需要再实现大文件分页，包括不满一页，刚好满一页，满n页不满n+1页各种corner case，并需要给corner case写测试，非常繁琐</p>
+</li>
+<li>
+<p>read
+<code>read</code>和<code>mmap</code>都是linux的系统调用，使用<code>read</code>时操作系统会帮我们维护读写指针，但仍然需要自己处理分页</p>
+</li>
+<li>
+<p>fread
+libc提供的IO函数，内部会自动维护缓冲，读写指针，如果设置了缓冲区大小，也相当于有了分页的功能</p>
+</li>
+<li>
+<p>std::fstream
+libc++的IO函数，<code>fread</code>已经能满足要求了，但使用<code>std::fstream</code>是一种&quot;when in cpp do as the cpper do&quot;的做法</p>
+</li>
+</ul>
+<h2 id="k路归并排序" class="headerLink">
+    <a href="#k%e8%b7%af%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f" class="header-mark"></a>k路归并排序</h2><p>归并排序处理大规模数据时，会形成多个文件，假设为k个，最终将k个已排序块合并的过程，就是k路归并排序<br>
+k路归并时，每次取出k个已排序块中最小的记录，如何确定哪个记录是最小的，可以简单的遍历k个记录，找出其中最小的一个，也可以使用胜者树、败者树加快归并的过程</p>
+<p>遍历k个记录，可以被称为暴力查找，时间复杂度是$O(k)$，而胜者树、败者树的时间复杂度为$O(\log k)$</p>
+<p>k值一般不会很大，经典值有8，16。虽然k很小，但因为取出每条记录都需要经过归并，此处的算法优化效果是非常可观的，我测试的情况是64M规模排序，使用暴力查找耗时5min，使用败者树耗时大约5s</p>
+<h2 id="胜者树" class="headerLink">
+    <a href="#%e8%83%9c%e8%80%85%e6%a0%91" class="header-mark"></a>胜者树</h2><p>胜者树的思想是，假设有八个选手A，B，C，D，E，F，G，H参与比赛，他们两两配对并参与比赛，比赛的胜者参与下一轮比赛，只需要三轮比赛就能比出冠军</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">第三轮比赛的胜者                A
+</span></span><span class="line"><span class="cl">第二轮比赛的胜者        A                 H   
+</span></span><span class="line"><span class="cl">第一轮比赛的胜者  A          D        E        H
+</span></span><span class="line"><span class="cl">参赛选手      A    B    C     D   E    F   G    H
+</span></span></code></pre></div><p>八个选手中A胜出，胜者树记录了A通过比赛不断“上升”的过程
+现在假设因为某种原因，原来的冠军A被替换成A1，而A1的排名未知，需要重新确定冠军</p>
+<ol>
+<li>A1与B比赛，如果A1胜，则A1作为胜者进入下一轮比赛，如果B胜，则B作为胜者进入下一轮</li>
+<li>设A与B比赛的胜者为X1(X1 = A1 | B)， X1与D比赛， 产生的胜者X2进入下一轮</li>
+<li>X2与H比赛，产生的胜者即为冠军</li>
+</ol>
+<p>胜者树的算法思想是动态规划，八个选手比赛的过程中，有很多重复的子问题，例如，A的排名需要重新确定时，C和D的胜负关系是不会改变的，所以C和D没必要再比赛，同理E和H也没必要再比赛，胜者树这样的数据结构在归并过程中维护了最优子结构，避免了重复完成子问题</p>
+<h2 id="败者树" class="headerLink">
+    <a href="#%e8%b4%a5%e8%80%85%e6%a0%91" class="header-mark"></a>败者树</h2><p>将胜者树中的节点的值换成这轮比赛中的败者，其他不变，就形成了败者树</p>
+<p>败者树的一个缺点就是不直观，因为节点记录了败者，但参赛的仍然是胜者，事实上，在构建败者树的过程中仍然需要构建胜者树。</p>
+<p>败者树相比胜者树的优点是，重新确定冠军时，当前参赛选手需要和上次当轮比赛的败者比赛（例如第一轮比赛中，X1需要和D比赛），胜者树需要从兄弟节点获取败者，而败者树可以直接从父节点获取败者</p>
+<p>败者树的另一个理解是，败者树的节点中存储的是左右子树两胜者中比赛产生的次胜者，而优胜者进入下一轮比赛。例如败者树中存储了D的节点，D来源于第一轮比赛中A和D比赛，其中A是优胜者，D是次胜者</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">冠军                          A
+</span></span><span class="line"><span class="cl">第三轮比赛的败者                H
+</span></span><span class="line"><span class="cl">第二轮比赛的败者        D                 E
+</span></span><span class="line"><span class="cl">第一轮比赛的败者  B          C        F        G
+</span></span><span class="line"><span class="cl">参赛选手      A    B    C     D   E    F   G    H
+</span></span></code></pre></div><p>此外败者树的根节点记录的是败者，所以还需要额外记录一个冠军</p>
+<h2 id="实现" class="headerLink">
+    <a href="#%e5%ae%9e%e7%8e%b0" class="header-mark"></a>实现</h2><p>我使用堆模拟了败者树，败者树也是一种二叉树，堆模拟二叉树的优点如下</p>
+<ol>
+<li>内存碎片小</li>
+<li>节点在内存中是紧邻的，能充分利用高速缓存的性能，cache友好</li>
+</ol>
+<p>此外，堆模拟的二叉树中访问父节点，兄弟节点也非常简单，可以使用位运算<br>
+假设堆的大小为16，第一个元素不使用，模拟的二叉树如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">                1
+</span></span><span class="line"><span class="cl">       2                  3
+</span></span><span class="line"><span class="cl">  4        5          6        7
+</span></span><span class="line"><span class="cl">8   9   10   11   12   13   14   15
+</span></span></code></pre></div><p>其中的数组表示节点的编号，或节点在堆中的索引
+假设当前节点为x，其父节点为<code>x &lt;&lt; 1</code>，兄弟节点为<code> x ^ 1</code></p>
+<hr>
+<p>其中第一个未使用的元素在败者树中刚好用来存储冠军，非常巧妙<br>
+堆模拟败者树有两个坑点：</p>
+<ol>
+<li>分清节点编号和选手编号（在这篇文章中我特意使用字母ABC表示选手编号，而使用数字123表示节点编号，但实现时，使用的都是数字类型）</li>
+<li>堆模拟的败者树消除了败者树的优势：直接从父节点获取败者，因为堆访问兄弟节点非常方便，而且没有额外的空间开销。此外败者树非常不直观，如果使用堆模拟，可以考虑胜者树</li>
+</ol>
+<p>最终实现见<a href="https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h" target="_blank" rel="noopener noreferrer"><code>external_merge_sort.h</code></a>，在木兰宽松许可证下开源</p>
+<h1 id="exit" class="headerLink">
+    <a href="#exit" class="header-mark"></a>exit</h1><p>在对比<code>fread</code>，<code>fwrite</code>和<code>std::fstream</code>时，看到有篇回答提及，如果程序异常退出，<code>std::fstream</code>可能来不及把缓冲区的内容落盘</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ofstream</span> <span class="n">ofs</span><span class="p">(</span><span class="s">&#34;hello.txt&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ofs</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Hello world</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这里又涉及一个问题，<code>std::fstream</code>需要手动关闭吗？</p>
+<h2 id="fstream自动关闭" class="headerLink">
+    <a href="#fstream%e8%87%aa%e5%8a%a8%e5%85%b3%e9%97%ad" class="header-mark"></a><code>fstream</code>自动关闭</h2><p>答案是可以不手动关闭，因为<code>fstream</code>会在析构时自动关闭。见cppreference对<code>basic_fstream</code>的析构函数的<a href="https://en.cppreference.com/w/cpp/io/basic_fstream" target="_blank" rel="noopener noreferrer">说明</a></p>
+<blockquote>
+<p>destructs the basic_fstream and the associated buffer, closes the file</p>
+</blockquote>
+<p>然后来翻源码证实一下<br>
+首先看一下cppreference对<code>fstream</code>，<code>ifstream</code>，<code>ofstream</code>的说明
+<figure><a class="lightgallery" href="https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg" title="https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg" data-thumbnail="https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg">
+        <img
+            
+            loading="lazy"
+            src="https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg"
+            srcset="https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg, https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg 1.5x, https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg 2x"
+            sizes="auto"
+            alt="https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg">
+    </a></figure>
+<code>basic_istream</code>最终实例化为<code>ifstream</code>，<code>basic_ostream</code>最终实例化为<code>ofstream</code>，<code>basic_iostream</code>最终实例化为<code>fstream</code>，所以<code>fstream</code>相当于<code>ifstream</code>和<code>ofstream</code>的父类</p>
+<p>以<code>ofstream</code>举例，它的析构函数在glibc的头文件<code>fstream</code>中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">      <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">       *  @brief  The destructor does nothing.
+</span></span></span><span class="line"><span class="cl"><span class="cm">       *
+</span></span></span><span class="line"><span class="cl"><span class="cm">       *  The file is closed by the filebuf object, not the formatting
+</span></span></span><span class="line"><span class="cl"><span class="cm">       *  stream.
+</span></span></span><span class="line"><span class="cl"><span class="cm">       */</span>
+</span></span><span class="line"><span class="cl">      <span class="o">~</span><span class="n">basic_ofstream</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span> <span class="p">}</span>
+</span></span></code></pre></div><p>看来关闭文件的工作是交给filebuf完成的，此处的filebuf指的是<code>basic_ofstream</code>的成员变量<code>_M_filebuf</code>
+实现如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">      <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">       *  @brief  The destructor closes the file first.
+</span></span></span><span class="line"><span class="cl"><span class="cm">       */</span>
+</span></span><span class="line"><span class="cl">      <span class="k">virtual</span>
+</span></span><span class="line"><span class="cl">      <span class="o">~</span><span class="n">basic_filebuf</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kr">__try</span>
+</span></span><span class="line"><span class="cl">	  <span class="p">{</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">__catch</span><span class="p">(...)</span>
+</span></span><span class="line"><span class="cl">	  <span class="p">{</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span></code></pre></div><p>那么自动关闭和手动关闭的区别在哪里呢？
+<code>ofstream</code>的<code>close</code>方法实现如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">      <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">       *  @brief  Close the file.
+</span></span></span><span class="line"><span class="cl"><span class="cm">       *
+</span></span></span><span class="line"><span class="cl"><span class="cm">       *  Calls @c std::basic_filebuf::close().  If that function
+</span></span></span><span class="line"><span class="cl"><span class="cm">       *  fails, @c failbit is set in the stream&#39;s error state.
+</span></span></span><span class="line"><span class="cl"><span class="cm">       */</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">void</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_M_filebuf</span><span class="p">.</span><span class="n">close</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	  <span class="k">this</span><span class="o">-&gt;</span><span class="n">setstate</span><span class="p">(</span><span class="n">ios_base</span><span class="o">::</span><span class="n">failbit</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span></code></pre></div><p>它也是调用了filebuf的<code>close</code>方法，除了错误处理有所不同，其他完全一样</p>
+<hr>
+<p>初学时总被反复提醒<code>ofstream</code>打开了一定要关闭，但实践不一定需要完全遵循，举几个例子</p>
+<ol>
+<li>一个很短的函数内打开<code>ofstream</code>，可以不关闭，函数退出时自动关闭</li>
+<li>一个很长的函数内打开<code>ofstream</code>，为了尽快释放资源可以手动关闭，也可以利用对象离开作用域立刻销毁的特性，额外创建一个作用域，让<code>ofstream</code>提前销毁，这也是更符合C++的RAII的做法</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">file</span><span class="p">(</span><span class="s">&#34;output.txt&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 写入文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 此处已经关闭
+</span></span></span></code></pre></div><p>这个特性在其他语言中很少出现，因为C++无GC，对象销毁时机是完全确定的，而GC语言即使提供了析构函数，因为无法确定对象销毁时机，实现某些对销毁时机非常敏感的特性（例如RAII的锁）时，会出现很多无法预料的情况</p>
+<blockquote>
+<p>libc在进程退出和<code>exit</code>时会自动将所有<code>FILE</code>缓冲区残留的数据落盘，并释放缓冲区<br>
+linux在进程exit系统调用时会自动关闭进程未关闭的文件，并释放进程的内存</p>
+</blockquote>
+<h2 id="无法自动关闭的特殊情况" class="headerLink">
+    <a href="#%e6%97%a0%e6%b3%95%e8%87%aa%e5%8a%a8%e5%85%b3%e9%97%ad%e7%9a%84%e7%89%b9%e6%ae%8a%e6%83%85%e5%86%b5" class="header-mark"></a>无法自动关闭的特殊情况</h2><p><code>fstream</code>的关闭依赖于其析构函数的调用，只需要绕过析构函数即可，绕过方法其一就是<code>exit</code>函数</p>
+<p>前文提及libc的<code>exit</code>函数会关闭所有打开的<code>FILE</code>，关闭的过程包括缓冲区残留的数据落盘和释放缓冲区，但<code>exit</code>函数不会关闭<code>ofstream</code>，因为<code>ofstream</code>自己维护了一个缓冲区，而没有使用<code>FILE</code>对象的缓冲区</p>
+<p>首先确定一点，<code>ofstream</code>会自动分配缓冲区，也可以由用户手动设置缓冲区</p>
+<p><code>ofstream</code>的<code>open</code>方法实现如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">  <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">_CharT</span><span class="p">,</span> <span class="k">typename</span> <span class="n">_Traits</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">typename</span> <span class="n">basic_filebuf</span><span class="o">&lt;</span><span class="n">_CharT</span><span class="p">,</span> <span class="n">_Traits</span><span class="o">&gt;::</span><span class="n">__filebuf_type</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl">    <span class="n">basic_filebuf</span><span class="o">&lt;</span><span class="n">_CharT</span><span class="p">,</span> <span class="n">_Traits</span><span class="o">&gt;::</span>
+</span></span><span class="line"><span class="cl">    <span class="n">open</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">__s</span><span class="p">,</span> <span class="n">ios_base</span><span class="o">::</span><span class="n">openmode</span> <span class="n">__mode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">__filebuf_type</span> <span class="o">*</span><span class="n">__ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">is_open</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">	  <span class="n">_M_file</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">__s</span><span class="p">,</span> <span class="n">__mode</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">is_open</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	      <span class="n">_M_allocate_internal_buffer</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	      <span class="c1">// 省略...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">__ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p><code>_M_allocate_internal_buffer</code>函数完成了缓冲区的自动分配，实现如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">  <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">_CharT</span><span class="p">,</span> <span class="k">typename</span> <span class="n">_Traits</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span>
+</span></span><span class="line"><span class="cl">    <span class="n">basic_filebuf</span><span class="o">&lt;</span><span class="n">_CharT</span><span class="p">,</span> <span class="n">_Traits</span><span class="o">&gt;::</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_M_allocate_internal_buffer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// Allocate internal buffer only if one doesn&#39;t already exist
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// (either allocated or provided by the user via setbuf).
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_M_buf_allocated</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">_M_buf</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">	  <span class="n">_M_buf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">char_type</span><span class="p">[</span><span class="n">_M_buf_size</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	  <span class="n">_M_buf_allocated</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>使用默认内存分配器申请了一块内存用于缓冲区，可以看到并没有把这块内存交给<code>FILE</code>管理</p>
+<blockquote>
+<p>libc和libc++的实现都会随着版本迭代而变化，具体实现一般都对用户隐藏，而只暴露必要的接口，libc和libc++需要保持彼此独立所以也不能使用对方的非公开API</p>
+</blockquote>
+<p>至此已经能回答之前的问题，为什么<code>fstream</code>在调用<code>exit</code>后数据没有落盘？因为数据残留在<code>fstream</code>内部维护的缓冲区中，没有同步到外存，而<code>exit</code>不负责为<code>fstream</code>清理残局</p>
+<h1 id="范式与反范式" class="headerLink">
+    <a href="#%e8%8c%83%e5%bc%8f%e4%b8%8e%e5%8f%8d%e8%8c%83%e5%bc%8f" class="header-mark"></a>范式与反范式</h1><h2 id="分层" class="headerLink">
+    <a href="#%e5%88%86%e5%b1%82" class="header-mark"></a>分层</h2><p>纵观整个计算机体系，分层的思想从底层到上层都在不断的使用。有句名言：计算机中的一切问题都能使用分层解决<br>
+分层解决实际问题的例子</p>
+<ul>
+<li>计算机网络仅仅使用五层就实现了世界上规模最大最复杂的网络</li>
+<li>通过增加域名这一层，使得32bit的ip拥有了树状结构，符合人类社会的组织规律（国家区域顶级域名，用途特定域名gov,edu等），使得负载均衡，代理等灵活的技术成为可能</li>
+</ul>
+<p>分层的工作是，使用当前层提供的原语，屏蔽当前层的细节，向上层提供更简单更强大的原语</p>
+<hr>
+<p>以上是教科书内容，分层思想很伟大，但在实践中有时会违背分层的思想。分层是范式，所以理所当然有其反范式，例如NAT</p>
+<p>NAT实现了网络地址的转换，它维护一个外网端口号：内网端口号+内网ip的映射，有关NAT的批评其一就是它违反了计算机网络中分层的思想，因为NAT工作在网络层，而它会修改端口号，而端口号属于传输层。即NAT修改了上层报文内容</p>
+<p>这体现了分层往往存在的问题：分层尝试屏蔽底层细节，但无法完全屏蔽。所以计算机科学从业者就需要对整个计算机体系的每一层具有足够的了解，才能解决复杂的问题。例子</p>
+<ul>
+<li>即使使用C写操作系统，也不得不写汇编指令，因为C没有提供在C层面调用某些汇编指令的能力</li>
+<li>跨平台尝试抹平平台差异，但也会限制平台原生能力的使用，所以跨平台往往还需要写平台原生插件</li>
+<li>linux的VFS向上层提供了一致的文件模型，屏蔽了底层资源、文件系统、硬件等差异，但数据库开发中还是需要考虑计算机的存储设备的硬件情况，例如磁盘读写时间包括了寻道时间，旋转延迟，  传输时间。而其中寻道时间和旋转延迟占了大部分时间，所以数据库会在内存中分块缓存修改后的文件内容，积累一段时间后再写回。数据库使用的IO策略立足于存储设备硬件现实</li>
+</ul>
+<p>此外，分层也无法解决全部的问题，分层体系中，往往能找出一些上层重复实现底层功能的例子<br>
+例如</p>
+<ul>
+<li>操作系统提供了IO缓冲，而libc还要在实现一遍</li>
+<li>操作系统提供了LRU的页置换策略，而数据库还需要再实现一遍。数据库有时候甚至需要绕过操作系统这一层(前文提及“部署数据库的服务器可能会关闭内存交换功能”)</li>
+<li>libc提供了内置的内存分配器，而postgresql也实现了自己的内存分配器</li>
+<li>libc提供了许多标准库中的函数，例如字符串处理函数，memcpy等，这些在postgresql中也有重复实现</li>
+</ul>
+<p>对这一现实，我的理解如下</p>
+<ul>
+<li>操作系统访问外存速度很慢，所以操作系统尝试缓冲IO，但进程进行系统调用的过程也很慢，所以libc提供IO缓冲，减少系统调用的次数，提高性能</li>
+<li>libc的内存分配器和memcpy，考虑的是通用场景，而特定场景下的性能可能不如数据库的实现。例如内存分配器的一个功能是尽可能减少内存碎片，而每次需要分配的内存有多大是由用户随意决定的。如果数据库完全掌握内存使用情况，就能使用针对数据库场景优化的内存分配器，减少内存碎片</li>
+<li>LRU置换策略，理由同上。数据库能针对各种算子专门优化，而操作系统无法知道进程何时需要访问页面，只能基于局部性原理进行假设</li>
+<li>libc提供的字符串处理函数安全性不够，实际上很多大型项目都会重新造一遍字符串处理函数，为了解决诸如缓冲区溢出，零结尾等问题</li>
+</ul>
+<h2 id="关系型数据库六范式" class="headerLink">
+    <a href="#%e5%85%b3%e7%b3%bb%e5%9e%8b%e6%95%b0%e6%8d%ae%e5%ba%93%e5%85%ad%e8%8c%83%e5%bc%8f" class="header-mark"></a>关系型数据库六范式</h2><p>关系型数据库的六范式的作用是减小数据冗余，消除插入异常，删除异常等，但在实践中，往往不会完全遵循六范式，因为划分实体和关联的工作非常复杂，只有领域专家才有可能做到。一般往往只遵循到第三范式</p>
+<p>此外，关系型数据库的范式会使越拆越小，在查询时需要做大量的连接操作，连接操作可以使用索引，使用归并连接，使用哈希等方式加快连接速度，但对时间复杂度的减小效果有限，数据量极大时仍然非常耗时。大数据和NoSQL就完全违反了关系型数据库的范式，但换来了非常快的查询速度</p>
+<h2 id="唯一事实原则" class="headerLink">
+    <a href="#%e5%94%af%e4%b8%80%e4%ba%8b%e5%ae%9e%e5%8e%9f%e5%88%99" class="header-mark"></a>唯一事实原则</h2><p>如果一个人有很多钟，反而无法确定时间，因为不同钟显示的时间不一样。在工程实践中为了避免这种问题，往往遵循single source of truth，即唯一事实原则，例如</p>
+<ul>
+<li>将一些参数提升为配置，其他要使用参数的地方只能引用参数，不能内联</li>
+<li>JS的ORM框架prisma使用<code>prisma.schema</code>作为唯一事实，并使用这一事实同步数据库和生成的类型</li>
+</ul>
+<p>然而唯一事实原则也有其反范式，而且使用非常广泛，即cache<br>
+此处cache指CPU提供的高速缓存，它和内存共同维护了一个数据的两个副本，非常明显的反范式，后果就是需要额外维护cache和内存的一致性</p>
+<ul>
+<li>cache有脏数据，而内存中的数据是干净的：需要将脏数据写回，而且需要选择写回时机</li>
+<li>内存中有脏数据，而cache中的数据是干净的，需要同步到cache</li>
+</ul>
+<p>此外cache的存在对DMA非常不友好，让DMA变得更加复杂了，因为DMA能在不经过CPU的情况下读写内存</p>
+<h1 id="buffer-vs-cache" class="headerLink">
+    <a href="#buffer-vs-cache" class="header-mark"></a>buffer vs cache</h1><p>最近突发奇想，使用另一个角度理解缓冲与缓存</p>
+<p>首先，我认为缓存的译名不准确，因为缓存的“缓”，在字典中是“慢”的意思，而缓存明显是用来加快速度用的，参考cache的台湾译名“快取”</p>
+<p>有两个系统A和B，它们通过接口相连，然而A和B的速度是不匹配的（A速度远大于B）。基于以上事实，才有必要使用buffer或cache，这也是现实中非常常见的情况</p>
+<p>两个速度不匹配的系统为了能够一起工作，必定还有其他条件，否则认为这两个系统不应该相互连接</p>
+<blockquote>
+<p>如果两个系统不应该连接，此时有两种方案改进</p>
+<ol>
+<li>使用性能更好的B1， 提高系统整体性能</li>
+<li>使用性能低但更便宜的A1，降低系统的造价</li>
+</ol>
+</blockquote>
+<h2 id="附加条件a猝发生产而b持续消费" class="headerLink">
+    <a href="#%e9%99%84%e5%8a%a0%e6%9d%a1%e4%bb%b6a%e7%8c%9d%e5%8f%91%e7%94%9f%e4%ba%a7%e8%80%8cb%e6%8c%81%e7%bb%ad%e6%b6%88%e8%b4%b9" class="header-mark"></a>附加条件：A猝发生产而B持续消费</h2><p>此时使用buffer，即缓冲</p>
+<ul>
+<li>网络流量往往是猝发的，而操作系统或用户程序无法保证立马响应，所以网卡往往有缓冲区</li>
+<li>用户读写文件的操作往往是猝发的（例如一个文本编辑器，用户随时按下按键输入字符），libc维护缓冲区，延迟写入外存，提高IO性能</li>
+<li>操作系统为外设IO提供缓冲，因为外设产生数据是猝发的</li>
+<li>在加入少量的酸或碱时，溶液的PH值发生突变（扩散作用很快），而缓冲液可以在这个情况下减小溶液PH值变化速度和范围（化学反应速度比扩散作用慢）。缓冲剂往往远多于酸或碱的量（使用滴管加入的）。如果酸或碱的量太多，缓冲液的效果就不好</li>
+</ul>
+<h2 id="附件条件a反复消费相同数据" class="headerLink">
+    <a href="#%e9%99%84%e4%bb%b6%e6%9d%a1%e4%bb%b6a%e5%8f%8d%e5%a4%8d%e6%b6%88%e8%b4%b9%e7%9b%b8%e5%90%8c%e6%95%b0%e6%8d%ae" class="header-mark"></a>附件条件：A反复消费相同数据</h2><p>此时使用cache，即快取</p>
+<ul>
+<li>许多包管理器都有cache的功能，因为用户往往重复下载相同的软件包</li>
+<li>CPU有cache，因为程序往往在一段时间内重复访问一块区域的内存，具有时间局部性和空间局部性</li>
+<li>浏览器会缓存部分文件，因为用户每次访问页面，都需要下载相同内容的文件</li>
+<li>为了加快访问速度，网站可以把静态资源放到CDN</li>
+</ul>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-06-25</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/week1/" class="prev" rel="prev" title="Week1"><i class="fas fa-angle-left fa-fw"></i>Week1</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.127.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2024-06-25T23:35:03+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"第二周：败者树、范式与反范式"}}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/js/gitalk.min.js" defer></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-48XH0QHHK3');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-48XH0QHHK3" async></script></div>
+</body>
+
+</html>
