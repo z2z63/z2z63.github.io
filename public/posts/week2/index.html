@@ -37,7 +37,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/week2\/"
-        },"genre": "posts","wordcount":  6624 ,
+        },"genre": "posts","wordcount":  6648 ,
         "url": "http:\/\/example.org\/posts\/week2\/","datePublished": "2024-06-25T23:35:03+08:00","dateModified": "2024-06-25T23:35:03+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
@@ -122,7 +122,7 @@
             <div class="post-meta-line">
                 <span class="post-author"><span class="author fas fa-user-circle fa-fw"></span><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-06-25">2024-06-25</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-06-25">2024-06-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;6624 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;14 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-06-25">2024-06-25</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-06-25">2024-06-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;6648 words&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -167,11 +167,11 @@ mmap时： 外存中的文件 &ndash;&gt; 内核分配给进程的页</p>
 <p>mmap分配的页是惰性分配的，<code>mmap</code>调用返回时，分配的页仍然是用户地址空间非法的页，进程第一次访问时，陷入内核态（因为访问了非法的页），然后内核完成页的分配，并填入正确的数据</p>
 <p>此外，mmap分配的页也会正常的换出换入内存，实际内存使用量不会很高</p>
 <blockquote>
-<p>Q：为什么<code>read</code>读取文件时有内核维护的缓冲区和进程维护的缓冲区？
+<p>Q：为什么<code>read</code>读取文件时有内核维护的缓冲区和进程维护的缓冲区？<br>
 A: 内核维护的缓冲区是对进程隐藏的，进程无法访问（在进程的地址空间中不存在），这是为了防止恶意进程破坏操作系统</p>
 </blockquote>
 <blockquote>
-<p>部署数据库的服务器可能会关闭内存交换功能，此时操作系统不会将近期不使用的页换出外存</p>
+<p>部署数据库的服务器可能会关闭内存交换功能，此时操作系统不会将近期不使用的页换出内存</p>
 </blockquote>
 <p>不过缺点也很明显，需要手动维护读写指针，而且如果设置了每次mmap的页（不是操作系统的页）的大小，还需要再实现大文件分页，包括不满一页，刚好满一页，满n页不满n+1页各种corner case，并需要给corner case写测试，非常繁琐</p>
 </li>
@@ -191,7 +191,7 @@ libc++的IO函数，<code>fread</code>已经能满足要求了，但使用<code>
 <h2 id="k路归并排序" class="headerLink">
     <a href="#k%e8%b7%af%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f" class="header-mark"></a>k路归并排序</h2><p>归并排序处理大规模数据时，会形成多个文件，假设为k个，最终将k个已排序块合并的过程，就是k路归并排序<br>
 k路归并时，每次取出k个已排序块中最小的记录，如何确定哪个记录是最小的，可以简单的遍历k个记录，找出其中最小的一个，也可以使用胜者树、败者树加快归并的过程</p>
-<p>遍历k个记录，可以被称为暴力查找，时间复杂度是$O(k)$，而胜者树、败者树的时间复杂度为$O(\log k)$</p>
+<p>遍历k个记录，可以被称为暴力查找，时间复杂度是$$O(k)$$，而胜者树、败者树的时间复杂度为$$O(\log k)$$</p>
 <p>k值一般不会很大，经典值有8，16。虽然k很小，但因为取出每条记录都需要经过归并，此处的算法优化效果是非常可观的，我测试的情况是64M规模排序，使用暴力查找耗时5min，使用败者树耗时大约5s</p>
 <h2 id="胜者树" class="headerLink">
     <a href="#%e8%83%9c%e8%80%85%e6%a0%91" class="header-mark"></a>胜者树</h2><p>胜者树的思想是，假设有八个选手A，B，C，D，E，F，G，H参与比赛，他们两两配对并参与比赛，比赛的胜者参与下一轮比赛，只需要三轮比赛就能比出冠军</p>
@@ -231,7 +231,7 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 </span></span><span class="line"><span class="cl">  4        5          6        7
 </span></span><span class="line"><span class="cl">8   9   10   11   12   13   14   15
 </span></span></code></pre></div><p>其中的数组表示节点的编号，或节点在堆中的索引
-假设当前节点为x，其父节点为<code>x &lt;&lt; 1</code>，兄弟节点为<code> x ^ 1</code></p>
+假设当前节点为x，其父节点为<code>x &gt;&gt; 1</code>，兄弟节点为<code> x ^ 1</code>，左子节点为<code>x &lt;&lt; 1</code>，右子节点为<code>(x &lt;&lt; 1) + 1</code></p>
 <hr>
 <p>其中第一个未使用的元素在败者树中刚好用来存储冠军，非常巧妙<br>
 堆模拟败者树有两个坑点：</p>
