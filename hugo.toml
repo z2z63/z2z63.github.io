@@ -1,7 +1,7 @@
 baseURL = 'http://example.org/'
 defaultContentLanguage = "en"
 languageCode = 'zh-CN'
-title = "Virtualfutre's Blog"
+title = "z2z63/Virtualfuture's Blog"
 
 theme = "DoIt"
 summaryLength = 70
@@ -28,6 +28,40 @@ hasCJKLanguage = true
   keepStatic = false
   # 是否使侧边目录自动折叠展开
   auto = true
+[params.home.profile]
+ avatarURL = "https://avatars.githubusercontent.com/z2z63"
+ avatarLinkURL = "https://github.com/z2z63"
+ title = "z2z63/Virtualfuture's Blog"
+ subTitle = "dedicated in computer science"
+ social = true
+
+# 网站分析配置
+[params.analytics]
+  enable = true
+  # Google Analytics
+  [params.analytics.google]
+    id = "G-48XH0QHHK3"
+    # 是否匿名化用户 IP
+    anonymizeIP = false
+
+[params.social]
+  GitHub = "z2z63"
+  Spotify = "31cruj6y7d62opb2cnyxrlbojx7y"
+  Steam = "76561199180604882"
+  Email = "vituralfuture@gmail.com"
+  RSS = true
+  
+[params.search]
+  enable = true
+  type = "fuse"
+
+[params.footer]
+  enable = true
+  hugo = true
+  hostedOn = "GitHub Pages"
+  copyright = true
+  author = true
+  since = 2023
 
 [menu]
   [[menu.main]]
@@ -62,14 +96,9 @@ hasCJKLanguage = true
 [markup]
   # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
   [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = true
     # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
     noClasses = false
-
-# 网站分析配置
-[params.analytics]
-  enable = true
-  # Google Analytics
-  [params.analytics.google]
-    id = "G-48XH0QHHK3"
-    # 是否匿名化用户 IP
-    anonymizeIP = false

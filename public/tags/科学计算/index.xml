@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>科学计算 - Tag - Virtualfutre&#39;s Blog</title>
+        <title>科学计算 - Tag - z2z63/Virtualfuture&#39;s Blog</title>
         <link>http://example.org/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
-        <description>科学计算 - Tag - Virtualfutre&#39;s Blog</description>
+        <description>科学计算 - Tag - z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 26 May 2023 15:51:48 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/" rel="self" type="application/rss+xml" /><item>
     <title>MATLAB微积分</title>
     <link>http://example.org/posts/matlab-calculus/</link>

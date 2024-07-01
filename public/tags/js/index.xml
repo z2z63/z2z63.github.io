@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>JS - Tag - Virtualfutre&#39;s Blog</title>
+        <title>JS - Tag - z2z63/Virtualfuture&#39;s Blog</title>
         <link>http://example.org/tags/js/</link>
-        <description>JS - Tag - Virtualfutre&#39;s Blog</description>
+        <description>JS - Tag - z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/js/" rel="self" type="application/rss+xml" /><item>
     <title>JS中的this</title>
     <link>http://example.org/posts/this-in-js/</link>

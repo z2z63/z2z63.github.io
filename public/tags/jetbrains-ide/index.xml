@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Jetbrains IDE - Tag - Virtualfutre&#39;s Blog</title>
+        <title>Jetbrains IDE - Tag - z2z63/Virtualfuture&#39;s Blog</title>
         <link>http://example.org/tags/jetbrains-ide/</link>
-        <description>Jetbrains IDE - Tag - Virtualfutre&#39;s Blog</description>
+        <description>Jetbrains IDE - Tag - z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/jetbrains-ide/" rel="self" type="application/rss+xml" /><item>
     <title>Idea配置java项目</title>
     <link>http://example.org/posts/idea-java-configuration/</link>
