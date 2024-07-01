@@ -2,6 +2,8 @@
 title: "第二周：败者树、范式与反范式"
 author: z2z63
 date: 2024-06-25T23:35:03+08:00
+math:
+  enable: true
 ---
 
 新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情  
@@ -37,7 +39,7 @@ date: 2024-06-25T23:35:03+08:00
 归并排序处理大规模数据时，会形成多个文件，假设为k个，最终将k个已排序块合并的过程，就是k路归并排序  
 k路归并时，每次取出k个已排序块中最小的记录，如何确定哪个记录是最小的，可以简单的遍历k个记录，找出其中最小的一个，也可以使用胜者树、败者树加快归并的过程  
 
-遍历k个记录，可以被称为暴力查找，时间复杂度是$$O(k)$$，而胜者树、败者树的时间复杂度为$$O(\log k)$$
+遍历k个记录，可以被称为暴力查找，时间复杂度是$$O(k)$$  而胜者树、败者树的时间复杂度为$$O(\log k)$$
 
 k值一般不会很大，经典值有8，16。虽然k很小，但因为取出每条记录都需要经过归并，此处的算法优化效果是非常可观的，我测试的情况是64M规模排序，使用暴力查找耗时5min，使用败者树耗时大约5s  
 ## 胜者树
@@ -95,16 +97,18 @@ k值一般不会很大，经典值有8，16。虽然k很小，但因为取出每
 堆模拟败者树有两个坑点：
 1. 分清节点编号和选手编号（在这篇文章中我特意使用字母ABC表示选手编号，而使用数字123表示节点编号，但实现时，使用的都是数字类型）
 2. 堆模拟的败者树消除了败者树的优势：直接从父节点获取败者，因为堆访问兄弟节点非常方便，而且没有额外的空间开销。此外败者树非常不直观，如果使用堆模拟，可以考虑胜者树
-   
+
+### corner case
+外部归并排序中产生多少个辅助排序文件，一般是不可控制的，选手数量往往不是2的幂  
+此时增加若干个哑节点(dumb node)，使选手数量达到2的幂，哑节点参与比赛一定败北  
+
 最终实现见[external_merge_sort.h](https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h)，在木兰宽松许可证下开源
 
 # exit
 在对比`fread`，`fwrite`和`std::fstream`时，看到有篇回答提及，如果程序异常退出，`std::fstream`可能来不及把缓冲区的内容落盘
 ```cpp
 #include <stdlib.h>
-
 #include <fstream>
-
 using std::ofstream;
 
 int main() {
@@ -121,7 +125,7 @@ int main() {
 
 然后来翻源码证实一下  
 首先看一下cppreference对`fstream`，`ifstream`，`ofstream`的说明
-![](https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg)
+![](https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg)  
 `basic_istream`最终实例化为`ifstream`，`basic_ostream`最终实例化为`ofstream`，`basic_iostream`最终实例化为`fstream`，所以`fstream`相当于`ifstream`和`ofstream`的父类
 
 以`ofstream`举例，它的析构函数在glibc的头文件`fstream`中

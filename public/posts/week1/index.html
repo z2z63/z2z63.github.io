@@ -174,7 +174,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"><p>最近关于博客的内容考虑了很多，怎样让博客的内容更有价值、怎样输出内容等等。也考虑了未来如果内容做好了，可以开始做SEO等等。因为我认为博客还是一种比较轻松的阅读内容，如果选择输出干货，一来读者不一定了解这方面的知识，二来读者如果非常了解这方面的知识，这篇文章也没有价值；如果想加深对某领域的了解，完全可以看一些经典的书籍，他们的内容比博客好多了，于是我决定改变博客的内容。希望我的博客是启发性的，读者看完后能够对某个小领域有个大致的理解，或者看完后产生兴趣，去阅读更专业的书籍、文档等等。换而言之以后的文章相比深度更倾向广度，比起话题更想随谈。另外我能力也不足以输出深度足够的文章。</p>
+            </div><div class="content" id="content"><p>最近关于博客的内容考虑了很多，怎样让博客的内容更有价值、怎样输出内容等等。也考虑了未来如果内容做好了，可以开始做SEO等等。因为我认为博客还是一种比较轻松的阅读内容，如果选择输出干货，一来读者不一定了解这方面的知识，二来读者如果非常了解这方面的知识，这篇文章也没有价值；如果想加深对某领域的了解，完全可以看一些经典的书籍，他们的内容比博客好多了，于是我决定改变博客的内容。希望我的博客是启发性的，读者看完后能够对某个小领域有个大致的理解，或者看完后产生兴趣，去阅读更专业的书籍、文档等等。换而言之以后的文章相比深度更倾向广度，比起话题更像随谈。另外我能力也不足以输出深度足够的文章。</p>
 <h1 id="外部归并排序" class="headerLink">
     <a href="#%e5%a4%96%e9%83%a8%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f" class="header-mark" aria-label="Header mark for '外部归并排序'"></a>外部归并排序</h1><p>最近打数据库比赛，我负责的一道题是归并连接
 <img class="tw-inline" loading="lazy" src="https://raw.githubusercontent.com/z2z63/image/main/202406172000587.png"     >
@@ -254,7 +254,7 @@ libc在操作系统IO操作原语基础上，提供了带缓冲的IO，例如<co
 </li>
 <li>
 <p><code>read</code>系统调用原来的接口是</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -354,7 +354,7 @@ libc在操作系统IO操作原语基础上，提供了带缓冲的IO，例如<co
 POSIX.1 引入了<code>size_t</code>表示数据的大小，于是<code>unsigned bytes</code>变成了<code>size_t nbytes</code><br>
 此外POSIX.1还引入了<code>ssize_t</code>作为<code>size_t</code>的有符号版本，以支持负数，<code>read</code>的返回值类型也被改成<code>ssize_t</code></p>
 <p>最终的版本</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -463,7 +463,7 @@ POSIX.1 引入了<code>size_t</code>表示数据的大小，于是<code>unsigned
 这一方面是因为标准往往为了中立而非常谨慎，甚至有时候可以说是不作为，导致标准提供的功能不足以覆盖部分需求，另一方面，编译器的vendor往往也是操作系统的vendor，例如Microsft的Windows和Visual c++，Apple的iOS,MacOS和clang，以及GNU与Linux。造操作系统是一个非常艰巨的任务，vendor往往也会造自己的编译器以满足开发操作系统的需求</p>
 <p>举一个我打数据库比赛时遇到的情况，我希望对记录进行排序，记录为一块内存，大小在运行时获得，比较函数取出记录中的属性（基址+偏移，数据类型长度）然后比较属性大小，要使用哪个属性参与比较，也是运行时动态取得的
 ，考虑cpp提供的<code>std::sort</code>，它的数据长度依赖于类型，而类型是编译常量，所以无法做到。考虑来自C的<code>std::qsort</code>，它的原型如下</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -561,7 +561,7 @@ POSIX.1 引入了<code>size_t</code>表示数据的大小，于是<code>unsigned
 </div>
 <p>因为比较函数<code>compar</code>是函数指针，无法使用lambda函数捕获外部变量，也就是说每次sql执行时，<code>compar</code>函数行为都是一样的，这肯定不能满足需求，不能实现比较任意属性</p>
 <p>我最终使用的是<code>qsort_r</code></p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -669,7 +669,7 @@ POSIX.1 引入了<code>size_t</code>表示数据的大小，于是<code>unsigned
 </blockquote>
 <p>要使用<code>qsort_r</code>，首先要定义<code>_GNU_SOURCE</code>，然后引入声明了<code>qsort_r</code>的头文件<code>&lt;stdlib.h&gt;</code></p>
 <p>然后查看gcc预定义的宏</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     

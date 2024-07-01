@@ -198,7 +198,7 @@
 <h1 id="左值引用" class="headerLink">
     <a href="#%e5%b7%a6%e5%80%bc%e5%bc%95%e7%94%a8" class="header-mark" aria-label="Header mark for '左值引用'"></a>左值引用</h1><p>左值常常被称为是变量的别名，为什么呢？<br>
 根据左值的概念，可以确定</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -302,7 +302,7 @@
 <p>从抽象的角度来看，a，b具有响应式的关系，修改一个，另一个也会改变<br>
 但实际上，a，b是对同一个地址的引用，换句话来说，a，b &lsquo;underlying&rsquo; 的对象只有一个，这里的对象并不是面向对象的对象<br>
 反汇编的结果也能证实这一观点</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -407,7 +407,7 @@
 左值引用的初衷也是简化指针的使用，左值引用具有指针的优点：能在函数内修改外部的值，又规避了指针的缺点：错误的指针运算会导致野指针，也可以认为它是受约束的指针</p>
 <h1 id="右值引用" class="headerLink">
     <a href="#%e5%8f%b3%e5%80%bc%e5%bc%95%e7%94%a8" class="header-mark" aria-label="Header mark for '右值引用'"></a>右值引用</h1><p>当自己动手实现一个栈类时，会遇到这个问题</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -506,7 +506,7 @@
 </div>
 <p>当push的定义为<code>push(Obeject obj)</code>时，会造成复制行为<br>
 当push的定义为<code>push(Object&amp; obj)</code>时，虽然可以避免复制，但是又会产生一个新的问题</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -734,7 +734,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
 </div>
 <p>编译后输出为</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -949,7 +949,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
 </div>
 <p>输出为</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1051,7 +1051,7 @@
 </div>
 <p>这个例子可能非常反直觉，当执行<code>a--</code>时，肯定有一个内存存储位置被赋值了，但是这个位置在哪里？
 反汇编后结果如下</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1155,7 +1155,7 @@
 </div>
 <p>编译器居然为我们分配了一个变量！<br>
 汇编代码等效为</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1253,7 +1253,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">);</span></span></span></code></pre>
 </div>
 <p>如果把<code>fn</code>修改为<code>void fn(int a)</code>，相应的反汇编结果为</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     

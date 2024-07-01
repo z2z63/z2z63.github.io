@@ -282,7 +282,7 @@
 <h2 id="stdin-stdout-stderror只是约定" class="headerLink">
     <a href="#stdin-stdout-stderror%e5%8f%aa%e6%98%af%e7%ba%a6%e5%ae%9a" class="header-mark" aria-label="Header mark for 'stdin, stdout, stderror只是约定'"></a>stdin, stdout, stderror只是约定</h2><p>通常一个程序开始运行时，已经有三个文件打开了：0，1，2，分别表示stdin, stdout, stderror<br>
 在xv6的实现中，内核并没有对0,1,2特殊处理，因为它只是shell的约定。xv6在用户态下提供了一个shell程序，片段如下</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -389,7 +389,7 @@
 <h1 id="文件打开关闭" class="headerLink">
     <a href="#%e6%96%87%e4%bb%b6%e6%89%93%e5%bc%80%e5%85%b3%e9%97%ad" class="header-mark" aria-label="Header mark for '文件打开，关闭'"></a>文件打开，关闭</h1><h2 id="open" class="headerLink">
     <a href="#open" class="header-mark" aria-label="Header mark for 'open'"></a>open</h2><p>open函数打开一个文件，返回fd</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -561,7 +561,7 @@
 </tbody>
 </table>
 <h2 id="close" class="headerLink">
-    <a href="#close" class="header-mark" aria-label="Header mark for 'close'"></a>close</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+    <a href="#close" class="header-mark" aria-label="Header mark for 'close'"></a>close</h2><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -660,7 +660,7 @@
 <p>进程结束时，操作系统会自动关闭进程打开的文件，所以在一些场合下，可以不调用<code>close</code>关闭文件</p>
 <h2 id="creat-vs-open" class="headerLink">
     <a href="#creat-vs-open" class="header-mark" aria-label="Header mark for '&lt;code&gt;creat&lt;/code&gt; vs &lt;code&gt;open&lt;/code&gt;'"></a><code>creat</code> vs <code>open</code></h2><p>考虑<code>creat</code>函数</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -767,7 +767,7 @@
 <h1 id="文件操作" class="headerLink">
     <a href="#%e6%96%87%e4%bb%b6%e6%93%8d%e4%bd%9c" class="header-mark" aria-label="Header mark for '文件操作'"></a>文件操作</h1><p>xv6实现中，<code>file</code>字段有一个属性，用于记录文件偏移</p>
 <h2 id="read" class="headerLink">
-    <a href="#read" class="header-mark" aria-label="Header mark for 'read'"></a>read</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+    <a href="#read" class="header-mark" aria-label="Header mark for 'read'"></a>read</h2><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -899,7 +899,7 @@
 </ul>
 <p>读取后，文件偏移向前移动实际读取的字节数</p>
 <h2 id="write" class="headerLink">
-    <a href="#write" class="header-mark" aria-label="Header mark for 'write'"></a>write</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+    <a href="#write" class="header-mark" aria-label="Header mark for 'write'"></a>write</h2><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1028,7 +1028,7 @@
 如果打开文件时使用了<code>O_APPEND</code>，会先将文件偏移移动到文件末尾，再写入</p>
 <h2 id="lseek" class="headerLink">
     <a href="#lseek" class="header-mark" aria-label="Header mark for 'lseek'"></a>lseek</h2><p><code>lseek</code>函数用于修改文件偏移</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1162,7 +1162,7 @@
 <h3 id="lseek常见用法" class="headerLink">
     <a href="#lseek%e5%b8%b8%e8%a7%81%e7%94%a8%e6%b3%95" class="header-mark" aria-label="Header mark for 'lseek常见用法'"></a>lseek常见用法</h3><ul>
 <li>判断文件是否可寻址
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1262,7 +1262,7 @@
 </div>
 </li>
 <li>获取当前文件偏移
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1360,7 +1360,7 @@
 </div>
 </li>
 <li>获取文件大小
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1464,7 +1464,7 @@
 <h2 id="dup系列函数" class="headerLink">
     <a href="#dup%e7%b3%bb%e5%88%97%e5%87%bd%e6%95%b0" class="header-mark" aria-label="Header mark for 'dup系列函数'"></a>dup系列函数</h2><p>dup系列函数用于实现<code>file</code>对象的共享，也就是两个fd指向同一个资源，因此，也会共享<code>file</code>对象的属性，比如<code>file</code>标志位，文件偏移等等</p>
 <h3 id="dup" class="headerLink">
-    <a href="#dup" class="header-mark" aria-label="Header mark for 'dup'"></a>dup</h3><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+    <a href="#dup" class="header-mark" aria-label="Header mark for 'dup'"></a>dup</h3><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1580,7 +1580,7 @@
 </table>
 <p><code>dup</code>返回的fd总是未使用的fd中最小的一个</p>
 <h3 id="dup2" class="headerLink">
-    <a href="#dup2" class="header-mark" aria-label="Header mark for 'dup2'"></a>dup2</h3><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+    <a href="#dup2" class="header-mark" aria-label="Header mark for 'dup2'"></a>dup2</h3><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1700,7 +1700,7 @@
 <h4 id="dup2-vs-close-open" class="headerLink">
     <a href="#dup2-vs-close-open" class="header-mark" aria-label="Header mark for '&lt;code&gt;dup2&lt;/code&gt; vs &lt;code&gt;close&lt;/code&gt;-&lt;code&gt;open&lt;/code&gt;'"></a><code>dup2</code> vs <code>close</code>-<code>open</code></h4><p>重定向标准输入，也就是在0处打开其他文件，有两种做法
 1.</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1800,7 +1800,7 @@
 <ol start="2">
 <li></li>
 </ol>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     

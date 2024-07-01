@@ -210,7 +210,7 @@ java的<code>Object</code>对象有一个方法<code>toString()</code>，然而�
 如果使用type hint，并引入严格的静态类型检查，python就是空值安全的。</p>
 <ul>
 <li>假设你需要使用一个字符串变量，并且它可能为<code>None</code>，就应该写成
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -307,7 +307,7 @@ java的<code>Object</code>对象有一个方法<code>toString()</code>，然而�
       "><span class="line"><span class="cl"><span class="n">x</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&#34;....&#34;</span></span></span></code></pre>
 </div>
 如果你需要使用字符串的<code>strip</code>方法：
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -404,7 +404,7 @@ java的<code>Object</code>对象有一个方法<code>toString()</code>，然而�
       "><span class="line"><span class="cl"><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></span></span></code></pre>
 </div>
 这样的写法并不会通过诸如mypy这样的静态类型检查器，需要使用&rsquo;type guard&rsquo;保证<code>x</code>的类型为<code>str</code>而不是<code>str | None</code>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -509,7 +509,7 @@ java的<code>Object</code>对象有一个方法<code>toString()</code>，然而�
 </div>
 </li>
 <li>假设你需要使用一个字符串，而且它不可能为空，应该写成
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -606,7 +606,7 @@ java的<code>Object</code>对象有一个方法<code>toString()</code>，然而�
       "><span class="line"><span class="cl"><span class="n">x</span> <span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;....&#34;</span></span></span></code></pre>
 </div>
 尝试给它赋值<code>None</code>，可以运行但是无法通过静态类型检查
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -715,7 +715,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
 <ul>
 <li>如果一个变量不能为空</li>
 </ul>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -815,7 +815,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
 <ul>
 <li>如果可能为空</li>
 </ul>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -917,7 +917,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
 <code>null</code>相关语法糖使用了 <code>!</code>和<code>?</code>，并和dart其他特性配合，组合出非常多的使用方式，例如在级联操作符中使用，在pattern中使用等等，例如</p>
 <ul>
 <li>null-aware
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1016,7 +1016,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
 </div>
 如果<code>notAString</code>为<code>null</code>，不报错，表达式返回<code>null</code></li>
 <li>null-aware短路
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1116,7 +1116,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
 </div>
 如果<code>thing</code>为<code>null</code>，不会评估表达式后面的部分，直接返回，避免写下<code>thing?.doohickey?.gizmo</code>这样繁琐的表达式</li>
 <li>null-aware与下标运算符
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1196,7 +1196,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
     </div>
   </div>
   <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-1" 
+    id="codeblock-id-10" 
     class="
       chroma 
       !tw-block 
@@ -1214,7 +1214,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
 </div>
 </li>
 <li>null-aware与<a href="https://dart.dev/language/operators#cascade-notation" target="_blank" rel="noopener noreferrer">级联运算符</a>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1294,7 +1294,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
     </div>
   </div>
   <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-2" 
+    id="codeblock-id-11" 
     class="
       chroma 
       !tw-block 
@@ -1312,7 +1312,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
 </div>
 </li>
 <li>null assert
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1392,7 +1392,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
     </div>
   </div>
   <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-3" 
+    id="codeblock-id-12" 
     class="
       chroma 
       !tw-block 
@@ -1413,7 +1413,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
 </div>
 一旦error的运行时类型为<code>null</code>，就会出现转型错误（cast error），抛出运行时异常</li>
 <li>与<a href="https://dart.dev/language/patterns" target="_blank" rel="noopener noreferrer">pattern</a>配合
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1493,7 +1493,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
     </div>
   </div>
   <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-4" 
+    id="codeblock-id-13" 
     class="
       chroma 
       !tw-block 
@@ -1513,7 +1513,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
 </span></span><span class="line"><span class="cl">    <span class="c1">// &#39;s&#39; has type non-nullable String here.
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre>
 </div>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1593,7 +1593,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
     </div>
   </div>
   <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-5" 
+    id="codeblock-id-14" 
     class="
       chroma 
       !tw-block 
@@ -1613,7 +1613,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// &#39;name&#39; is a non-nullable string here.
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre>
 </div>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1693,7 +1693,7 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
     </div>
   </div>
   <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-6" 
+    id="codeblock-id-15" 
     class="
       chroma 
       !tw-block 
@@ -1761,7 +1761,10 @@ dart也是一切皆对象，而dart只有两类类型，一个是<code>Null</cod
         </a><a href="#comments" id="view-comments" class="fixed-button" title="View Comments">
             <svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 32C114.6 32 0 125.1 0 240c0 49.6 21.4 95 57 130.7C44.5 421.1 2.7 466 2.2 466.5c-2.2 2.3-2.8 5.7-1.5 8.7S4.8 480 8 480c66.3 0 116-31.8 140.6-51.4 32.7 12.3 69 19.4 107.4 19.4 141.4 0 256-93.1 256-208S397.4 32 256 32z"/></svg>
-        </a></div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css">
+        </a></div><script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: (window.theme === 'dark' ? 'dark' : 'default') });
+</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css">
 <script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2024-01-25T18:04:12+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"现代语言的空安全"}},"fuse.min.js":"/lib/fuse/fuse.min.js","math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null}};</script><script
     src="/lib/katex/katex.min.js"
     

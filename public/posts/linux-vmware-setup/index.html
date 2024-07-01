@@ -197,7 +197,7 @@
     <a href="#%e5%ae%89%e8%a3%85linux-headers" class="header-mark" aria-label="Header mark for '安装linux-headers'"></a>安装linux-headers</h2><p>archlinux的更新是滚动更新，而更新了linux内核后需要重启才能完全生效。所以就会出现pacman能够查到已经安装了linux-headers包，但是仍然无法使用VMware的情况</p>
 <h2 id="加载内核模块" class="headerLink">
     <a href="#%e5%8a%a0%e8%bd%bd%e5%86%85%e6%a0%b8%e6%a8%a1%e5%9d%97" class="header-mark" aria-label="Header mark for '加载内核模块'"></a>加载内核模块</h2><p>需要加载vmw_vmci和vmmon这两个模块</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -295,7 +295,7 @@
 </div>
 <p>然而很有可能无法加载，输出为找不到模块，这是因为对于比较新的内核，需要自己编译这两个模块<br>
 找到这个<a href="https://github.com/mkubecek/vmware-host-modules" target="_blank" rel="noopener noreferrer">仓库</a>，拉下来，根据INSTALL中的方法，首先根据workstation的版本，切换到对应分支</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -394,7 +394,7 @@
 </span></span><span class="line"><span class="cl">git checkout workstation-17.0.2</span></span></code></pre>
 </div>
 <p>然后开始编译，编译完成后安装</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -492,7 +492,7 @@
 </span></span><span class="line"><span class="cl">sudo make install</span></span></code></pre>
 </div>
 <p>然后重新加载模块</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -590,7 +590,7 @@
 </div>
 <h2 id="设置网络" class="headerLink">
     <a href="#%e8%ae%be%e7%bd%ae%e7%bd%91%e7%bb%9c" class="header-mark" aria-label="Header mark for '设置网络'"></a>设置网络</h2><p>执行</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -688,7 +688,7 @@
 </div>
 <p>有可能会失败，根据systemctl的日志，需要先配置网络<br>
 aur中的VMware workstation包将<code>vmware-netcfg</code>软链接到<code>/usr/bin</code>所以可以直接使用</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -787,7 +787,7 @@ aur中的VMware workstation包将<code>vmware-netcfg</code>软链接到<code>/us
 <p>在弹出的界面中配置网络
 <img class="tw-inline" loading="lazy" src="https://raw.githubusercontent.com/z2z63/image/main/img20230924205037.png"     >
 设置开机自启，再重启</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     

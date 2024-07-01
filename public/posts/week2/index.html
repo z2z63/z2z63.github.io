@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http://example.org/posts/week2/"
-        },"genre": "posts","wordcount":  6658 ,
+        },"genre": "posts","wordcount":  6744 ,
         "url": "http://example.org/posts/week2/","datePublished": "2024-06-25T23:35:03+08:00","dateModified": "2024-06-25T23:35:03+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
@@ -162,7 +162,11 @@
     <li><a href="#k路归并排序">k路归并排序</a></li>
     <li><a href="#胜者树">胜者树</a></li>
     <li><a href="#败者树">败者树</a></li>
-    <li><a href="#实现">实现</a></li>
+    <li><a href="#实现">实现</a>
+      <ul>
+        <li><a href="#corner-case">corner case</a></li>
+      </ul>
+    </li>
   </ul>
 
   <ul>
@@ -189,7 +193,7 @@
             <div class="post-meta-line"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2024-06-25">2024-06-25</time>&nbsp;<svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-06-25">2024-06-25</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;6658 words&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;6744 words&nbsp;<svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;14 minutes&nbsp;</div>
         </div><div class="details toc print:!tw-block" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -203,7 +207,11 @@
     <li><a href="#k路归并排序">k路归并排序</a></li>
     <li><a href="#胜者树">胜者树</a></li>
     <li><a href="#败者树">败者树</a></li>
-    <li><a href="#实现">实现</a></li>
+    <li><a href="#实现">实现</a>
+      <ul>
+        <li><a href="#corner-case">corner case</a></li>
+      </ul>
+    </li>
   </ul>
 
   <ul>
@@ -260,11 +268,11 @@ libc++的IO函数，<code>fread</code>已经能满足要求了，但使用<code>
 <h2 id="k路归并排序" class="headerLink">
     <a href="#k%e8%b7%af%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f" class="header-mark" aria-label="Header mark for 'k路归并排序'"></a>k路归并排序</h2><p>归并排序处理大规模数据时，会形成多个文件，假设为k个，最终将k个已排序块合并的过程，就是k路归并排序<br>
 k路归并时，每次取出k个已排序块中最小的记录，如何确定哪个记录是最小的，可以简单的遍历k个记录，找出其中最小的一个，也可以使用胜者树、败者树加快归并的过程</p>
-<p>遍历k个记录，可以被称为暴力查找，时间复杂度是$$O(k)$$，而胜者树、败者树的时间复杂度为$$O(\log k)$$</p>
+<p>遍历k个记录，可以被称为暴力查找，时间复杂度是$$O(k)$$  而胜者树、败者树的时间复杂度为$$O(\log k)$$</p>
 <p>k值一般不会很大，经典值有8，16。虽然k很小，但因为取出每条记录都需要经过归并，此处的算法优化效果是非常可观的，我测试的情况是64M规模排序，使用暴力查找耗时5min，使用败者树耗时大约5s</p>
 <h2 id="胜者树" class="headerLink">
     <a href="#%e8%83%9c%e8%80%85%e6%a0%91" class="header-mark" aria-label="Header mark for '胜者树'"></a>胜者树</h2><p>胜者树的思想是，假设有八个选手A，B，C，D，E，F，G，H参与比赛，他们两两配对并参与比赛，比赛的胜者参与下一轮比赛，只需要三轮比赛就能比出冠军</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -376,7 +384,7 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 <p>败者树的一个缺点就是不直观，因为节点记录了败者，但参赛的仍然是胜者，事实上，在构建败者树的过程中仍然需要构建胜者树。</p>
 <p>败者树相比胜者树的优点是，重新确定冠军时，当前参赛选手需要和上次当轮比赛的败者比赛（例如第一轮比赛中，X1需要和D比赛），胜者树需要从兄弟节点获取败者，而败者树可以直接从父节点获取败者</p>
 <p>败者树的另一个理解是，败者树的节点中存储的是左右子树两胜者中比赛产生的次胜者，而优胜者进入下一轮比赛。例如败者树中存储了D的节点，D来源于第一轮比赛中A和D比赛，其中A是优胜者，D是次胜者</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -485,7 +493,7 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 </ol>
 <p>此外，堆模拟的二叉树中访问父节点，兄弟节点也非常简单，可以使用位运算<br>
 假设堆的大小为16，第一个元素不使用，模拟的二叉树如下</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -593,10 +601,13 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 <li>分清节点编号和选手编号（在这篇文章中我特意使用字母ABC表示选手编号，而使用数字123表示节点编号，但实现时，使用的都是数字类型）</li>
 <li>堆模拟的败者树消除了败者树的优势：直接从父节点获取败者，因为堆访问兄弟节点非常方便，而且没有额外的空间开销。此外败者树非常不直观，如果使用堆模拟，可以考虑胜者树</li>
 </ol>
+<h3 id="corner-case" class="headerLink">
+    <a href="#corner-case" class="header-mark" aria-label="Header mark for 'corner case'"></a>corner case</h3><p>外部归并排序中产生多少个辅助排序文件，一般是不可控制的，选手数量往往不是2的幂<br>
+此时增加若干个哑节点(dumb node)，使选手数量达到2的幂，哑节点参与比赛一定败北</p>
 <p>最终实现见<a href="https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h" target="_blank" rel="noopener noreferrer">external_merge_sort.h</a>，在木兰宽松许可证下开源</p>
 <h1 id="exit" class="headerLink">
     <a href="#exit" class="header-mark" aria-label="Header mark for 'exit'"></a>exit</h1><p>在对比<code>fread</code>，<code>fwrite</code>和<code>std::fstream</code>时，看到有篇回答提及，如果程序异常退出，<code>std::fstream</code>可能来不及把缓冲区的内容落盘</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -691,10 +702,8 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
       tw-overflow-x-auto
       tw-scrollbar-thin
       "><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">ofstream</span> <span class="n">ofs</span><span class="p">(</span><span class="s">&#34;hello.txt&#34;</span><span class="p">);</span>
@@ -710,10 +719,10 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 </blockquote>
 <p>然后来翻源码证实一下<br>
 首先看一下cppreference对<code>fstream</code>，<code>ifstream</code>，<code>ofstream</code>的说明
-<img class="tw-inline" loading="lazy" src="https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg"     >
+<img class="tw-inline" loading="lazy" src="https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg"     ><br>
 <code>basic_istream</code>最终实例化为<code>ifstream</code>，<code>basic_ostream</code>最终实例化为<code>ofstream</code>，<code>basic_iostream</code>最终实例化为<code>fstream</code>，所以<code>fstream</code>相当于<code>ifstream</code>和<code>ofstream</code>的父类</p>
 <p>以<code>ofstream</code>举例，它的析构函数在glibc的头文件<code>fstream</code>中</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1040,7 +1049,7 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 <li>一个很短的函数内打开<code>ofstream</code>，可以不关闭，函数退出时自动关闭</li>
 <li>一个很长的函数内打开<code>ofstream</code>，为了尽快释放资源可以手动关闭，也可以利用对象离开作用域立刻销毁的特性，额外创建一个作用域，让<code>ofstream</code>提前销毁，这也是更符合C++的RAII的做法</li>
 </ol>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1500,8 +1509,23 @@ linux在进程exit系统调用时会自动关闭进程未关闭的文件，并�
         </a><a href="#comments" id="view-comments" class="fixed-button" title="View Comments">
             <svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 32C114.6 32 0 125.1 0 240c0 49.6 21.4 95 57 130.7C44.5 421.1 2.7 466 2.2 466.5c-2.2 2.3-2.8 5.7-1.5 8.7S4.8 480 8 480c66.3 0 116-31.8 140.6-51.4 32.7 12.3 69 19.4 107.4 19.4 141.4 0 256-93.1 256-208S397.4 32 256 32z"/></svg>
-        </a></div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css">
-<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2024-06-25T23:35:03+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"第二周：败者树、范式与反范式"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null}};</script><script
+        </a></div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css">
+<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2024-06-25T23:35:03+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"第二周：败者树、范式与反范式"}},"fuse.min.js":"/lib/fuse/fuse.min.js","math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null}};</script><script
+    src="/lib/katex/katex.min.js"
+    
+      defer
+    
+  ></script><script
+    src="/lib/katex/auto-render.min.js"
+    
+      defer
+    
+  ></script><script
+    src="/js/katex.min.js"
+    
+      defer
+    
+  ></script><script
     src="/js/theme.min.js"
     
       defer

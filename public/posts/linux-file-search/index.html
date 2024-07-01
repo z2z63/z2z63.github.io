@@ -204,7 +204,7 @@
 </ol>
 <h3 id="需求1-根据文件名搜索路径--find" class="headerLink">
     <a href="#%e9%9c%80%e6%b1%821-%e6%a0%b9%e6%8d%ae%e6%96%87%e4%bb%b6%e5%90%8d%e6%90%9c%e7%b4%a2%e8%b7%af%e5%be%84--find" class="header-mark" aria-label="Header mark for '需求1: 根据文件名搜索路径&amp;ndash;&lt;code&gt;find&lt;/code&gt;'"></a>需求1: 根据文件名搜索路径&ndash;<code>find</code></h3><p>可以使用find命令，它是linux大多数发行版都自带的命令</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -302,7 +302,7 @@
 </div>
 <p>这个命令会在当前目录下递归搜索叫做filename的文件，但是这个文件名必须是完全匹配
 如果只是知道文件名的大概，或者无法保证文件名完全一致，可以用正则匹配</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -402,7 +402,7 @@
 须用双引号把括起来</strong><br>
 至此这个命令足够日常使用了，但是有些情景就不好用了，例如完全不知道这个文件的路径，只知道它的名字，或许可
 以这样</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -500,7 +500,7 @@
 </div>
 <p>这个命令会在根目录递归搜索所有文件，似乎能达到目的，但是它会去尝试读取一些系统文件和权限不足以访问的
 文件 ，导致输出一大堆错误信息 ，为了避免错误输出淹没了查找结果的输出，可以给予高权限</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -602,7 +602,7 @@
 设备中读取数据，另外实际上你也会发现，即使给了最高的权限，还是有些文件无法被读取<br>
 很明显，我们想要搜索的文件常常都是用户文件，它的权限不高，所以没必要用这种方式，另外为了防止错误信息
 淹没了查找结果，可以把错误信息丢掉</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -708,7 +708,7 @@
 locate的工作原理有点类似于Windows平台的<a href="https://www.voidtools.com/zh-cn/" target="_blank" rel="noopener noreferrer">everything</a>，
 但实际上locate可能胜过everything
 第一次使用locate命令前需要先建立索引(需要root权限)</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -805,7 +805,7 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
       "><span class="line"><span class="cl">sudo updatedb</span></span></code></pre>
 </div>
 <p>然后直接搜索</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -905,7 +905,7 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
 下搜索的情况<br>
 这个命令用来全局模糊搜索非常好用，因为<code>locate</code>默认把参数解释为正则匹配的<code>partten</code><br>
 在日常使用的过程中可能会出现这个问题，<code>locate</code>输出的结果太多了，例如</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1010,7 +1010,7 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
 <li>更加准确的描述方式
 如果我只想找到python解释器的位置，那么<code>python-stub</code>还有<code>python-websockets</code>就是不满足的，可以
 扩展正则语法的否定预查更加精准的匹配，然而这个情景下，用准确的文件名匹配更好
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1109,7 +1109,7 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
 这个命令的意思是<code>*</code>匹配前的路径，<code>python</code>匹配文件名，这样就能精准匹配到名为<code>python</code>的文件</li>
 <li>过滤不需要的信息
 执行过一遍<code>locate</code>后我已经知道某些路径下的搜索结果是不需要的，例如我想过滤<code>~/.cache</code>下的所有结果
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1208,7 +1208,7 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
 这里用到了<code>grep</code>的反向匹配过滤掉<code>~/.cache</code>下的所有匹配结果，但是这么过滤后可能还是太多了，需要
 进一步过滤，例如想要过滤<code>python-websockets</code>下的所有结果，通过查看grep的手册发现并没有反向匹配两种pattern的方法，这里可以利用linux shell的
 强大之处
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1316,7 +1316,7 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
 Like grep or ack, but faster.
 {% endblockquote %}<br>
 <code>ag</code>大多数发行版都没有自带，需要自己安装</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1413,7 +1413,7 @@ Like grep or ack, but faster.
       "><span class="line"><span class="cl">sudo pacman -S the_silver_searcher</span></span></code></pre>
 </div>
 <p>假设我想看一个python项目引入了哪些库，可以用ag搜索<code>import</code>语句</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     

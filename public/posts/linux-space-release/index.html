@@ -266,7 +266,7 @@
             </div><div class="content" id="content"><p>主力使用Linux一段时间后，系统占用的空间总会越来越多。虽然linux的包复用率非常高，甚至有些时候更新，包的大小还会负增长，但这无法阻止用户数据的增长，所以清理
 也主要是清理用户数据</p>
 <h1 id="查看磁盘使用率" class="headerLink">
-    <a href="#%e6%9f%a5%e7%9c%8b%e7%a3%81%e7%9b%98%e4%bd%bf%e7%94%a8%e7%8e%87" class="header-mark" aria-label="Header mark for '查看磁盘使用率'"></a>查看磁盘使用率</h1><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+    <a href="#%e6%9f%a5%e7%9c%8b%e7%a3%81%e7%9b%98%e4%bd%bf%e7%94%a8%e7%8e%87" class="header-mark" aria-label="Header mark for '查看磁盘使用率'"></a>查看磁盘使用率</h1><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -370,7 +370,7 @@
 <li><code>pacman</code>不会自动删除以前的包</li>
 </ol>
 <p>所以<a href="https://wiki.archlinux.org/title/pacman#:~:text=Cleaning%20the%20package%20cache" target="_blank" rel="noopener noreferrer">archlinux wiki</a>建议定期手动删除包缓存</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -476,7 +476,7 @@
     <a href="#python" class="header-mark" aria-label="Header mark for 'Python'"></a>Python</h2><h3 id="anaconda" class="headerLink">
     <a href="#anaconda" class="header-mark" aria-label="Header mark for 'anaconda'"></a>anaconda</h3><h4 id="删除虚拟环境" class="headerLink">
     <a href="#%e5%88%a0%e9%99%a4%e8%99%9a%e6%8b%9f%e7%8e%af%e5%a2%83" class="header-mark" aria-label="Header mark for '删除虚拟环境'"></a>删除虚拟环境</h4><p>查看conda虚拟环境</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -573,7 +573,7 @@
       "><span class="line"><span class="cl">conda env list</span></span></code></pre>
 </div>
 <p>鉴于某些不留requirements.txt的项目的环境真不好装，可以先生成requirements.txt再删除，日后也能恢复</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -670,7 +670,7 @@
       "><span class="line"><span class="cl">conda list -e &gt; requirements.txt</span></span></code></pre>
 </div>
 <p>删除某个虚拟环境</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -769,7 +769,7 @@
 <h4 id="删除conda缓存" class="headerLink">
     <a href="#%e5%88%a0%e9%99%a4conda%e7%bc%93%e5%ad%98" class="header-mark" aria-label="Header mark for '删除conda缓存'"></a>删除conda缓存</h4><p>conda下载包后会保存<code>tar</code>或<code>zst</code>，下次安装时就不需要重复下载<br>
 删除conda包缓存</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -867,7 +867,7 @@
 </div>
 <h3 id="pip缓存" class="headerLink">
     <a href="#pip%e7%bc%93%e5%ad%98" class="header-mark" aria-label="Header mark for 'pip缓存'"></a>pip缓存</h3><p>pip也会缓存下载过的包，可以手动删除</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -971,7 +971,7 @@
 <h2 id="java" class="headerLink">
     <a href="#java" class="header-mark" aria-label="Header mark for 'Java'"></a>Java</h2><h3 id="maven缓存" class="headerLink">
     <a href="#maven%e7%bc%93%e5%ad%98" class="header-mark" aria-label="Header mark for 'maven缓存'"></a>maven缓存</h3><p>maven也会缓存下载过的包，如果使用不同版本的JDK，最后缓存的包可能会占据一些空间</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1070,7 +1070,7 @@
 <p>删除缓存后，下次运行maven时会重新下载依赖</p>
 <h3 id="gradle缓存" class="headerLink">
     <a href="#gradle%e7%bc%93%e5%ad%98" class="header-mark" aria-label="Header mark for 'gradle缓存'"></a>gradle缓存</h3><p>gradle作为android官方指定构建工具，它的缓存可能比maven还要多</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1171,7 +1171,7 @@
     <a href="#%e7%bc%96%e8%af%91%e4%ba%a7%e7%89%a9" class="header-mark" aria-label="Header mark for '编译产物'"></a>编译产物</h3><p>不管是使用autoconf + make还是cmake，最终的构建命令基本都是<code>make</code><br>
 一个大型或者中型项目编译产物可能不小，为了加快构建速度make往往会缓存许多构建中间产物<br>
 进入构建目录执行</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1270,7 +1270,7 @@
 <h3 id="本地安装的软件" class="headerLink">
     <a href="#%e6%9c%ac%e5%9c%b0%e5%ae%89%e8%a3%85%e7%9a%84%e8%bd%af%e4%bb%b6" class="header-mark" aria-label="Header mark for '本地安装的软件'"></a>本地安装的软件</h3><p>C/C++的依赖确实很难搞，有些时候会在<code>/usr/local</code>下安装一些软件作为项目的依赖<br>
 这些软件往往是下载源码，编译安装的，进入对应的构建目录</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1370,7 +1370,7 @@
 <h2 id="js" class="headerLink">
     <a href="#js" class="header-mark" aria-label="Header mark for 'JS'"></a>JS</h2><h3 id="npm" class="headerLink">
     <a href="#npm" class="header-mark" aria-label="Header mark for 'npm'"></a>npm</h3><p>npm利用包缓存实现自我修复的功能，因此不建议直接清除缓存，相反，npm提供了验证并压缩缓存的方法</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1471,7 +1471,7 @@
 <h2 id="docker" class="headerLink">
     <a href="#docker" class="header-mark" aria-label="Header mark for 'docker'"></a>docker</h2><p>docker的镜像也会占用不少的空间而且平时很难注意到<br>
 查看容器</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1568,7 +1568,7 @@
       "><span class="line"><span class="cl">docker ps -a</span></span></code></pre>
 </div>
 <p>删除容器</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1665,7 +1665,7 @@
       "><span class="line"><span class="cl">docker rm &lt;container-name&gt;</span></span></code></pre>
 </div>
 <p>查看本地的镜像</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1762,7 +1762,7 @@
       "><span class="line"><span class="cl">docker image list</span></span></code></pre>
 </div>
 <p>删除本地的镜像</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1888,7 +1888,7 @@
 仓库盘中的文件就满足这种特征，可以打包然后压缩，减少存储占用<br>
 打包会减少很多因为按块管理造成的浪费，压缩的效果不确定，因为对文本文件，压缩效果显著，而对已经压缩过的文件，压缩后几乎不会减小大小</p>
 <h2 id="删除孤儿包" class="headerLink">
-    <a href="#%e5%88%a0%e9%99%a4%e5%ad%a4%e5%84%bf%e5%8c%85" class="header-mark" aria-label="Header mark for '删除孤儿包'"></a>删除孤儿包</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+    <a href="#%e5%88%a0%e9%99%a4%e5%ad%a4%e5%84%bf%e5%8c%85" class="header-mark" aria-label="Header mark for '删除孤儿包'"></a>删除孤儿包</h2><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     

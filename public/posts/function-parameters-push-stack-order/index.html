@@ -201,7 +201,7 @@
             </div><div class="content" id="content"><p>最近遇到了一个函数传参造成的问题，于是来稍微研究一下这个东西</p>
 <p>什么是函数传参顺序？
 一个简单例子</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -311,7 +311,7 @@
 分析机器指令准备参数的顺序</p>
 <h3 id="c" class="headerLink">
     <a href="#c" class="header-mark" aria-label="Header mark for 'C'"></a>C</h3><p>首先新建文件<code>test.c</code>，内容如下</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -417,7 +417,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
 </div>
 <p>用gcc编译，然后查看反汇编代码</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -515,7 +515,7 @@
 </span></span><span class="line"><span class="cl">objdump -S ./a.out</span></span></code></pre>
 </div>
 <p><code>main</code>函数的反汇编代码如下</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -735,7 +735,7 @@
 </div>
 <p><code>fn</code>函数把edi和esi的值复制到栈帧中，然后再复制到寄存器中，可以确定先准备了2，再准备了1
 猜测<code>0xeae(%rip)</code>存放着字符串<code>&quot;%d %d&quot;</code>的值，进入gdb查看这个地址的值</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -837,7 +837,7 @@
 <p>所以可以确定，<code>printf</code>函数的字符串是最后一个被传入的，所以这个<code>printf</code>函数也是从右到左</p>
 <h3 id="python" class="headerLink">
     <a href="#python" class="header-mark" aria-label="Header mark for 'Python'"></a>Python</h3><p>新建一个<code>test.py</code>，内容如下</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -942,7 +942,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">main</span><span class="p">)</span></span></span></code></pre>
 </div>
 <p>在终端执行脚本</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1039,7 +1039,7 @@
       "><span class="line"><span class="cl">python ./test.py</span></span></code></pre>
 </div>
 <p>结果如下</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     

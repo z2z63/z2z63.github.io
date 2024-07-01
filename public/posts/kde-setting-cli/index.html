@@ -228,7 +228,7 @@
     <a href="#kscreen-doctor" class="header-mark" aria-label="Header mark for 'kscreen-doctor'"></a>kscreen-doctor</h2><p>又发现能够通过<code>kscreen-doctor output.eDP.scale.1,5</code>修改指定屏幕的缩放比例，然而并没有效果，查阅文档后发现这个命令只能对wayland起作用</p>
 <h2 id="qt_screen_scale_factors" class="headerLink">
     <a href="#qt_screen_scale_factors" class="header-mark" aria-label="Header mark for 'QT_SCREEN_SCALE_FACTORS'"></a>QT_SCREEN_SCALE_FACTORS</h2><p>仔细想了一下，可能缩放比例这个概念就不太正确，分辨率并没有问题，KDE只是一个桌面环境，在KDE修改了缩放比例后，它会以某种方式通知GUI程序，告诉他们应该采用什么样的缩放比例，然后GUI程序就能根据缩放比例调整按钮，文字，图标的大小，达到一个与屏幕大小观感协调的效果。查阅了<a href="https://wiki.archlinux.org/title/HiDPI#Qt_5" target="_blank" rel="noopener noreferrer">archlinux wiki</a>后，我发现了这个环境变量<code>QT_SCREEN_SCALE_FACTORS</code></p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -571,7 +571,7 @@
 </div>
 <p>启动这个脚本，然后打开KDE systemsetting，修改缩放比例，找到一些文件被修改了，其中有<code>~/.config/kcmfonts</code>
 它的内容如下</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -672,7 +672,7 @@
 <p>根据文件的修改时间，文件名的提示，还有文件内容的提示，只需要修改这个配置文件，就能达到修改字体DPI的目的</p>
 <h3 id="更简单的做法" class="headerLink">
     <a href="#%e6%9b%b4%e7%ae%80%e5%8d%95%e7%9a%84%e5%81%9a%e6%b3%95" class="header-mark" aria-label="Header mark for '更简单的做法'"></a>更简单的做法</h3><p>在reddit上看到了另一个做法，修改设置后按照修改时间对文件进行排序，找到最新修改的文件。这个方法确实很简单，我找到了<code>~/.config/kdeglobals</code>这个文件，而且非常巧妙的是，它有一段内容为</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -789,7 +789,7 @@
     <a href="#%e6%a3%80%e6%b5%8b%e5%a4%96%e7%bd%ae%e5%b1%8f%e5%b9%95%e8%bf%9e%e6%8e%a5%e7%8a%b6%e6%80%81" class="header-mark" aria-label="Header mark for '检测外置屏幕连接状态'"></a>检测外置屏幕连接状态</h2><p>脚本需要检测现在使用的是什么屏幕，然后作出不同的设置<br>
 为了简单，我就只检测屏幕连接的数量，如果连接的屏幕数量为2，就认为外置屏幕已经连接，为1就认为外置屏幕已经断开
 脚本如下</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1005,7 +1005,7 @@
 <hr>
 <p>KDE窗口超大外边距
 参考<a href="https://www.reddit.com/r/kde/comments/p5nji9/custom_window_decoration_causes_extremely_large/" target="_blank" rel="noopener noreferrer">reddit</a>和<a href="https://github.com/andreyorst/Breezemite/issues/8" target="_blank" rel="noopener noreferrer">github issue</a>,这其实是主题在字体高DPI时的一个bug，解决办法就是修改主题的配置文件，我使用的win11 dark主题，配置文件在<code>~/.local/share/aurorae/themes/Win11OS-dark/Win11OS-darkrc</code>，修改</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     

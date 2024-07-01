@@ -226,7 +226,7 @@
     <a href="#%e5%a6%82%e4%bd%95%e7%bc%96%e8%af%91" class="header-mark" aria-label="Header mark for '如何编译'"></a>如何编译</h1><p>首先声明一点，网上大部分的教程都不太合理，因为对环境的影响太大，权限约束不够严格
 作为开源自由软件，pg使用GNU工具链编译，包括<code>autoconf</code>,<code>makefile</code>，<code>gcc</code>等
 进入pg项目，在<code>build</code>目录下编译</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -328,7 +328,7 @@
 </div>
 <p>安装到<code>build</code>目录是比较合理的！因为默认的安装位置<code>/usr/local</code>需要root权限才能写入，没必要给root权限，也完全没必要安装到这个地方
 执行完之后，可能需要设置<code>LD_LIBRARY_PATH</code>环境变量</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -430,7 +430,7 @@
     <a href="#%e8%b0%83%e8%af%95%e7%9a%84%e6%96%b9%e6%b3%95" class="header-mark" aria-label="Header mark for '调试的方法'"></a>调试的方法</h1><p>首先，在使用<code>configure</code>时，指定参数<code>--enable-debug</code>，以<code>-g</code>选项编译pg
 <code>make</code>命令生成的可执行有多个，需要确定调试的可执行，以及它的入口函数<code>main</code>所在的位置
 启动pg后，通过<code>ps aux | grep postgres</code>可以看到，pg有多个进程协作</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -539,7 +539,7 @@ gdb默认跟踪父进程，导致无法进入子进程调试，可以通过<code
 然而，这种方式我在使用时发现会导致gdb立刻退出，而pg进程还在后台运行
 于是，我尝试使用gdb的attach功能调试<code> arch test [local] idle</code>进程
 首先，要让gdb能够attach上pg的进程，需要修改<code>ptrace</code>的安全策略</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -639,7 +639,7 @@ gdb默认跟踪父进程，导致无法进入子进程调试，可以通过<code
 <h1 id="pg的其他特性" class="headerLink">
     <a href="#pg%e7%9a%84%e5%85%b6%e4%bb%96%e7%89%b9%e6%80%a7" class="header-mark" aria-label="Header mark for 'pg的其他特性'"></a>pg的其他特性</h1><h2 id="内存管理" class="headerLink">
     <a href="#%e5%86%85%e5%ad%98%e7%ae%a1%e7%90%86" class="header-mark" aria-label="Header mark for '内存管理'"></a>内存管理</h2><p>常规的程序使用C标准库提供的<code>malloc</code>和<code>free</code>函数管理内存，如下</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -827,7 +827,7 @@ linux的IO机制主要的进化过程如下</p>
     C --> D[epoll]
 </pre><p><code>epoll</code>是一个现代的异步IO机制，它是高性能服务器必不可少的一部分<br>
 简单来说，<code>epoll</code>机制有三个主要的函数</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -943,7 +943,7 @@ linux的IO机制主要的进化过程如下</p>
 <li>语言没有常见数据结构的标准库，导致开发一个大型项目的一个必不可少的工作就是重新造轮子</li>
 </ol>
 <h2 id="读后感" class="headerLink">
-    <a href="#%e8%af%bb%e5%90%8e%e6%84%9f" class="header-mark" aria-label="Header mark for '读后感'"></a>读后感</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+    <a href="#%e8%af%bb%e5%90%8e%e6%84%9f" class="header-mark" aria-label="Header mark for '读后感'"></a>读后感</h2><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
