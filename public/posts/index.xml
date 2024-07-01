@@ -3,7 +3,8 @@
         <title>All Posts - z2z63/Virtualfuture&#39;s Blog</title>
         <link>http://example.org/posts/</link>
         <description>All Posts | z2z63/Virtualfuture&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 25 Jun 2024 23:35:03 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Tue, 25 Jun 2024 23:35:03 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
     <title>第二周：败者树、范式与反范式</title>
     <link>http://example.org/posts/week2/</link>
     <pubDate>Tue, 25 Jun 2024 23:35:03 &#43;0800</pubDate><author>

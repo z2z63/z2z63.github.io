@@ -12,6 +12,15 @@ hasCJKLanguage = true
   version = "0.2.X"
 [params.math]
   enable = true
+[param.page]
+  # 是否在文章页面显示原始 Markdown 文档链接
+  linkToMarkdown = true
+  # 配置编辑文章的链接
+  linkToEdit = true
+[params.page.share]
+  enable = true
+
+
 [params.page.code]
   # 默认展开显示的代码行数
   maxShownLines = 10
@@ -107,3 +116,9 @@ hasCJKLanguage = true
     noClasses = false
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+# 作者配置
+[author]
+  name = "z2z63"
+  email = "virtualfuture@gmail.com"
+  link = "https://github.com/z2z63"
+  avatar = "https://avatars.githubusercontent.com/z2z63"
