@@ -95,7 +95,7 @@ enableGitInfo = true
     pre = ""
     post = ""
     name = "Tags"
-    url = "/tags/"
+    url = "/tags"
     title = ""
     weight = 2
   [[menu.main]]
@@ -103,9 +103,17 @@ enableGitInfo = true
     pre = ""
     post = ""
     name = "Categories"
-    url = "/categories/"
+    url = "/categories"
     title = ""
     weight = 3
+  [[menu.main]]
+    identifier = "friends"
+    pre = ""
+    post = ""
+    name = "Friends"
+    url = "/friends"
+    title = ""
+    weight = 4
 
 # Markup related configuration in Hugo
 [markup]
