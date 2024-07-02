@@ -12,7 +12,7 @@
     <pubDate>Mon, 01 Jul 2024 20:54:15 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/week3/</guid>
-    <description><![CDATA[写在前面博客新增了许多功能，包括作者资料，友联，样式优化，社交链接等等，其中Steam社交链接格式不正确，我给博客主题的作者提了一个 pull req]]></description>
+    <description><![CDATA[写在前面博客新增了许多功能，包括作者资料，友链，样式优化，社交链接等等，其中Steam社交链接格式不正确，我给博客主题的作者提了一个 pull req]]></description>
 </item><item>
     <title>第二周：败者树、范式与反范式</title>
     <link>http://example.org/posts/week2/</link>

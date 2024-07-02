@@ -4,7 +4,7 @@ author: z2z63
 date: 2024-07-01T20:54:15+08:00
 ---
 ## 写在前面
-博客新增了许多功能，包括作者资料，友联，样式优化，社交链接等等，其中Steam社交链接格式不正确，我给博客主题的作者提了一个
+博客新增了许多功能，包括作者资料，友链，样式优化，社交链接等等，其中Steam社交链接格式不正确，我给博客主题的作者提了一个
 [pull request](https://github.com/HEIGE-PCloud/DoIt/pull/1311)，这是我的第一个pr，只修改了一个单词，很幸运地被merge了，
 如果你也在使用[DoIt主题](https://github.com/HEIGE-PCloud/DoIt)，那么说不定其中某行代码就是我写的😋
 
