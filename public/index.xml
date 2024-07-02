@@ -4,9 +4,16 @@
         <link>http://example.org/</link>
         <description>z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Mon, 01 Jul 2024 18:37:09 &#43;0800</lastBuildDate>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Tue, 02 Jul 2024 17:25:46 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>第三周：来拷打一下小程序</title>
+    <link>http://example.org/posts/week3/</link>
+    <pubDate>Mon, 01 Jul 2024 20:54:15 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/week3/</guid>
+    <description><![CDATA[写在前面， 博客新增了许多功能，包括作者资料，友联，样式优化，社交链接等等，其中Steam社交链接格式不正确，我给博客主题的作者提了一个 pull re]]></description>
+</item><item>
     <title>第二周：败者树、范式与反范式</title>
     <link>http://example.org/posts/week2/</link>
     <pubDate>Tue, 25 Jun 2024 23:35:03 &#43;0800</pubDate><author>
@@ -69,12 +76,5 @@
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-desktop-widget-pano/</guid>
     <description><![CDATA[<p>这篇文章描述了如何在KDE桌面环境使用一个名为pano的音频可视化widget</p>]]></description>
-</item><item>
-    <title>PostgreSQL源码阅读报告</title>
-    <link>http://example.org/posts/postgresql_source/</link>
-    <pubDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/postgresql_source/</guid>
-    <description><![CDATA[<p>这篇文章是数据库系统原理课程的任务“阅读postgresql源码“的报告</p>]]></description>
 </item></channel>
 </rss>
