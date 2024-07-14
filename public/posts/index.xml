@@ -4,7 +4,14 @@
         <link>http://example.org/posts/</link>
         <description>All Posts | z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Tue, 02 Jul 2024 17:25:46 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sun, 14 Jul 2024 14:46:02 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>第五周：git workflow与软件发行</title>
+    <link>http://example.org/posts/week5/</link>
+    <pubDate>Sun, 14 Jul 2024 14:46:02 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/week5/</guid>
+    <description><![CDATA[git相关文章在各种技术论坛、博客都能找到不少，可以说讲git已经是烂大街的文章了，这篇文章虽然跟git有关，但我希望避开各种无聊而且每篇文]]></description>
+</item><item>
     <title>第三周：来拷打一下小程序</title>
     <link>http://example.org/posts/week3/</link>
     <pubDate>Mon, 01 Jul 2024 20:54:15 &#43;0800</pubDate><author>
@@ -67,12 +74,5 @@
         <name>z2z63</name>
     </author><guid>http://example.org/posts/null-safety/</guid>
     <description><![CDATA[<p>所谓空安全，也就是null safety，它是部分现代语言具有的新特性，如dart和kotlin，既然它是现代语言才具备的特性，说明之前的语言往往没有，例如java</p>]]></description>
-</item><item>
-    <title>KDE桌面部件pano</title>
-    <link>http://example.org/posts/linux-desktop-widget-pano/</link>
-    <pubDate>Sat, 23 Dec 2023 15:45:44 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/linux-desktop-widget-pano/</guid>
-    <description><![CDATA[<p>这篇文章描述了如何在KDE桌面环境使用一个名为pano的音频可视化widget</p>]]></description>
 </item></channel>
 </rss>
