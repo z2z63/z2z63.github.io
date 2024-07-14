@@ -1,5 +1,5 @@
 ---
-title: "第五周：git workflow与软件发行"
+title: "第五周：CI/CD、git workflow与软件发行"
 author: z2z63
 date: 2024-07-14T14:46:02+08:00
 ---
