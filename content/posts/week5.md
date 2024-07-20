@@ -2,7 +2,7 @@
 title: "第五周：CI/CD、git workflow与软件发行"
 author: z2z63
 date: 2024-07-14T14:46:02+08:00
-mermiad: true
+mermaid: true
 ---
 git相关文章在各种技术论坛、博客都能找到不少，可以说讲git已经是烂大街的文章了，这篇文章虽然跟git有关，但我希望避开各种无聊而且每篇文章都在谈论的话题，输出一些我从各种角落中积累的知识
 > **Note:** 如果想学习git，可以看[《pro git》](https://git-scm.com/book/en/v2)
