@@ -7,6 +7,13 @@
             <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 20 Jul 2024 20:59:10 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>第六周：关于C/C&#43;&#43;开发，我了解的一切 —— 编译器、构建工具</title>
+    <link>http://example.org/posts/week6/</link>
+    <pubDate>Sat, 20 Jul 2024 20:59:10 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/week6/</guid>
+    <description><![CDATA[最近两个月也是基本一直在写C++了，尤其是实习以来，从一个linux的C++开发者切换到windows + visual c++，这其中遇到的问题非常多，也]]></description>
+</item><item>
     <title>第五周：CI/CD、git workflow与软件发行</title>
     <link>http://example.org/posts/week5/</link>
     <pubDate>Sun, 14 Jul 2024 14:46:02 &#43;0800</pubDate><author>
@@ -69,12 +76,5 @@
         <name>z2z63</name>
     </author><guid>http://example.org/posts/type-move-to-right/</guid>
     <description><![CDATA[<p>许多新语言(2000之后发明的语言)大多有一个偏好：类型后置</p>]]></description>
-</item><item>
-    <title>现代语言的空安全</title>
-    <link>http://example.org/posts/null-safety/</link>
-    <pubDate>Thu, 25 Jan 2024 18:04:12 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/null-safety/</guid>
-    <description><![CDATA[<p>所谓空安全，也就是null safety，它是部分现代语言具有的新特性，如dart和kotlin，既然它是现代语言才具备的特性，说明之前的语言往往没有，例如java</p>]]></description>
 </item></channel>
 </rss>
