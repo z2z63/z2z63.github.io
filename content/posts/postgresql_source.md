@@ -3,6 +3,7 @@ title: "PostgreSQL源码阅读报告"
 author: z2z63
 date: 2023-12-21T18:27:09+08:00
 tags: [C/C++]
+mermaid: true
 ---
 这篇文章是数据库系统原理课程的任务“阅读postgresql源码“的报告
 <!--more-->

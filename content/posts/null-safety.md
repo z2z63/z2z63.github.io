@@ -4,6 +4,7 @@ author: z2z63
 date: 2024-01-25T18:04:12+08:00
 math: 
   enable: true
+mermaid: true
 ---
 所谓空安全，也就是null safety，它是部分现代语言具有的新特性，如dart和kotlin，既然它是现代语言才具备的特性，说明之前的语言往往没有，例如java
 <!--more-->

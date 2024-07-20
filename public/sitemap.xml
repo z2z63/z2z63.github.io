@@ -2,14 +2,14 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://example.org/posts/</loc><lastmod>2024-07-14T17:47:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://example.org/</loc><lastmod>2024-07-14T17:47:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://example.org/posts/week5/</loc><lastmod>2024-07-14T17:47:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://example.org/about/</loc><lastmod>2024-07-12T21:06:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://example.org/posts/week3/</loc><lastmod>2024-07-02T18:13:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://example.org/friends/</loc><lastmod>2024-07-01T18:59:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://example.org/posts/week2/</loc><lastmod>2024-07-01T18:05:06&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>http://example.org/posts/week1/</loc><lastmod>2024-07-01T18:05:06&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>http://example.org/posts/</loc><lastmod>2024-07-14T18:01:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/</loc><lastmod>2024-07-14T18:01:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/posts/week5/</loc><lastmod>2024-07-14T18:01:59&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://example.org/about/</loc><lastmod>2024-07-12T21:06:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>http://example.org/posts/week3/</loc><lastmod>2024-07-02T18:13:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>http://example.org/friends/</loc><lastmod>2024-07-01T18:59:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>http://example.org/posts/week2/</loc><lastmod>2024-07-01T18:05:06&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>http://example.org/posts/week1/</loc><lastmod>2024-07-01T18:05:06&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
             <loc>http://example.org/posts/browser_tricks/</loc><lastmod>2024-06-07T23:07:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://example.org/posts/hash_dos_and_python_hash/</loc><lastmod>2024-06-07T23:07:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://example.org/posts/fcitx5_rime_color_style/</loc><lastmod>2024-04-10T17:18:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
