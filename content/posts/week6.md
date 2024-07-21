@@ -170,5 +170,175 @@ autotools + Makefile的树外构建流程如下
    ```shell
    make
    ```
----
-未完待续
+## CMake
+前文提及的autotools + Makefile在许多老牌开源项目中被使用，但它也有很多问题
+1. 只能在linux平台使用
+2. 命令式语法，经常需要重复处理一些琐碎细节
+3. 支持多种工具链的心智负担大
+
+CMake是相比Makefile更优的做法，它使用`CMakeLists.txt`文件管理工程，CMake完成的是configure的过程，它本身并不负责构建，而只负责生成构建配置。 
+
+CMake核心概念是target，target可以通过`add_executable`，`add_library`，`add_custom_target`产生
+- `add_executable`会使输出的二进制中增加对应的可执行
+- `add_library`可以输出动态库，静态库，也可以是接口库，接口库是CMake的概念，相比其他库，接口库没有构建的过程
+- `add_custom_target`用于执行任意命令
+
+target可以携带属性，可以通过`set_target_properties`设置属性，通过`get_target_property`访问属性，例子：  
+- 可执行可以携带`WIN32_EXECUTABLE `属性，这样的可执行在windows平台运行时，是窗口程序，不需要控制台主机或windows terminal作为宿主，可以显示Win32的窗口，其入口函数为`WinMain`
+- 库可以携带属性，控制其输出产物，例如`SHARED`输出共享库，`STATIC`输出静态库，`MODULE`输出不参与链接其他target，可供`dlopen`在运行时动态链接的库
+
+### CMake的跨平台特性
+CMake在不同的平台有不同的行为
+- CMake会自动调整输出产物的格式，在windows平台输出exe、dll、lib，在linux平台输出可执行（无扩展名）、so（共享库）、a（静态库）  
+- CMake在不同平台生成对应的工程，例如在linux平台默认生成Makefile工程，在windows平台默认生成Visual Studio工程，在MacOS平台默认生成XCode工程
+- `find_pacakge`时，在不同平台采用不同的搜索策略，符合这些平台组织软件包的方式
+
+### 第三方库
+CMake大大简化了C++项目使用第三方库的过程，经过实践，我认为`find_package`和`ExternalProject_Add`是非常方便的功能
+
+#### `find_package`
+在linux平台，许多C++第三方库可以通过包管理器安装，只要第三方库支持CMake，就会将`Find<PackageName>.cmake`或`<PackageName>Config.cmake`或相似名称的CMake文件安装到`/usr/lib/cmake/<package-name>/`下
+> **Note:** 在Linux平台，安装指的是带权限的复制。man描述`install`命令为“install - copy files and set attributes”
+
+`find_package`在linux平台会搜索此目录，并执行其中的CMake文件，执行的结果通常包括设置了头文件搜索路径变量，添加了若干库；随后只需使用`target_include_directories`添加头文件搜索路径，使用`target_link_libraries`链接到此库即可
+
+### `ExternalProject`
+`ExternalProject`是一个非常强大的功能，可以说是C++第三方库的最终银弹。  
+`find_package`在Linux平台的一个缺点是，它默认使用系统的软件包，而linux系统的软件包版本一般无法选择，由发行版软件源控制。许多项目使用的第三方库的版本比系统软件包的版本旧。linux软件包大部分也使用语义化版本（参考[《第五周：CI/CD、git workflow与软件发行》](../week5/)）。如果主版本号不一致，一般是无法使用的。
+
+此外，使用`find_package`的前提是第三方库提供了诸如`Find<PackageName>.cmake`这样的文件，然而还有些时候第三方库没有提供
+
+以上问题都能通过`ExternalProject`解决，它提供了丰富的选项，支持使用HTTP下载，使用git拉取源码包，支持自定义configure、build、install  
+
+无论第三方库是如何组织软件包的，想要能够被别人调用，最终都需要提供两个信息：头文件搜索路径、库搜索路径。软件包在安装时，也通常是安装头文件和库，以及一些文档。通常使用`ExternalProject`拉取指定版本的第三方库源码，完成configure、构建、安装，然后手动配置其头文件搜索路径和库搜索路径
+
+以[AnyQ](https://github.com/baidu/AnyQ)为例，以下是AnyQ引入指定版本的libcurl的配置
+```cmake
+include(ExternalProject)
+
+SET(CURL_PROJECT  "extern_curl")
+SET(CURL_URL      "https://curl.haxx.se/download/curl-7.60.0.tar.gz")
+SET(CURL_SOURCES_DIR ${THIRD_PARTY_PATH}/curl)
+SET(CURL_DOWNLOAD_DIR  "${CURL_SOURCES_DIR}/src/")
+
+ExternalProject_Add(
+    ${CURL_PROJECT}
+    ${EXTERNAL_PROJECT_LOG_ARGS}
+    DOWNLOAD_DIR          ${CURL_DOWNLOAD_DIR}
+    DOWNLOAD_COMMAND      wget --no-check-certificate ${CURL_URL} -c && tar -zxvf curl-7.60.0.tar.gz
+    DOWNLOAD_NO_PROGRESS  1
+    PREFIX                ${CURL_SOURCES_DIR}
+    CONFIGURE_COMMAND     cd ${CURL_DOWNLOAD_DIR}/curl-7.60.0 && ./configure --prefix=${THIRD_PARTY_PATH} --without-ssl 
+    BUILD_COMMAND         cd ${CURL_DOWNLOAD_DIR}/curl-7.60.0 && make
+    INSTALL_COMMAND       cd ${CURL_DOWNLOAD_DIR}/curl-7.60.0 && make install
+    UPDATE_COMMAND        ""
+)
+```
+
+由于`ExternalProject`可以完全控制configure，可以在configure时，传入编译参数、功能开关等，实现第三方库携带调试符号，根据项目需求裁剪第三方库功能等需求。例如AnyQ就去掉了libcurl自带的ssl功能，在不需要HTTPS的场合下可以大大减小二进制大小
+
+### `FetchContent`
+`FetchContent`也能用来将其他C++项目集成进来，但这个项目必须也使用CMake  
+
+以上我并没有使用“第三方库”这样的字眼，因为`FetchContent`会将其他CMake工程的所有target全部添加到本CMake工程内，容易会造成名称冲突  
+
+相反，`ExternalProject`将第三方库转变成了一个target，并且能够指定target的名称，就不会出现名称冲突的情况
+> The ExternalProject_Add() function creates a custom target to drive download, update/patch, configure, build, install and test steps of an external project:
+
+### CMake缺点
+写了这么多CMake的优点，终于轮到吐槽CMake了。没错，CMake本身的问题实在是太多了，但苦于CMake已经成了C++项目的事实标准，很多时候并没有更好的选择
+
+
+所有函数都是无返回值的，任何输出都是输出到一个变量上，非常不符合大部分编程语言的习惯  
+
+甚至if else还有这种逆天语法
+```cmake
+if(<condition>)
+  <commands>
+elseif(<condition>) # optional block, can be repeated
+  <commands>
+else()              # optional block
+  <commands>
+endif()
+```
+
+字符串操作可读性也非常不好
+```cmake
+string(REPLACE <match-string> <replace-string> <out-var> <input>...)
+string(REGEX MATCH <match-regex> <out-var> <input>...)
+```
+配合无返回值的设计，非常考验眼力
+
+
+CMakeLists.txt一旦写长了，非常难以阅读。而了解一个项目最快的方式就是去阅读CMake配置，了解其构建流程
+
+还有generator expression这种逆天设计
+```cmake
+# WRONG: New lines and spaces all treated as argument separators, so the
+# generator expression is split and not recognized correctly.
+target_compile_definitions(tgt PRIVATE
+  $<$<AND:
+      $<CXX_COMPILER_ID:GNU>,
+      $<VERSION_GREATER_EQUAL:$<CXX_COMPILER_VERSION>,5>
+    >:HAVE_5_OR_LATER>
+)
+```
+
+此外，许多第三方库提供的`Find<PackageName>.cmake`等文件，并没有文档说明它添加了哪些库，设置了哪些变量。官网文档大部分不会提及如何使用`find_package`引入他们的库，在`Find<PackageName>.cmake`文件开头写段注释已经算是"well documentated"的做法（相信大部分人都不会去看这个文件里面的注释吧）
+
+## 分层配置
+如果在源码树中非常深的位置想要git不追踪某个文件，可以在项目的根目录写下这个文件相对根目录的路径
+```.gitignore
+aaa/bbb/ccc/ddd/eee/fff/ggg/a.out
+```
+然而这种做法并不优雅，git提供了更优的方法  
+在`aaa/bbb/ccc/ddd/eee/fff/ggg/`目录下创建一个`.gitignore`文件，其中写下
+```.gitignore
+a.out
+```
+优点是忽略这个文件的配置和这个文件距离很近，上下文关联强
+
+同理，Makefile和CMake也支持这样的分层配置
+Makefile可以通过`Include`指令添加子目录的Makefile，CMake可以通过`include_subdirectory`引入CMake子工程
+
+以[Paddle](https://github.com/PaddlePaddle/Paddle)为例，源码树的每一层都有`CMakeLists.txt`
+```
+➜  paddle git:(develop) fd CMakeLists.txt  | tree --fromfile 
+.
+├── cinn
+│   ├── adt
+│   │   ├── CMakeLists.txt
+│   │   └── print_utils
+│   │       └── CMakeLists.txt
+│   ├── ast_gen_ius
+│   │   └── CMakeLists.txt
+│   ├── auto_schedule
+│   │   ├── analysis
+│   │   │   └── CMakeLists.txt
+│   │   ├── CMakeLists.txt
+│   │   └── search_space
+│   │       ├── auto_gen_rule
+│   │       │   └── CMakeLists.txt
+│   │       └── CMakeLists.txt
+│   ├── backends
+│   │   ├── CMakeLists.txt
+│   │   ├── llvm
+│   │   │   └── CMakeLists.txt
+│   │   └── nvrtc
+│   │       └── CMakeLists.txt
+│   ├── CMakeLists.txt
+│   ├── common
+│   │   └── CMakeLists.txt
+│   ├── hlir
+│   │   ├── CMakeLists.txt
+│   │   ├── dialect
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── operator
+│   │   │   │   ├── CMakeLists.txt
+│   │   │   │   ├── ir
+│   │   │   │   │   └── CMakeLists.txt
+│   │   │   │   └── transforms
+│   │   │   │       └── CMakeLists.txt
+...
+```
+这样的配置可以将编译逻辑下放到源码树的末梢，并减少上层CMake工程变更，上层CMake工程关注整体架构，下层CMake工程关注编译细节，还能减少git协作时上层CMake配置变更冲突的情况

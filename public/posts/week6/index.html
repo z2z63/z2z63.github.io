@@ -14,7 +14,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-07-20T20:59:10+08:00">
-    <meta property="article:modified_time" content="2024-07-20T21:12:24+08:00">
+    <meta property="article:modified_time" content="2024-07-21T01:29:02+08:00">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="第六周：关于C/C&#43;&#43;开发，我了解的一切 —— 编译器、构建工具">
@@ -33,8 +33,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http://example.org/posts/week6/"
-        },"genre": "posts","wordcount":  4040 ,
-        "url": "http://example.org/posts/week6/","datePublished": "2024-07-20T20:59:10+08:00","dateModified": "2024-07-20T21:12:24+08:00","publisher": {
+        },"genre": "posts","wordcount":  7471 ,
+        "url": "http://example.org/posts/week6/","datePublished": "2024-07-20T20:59:10+08:00","dateModified": "2024-07-21T01:29:02+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
                 "@type": "Person",
@@ -165,6 +165,16 @@
     <li><a href="#makefile">Makefile</a></li>
     <li><a href="#autotools">autotools</a></li>
     <li><a href="#树外构建">树外构建</a></li>
+    <li><a href="#cmake">CMake</a>
+      <ul>
+        <li><a href="#cmake的跨平台特性">CMake的跨平台特性</a></li>
+        <li><a href="#第三方库">第三方库</a></li>
+        <li><a href="#externalproject"><code>ExternalProject</code></a></li>
+        <li><a href="#fetchcontent"><code>FetchContent</code></a></li>
+        <li><a href="#cmake缺点">CMake缺点</a></li>
+      </ul>
+    </li>
+    <li><a href="#分层配置">分层配置</a></li>
   </ul>
 </nav></div>
     </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title">第六周：关于C/C&#43;&#43;开发，我了解的一切 —— 编译器、构建工具</h1><div class="post-meta">
@@ -173,9 +183,9 @@
                 </span></div>
             <div class="post-meta-line"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2024-07-20">2024-07-20</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-07-20">2024-07-20</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;4040 words&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;9 minutes&nbsp;</div>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-07-21">2024-07-21</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;7471 words&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;15 minutes&nbsp;</div>
         </div><div class="details toc print:!tw-block" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -191,6 +201,16 @@
     <li><a href="#makefile">Makefile</a></li>
     <li><a href="#autotools">autotools</a></li>
     <li><a href="#树外构建">树外构建</a></li>
+    <li><a href="#cmake">CMake</a>
+      <ul>
+        <li><a href="#cmake的跨平台特性">CMake的跨平台特性</a></li>
+        <li><a href="#第三方库">第三方库</a></li>
+        <li><a href="#externalproject"><code>ExternalProject</code></a></li>
+        <li><a href="#fetchcontent"><code>FetchContent</code></a></li>
+        <li><a href="#cmake缺点">CMake缺点</a></li>
+      </ul>
+    </li>
+    <li><a href="#分层配置">分层配置</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>最近两个月也是基本一直在写C++了，尤其是实习以来，从一个linux的C++开发者切换到windows + visual c++，这其中遇到的问题非常多，也让我不断的思考究竟怎样才是最佳实践。</p>
@@ -1019,17 +1039,822 @@ Makefile有以下内容：</p>
 </div>
 </li>
 </ol>
-<hr>
-<p>未完待续</p>
+<h2 id="cmake" class="headerLink">
+    <a href="#cmake" class="header-mark" aria-label="Header mark for 'CMake'"></a>CMake</h2><p>前文提及的autotools + Makefile在许多老牌开源项目中被使用，但它也有很多问题</p>
+<ol>
+<li>只能在linux平台使用</li>
+<li>命令式语法，经常需要重复处理一些琐碎细节</li>
+<li>支持多种工具链的心智负担大</li>
+</ol>
+<p>CMake是相比Makefile更优的做法，它使用<code>CMakeLists.txt</code>文件管理工程，CMake完成的是configure的过程，它本身并不负责构建，而只负责生成构建配置。</p>
+<p>CMake核心概念是target，target可以通过<code>add_executable</code>，<code>add_library</code>，<code>add_custom_target</code>产生</p>
+<ul>
+<li><code>add_executable</code>会使输出的二进制中增加对应的可执行</li>
+<li><code>add_library</code>可以输出动态库，静态库，也可以是接口库，接口库是CMake的概念，相比其他库，接口库没有构建的过程</li>
+<li><code>add_custom_target</code>用于执行任意命令</li>
+</ul>
+<p>target可以携带属性，可以通过<code>set_target_properties</code>设置属性，通过<code>get_target_property</code>访问属性，例子：</p>
+<ul>
+<li>可执行可以携带<code>WIN32_EXECUTABLE </code>属性，这样的可执行在windows平台运行时，是窗口程序，不需要控制台主机或windows terminal作为宿主，可以显示Win32的窗口，其入口函数为<code>WinMain</code></li>
+<li>库可以携带属性，控制其输出产物，例如<code>SHARED</code>输出共享库，<code>STATIC</code>输出静态库，<code>MODULE</code>输出不参与链接其他target，可供<code>dlopen</code>在运行时动态链接的库</li>
+</ul>
+<h3 id="cmake的跨平台特性" class="headerLink">
+    <a href="#cmake%e7%9a%84%e8%b7%a8%e5%b9%b3%e5%8f%b0%e7%89%b9%e6%80%a7" class="header-mark" aria-label="Header mark for 'CMake的跨平台特性'"></a>CMake的跨平台特性</h3><p>CMake在不同的平台有不同的行为</p>
+<ul>
+<li>CMake会自动调整输出产物的格式，在windows平台输出exe、dll、lib，在linux平台输出可执行（无扩展名）、so（共享库）、a（静态库）</li>
+<li>CMake在不同平台生成对应的工程，例如在linux平台默认生成Makefile工程，在windows平台默认生成Visual Studio工程，在MacOS平台默认生成XCode工程</li>
+<li><code>find_pacakge</code>时，在不同平台采用不同的搜索策略，符合这些平台组织软件包的方式</li>
+</ul>
+<h3 id="第三方库" class="headerLink">
+    <a href="#%e7%ac%ac%e4%b8%89%e6%96%b9%e5%ba%93" class="header-mark" aria-label="Header mark for '第三方库'"></a>第三方库</h3><p>CMake大大简化了C++项目使用第三方库的过程，经过实践，我认为<code>find_package</code>和<code>ExternalProject_Add</code>是非常方便的功能</p>
+<h4 id="find_package" class="headerLink">
+    <a href="#find_package" class="header-mark" aria-label="Header mark for '&lt;code&gt;find_package&lt;/code&gt;'"></a><code>find_package</code></h4><p>在linux平台，许多C++第三方库可以通过包管理器安装，只要第三方库支持CMake，就会将<code>Find&lt;PackageName&gt;.cmake</code>或<code>&lt;PackageName&gt;Config.cmake</code>或相似名称的CMake文件安装到<code>/usr/lib/cmake/&lt;package-name&gt;/</code>下</p>
+<blockquote>
+<p><strong>Note:</strong> 在Linux平台，安装指的是带权限的复制。man描述<code>install</code>命令为“install - copy files and set attributes”</p>
+</blockquote>
+<p><code>find_package</code>在linux平台会搜索此目录，并执行其中的CMake文件，执行的结果通常包括设置了头文件搜索路径变量，添加了若干库；随后只需使用<code>target_include_directories</code>添加头文件搜索路径，使用<code>target_link_libraries</code>链接到此库即可</p>
+<h3 id="externalproject" class="headerLink">
+    <a href="#externalproject" class="header-mark" aria-label="Header mark for '&lt;code&gt;ExternalProject&lt;/code&gt;'"></a><code>ExternalProject</code></h3><p><code>ExternalProject</code>是一个非常强大的功能，可以说是C++第三方库的最终银弹。<br>
+<code>find_package</code>在Linux平台的一个缺点是，它默认使用系统的软件包，而linux系统的软件包版本一般无法选择，由发行版软件源控制。许多项目使用的第三方库的版本比系统软件包的版本旧。linux软件包大部分也使用语义化版本（参考<a href="../week5/" rel="">《第五周：CI/CD、git workflow与软件发行》</a>）。如果主版本号不一致，一般是无法使用的。</p>
+<p>此外，使用<code>find_package</code>的前提是第三方库提供了诸如<code>Find&lt;PackageName&gt;.cmake</code>这样的文件，然而还有些时候第三方库没有提供</p>
+<p>以上问题都能通过<code>ExternalProject</code>解决，它提供了丰富的选项，支持使用HTTP下载，使用git拉取源码包，支持自定义configure、build、install</p>
+<p>无论第三方库是如何组织软件包的，想要能够被别人调用，最终都需要提供两个信息：头文件搜索路径、库搜索路径。软件包在安装时，也通常是安装头文件和库，以及一些文档。通常使用<code>ExternalProject</code>拉取指定版本的第三方库源码，完成configure、构建、安装，然后手动配置其头文件搜索路径和库搜索路径</p>
+<p>以<a href="https://github.com/baidu/AnyQ" target="_blank" rel="noopener noreferrer">AnyQ</a>为例，以下是AnyQ引入指定版本的libcurl的配置</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    code-block-title 
+    
+    tw-flex 
+    tw-flex-row 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        tw-select-none 
+        tw-mx-2 
+        tw-block
+        group-[.is-open]:tw-rotate-90
+        tw-transition-[transform] 
+        tw-duration-500 
+        tw-ease-in-out
+        print:!tw-hidden"
+      disabled
+      aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+
+    <div class="code-block-title-bar tw-w-full">
+      <p class="tw-select-none !tw-my-1">cmake</p>
+    </div>
+    <div class="tw-flex">
+      <button 
+        class="
+          line-number-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.show-line-numbers]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.is-wrap]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw-select-none
+          tw-mx-2 
+          tw-hidden
+          group-[.is-open]:tw-block
+          hover:tw-text-fgColor-link 
+          print:!tw-hidden"
+        title="Copy code">
+          <span class="copy-icon tw-block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw-hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw-select-none 
+          tw-mx-2 
+          tw-block 
+          group-[.is-open]:tw-hidden 
+          print:!tw-hidden" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
+    id="codeblock-id-8" 
+    class="
+      chroma 
+      !tw-block 
+      tw-p-0
+      tw-m-0
+      tw-transition-[max-height] 
+      tw-duration-500 
+      tw-ease-in-out 
+      group-[.is-closed]:!tw-max-h-0 
+      group-[.is-wrap]:tw-text-wrap
+      tw-overflow-y-hidden
+      tw-overflow-x-auto
+      tw-scrollbar-thin
+      "><span class="line"><span class="cl"><span class="nb">include</span><span class="p">(</span><span class="s">ExternalProject</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">SET</span><span class="p">(</span><span class="s">CURL_PROJECT</span>  <span class="s2">&#34;extern_curl&#34;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">SET</span><span class="p">(</span><span class="s">CURL_URL</span>      <span class="s2">&#34;https://curl.haxx.se/download/curl-7.60.0.tar.gz&#34;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">SET</span><span class="p">(</span><span class="s">CURL_SOURCES_DIR</span> <span class="o">${</span><span class="nv">THIRD_PARTY_PATH</span><span class="o">}</span><span class="s">/curl</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">SET</span><span class="p">(</span><span class="s">CURL_DOWNLOAD_DIR</span>  <span class="s2">&#34;${CURL_SOURCES_DIR}/src/&#34;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">ExternalProject_Add</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CURL_PROJECT</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">EXTERNAL_PROJECT_LOG_ARGS</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="s">DOWNLOAD_DIR</span>          <span class="o">${</span><span class="nv">CURL_DOWNLOAD_DIR</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="s">DOWNLOAD_COMMAND</span>      <span class="s">wget</span> <span class="s">--no-check-certificate</span> <span class="o">${</span><span class="nv">CURL_URL</span><span class="o">}</span> <span class="s">-c</span> <span class="s">&amp;&amp;</span> <span class="s">tar</span> <span class="s">-zxvf</span> <span class="s">curl-7.60.0.tar.gz</span>
+</span></span><span class="line"><span class="cl">    <span class="s">DOWNLOAD_NO_PROGRESS</span>  <span class="s">1</span>
+</span></span><span class="line"><span class="cl">    <span class="s">PREFIX</span>                <span class="o">${</span><span class="nv">CURL_SOURCES_DIR</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="s">CONFIGURE_COMMAND</span>     <span class="s">cd</span> <span class="o">${</span><span class="nv">CURL_DOWNLOAD_DIR</span><span class="o">}</span><span class="s">/curl-7.60.0</span> <span class="s">&amp;&amp;</span> <span class="s">./configure</span> <span class="s">--prefix=</span><span class="o">${</span><span class="nv">THIRD_PARTY_PATH</span><span class="o">}</span> <span class="s">--without-ssl</span> 
+</span></span><span class="line"><span class="cl">    <span class="s">BUILD_COMMAND</span>         <span class="s">cd</span> <span class="o">${</span><span class="nv">CURL_DOWNLOAD_DIR</span><span class="o">}</span><span class="s">/curl-7.60.0</span> <span class="s">&amp;&amp;</span> <span class="s">make</span>
+</span></span><span class="line"><span class="cl">    <span class="s">INSTALL_COMMAND</span>       <span class="s">cd</span> <span class="o">${</span><span class="nv">CURL_DOWNLOAD_DIR</span><span class="o">}</span><span class="s">/curl-7.60.0</span> <span class="s">&amp;&amp;</span> <span class="s">make</span> <span class="s">install</span>
+</span></span><span class="line"><span class="cl">    <span class="s">UPDATE_COMMAND</span>        <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span></span></span></code></pre>
+</div>
+<p>由于<code>ExternalProject</code>可以完全控制configure，可以在configure时，传入编译参数、功能开关等，实现第三方库携带调试符号，根据项目需求裁剪第三方库功能等需求。例如AnyQ就去掉了libcurl自带的ssl功能，在不需要HTTPS的场合下可以大大减小二进制大小</p>
+<h3 id="fetchcontent" class="headerLink">
+    <a href="#fetchcontent" class="header-mark" aria-label="Header mark for '&lt;code&gt;FetchContent&lt;/code&gt;'"></a><code>FetchContent</code></h3><p><code>FetchContent</code>也能用来将其他C++项目集成进来，但这个项目必须也使用CMake</p>
+<p>以上我并没有使用“第三方库”这样的字眼，因为<code>FetchContent</code>会将其他CMake工程的所有target全部添加到本CMake工程内，容易会造成名称冲突</p>
+<p>相反，<code>ExternalProject</code>将第三方库转变成了一个target，并且能够指定target的名称，就不会出现名称冲突的情况</p>
+<blockquote>
+<p>The ExternalProject_Add() function creates a custom target to drive download, update/patch, configure, build, install and test steps of an external project:</p>
+</blockquote>
+<h3 id="cmake缺点" class="headerLink">
+    <a href="#cmake%e7%bc%ba%e7%82%b9" class="header-mark" aria-label="Header mark for 'CMake缺点'"></a>CMake缺点</h3><p>写了这么多CMake的优点，终于轮到吐槽CMake了。没错，CMake本身的问题实在是太多了，但苦于CMake已经成了C++项目的事实标准，很多时候并没有更好的选择</p>
+<p>所有函数都是无返回值的，任何输出都是输出到一个变量上，非常不符合大部分编程语言的习惯</p>
+<p>甚至if else还有这种逆天语法</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    code-block-title 
+    
+    tw-flex 
+    tw-flex-row 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        tw-select-none 
+        tw-mx-2 
+        tw-block
+        group-[.is-open]:tw-rotate-90
+        tw-transition-[transform] 
+        tw-duration-500 
+        tw-ease-in-out
+        print:!tw-hidden"
+      disabled
+      aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+
+    <div class="code-block-title-bar tw-w-full">
+      <p class="tw-select-none !tw-my-1">cmake</p>
+    </div>
+    <div class="tw-flex">
+      <button 
+        class="
+          line-number-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.show-line-numbers]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.is-wrap]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw-select-none
+          tw-mx-2 
+          tw-hidden
+          group-[.is-open]:tw-block
+          hover:tw-text-fgColor-link 
+          print:!tw-hidden"
+        title="Copy code">
+          <span class="copy-icon tw-block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw-hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw-select-none 
+          tw-mx-2 
+          tw-block 
+          group-[.is-open]:tw-hidden 
+          print:!tw-hidden" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
+    id="codeblock-id-9" 
+    class="
+      chroma 
+      !tw-block 
+      tw-p-0
+      tw-m-0
+      tw-transition-[max-height] 
+      tw-duration-500 
+      tw-ease-in-out 
+      group-[.is-closed]:!tw-max-h-0 
+      group-[.is-wrap]:tw-text-wrap
+      tw-overflow-y-hidden
+      tw-overflow-x-auto
+      tw-scrollbar-thin
+      "><span class="line"><span class="cl"><span class="nb">if</span><span class="p">(</span><span class="s">&lt;condition&gt;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="err">&lt;commands&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">elseif</span><span class="p">(</span><span class="s">&lt;condition&gt;</span><span class="p">)</span> <span class="c"># optional block, can be repeated
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>  <span class="err">&lt;commands&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">else</span><span class="p">()</span>              <span class="c"># optional block
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>  <span class="err">&lt;commands&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">endif</span><span class="p">()</span></span></span></code></pre>
+</div>
+<p>字符串操作可读性也非常不好</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    code-block-title 
+    
+    tw-flex 
+    tw-flex-row 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        tw-select-none 
+        tw-mx-2 
+        tw-block
+        group-[.is-open]:tw-rotate-90
+        tw-transition-[transform] 
+        tw-duration-500 
+        tw-ease-in-out
+        print:!tw-hidden"
+      disabled
+      aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+
+    <div class="code-block-title-bar tw-w-full">
+      <p class="tw-select-none !tw-my-1">cmake</p>
+    </div>
+    <div class="tw-flex">
+      <button 
+        class="
+          line-number-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.show-line-numbers]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.is-wrap]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw-select-none
+          tw-mx-2 
+          tw-hidden
+          group-[.is-open]:tw-block
+          hover:tw-text-fgColor-link 
+          print:!tw-hidden"
+        title="Copy code">
+          <span class="copy-icon tw-block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw-hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw-select-none 
+          tw-mx-2 
+          tw-block 
+          group-[.is-open]:tw-hidden 
+          print:!tw-hidden" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
+    id="codeblock-id-10" 
+    class="
+      chroma 
+      !tw-block 
+      tw-p-0
+      tw-m-0
+      tw-transition-[max-height] 
+      tw-duration-500 
+      tw-ease-in-out 
+      group-[.is-closed]:!tw-max-h-0 
+      group-[.is-wrap]:tw-text-wrap
+      tw-overflow-y-hidden
+      tw-overflow-x-auto
+      tw-scrollbar-thin
+      "><span class="line"><span class="cl"><span class="nb">string</span><span class="p">(</span><span class="s">REPLACE</span> <span class="s">&lt;match-string&gt;</span> <span class="s">&lt;replace-string&gt;</span> <span class="s">&lt;out-var&gt;</span> <span class="s">&lt;input&gt;...</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">string</span><span class="p">(</span><span class="s">REGEX</span> <span class="s">MATCH</span> <span class="s">&lt;match-regex&gt;</span> <span class="s">&lt;out-var&gt;</span> <span class="s">&lt;input&gt;...</span><span class="p">)</span></span></span></code></pre>
+</div>
+<p>配合无返回值的设计，非常考验眼力</p>
+<p>CMakeLists.txt一旦写长了，非常难以阅读。而了解一个项目最快的方式就是去阅读CMake配置，了解其构建流程</p>
+<p>还有generator expression这种逆天设计</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    code-block-title 
+    
+    tw-flex 
+    tw-flex-row 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        tw-select-none 
+        tw-mx-2 
+        tw-block
+        group-[.is-open]:tw-rotate-90
+        tw-transition-[transform] 
+        tw-duration-500 
+        tw-ease-in-out
+        print:!tw-hidden"
+      disabled
+      aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+
+    <div class="code-block-title-bar tw-w-full">
+      <p class="tw-select-none !tw-my-1">cmake</p>
+    </div>
+    <div class="tw-flex">
+      <button 
+        class="
+          line-number-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.show-line-numbers]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.is-wrap]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw-select-none
+          tw-mx-2 
+          tw-hidden
+          group-[.is-open]:tw-block
+          hover:tw-text-fgColor-link 
+          print:!tw-hidden"
+        title="Copy code">
+          <span class="copy-icon tw-block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw-hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw-select-none 
+          tw-mx-2 
+          tw-block 
+          group-[.is-open]:tw-hidden 
+          print:!tw-hidden" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
+    id="codeblock-id-11" 
+    class="
+      chroma 
+      !tw-block 
+      tw-p-0
+      tw-m-0
+      tw-transition-[max-height] 
+      tw-duration-500 
+      tw-ease-in-out 
+      group-[.is-closed]:!tw-max-h-0 
+      group-[.is-wrap]:tw-text-wrap
+      tw-overflow-y-hidden
+      tw-overflow-x-auto
+      tw-scrollbar-thin
+      "><span class="line"><span class="cl"><span class="c"># WRONG: New lines and spaces all treated as argument separators, so the
+</span></span></span><span class="line"><span class="cl"><span class="c"># generator expression is split and not recognized correctly.
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">target_compile_definitions</span><span class="p">(</span><span class="s">tgt</span> <span class="s">PRIVATE</span>
+</span></span><span class="line"><span class="cl">  <span class="err">$</span><span class="s">&lt;</span><span class="err">$</span><span class="s">&lt;AND:</span>
+</span></span><span class="line"><span class="cl">      <span class="o">$&lt;</span><span class="nv">CXX_COMPILER_ID:GNU</span><span class="o">&gt;</span><span class="s">,</span>
+</span></span><span class="line"><span class="cl">      <span class="o">$&lt;</span><span class="nv">VERSION_GREATER_EQUAL:$&lt;CXX_COMPILER_VERSION</span><span class="o">&gt;</span><span class="s">,5&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&gt;:HAVE_5_OR_LATER&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span></span></span></code></pre>
+</div>
+<p>此外，许多第三方库提供的<code>Find&lt;PackageName&gt;.cmake</code>等文件，并没有文档说明它添加了哪些库，设置了哪些变量。官网文档大部分不会提及如何使用<code>find_package</code>引入他们的库，在<code>Find&lt;PackageName&gt;.cmake</code>文件开头写段注释已经算是&quot;well documentated&quot;的做法（相信大部分人都不会去看这个文件里面的注释吧）</p>
+<h2 id="分层配置" class="headerLink">
+    <a href="#%e5%88%86%e5%b1%82%e9%85%8d%e7%bd%ae" class="header-mark" aria-label="Header mark for '分层配置'"></a>分层配置</h2><p>如果在源码树中非常深的位置想要git不追踪某个文件，可以在项目的根目录写下这个文件相对根目录的路径</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    code-block-title 
+    
+    tw-flex 
+    tw-flex-row 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        tw-select-none 
+        tw-mx-2 
+        tw-block
+        group-[.is-open]:tw-rotate-90
+        tw-transition-[transform] 
+        tw-duration-500 
+        tw-ease-in-out
+        print:!tw-hidden"
+      disabled
+      aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+
+    <div class="code-block-title-bar tw-w-full">
+      <p class="tw-select-none !tw-my-1">.gitignore</p>
+    </div>
+    <div class="tw-flex">
+      <button 
+        class="
+          line-number-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.show-line-numbers]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.is-wrap]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw-select-none
+          tw-mx-2 
+          tw-hidden
+          group-[.is-open]:tw-block
+          hover:tw-text-fgColor-link 
+          print:!tw-hidden"
+        title="Copy code">
+          <span class="copy-icon tw-block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw-hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw-select-none 
+          tw-mx-2 
+          tw-block 
+          group-[.is-open]:tw-hidden 
+          print:!tw-hidden" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
+    id="codeblock-id-12" 
+    class="
+      chroma 
+      !tw-block 
+      tw-p-0
+      tw-m-0
+      tw-transition-[max-height] 
+      tw-duration-500 
+      tw-ease-in-out 
+      group-[.is-closed]:!tw-max-h-0 
+      group-[.is-wrap]:tw-text-wrap
+      tw-overflow-y-hidden
+      tw-overflow-x-auto
+      tw-scrollbar-thin
+      "><span class="line"><span class="cl">aaa/bbb/ccc/ddd/eee/fff/ggg/a.out</span></span></code></pre>
+</div>
+<p>然而这种做法并不优雅，git提供了更优的方法<br>
+在<code>aaa/bbb/ccc/ddd/eee/fff/ggg/</code>目录下创建一个<code>.gitignore</code>文件，其中写下</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    code-block-title 
+    
+    tw-flex 
+    tw-flex-row 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        tw-select-none 
+        tw-mx-2 
+        tw-block
+        group-[.is-open]:tw-rotate-90
+        tw-transition-[transform] 
+        tw-duration-500 
+        tw-ease-in-out
+        print:!tw-hidden"
+      disabled
+      aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+
+    <div class="code-block-title-bar tw-w-full">
+      <p class="tw-select-none !tw-my-1">.gitignore</p>
+    </div>
+    <div class="tw-flex">
+      <button 
+        class="
+          line-number-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.show-line-numbers]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.is-wrap]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw-select-none
+          tw-mx-2 
+          tw-hidden
+          group-[.is-open]:tw-block
+          hover:tw-text-fgColor-link 
+          print:!tw-hidden"
+        title="Copy code">
+          <span class="copy-icon tw-block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw-hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw-select-none 
+          tw-mx-2 
+          tw-block 
+          group-[.is-open]:tw-hidden 
+          print:!tw-hidden" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
+    id="codeblock-id-13" 
+    class="
+      chroma 
+      !tw-block 
+      tw-p-0
+      tw-m-0
+      tw-transition-[max-height] 
+      tw-duration-500 
+      tw-ease-in-out 
+      group-[.is-closed]:!tw-max-h-0 
+      group-[.is-wrap]:tw-text-wrap
+      tw-overflow-y-hidden
+      tw-overflow-x-auto
+      tw-scrollbar-thin
+      "><span class="line"><span class="cl">a.out</span></span></code></pre>
+</div>
+<p>优点是忽略这个文件的配置和这个文件距离很近，上下文关联强</p>
+<p>同理，Makefile和CMake也支持这样的分层配置
+Makefile可以通过<code>Include</code>指令添加子目录的Makefile，CMake可以通过<code>include_subdirectory</code>引入CMake子工程</p>
+<p>以<a href="https://github.com/PaddlePaddle/Paddle" target="_blank" rel="noopener noreferrer">Paddle</a>为例，源码树的每一层都有<code>CMakeLists.txt</code></p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    code-block-title 
+    
+    tw-flex 
+    tw-flex-row 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        tw-select-none 
+        tw-mx-2 
+        tw-block
+        group-[.is-open]:tw-rotate-90
+        tw-transition-[transform] 
+        tw-duration-500 
+        tw-ease-in-out
+        print:!tw-hidden"
+      disabled
+      aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+
+    <div class="code-block-title-bar tw-w-full">
+      <p class="tw-select-none !tw-my-1">text</p>
+    </div>
+    <div class="tw-flex">
+      <button 
+        class="
+          line-number-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.show-line-numbers]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.is-wrap]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw-select-none
+          tw-mx-2 
+          tw-hidden
+          group-[.is-open]:tw-block
+          hover:tw-text-fgColor-link 
+          print:!tw-hidden"
+        title="Copy code">
+          <span class="copy-icon tw-block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw-hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw-select-none 
+          tw-mx-2 
+          tw-block 
+          group-[.is-open]:tw-hidden 
+          print:!tw-hidden" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
+    id="codeblock-id-14" 
+    class="
+      chroma 
+      !tw-block 
+      tw-p-0
+      tw-m-0
+      tw-transition-[max-height] 
+      tw-duration-500 
+      tw-ease-in-out 
+      group-[.is-closed]:!tw-max-h-0 
+      group-[.is-wrap]:tw-text-wrap
+      tw-overflow-y-hidden
+      tw-overflow-x-auto
+      tw-scrollbar-thin
+      "><span class="line"><span class="cl">➜  paddle git:(develop) fd CMakeLists.txt  | tree --fromfile 
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── cinn
+</span></span><span class="line"><span class="cl">│   ├── adt
+</span></span><span class="line"><span class="cl">│   │   ├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   │   └── print_utils
+</span></span><span class="line"><span class="cl">│   │       └── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   ├── ast_gen_ius
+</span></span><span class="line"><span class="cl">│   │   └── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   ├── auto_schedule
+</span></span><span class="line"><span class="cl">│   │   ├── analysis
+</span></span><span class="line"><span class="cl">│   │   │   └── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   │   ├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   │   └── search_space
+</span></span><span class="line"><span class="cl">│   │       ├── auto_gen_rule
+</span></span><span class="line"><span class="cl">│   │       │   └── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   │       └── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   ├── backends
+</span></span><span class="line"><span class="cl">│   │   ├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   │   ├── llvm
+</span></span><span class="line"><span class="cl">│   │   │   └── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   │   └── nvrtc
+</span></span><span class="line"><span class="cl">│   │       └── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   ├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   ├── common
+</span></span><span class="line"><span class="cl">│   │   └── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   ├── hlir
+</span></span><span class="line"><span class="cl">│   │   ├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   │   ├── dialect
+</span></span><span class="line"><span class="cl">│   │   │   ├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   │   │   ├── operator
+</span></span><span class="line"><span class="cl">│   │   │   │   ├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   │   │   │   ├── ir
+</span></span><span class="line"><span class="cl">│   │   │   │   │   └── CMakeLists.txt
+</span></span><span class="line"><span class="cl">│   │   │   │   └── transforms
+</span></span><span class="line"><span class="cl">│   │   │   │       └── CMakeLists.txt
+</span></span><span class="line"><span class="cl">...</span></span></code></pre>
+</div>
+<p>这样的配置可以将编译逻辑下放到源码树的末梢，并减少上层CMake工程变更，上层CMake工程关注整体架构，下层CMake工程关注编译细节，还能减少git协作时上层CMake配置变更冲突的情况</p>
 </div>
 
         <div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-07-20&nbsp;<a class="git-hash" href="https://github.com/z2z63/z2z63.github.io/commit/577bb3b69661500bdc72636d3a513f9507d01edd" target="_blank" title="commit by z2z63(vituralfuture@gmail.com) 577bb3b69661500bdc72636d3a513f9507d01edd: update" rel="noopener noreferrer">
+                <span>Updated on 2024-07-21&nbsp;<a class="git-hash" href="https://github.com/z2z63/z2z63.github.io/commit/0eac46805c274187f17cc0c8f42d7915b0df619e" target="_blank" title="commit by z2z63(vituralfuture@gmail.com) 0eac46805c274187f17cc0c8f42d7915b0df619e: update" rel="noopener noreferrer">
                                     <svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M440.667 182.109l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l14.623-81.891C377.123 38.754 371.468 32 363.997 32h-40.632a12 12 0 0 0-11.813 9.891L296.175 128H197.54l14.623-81.891C213.477 38.754 207.822 32 200.35 32h-40.632a12 12 0 0 0-11.813 9.891L132.528 128H53.432a12 12 0 0 0-11.813 9.891l-7.143 40C33.163 185.246 38.818 192 46.289 192h74.81L98.242 320H19.146a12 12 0 0 0-11.813 9.891l-7.143 40C-1.123 377.246 4.532 384 12.003 384h74.81L72.19 465.891C70.877 473.246 76.532 480 84.003 480h40.632a12 12 0 0 0 11.813-9.891L151.826 384h98.634l-14.623 81.891C234.523 473.246 240.178 480 247.65 480h40.632a12 12 0 0 0 11.813-9.891L315.472 384h79.096a12 12 0 0 0 11.813-9.891l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l22.857-128h79.096a12 12 0 0 0 11.813-9.891zM261.889 320h-98.634l22.857-128h98.634l-22.857 128z"/></svg>577bb3b</a></span>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M440.667 182.109l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l14.623-81.891C377.123 38.754 371.468 32 363.997 32h-40.632a12 12 0 0 0-11.813 9.891L296.175 128H197.54l14.623-81.891C213.477 38.754 207.822 32 200.35 32h-40.632a12 12 0 0 0-11.813 9.891L132.528 128H53.432a12 12 0 0 0-11.813 9.891l-7.143 40C33.163 185.246 38.818 192 46.289 192h74.81L98.242 320H19.146a12 12 0 0 0-11.813 9.891l-7.143 40C-1.123 377.246 4.532 384 12.003 384h74.81L72.19 465.891C70.877 473.246 76.532 480 84.003 480h40.632a12 12 0 0 0 11.813-9.891L151.826 384h98.634l-14.623 81.891C234.523 473.246 240.178 480 247.65 480h40.632a12 12 0 0 0 11.813-9.891L315.472 384h79.096a12 12 0 0 0 11.813-9.891l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l22.857-128h79.096a12 12 0 0 0 11.813-9.891zM261.889 320h-98.634l22.857-128h98.634l-22.857 128z"/></svg>0eac468</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
