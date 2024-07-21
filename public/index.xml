@@ -12,7 +12,7 @@
     <pubDate>Sat, 20 Jul 2024 20:59:10 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/week6/</guid>
-    <description><![CDATA[最近两个月也是基本一直在写C++了，尤其是实习以来，从一个linux的C++开发者切换到windows + visual c++，这其中遇到的问题非常多，也]]></description>
+    <description><![CDATA[最近两个月也是基本一直在写C++了，尤其是实习以来，从linux的C++开发切换到windows + visual c++，这其中遇到的问题非常多，也让我不]]></description>
 </item><item>
     <title>第五周：CI/CD、git workflow与软件发行</title>
     <link>http://example.org/posts/week5/</link>
