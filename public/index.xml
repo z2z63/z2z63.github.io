@@ -4,9 +4,16 @@
         <link>http://example.org/</link>
         <description>z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 20 Jul 2024 20:59:10 &#43;0800</lastBuildDate>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 27 Jul 2024 18:57:33 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>第七周：关于C/C&#43;&#43;开发，我了解的一切 —— LSP、debugger</title>
+    <link>http://example.org/posts/week7/</link>
+    <pubDate>Sat, 27 Jul 2024 18:57:33 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/week7/</guid>
+    <description><![CDATA[解决了工具链的问题，还只能在命令行完成项目的构建。要使用IDE进行C++开发，除了工具链的知识外，还需要了解其他知识才能配置出一个好用的C+]]></description>
+</item><item>
     <title>第六周：关于C/C&#43;&#43;开发，我了解的一切 —— 编译器、构建工具</title>
     <link>http://example.org/posts/week6/</link>
     <pubDate>Sat, 20 Jul 2024 20:59:10 &#43;0800</pubDate><author>
@@ -69,12 +76,5 @@
         <name>z2z63</name>
     </author><guid>http://example.org/posts/apue-chapter1-fileio/</guid>
     <description><![CDATA[<p>这是APUE（Advanced Programming in the UNIX Environment，UINX环境高级编程）阅读笔记系列文章</p>]]></description>
-</item><item>
-    <title>逐渐向右移动的类型——静态类型成为新语言的趋势</title>
-    <link>http://example.org/posts/type-move-to-right/</link>
-    <pubDate>Thu, 25 Jan 2024 19:33:40 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/type-move-to-right/</guid>
-    <description><![CDATA[<p>许多新语言(2000之后发明的语言)大多有一个偏好：类型后置</p>]]></description>
 </item></channel>
 </rss>
