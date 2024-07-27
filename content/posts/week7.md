@@ -1,5 +1,5 @@
 ---
-title: "第七周：关于C/C++开发，我了解的一切 —— LSP、debugger"
+title: "第七周：关于C/C++开发，我了解的一切 —— LSP、debugger与IDE"
 author: z2z63
 date: 2024-07-27T18:57:33+08:00
 ---

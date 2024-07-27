@@ -5,7 +5,7 @@
         <description>All Posts | z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
             <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 27 Jul 2024 18:57:33 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>第七周：关于C/C&#43;&#43;开发，我了解的一切 —— LSP、debugger</title>
+    <title>第七周：关于C/C&#43;&#43;开发，我了解的一切 —— LSP、debugger与IDE</title>
     <link>http://example.org/posts/week7/</link>
     <pubDate>Sat, 27 Jul 2024 18:57:33 &#43;0800</pubDate><author>
         <name>z2z63</name>
