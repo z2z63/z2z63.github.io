@@ -6,21 +6,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noodp" /><title>Linux搜索神器 - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://example.org/posts/linux-file-search/">
+    <meta name="robots" content="noodp" /><title>努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？ - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://example.org/posts/week8/">
   <meta property="og:site_name" content="z2z63/Virtualfuture&#39;s Blog">
-  <meta property="og:title" content="Linux搜索神器">
-  <meta property="og:description" content="使用Linux时，常常需要在文件系统中快速搜索到内容，比如说 在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径 想找某个文件，但">
+  <meta property="og:title" content="努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？">
+  <meta property="og:description" content="实习期间摸了不少的鱼，通勤路上在看各种文档，在公司摸鱼时就在看glibc或cpython的源码，花了不少时间总算是理解了部分。所谓内存管理系">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-04-01T23:35:22+00:00">
-    <meta property="article:modified_time" content="2023-12-21T18:43:40+08:00">
-    <meta property="article:tag" content="Linux">
-    <meta property="article:tag" content="Shell">
+    <meta property="article:published_time" content="2024-08-04T14:21:56+08:00">
+    <meta property="article:modified_time" content="2024-08-04T14:21:56+08:00">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Linux搜索神器">
-  <meta name="twitter:description" content="使用Linux时，常常需要在文件系统中快速搜索到内容，比如说 在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径 想找某个文件，但">
+  <meta name="twitter:title" content="努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？">
+  <meta name="twitter:description" content="实习期间摸了不少的鱼，通勤路上在看各种文档，在公司摸鱼时就在看glibc或cpython的源码，花了不少时间总算是理解了部分。所谓内存管理系">
 <meta name="application-name" content="z2z63/Virtualfuture&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="z2z63/Virtualfuture&#39;s Blog">
 
@@ -28,15 +26,15 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-<link rel="canonical" href="http://example.org/posts/linux-file-search/" /><link rel="next" href="http://example.org/posts/matplotlib-chinese-font/" />
+<link rel="canonical" href="http://example.org/posts/week8/" /><link rel="prev" href="http://example.org/posts/week7/" />
 <link rel="stylesheet" href="/css/main.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">{"@context": "https://schema.org","@type": "BlogPosting",
-        "headline": "Linux搜索神器",
+        "headline": "努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http://example.org/posts/linux-file-search/"
-        },"genre": "posts","keywords":["Linux","Shell"],"wordcount":  2233 ,
-        "url": "http://example.org/posts/linux-file-search/","datePublished": "2023-04-01T23:35:22+00:00","dateModified": "2023-12-21T18:43:40+08:00","publisher": {
+            "@id": "http://example.org/posts/week8/"
+        },"genre": "posts","wordcount":  5030 ,
+        "url": "http://example.org/posts/week8/","datePublished": "2024-08-04T14:21:56+08:00","dateModified": "2024-08-04T14:21:56+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
                 "@type": "Person",
@@ -160,24 +158,29 @@
         <h2 class="toc-title">Contents</h2>
         <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#总览">总览</a></li>
+    <li><a href="#前置知识">前置知识</a></li>
+    <li><a href="#python的内存分配系统">Python的内存分配系统</a>
       <ul>
-        <li><a href="#需求1-根据文件名搜索路径--find">需求1: 根据文件名搜索路径&ndash;<code>find</code></a></li>
-        <li><a href="#需求2全局搜索文件--locate">需求2:全局搜索文件&ndash;<code>locate</code></a></li>
-        <li><a href="#需求3搜索文件内容--grepagdelackdel">需求3:搜索文件内容&ndash;<code>grep</code>,<code>ag</code>,<!-- raw HTML omitted --><code>ack</code><!-- raw HTML omitted --></a></li>
+        <li><a href="#arena">arena</a></li>
+        <li><a href="#pool">pool</a></li>
+        <li><a href="#block">block</a></li>
+        <li><a href="#usedpools">usedpools</a></li>
+        <li><a href="#malloc流程">malloc流程</a></li>
+        <li><a href="#总结">总结</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
-    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title">Linux搜索神器</h1><div class="post-meta">
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title">努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src="https://avatars.githubusercontent.com/z2z63"   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2023-04-01">2023-04-01</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2023-12-21">2023-12-21</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;2233 words&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;5 minutes&nbsp;</div>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2024-08-04">2024-08-04</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-08-04">2024-08-04</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;5030 words&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;11 minutes&nbsp;</div>
         </div><div class="details toc print:!tw-block" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -186,24 +189,44 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#总览">总览</a></li>
+    <li><a href="#前置知识">前置知识</a></li>
+    <li><a href="#python的内存分配系统">Python的内存分配系统</a>
       <ul>
-        <li><a href="#需求1-根据文件名搜索路径--find">需求1: 根据文件名搜索路径&ndash;<code>find</code></a></li>
-        <li><a href="#需求2全局搜索文件--locate">需求2:全局搜索文件&ndash;<code>locate</code></a></li>
-        <li><a href="#需求3搜索文件内容--grepagdelackdel">需求3:搜索文件内容&ndash;<code>grep</code>,<code>ag</code>,<!-- raw HTML omitted --><code>ack</code><!-- raw HTML omitted --></a></li>
+        <li><a href="#arena">arena</a></li>
+        <li><a href="#pool">pool</a></li>
+        <li><a href="#block">block</a></li>
+        <li><a href="#usedpools">usedpools</a></li>
+        <li><a href="#malloc流程">malloc流程</a></li>
+        <li><a href="#总结">总结</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>使用Linux时，常常需要在文件系统中快速搜索到内容，比如说</p>
-<ol>
-<li>在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径</li>
-<li>想找某个文件，但是完全不知道它在哪里，需要全局搜索</li>
-<li>在一个项目中想要搜索一个特定字符串的出现</li>
-</ol>
-<h3 id="需求1-根据文件名搜索路径--find" class="headerLink">
-    <a href="#%e9%9c%80%e6%b1%821-%e6%a0%b9%e6%8d%ae%e6%96%87%e4%bb%b6%e5%90%8d%e6%90%9c%e7%b4%a2%e8%b7%af%e5%be%84--find" class="header-mark" aria-label="Header mark for '需求1: 根据文件名搜索路径&amp;ndash;&lt;code&gt;find&lt;/code&gt;'"></a>需求1: 根据文件名搜索路径&ndash;<code>find</code></h3><p>可以使用find命令，它是linux大多数发行版都自带的命令</p>
-<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+            </div><div class="content" id="content"><p>实习期间摸了不少的鱼，通勤路上在看各种文档，在公司摸鱼时就在看glibc或cpython的源码，花了不少时间总算是理解了部分。所谓内存管理系统充斥着各种指针运算，抽象程度非常高，这篇文章我希望是定性的去描述内存分配系统，因为源码总是枯燥又无聊的，如果不是它出现了问题，我想大部分人都不会去看源码吧</p>
+<h2 id="总览" class="headerLink">
+    <a href="#%e6%80%bb%e8%a7%88" class="header-mark" aria-label="Header mark for '总览'"></a>总览</h2><p>glibc作为libc的GNU实现，按照分层的角度，它往下是操作系统，往上是用户代码，它将操作系统的许多能力以C标准规定的形式提供，并且在linux平台，glibc还提供了稳定的系统调用接口</p>
+<p>从操作系统的角度，每个进程都有自己的地址空间，当进程需要更多的内存时，有两种方式，可以通过<code>mmap</code>系统调用申请一块可读可写的内存，还可以通过<code>brk</code>系统调用扩张堆区。无论使用哪种方式，操作系统分配内存的最小单位是页，一般是4K</p>
+<p>4K是一个非常粗的粒度，从操作系统的角度，4K是为了减少内存管理系统的开销并减少内存碎片的一个权衡结果，但对于用户进程来说，4K还是太大了，因此用户态还需要一个内存管理系统，用于满足用户程序零散、频繁的内存需求</p>
+<p>glibc提供了一个内存管理系统，在linux平台，几乎所有进程都会链接到glibc。包括解释语言，诸如shell、python。它们如果需要访问操作系统，也要链接到glibc。因此glibc是用户程序的最底层，简化了用户程序与操作系统的交互</p>
+<blockquote>
+<p>如果只使用系统调用的ABI接口，就不必链接到glibc。但需要写内联汇编，而且直接使用系统调用难度高，移植性差</p>
+</blockquote>
+<p>分层并不能解决所有问题，许多用户程序会在glibc提供的内存管理系统之上再实现一个自己的内存管理系统。python在编译时，可以选择是否使用python内置的内存管理系统，如果选择否，就会直接使用libc的内存管理系统。为了性能和开销、这个选项是默认打开的</p>
+<h2 id="前置知识" class="headerLink">
+    <a href="#%e5%89%8d%e7%bd%ae%e7%9f%a5%e8%af%86" class="header-mark" aria-label="Header mark for '前置知识'"></a>前置知识</h2><p>阅读glibc和python的源码需要不少的指针经验，还需要有从汇编角度理解C代码的能力</p>
+<ul>
+<li>C的结构体可以认为是一块内存+各字段的偏移+各字段的数据长度。编译后，结构体成员的访问会变成地址运算+地址访问</li>
+<li>许多平台都有数据对齐的要求，数据不对齐轻则读取速度降低，重则无法访问数据</li>
+<li>申请一块内存时，这块内存要求是连续的，越大的连续内存申请越难以满足</li>
+<li>内存碎片，即由于不规律的索取内存，内存千疮百孔，即使空闲内存总和满足了申请大小，但不存在足够大的连续内存而无法满足内存申请，导致内存使用率低下</li>
+</ul>
+<h2 id="python的内存分配系统" class="headerLink">
+    <a href="#python%e7%9a%84%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d%e7%b3%bb%e7%bb%9f" class="header-mark" aria-label="Header mark for 'Python的内存分配系统'"></a>Python的内存分配系统</h2><p>Python的语言特性依赖于大量小对象的创建，例如函数传参、本地变量访问、unicode对象等，导致Python的内存需求是大量、频繁、琐碎的。</p>
+<p>如果直接使用libc提供的内存分配系统，由于大量小块内存的请求，会产生大量的内存碎片，不仅仅增加了进程的内存使用，而且使用系统调用向操作系统申请内存这个过程很慢，降低了Python解释器运行速度</p>
+<p>为了缓解这种现象，Python内置了一个简单的内存分配系统。相比libc，它会尝试占用更多的内存，然后满足大量小块内存申请的同时减少内存碎片的产生。如果可行，它也会将闲置内存归还给操作系统</p>
+<p>Python有三套内存管理系统，一套是内置的内存管理系统，在release模式下使用，一套是调试时使用的内存管理系统，用于开发CPython时帮助发现潜在的问题，最后一套是原始的内存管理系统，即直接使用libc的内存管理系统</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -227,7 +250,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">C</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -297,10 +320,28 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">find . -name <span class="s2">&#34;filename&#34;</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* user context passed as the first argument to the 4 functions */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="o">*</span><span class="n">ctx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* allocate a memory block */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span><span class="o">*</span> <span class="p">(</span><span class="o">*</span><span class="n">malloc</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ctx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* allocate a memory block initialized by zeros */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span><span class="o">*</span> <span class="p">(</span><span class="o">*</span><span class="n">calloc</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ctx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">nelem</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">elsize</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* allocate or resize a memory block */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span><span class="o">*</span> <span class="p">(</span><span class="o">*</span><span class="n">realloc</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ctx</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">new_size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* release a memory block */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">free</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ctx</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">PyMemAllocatorEx</span><span class="p">;</span></span></span></code></pre>
 </div>
-<p>这个命令会在当前目录下递归搜索叫做filename的文件，但是这个文件名必须是完全匹配
-如果只是知道文件名的大概，或者无法保证文件名完全一致，可以用正则匹配</p>
+<p>结构体<code>PyMemAllocatorEx</code>相当于一个内存管理系统的接口，只要实现了这个接口，就能将此内存管理系统用于CPython中</p>
+<p>此外，C标准规定malloc或calloc在申请内存的大小为零时，<a href="https://en.cppreference.com/w/c/memory/malloc#:~:text=If%20size%20is%20zero%2C%20the%20behavior%20of%20malloc%20is%20implementation%2Ddefined." target="_blank" rel="noopener noreferrer">其结果未定义</a>。Python为了其跨平台特性，将申请内存大小为零的请求转变为申请内存大小为1的请求，消除了UB</p>
+<p>Python管理内存分为三个层级：<code>arena</code>，<code>pool</code>，<code>block</code></p>
+<h3 id="arena" class="headerLink">
+    <a href="#arena" class="header-mark" aria-label="Header mark for 'arena'"></a>arena</h3><p>一个<code>arena</code>大小为1MiB，一个<code>arena</code>包括多个<code>pool</code></p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -325,7 +366,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">C</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -395,12 +436,18 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">find . -name <span class="s2">&#34;filename.*&#34;</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">arena_object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uintptr_t</span> <span class="n">address</span><span class="p">;</span>                  <span class="c1">// arena的起始地址，直接使用mmap分配这块内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">block</span><span class="o">*</span> <span class="n">pool_address</span><span class="p">;</span>                <span class="c1">// 指向下一个未初始化的pool
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">uint</span> <span class="n">nfreepools</span><span class="p">;</span>                    <span class="c1">// 记录该arena中有多少个空闲的pool
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">uint</span> <span class="n">ntotalpools</span><span class="p">;</span>                   <span class="c1">// 该arena中所有的pool，包括空闲pool和已使用的pool
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span> <span class="n">pool_header</span><span class="o">*</span> <span class="n">freepools</span><span class="p">;</span>      <span class="c1">// 记录空闲pool的单链表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span> <span class="n">arena_object</span><span class="o">*</span> <span class="n">nextarena</span><span class="p">;</span>     <span class="c1">// 双向链表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span> <span class="n">arena_object</span><span class="o">*</span> <span class="n">prevarena</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre>
 </div>
-<p>这个命令会搜索所有满足正则表达式<code>filename.*</code>的文件，但是注意，<strong>由于bash会将<code>*</code>解释为匹配的文件，必
-须用双引号把括起来</strong><br>
-至此这个命令足够日常使用了，但是有些情景就不好用了，例如完全不知道这个文件的路径，只知道它的名字，或许可
-以这样</p>
+<p><code>arena_object</code>只是一个用于book keeping的结构，<code>arena</code>的内存都是额外分配的</p>
+<p>Python解释器运行时，存在多个<code>arena</code>，通过一个动态数组管理</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -425,7 +472,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">C</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -495,11 +542,20 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">find / -name <span class="s2">&#34;filename&#34;</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="cm">/* Array of objects used to track chunks of memory (arenas). */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">struct</span> <span class="n">arena_object</span><span class="o">*</span> <span class="n">arenas</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* Number of slots currently allocated in the `arenas` vector. */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">uint</span> <span class="n">maxarenas</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* The head of the singly-linked, NULL-terminated list of available
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * arena_objects.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">struct</span> <span class="n">arena_object</span><span class="o">*</span> <span class="n">unused_arena_objects</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span></span></span></code></pre>
 </div>
-<p>这个命令会在根目录递归搜索所有文件，似乎能达到目的，但是它会去尝试读取一些系统文件和权限不足以访问的
-文件 ，导致输出一大堆错误信息 ，为了避免错误输出淹没了查找结果的输出，可以给予高权限</p>
-<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+<p>动态数组的首地址为<code>arenas</code>，长度为<code>maxarenas</code>，<code>unused_arena_objects</code>之后的数组元素是未使用的arena，并且他们通过单链表连接</p>
+<h3 id="pool" class="headerLink">
+    <a href="#pool" class="header-mark" aria-label="Header mark for 'pool'"></a>pool</h3><p>一个pool包含多个block，而且一个pool的每个block的大小都是相等的。所以pool有一个大小类别，即sizeclass（sizeclass说明见block）</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -523,7 +579,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">C</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -593,14 +649,21 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">sudo find / -name <span class="s2">&#34;filename&#34;</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">pool_header</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">union</span> <span class="p">{</span> <span class="n">block</span> <span class="o">*</span><span class="n">_padding</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">uint</span> <span class="n">count</span><span class="p">;</span> <span class="p">}</span> <span class="n">ref</span><span class="p">;</span>          <span class="c1">// _padding仅仅用于对齐，count表示该pool分配了多少个block
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">block</span> <span class="o">*</span><span class="n">freeblock</span><span class="p">;</span>                   <span class="c1">// 单链表组织空闲block
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span> <span class="n">pool_header</span> <span class="o">*</span><span class="n">nextpool</span><span class="p">;</span>       <span class="c1">// 指向下一个与同大小类别的pool
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span> <span class="n">pool_header</span> <span class="o">*</span><span class="n">prevpool</span><span class="p">;</span>       <span class="c1">// 前一个pool，组成双链表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">uint</span> <span class="n">arenaindex</span><span class="p">;</span>                    <span class="c1">// 该pool所属的arena在`arenas`动态数组中的索引
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">uint</span> <span class="n">szidx</span><span class="p">;</span>                         <span class="c1">// 大小类别的索引
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">uint</span> <span class="n">nextoffset</span><span class="p">;</span>                    <span class="c1">// 距离下一个空闲block的偏移，相对的起始地址为pool首地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">uint</span> <span class="n">maxnextoffset</span><span class="p">;</span>                 <span class="c1">// 空闲blocks中最大的偏移
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">pool_header</span> <span class="o">*</span><span class="n">poolp</span><span class="p">;</span></span></span></code></pre>
 </div>
-<p>但是这个命令其实<strong>相当危险！</strong>，作为超级用户，不应该给予它如此高的权限，这是没必要的，还可能有风险
-而且由于linux实现的的文件系统是VFS(虚拟文件系统)，并不是所有文件的open和read操作都会在硬盘上生效，
-比如说，访问<code>/proc</code>下的文件实际上是从内存中读取进程的相关信息，访问<code>/dev</code>下的文件实际上是尝试从
-设备中读取数据，另外实际上你也会发现，即使给了最高的权限，还是有些文件无法被读取<br>
-很明显，我们想要搜索的文件常常都是用户文件，它的权限不高，所以没必要用这种方式，另外为了防止错误信息
-淹没了查找结果，可以把错误信息丢掉</p>
+<h3 id="block" class="headerLink">
+    <a href="#block" class="header-mark" aria-label="Header mark for 'block'"></a>block</h3><p>block的大小有<code>16</code>，<code>32</code>，<code>48</code>，<code>64</code>等等，以<code>16</code>为阶梯大小递增,这是block的大小类别，<code>16</code>的大小类别索引为<code>0</code>，<code>32</code>的大小类别索引为2，以此类推</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -625,7 +688,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">C</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -695,18 +758,11 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">find / -name <span class="s2">&#34;filename&#34;</span> 2&gt;/dev/null</span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="cm">/* When you say memory, my mind reasons in terms of (pointers to) blocks */</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="kt">uint8_t</span> <span class="n">block</span><span class="p">;</span></span></span></code></pre>
 </div>
-<p>在shell中，<code>2</code>代表标准错误，同理<code>0</code>代表标准输入，<code>1</code>代表标准输出，<code>&gt;</code>代表重定向输出，<code>/dev/null</code>
-是linux的空设备，它相当于一个无底洞，输出到<code>/dev/null</code>就相当于丢弃输出<br>
-虽然find命令很强大，但是如你所见，用它搜索文件有时候还是不好用</p>
-<h3 id="需求2全局搜索文件--locate" class="headerLink">
-    <a href="#%e9%9c%80%e6%b1%822%e5%85%a8%e5%b1%80%e6%90%9c%e7%b4%a2%e6%96%87%e4%bb%b6--locate" class="header-mark" aria-label="Header mark for '需求2:全局搜索文件&amp;ndash;&lt;code&gt;locate&lt;/code&gt;'"></a>需求2:全局搜索文件&ndash;<code>locate</code></h3><p>locate可能需要自己<a href="https://wiki.archlinux.org/title/locate" target="_blank" rel="noopener noreferrer">安装</a>，如
-<a href="https://wiki.archlinux.org/title/locate" target="_blank" rel="noopener noreferrer">archwiki</a>所说，locate命令是在预先建立好的文件系统
-索引数据库中搜索，这可以大大加快速度（当用find全局搜索或者在机械硬盘中搜索时往往能体会到find的速度）
-locate的工作原理有点类似于Windows平台的<a href="https://www.voidtools.com/zh-cn/" target="_blank" rel="noopener noreferrer">everything</a>，
-但实际上locate可能胜过everything
-第一次使用locate命令前需要先建立索引(需要root权限)</p>
+<p>block的定义非常有意思，比较考验对C的理解</p>
+<p>C一个非常灵活的地方在于，给结构体分配内存时，分配的内存大小不一定是结构体的大小。以结构体</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -731,7 +787,7 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">C</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -801,9 +857,11 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">sudo updatedb</span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">MyStruct</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">a</span><span class="err">；</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
 </div>
-<p>然后直接搜索</p>
+<p>为例，可以给<code>MyStruct</code>分配更多的内存</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -828,7 +886,7 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">text</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -898,12 +956,18 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">locate <span class="s2">&#34;filename&#34;</span></span></span></code></pre>
+      "><span class="line"><span class="cl">+---------------------+
+</span></span><span class="line"><span class="cl">|       int a         |
+</span></span><span class="line"><span class="cl">+---------------------+
+</span></span><span class="line"><span class="cl">|       空  闲         |
+</span></span><span class="line"><span class="cl">|                     |
+</span></span><span class="line"><span class="cl">|       空  间         |
+</span></span><span class="line"><span class="cl">+---------------------+</span></span></code></pre>
 </div>
-<p>可以在全局查找文件，另外locate会考虑权限控制，只会显示用户可访问的文件，就不会出现在<code>/proc</code>和<code>/dev</code>
-下搜索的情况<br>
-这个命令用来全局模糊搜索非常好用，因为<code>locate</code>默认把参数解释为正则匹配的<code>partten</code><br>
-在日常使用的过程中可能会出现这个问题，<code>locate</code>输出的结果太多了，例如</p>
+<p>多于的空间可以解释为其他用途的数据</p>
+<p>此处<code>block</code>的大小在是由其所在的<code>pool</code>决定的，所以<code>block</code>没必要再记录自身的大小</p>
+<p>此外，<code>block</code>的使用中经常出现<code>*(block**)b</code>，实际上<code>block</code>隐含了一个<code>next</code>结构体成员</p>
+<p>可以将<code>block</code>的定义改为以下定义</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -928,7 +992,7 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">C</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -998,17 +1062,21 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">locate python <span class="p">|</span> wc
-</span></span><span class="line"><span class="cl"><span class="m">411629</span>  <span class="m">411761</span> <span class="m">48329698</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">block</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">block</span><span class="o">*</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
 </div>
-<p>如上，用<code>wc</code>统计出有411629行，也就是有411629个匹配结果！<br>
-让我们来看看为什么会有这么多结果，首先可以发现，如果一个目录名包括了<code>python</code>字符串，那么这个目录下所有文件
-都会命中正则匹配！例如<code>/home/arch/.cache/JetBrains/CLion2022.3/python_stubs/-548636620/PySide6 </code>另外有些目录下的匹配结果是不需要的，比如说我只想看看我的电脑上有多少个python解释器，
-那么<code>~/.cache</code>很有可能就是不需要的,那么如何避免这些情况呢？</p>
+<p>与原<code>block</code>定义是等价的，<code>*(block**)b</code>也可以改写成<code>b-&gt;next</code>，这样可读性更好</p>
+<blockquote>
+<p><strong>Note:</strong> 以上改写基于一个事实：next成员的偏移为零，其地址与结构体首地址相同</p>
+</blockquote>
+<p><code>block</code>记录了这一小块内存的起始地址，假设该<code>block</code>所属<code>pool</code>的大小类别为<code>16</code>，即<code>block</code>表示的一小块内存的大小为<code>16</code></p>
 <ul>
-<li>更加准确的描述方式
-如果我只想找到python解释器的位置，那么<code>python-stub</code>还有<code>python-websockets</code>就是不满足的，可以
-扩展正则语法的否定预查更加精准的匹配，然而这个情景下，用准确的文件名匹配更好
+<li><code>block</code>正在被使用时，它表示的<code>16</code>字节的内存完全交给上层使用，<code>block</code>本身不额外占据空间</li>
+<li><code>block</code>闲置时，前<code>8</code>个字节（64位机器的指针宽度）记录了结构体成员变量<code>next</code>，<code>next</code>指向下一个空闲的<code>block</code></li>
+</ul>
+<p>可以认为，一个<code>pool</code>的所有空闲<code>block</code>组成了一个单链表，而<code>pool-&gt;nextoffset</code>记录了链表头</p>
+<p><code>pool</code>的内存视图如下</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -1033,7 +1101,7 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">text</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -1103,11 +1171,14 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">locate <span class="s2">&#34;*/python&#34;</span></span></span></code></pre>
+      "><span class="line"><span class="cl">+-------------------------------------------------------------------+
+</span></span><span class="line"><span class="cl">| pool_header  |  block1  | block2 | block3 | block4 | block5 | ... |
+</span></span><span class="line"><span class="cl">+-------------------------------------------------------------------+</span></span></code></pre>
 </div>
-这个命令的意思是<code>*</code>匹配前的路径，<code>python</code>匹配文件名，这样就能精准匹配到名为<code>python</code>的文件</li>
-<li>过滤不需要的信息
-执行过一遍<code>locate</code>后我已经知道某些路径下的搜索结果是不需要的，例如我想过滤<code>~/.cache</code>下的所有结果
+<p>可以看出，<code>pool_header</code>在分配内存时，也分配了多于<code>pool_header</code>大小的内存（实际上，一个<code>pool</code>大小一般是16KiB）</p>
+<h3 id="usedpools" class="headerLink">
+    <a href="#usedpools" class="header-mark" aria-label="Header mark for 'usedpools'"></a>usedpools</h3><p><code>usedpools</code>可以说是整个Python内存管理系统中最精彩、最能体现C奇技淫巧的部分
+去掉部分条件编译后如下</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -1132,7 +1203,7 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">C</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -1202,324 +1273,86 @@ locate的工作原理有点类似于Windows平台的<a href="https://www.voidtoo
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">locate <span class="s2">&#34;python&#34;</span> <span class="p">|</span> grep -v <span class="s2">&#34;.cache&#34;</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="cp">#define PTA(x)  ((poolp )((uint8_t *)&amp;(usedpools[2*(x)]) - 2*sizeof(block *)))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define PT(x)   PTA(x), PTA(x)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">poolp</span> <span class="n">usedpools</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="p">((</span><span class="n">NB_SMALL_SIZE_CLASSES</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">PT</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">,</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">11</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">13</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">14</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">,</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">17</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">18</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">19</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">21</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">22</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">,</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">24</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">26</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">27</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">28</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">29</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="nf">PT</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
 </div>
-这里用到了<code>grep</code>的反向匹配过滤掉<code>~/.cache</code>下的所有匹配结果，但是这么过滤后可能还是太多了，需要
-进一步过滤，例如想要过滤<code>python-websockets</code>下的所有结果，通过查看grep的手册发现并没有反向匹配两种pattern的方法，这里可以利用linux shell的
-强大之处
-<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
-  <div class="
-    code-block-title 
-    
-    tw-flex 
-    tw-flex-row 
-    tw-justify-between 
-    tw-w-full tw-bg-bgColor-secondary
-    ">      
-    <button 
-      class="
-        tw-select-none 
-        tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
-
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
-    </div>
-    <div class="tw-flex">
-      <button 
-        class="
-          line-number-button
-          tw-select-none 
-          tw-mx-2 
-          tw-hidden 
-          group-[.is-open]:tw-block 
-          group-[.show-line-numbers]:tw-text-fgColor-link 
-          print:!tw-hidden" 
-        title="Toggle line numbers"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
-
-      <button 
-        class="
-          wrap-code-button
-          tw-select-none 
-          tw-mx-2 
-          tw-hidden 
-          group-[.is-open]:tw-block 
-          group-[.is-wrap]:tw-text-fgColor-link 
-          print:!tw-hidden" 
-        title="Toggle code wrap"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
-      
-      <button 
-        class="
-          copy-code-button
-          tw-select-none
-          tw-mx-2 
-          tw-hidden
-          group-[.is-open]:tw-block
-          hover:tw-text-fgColor-link 
-          print:!tw-hidden"
-        title="Copy code">
-          <span class="copy-icon tw-block"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
-          <span class="check-icon tw-hidden"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
-      </button>
-        
-      <button 
-        class="
-          tw-select-none 
-          tw-mx-2 
-          tw-block 
-          group-[.is-open]:tw-hidden 
-          print:!tw-hidden" 
-        disabled
-        aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
-    </div>
-  </div>
-  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-11" 
-    class="
-      chroma 
-      !tw-block 
-      tw-p-0
-      tw-m-0
-      tw-transition-[max-height] 
-      tw-duration-500 
-      tw-ease-in-out 
-      group-[.is-closed]:!tw-max-h-0 
-      group-[.is-wrap]:tw-text-wrap
-      tw-overflow-y-hidden
-      tw-overflow-x-auto
-      tw-scrollbar-thin
-      "><span class="line"><span class="cl">locate <span class="s2">&#34;python&#34;</span> <span class="p">|</span> grep -v <span class="s2">&#34;.cache&#34;</span> <span class="p">|</span> grep -v <span class="s2">&#34;python-websockets&#34;</span></span></span></code></pre>
-</div>
-利用最简单的概念和最简单的操作就能组合出非常复杂的流程，这体现出linux设计的优点，也体现了
-<a href="https://en.wikipedia.org/wiki/Principle_of_least_astonishment" target="_blank" rel="noopener noreferrer">最小惊讶原理</a>，说实话
-我第一次看到这种用法只吃惊了1秒！</li>
+<p><code>usedpools</code>非常巧妙地组织了正在使用的<code>pool</code>，它是分配内存时的快速通道。</p>
+<blockquote>
+<p><strong>Note:</strong> 理解<code>usedpools</code>需要画一些草稿辅助</p>
+</blockquote>
+<p><code>usedpools</code>被视为一个数组，每两个<code>poolp</code>表示数组的一个元素（entry），数组的一个元素即一个链表头，链表头是一个环形双向链表的哨兵节点（哨兵节点不存储数据），数组的索引即大小类别的索引</p>
+<p>假设要分配<code>27</code>个字节，首先向上取整到<code>16</code>的倍数，即取整到<code>32</code>，<code>32</code>对应的大小类别的索引为<code>2</code>,于是访问<code>usedpools[2 + 2]</code>，得到一个<code>poolp</code>。在初始化时，<code>usedpools[2 + 2]-&gt;nextpool</code>和<code>usedpools[2 + 2]-&gt;prevpool</code>指向的值都是<code>usedpools[2 + 2]</code>的地址，即表示该环形双向链表为空；如果该大小类别已经有<code>pool</code>分配了，<code>usedpools[2 + 2]</code>表示的环形双向链表就会有两个节点（包括哨兵节点）</p>
+<p><code>usedpools</code>第一次见时，理解起来很费劲。但理解其意图后，<code>usedpools</code>的用法还是有些可读性。它去除了<code>pool_header</code>结构体中不必要的部分，可以认为是一种索引。<code>usedpools</code>的元素大小越小，cache line就能放下更多的<code>usedpools</code>元素，性能就越高</p>
+<p><code>usedpools</code>已经有一位core dev讲解过
+<div class="bilibili">
+    <iframe src="//player.bilibili.com/player.html?bvid=BV1qV4y1J7gY&amp;page=1&amp;autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+</div></p>
+<h3 id="malloc流程" class="headerLink">
+    <a href="#malloc%e6%b5%81%e7%a8%8b" class="header-mark" aria-label="Header mark for 'malloc流程'"></a>malloc流程</h3><p>python有四套内存管理系统，可以通过编译参数指定使用哪一个</p>
+<ul>
+<li>编译参数为<code>--with-pydebug --without-pymalloc</code>，会使用<code>_PyMem_DebugRawMalloc</code>作为malloc入口</li>
+<li>编译参数为<code>--with-pydebug</code>，会使用<code>_PyMem_DebugMalloc</code>作为malloc入口</li>
+<li>编译参数为<code>--without-pymalloc</code>，会使用<code>_PyMem_RawMalloc</code>作为malloc入口</li>
+<li>编译参数无以上提及的两个参数，会使用<code>_PyObject_Malloc</code>作为malloc入口</li>
 </ul>
-<h3 id="需求3搜索文件内容--grepagdelackdel" class="headerLink">
-    <a href="#%e9%9c%80%e6%b1%823%e6%90%9c%e7%b4%a2%e6%96%87%e4%bb%b6%e5%86%85%e5%ae%b9--grepagdelackdel" class="header-mark" aria-label="Header mark for '需求3:搜索文件内容&amp;ndash;&lt;code&gt;grep&lt;/code&gt;,&lt;code&gt;ag&lt;/code&gt;,&lt;!-- raw HTML omitted --&gt;&lt;code&gt;ack&lt;/code&gt;&lt;!-- raw HTML omitted --&gt;'"></a>需求3:搜索文件内容&ndash;<code>grep</code>,<code>ag</code>,<!-- raw HTML omitted --><code>ack</code><!-- raw HTML omitted --></h3><p>在VScode和jetbrain系IDE中都可以通过Ctrl+Sift+F在整个项目中搜索文件内容，linux的命令行也有对应的
-工具<code>grep</code>和<code>ag</code>，但是<code>grep</code>的命令太长，所以这里暂时略过<code>grep</code><!-- raw HTML omitted -->(因为我也不会)<!-- raw HTML omitted --><br>
-<code>ag</code>是<a href="https://github.com/ggreer/the_silver_searcher" target="_blank" rel="noopener noreferrer">The Silver Searcher</a>的指代，<a href="https://tldr.sh/" target="_blank" rel="noopener noreferrer"><code>tldr</code></a>对<code>ag</code>的介绍是
-{% blockquote %}  Recursively search for PATTERN in PATH.
-Like grep or ack, but faster.
-{% endblockquote %}<br>
-<code>ag</code>大多数发行版都没有自带，需要自己安装</p>
-<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
-  <div class="
-    code-block-title 
-    
-    tw-flex 
-    tw-flex-row 
-    tw-justify-between 
-    tw-w-full tw-bg-bgColor-secondary
-    ">      
-    <button 
-      class="
-        tw-select-none 
-        tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
-
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
-    </div>
-    <div class="tw-flex">
-      <button 
-        class="
-          line-number-button
-          tw-select-none 
-          tw-mx-2 
-          tw-hidden 
-          group-[.is-open]:tw-block 
-          group-[.show-line-numbers]:tw-text-fgColor-link 
-          print:!tw-hidden" 
-        title="Toggle line numbers"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
-
-      <button 
-        class="
-          wrap-code-button
-          tw-select-none 
-          tw-mx-2 
-          tw-hidden 
-          group-[.is-open]:tw-block 
-          group-[.is-wrap]:tw-text-fgColor-link 
-          print:!tw-hidden" 
-        title="Toggle code wrap"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
-      
-      <button 
-        class="
-          copy-code-button
-          tw-select-none
-          tw-mx-2 
-          tw-hidden
-          group-[.is-open]:tw-block
-          hover:tw-text-fgColor-link 
-          print:!tw-hidden"
-        title="Copy code">
-          <span class="copy-icon tw-block"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
-          <span class="check-icon tw-hidden"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
-      </button>
-        
-      <button 
-        class="
-          tw-select-none 
-          tw-mx-2 
-          tw-block 
-          group-[.is-open]:tw-hidden 
-          print:!tw-hidden" 
-        disabled
-        aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
-    </div>
-  </div>
-  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-12" 
-    class="
-      chroma 
-      !tw-block 
-      tw-p-0
-      tw-m-0
-      tw-transition-[max-height] 
-      tw-duration-500 
-      tw-ease-in-out 
-      group-[.is-closed]:!tw-max-h-0 
-      group-[.is-wrap]:tw-text-wrap
-      tw-overflow-y-hidden
-      tw-overflow-x-auto
-      tw-scrollbar-thin
-      "><span class="line"><span class="cl">sudo pacman -S the_silver_searcher</span></span></code></pre>
-</div>
-<p>假设我想看一个python项目引入了哪些库，可以用ag搜索<code>import</code>语句</p>
-<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
-  <div class="
-    code-block-title 
-    
-    tw-flex 
-    tw-flex-row 
-    tw-justify-between 
-    tw-w-full tw-bg-bgColor-secondary
-    ">      
-    <button 
-      class="
-        tw-select-none 
-        tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
-
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
-    </div>
-    <div class="tw-flex">
-      <button 
-        class="
-          line-number-button
-          tw-select-none 
-          tw-mx-2 
-          tw-hidden 
-          group-[.is-open]:tw-block 
-          group-[.show-line-numbers]:tw-text-fgColor-link 
-          print:!tw-hidden" 
-        title="Toggle line numbers"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
-
-      <button 
-        class="
-          wrap-code-button
-          tw-select-none 
-          tw-mx-2 
-          tw-hidden 
-          group-[.is-open]:tw-block 
-          group-[.is-wrap]:tw-text-fgColor-link 
-          print:!tw-hidden" 
-        title="Toggle code wrap"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
-      
-      <button 
-        class="
-          copy-code-button
-          tw-select-none
-          tw-mx-2 
-          tw-hidden
-          group-[.is-open]:tw-block
-          hover:tw-text-fgColor-link 
-          print:!tw-hidden"
-        title="Copy code">
-          <span class="copy-icon tw-block"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
-          <span class="check-icon tw-hidden"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
-      </button>
-        
-      <button 
-        class="
-          tw-select-none 
-          tw-mx-2 
-          tw-block 
-          group-[.is-open]:tw-hidden 
-          print:!tw-hidden" 
-        disabled
-        aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
-    </div>
-  </div>
-  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-13" 
-    class="
-      chroma 
-      !tw-block 
-      tw-p-0
-      tw-m-0
-      tw-transition-[max-height] 
-      tw-duration-500 
-      tw-ease-in-out 
-      group-[.is-closed]:!tw-max-h-0 
-      group-[.is-wrap]:tw-text-wrap
-      tw-overflow-y-hidden
-      tw-overflow-x-auto
-      tw-scrollbar-thin
-      "><span class="line"><span class="cl">ag <span class="s2">&#34;import&#34;</span></span></span></code></pre>
-</div>
-<p>ag默认使用正则表达式搜索，而且搜索速度非常快！</p>
-<hr>
-<p>搜索非常快的原因见github仓库</p>
+<p><code>--with-pydebug</code>的目地是为了开发cpython时，帮助发现内存问题，<code>--without-pymalloc</code>的目地是直接使用libc的内存管理系统</p>
+<p>一般来说，python以release模式编译并发行，所以最主要的malloc入口是<code>_PyObject_Malloc</code>，以下定性地阐述其流程</p>
+<ul>
+<li>如果申请大小大于一个阈值（512字节），就直接使用<code>_PyMem_RawMalloc</code>分配内存，它将大小为零的内存申请转换为大小为1的内存申请（为了消除UB），然后直接使用libc的<code>malloc</code>，<code>malloc</code>申请的内存直接返回</li>
+<li>以下部分的申请大小都小于阈值
+<ol>
+<li>将申请内存大小向上取整到<code>16</code>的倍数，并计算其sizeclass的索引</li>
+<li>访问<code>usedpools[size + size]</code>，得到该sizeclass对应的<code>pool</code>的环形双向链表</li>
+</ol>
+<ul>
+<li>如果链表中存在元素，则从<code>pool-&gt;freeblock</code>中取出一个空闲block
+<ul>
+<li>取出后如果<code>pool</code>已满，将该<code>pool</code>从<code>usedpools</code>中移除</li>
+<li>如果未满，返回</li>
+</ul>
+</li>
+<li>如果链表中不存在元素，则尝试建立一个新的<code>pool</code>，并从其中取<code>block</code>
+<ul>
+<li>如果不存在可用的（非全满）的<code>arena</code>，就创建一个<code>arena</code>，并将其加入<code>arenas</code>表示的动态数组的管理中</li>
+</ul>
+<ol>
+<li>至此可以保证一定有一个<code>arnea</code>可以分配出一个<code>pool</code></li>
+<li>从<code>arena</code>中取出一个<code>pool</code>，并处理取出<code>pool</code>后<code>arena</code>全满、<code>pool</code>未初始化等情况</li>
+<li>从该<code>pool</code>中取出</li>
+<li>将取出的<code>pool</code>插入到<code>usedpools[size + size]</code>表示的环形双向链表中</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>一些细节：</p>
+<ol>
+<li>大部分内存请求都是小规模的，会进入python内置的内存管理系统</li>
+<li>大部分小规模的内存请求可以通过sizeclass的索引查找<code>usedpools</code>快速满足</li>
+<li><code>arenas</code>表示的动态数组中，会优先使用第一个未满的<code>arena</code>，用满后才会开辟新的<code>arena</code></li>
+<li>从一个<code>pool</code>取<code>block</code>时，优先取地址更大的<code>block</code>，即使存在低地址的block归还给<code>pool</code>。这样可以将查找推迟到该<code>poool</code>的所有<code>block</code>都分配过一次之后</li>
+<li>大量使用<code>__builtin_expect</code>，主动提供分支预测信息，加快流水线执行机器指令</li>
+</ol>
+<h3 id="总结" class="headerLink">
+    <a href="#%e6%80%bb%e7%bb%93" class="header-mark" aria-label="Header mark for '总结'"></a>总结</h3><ul>
+<li>所有内存请求都规整到<code>16</code>的倍数，一个<code>pool</code>的所有<code>block</code>的大小都是相等的，减少了内存碎片</li>
+<li><code>usedpools</code>按照大小类别快速满足内存请求，体现了“加速大概率事件”这一计算机体系架构的核心思想</li>
+<li>优先使用最满的<code>arena</code>，减少内存使用量</li>
+</ul>
 </div>
 
         <div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-12-21&nbsp;<a class="git-hash" href="https://github.com/z2z63/z2z63.github.io/commit/15300713e676171b41eb9ede753ebbde3fc1d05c" target="_blank" title="commit by z2z63(vituralfuture@gmail.com) 15300713e676171b41eb9ede753ebbde3fc1d05c: update" rel="noopener noreferrer">
-                                    <svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M440.667 182.109l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l14.623-81.891C377.123 38.754 371.468 32 363.997 32h-40.632a12 12 0 0 0-11.813 9.891L296.175 128H197.54l14.623-81.891C213.477 38.754 207.822 32 200.35 32h-40.632a12 12 0 0 0-11.813 9.891L132.528 128H53.432a12 12 0 0 0-11.813 9.891l-7.143 40C33.163 185.246 38.818 192 46.289 192h74.81L98.242 320H19.146a12 12 0 0 0-11.813 9.891l-7.143 40C-1.123 377.246 4.532 384 12.003 384h74.81L72.19 465.891C70.877 473.246 76.532 480 84.003 480h40.632a12 12 0 0 0 11.813-9.891L151.826 384h98.634l-14.623 81.891C234.523 473.246 240.178 480 247.65 480h40.632a12 12 0 0 0 11.813-9.891L315.472 384h79.096a12 12 0 0 0 11.813-9.891l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l22.857-128h79.096a12 12 0 0 0 11.813-9.891zM261.889 320h-98.634l22.857-128h98.634l-22.857 128z"/></svg>1530071</a></span>
+                <span>Updated on 2024-08-04</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -1530,16 +1363,14 @@ Like grep or ack, but faster.
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"/></svg>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/shell/">Shell</a></section>
+        <section class="post-tags"></section>
         <section class="print:!tw-hidden">
             <span><button class="tw-text-fgColor-link-muted hover:tw-text-fgColor-link-muted-hover" onclick="window.history.back();">Back</button></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav print:tw-hidden">
-            <a href="/posts/matplotlib-chinese-font/" class="next" rel="next" title="matplotlib在linux平台上显示中文的解决方案">matplotlib在linux平台上显示中文的解决方案<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></a></div>
+    <div class="post-nav print:tw-hidden"><a href="/posts/week7/" class="prev" rel="prev" title="第七周：关于C/C&#43;&#43;开发，我了解的一切 —— LSP、debugger与IDE"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>第七周：关于C/C&#43;&#43;开发，我了解的一切 —— LSP、debugger与IDE</a></div>
 </div>
 <div id="comments" class="print:!tw-hidden tw-pt-32 tw-pb-8"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -1562,7 +1393,7 @@ Like grep or ack, but faster.
             <svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 32C114.6 32 0 125.1 0 240c0 49.6 21.4 95 57 130.7C44.5 421.1 2.7 466 2.2 466.5c-2.2 2.3-2.8 5.7-1.5 8.7S4.8 480 8 480c66.3 0 116-31.8 140.6-51.4 32.7 12.3 69 19.4 107.4 19.4 141.4 0 256-93.1 256-208S397.4 32 256 32z"/></svg>
         </a></div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css">
-<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2023-04-01T23:35:22Z","owner":"z2z63","repo":"z2z63.github.io","title":"Linux搜索神器"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null},"sharerjs":true};</script><script
+<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2024-08-04T14:21:56+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null},"sharerjs":true};</script><script
     src="/lib/sharer/sharer.min.js"
     
   ></script><script

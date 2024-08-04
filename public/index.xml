@@ -4,9 +4,16 @@
         <link>http://example.org/</link>
         <description>z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 27 Jul 2024 18:57:33 &#43;0800</lastBuildDate>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sun, 04 Aug 2024 14:21:56 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？</title>
+    <link>http://example.org/posts/week8/</link>
+    <pubDate>Sun, 04 Aug 2024 14:21:56 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/week8/</guid>
+    <description><![CDATA[实习期间摸了不少的鱼，通勤路上在看各种文档，在公司摸鱼时就在看glibc或cpython的源码，花了不少时间总算是理解了部分。所谓内存管理系]]></description>
+</item><item>
     <title>第七周：关于C/C&#43;&#43;开发，我了解的一切 —— LSP、debugger与IDE</title>
     <link>http://example.org/posts/week7/</link>
     <pubDate>Sat, 27 Jul 2024 18:57:33 &#43;0800</pubDate><author>
@@ -69,12 +76,5 @@
         <name>z2z63</name>
     </author><guid>http://example.org/posts/fcitx5_rime_color_style/</guid>
     <description><![CDATA[<p>rime是一个开源、高度可定制、多平台支持的输入法框架，然而在配置fctix5-rime的配色方案时我又踩了坑，记录一下解决方案</p>]]></description>
-</item><item>
-    <title>APUE第三章总结：文件IO</title>
-    <link>http://example.org/posts/apue-chapter1-fileio/</link>
-    <pubDate>Sun, 11 Feb 2024 22:56:30 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/apue-chapter1-fileio/</guid>
-    <description><![CDATA[<p>这是APUE（Advanced Programming in the UNIX Environment，UINX环境高级编程）阅读笔记系列文章</p>]]></description>
 </item></channel>
 </rss>

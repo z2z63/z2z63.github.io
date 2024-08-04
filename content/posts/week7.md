@@ -80,7 +80,7 @@ clangd是一个非常强大的语言服务器，体验不输各种商业化的�
 - 调试需要硬件支持，涉及中断
 - linux提供ptrace系统调用，供debugger使用
 
-具备以上知识只能在命令行调用debugger，在绝大部分情况下我们都是使用IDE的debug功能。就像LSP，debuuger也有协议与文本编辑器通信，这样IDE就不需要自己实现每个语言的调试功能，这个协议为[DAP](https://microsoft.github.io/debug-adapter-protocol/)，即Debug Adapter Protocol
+具备以上知识只能在命令行调用debugger，在绝大部分情况下我们都是使用IDE的debug功能。就像LSP，debuger也有协议与文本编辑器通信，这样IDE就不需要自己实现每个语言的调试功能，这个协议为[DAP](https://microsoft.github.io/debug-adapter-protocol/)，即Debug Adapter Protocol
 
 有了DAP，debugger就能和IDE分离，debugger可以运行在远程，而IDE运行在本地，这样的调试被成为远程调试
 
