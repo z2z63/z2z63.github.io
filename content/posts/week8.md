@@ -11,7 +11,7 @@ glibc作为libc的GNU实现，按照分层的角度，它往下是操作系统�
 
 4K是一个非常粗的粒度，从操作系统的角度，4K是为了减少内存管理系统的开销并减少内存碎片的一个权衡结果，但对于用户进程来说，4K还是太大了，因此用户态还需要一个内存管理系统，用于满足用户程序零散、频繁的内存需求
 
-glibc提供了一个内存管理系统，在linux平台，几乎所有进程都会链接到glibc。包括解释语言，诸如shell、python。它们如果需要访问操作系统，也要链接到glibc。因此glibc是用户程序的最底层，简化了用户程序与操作系统的交互
+glibc提供了一个内存管理系统，在linux平台，几乎所有进程都会链接到glibc。包括解释语言，诸如shell、python。它们如果需要访问操作系统，也要链接到glibc。因此glibc是用户程序的最底层，简化用户程序与操作系统的交互
 > 如果只使用系统调用的ABI接口，就不必链接到glibc。但需要写内联汇编，而且直接使用系统调用难度高，移植性差
 
 分层并不能解决所有问题，许多用户程序会在glibc提供的内存管理系统之上再实现一个自己的内存管理系统。python在编译时，可以选择是否使用python内置的内存管理系统，如果选择否，就会直接使用libc的内存管理系统。为了性能和开销、这个选项是默认打开的
@@ -197,7 +197,7 @@ python有四套内存管理系统，可以通过编译参数指定使用哪一�
       - 如果未满，返回
     - 如果链表中不存在元素，则尝试建立一个新的`pool`，并从其中取`block`
       - 如果不存在可用的（非全满）的`arena`，就创建一个`arena`，并将其加入`arenas`表示的动态数组的管理中
-      1. 至此可以保证一定有一个`arnea`可以分配出一个`pool`
+      1. 至此可以保证一定有一个`arena`可以分配出一个`pool`
       2. 从`arena`中取出一个`pool`，并处理取出`pool`后`arena`全满、`pool`未初始化等情况
       3. 从该`pool`中取出
       4. 将取出的`pool`插入到`usedpools[size + size]`表示的环形双向链表中
@@ -213,3 +213,176 @@ python有四套内存管理系统，可以通过编译参数指定使用哪一�
 - 所有内存请求都规整到`16`的倍数，一个`pool`的所有`block`的大小都是相等的，减少了内存碎片
 - `usedpools`按照大小类别快速满足内存请求，体现了“加速大概率事件”这一计算机体系架构的核心思想
 - 优先使用最满的`arena`，减少内存使用量
+## glibc的内存管理系统
+glibc的内存管理系统非常复杂。也许是因为glibc开发完成于“古代”，源码风格非常乱，花括号缩进可读性非常差，几百行的if else分支随处可见，宏里还会使用局部变量，不推荐阅读  
+
+我花费了一些时间阅读`malloc`实现后，只理解了部分。以下大部分内容都来自于glibc的[wiki](https://sourceware.org/glibc/wiki/MallocInternals)，但我希望它的内容比wiki更容易阅读
+
+### arena
+glibc向操作系统索取内存的方式有两种，一种是通过`brk`扩展堆区，另一种是通过`mmap`得到映射的一块内存。glibc将通过`brk`扩展的堆区称为main arena，它是第一个初始化的arena
+
+与MSVC不同，glibc不存在单线程版本和多线程版本。为了实现`malloc`的线程安全，arena对象有一个互斥锁字段，用于控制互斥访问
+
+为了缓解多线程环境下的互斥时间开销，一个进程可以有多个arena，一个arena可以有一个或多个heap（此处的heap仅仅指连续内存，不是进程的heap），一个heap有多个chunck，chunck是glibc管理内存的最小单位，返回给用户的内存首地址也是chunck的**一部分**
+> **Note:** arena拥有的内存不一定不是连续的，因为只有heap才是连续的，而一个arena可以拥有多个heap
+
+arena的结构如下（省略部分），bin相关介绍见下文
+```C
+struct malloc_state
+{
+  __libc_lock_define (, mutex);     // 互斥锁用于互斥访问arena
+  int flags;
+  int have_fastchunks;              // 记录是否有fastbin
+  mfastbinptr fastbinsY[NFASTBINS];
+  mchunkptr top;
+  mchunkptr last_remainder;
+  mchunkptr bins[NBINS * 2 - 2];
+  unsigned int binmap[BINMAPSIZE];
+  struct malloc_state *next;        // 形成单链表
+  struct malloc_state *next_free;
+};
+
+### heap
+```
+heap的结构如下
+```C
+typedef struct _heap_info
+{
+  mstate ar_ptr;                // 指向heap所属的arena
+  struct _heap_info *prev;      // 形成单链表
+  size_t size;                  // 此heap拥有的连续字节数
+  size_t mprotect_size;
+  size_t pagesize;              // 分配此heap时使用的页大小，一般是4K
+  char pad[-3 * SIZE_SZ & MALLOC_ALIGN_MASK];   // 用于使后续数据对齐
+} heap_info;
+```
+![](https://sourceware.org/glibc/wiki/MallocInternals?action=AttachFile&do=get&target=MallocInternals-heaps.svg)
+
+### chunck
+Q：为什么`malloc`需要提供申请的内存的大小，而`free`不需要
+A：因为`malloc`返回的内存是chunck的一部分，而chunck记录了该chunck的大小
+
+chunck是一块长度不固定的内存，两个相邻的chunck可以合并成一个更大的chunck
+
+chunck结构如下
+```C
+struct malloc_chunk {
+  INTERNAL_SIZE_T      mchunk_prev_size;// chucnk空闲时表示临接的chunck的大小，用于chunck合并
+  INTERNAL_SIZE_T      mchunk_size;     // chunck的大小
+  struct malloc_chunk* fd;              // forward的缩写，在chuck空闲时用于形成双向链表
+  struct malloc_chunk* bk;              // back的缩写，在chuck空闲时用于形成双向链表
+  struct malloc_chunk* fd_nextsize;     // 指向更大的chunck，当chunck较大时用于形成双向链表，chunck较小时不使用
+  struct malloc_chunk* bk_nextsize;     // 指向更小的chunck，当chunck较大时用于形成双向链表，chunck较小时不使用
+};
+```
+由于需要记录一些元数据，一个chunck会有一些额外的空间开销  
+
+规定一个chunck的大小为8字节的倍数，当用户申请的空间+chunck额外开销不足8字节倍数时，需要向上取整。由于chunck的大小是8字节的倍数，`mchunk_size`字段的低三位一直是零，可以用来记录一些额外的信息
+```
++-------------+---+---+---+
+| mchunk_size | A | M | P |
++-------------+---+---+---+
+```
+- A(0x4)  
+  用于标记该chunc所属的heap是否是通过`mmap`获得的。增加这一标志后，如果`A`为0，表示chucnk来自主arena，即进程的堆区，如果`A`为1，表示chunck来自映射的内存。由于`mmmap`返回的地址永远是页对齐的，可以通过chunck地址的高位确定它来自的heap 
+- M(0x2)
+  当申请的内存太大时，malloc会直接使用`mmap`创建一个超大的chucnk，`M`位标记该chunck是直接使用`mmap`创建的
+- P(0x1)
+  标记前一个邻接的chunck正在被使用，此时`mchunk_prev_size`字段无效，设置该位会阻止邻接chunck的合并
+
+`malloc`返回的是分配的chunck的`mchunk_size`之后的地址，即`fd`和`bk`是分时复用的
+<table><tbody><tr>  <td style="text-align: center;"><p class="line862">In-use Chunk</p></td>
+  <td style="text-align: center;"><p class="line862">Free Chunk</p></td>
+</tr>
+<tr>  <td><span class="anchor" id="line-96"></span><p class="line891"><object data="https://sourceware.org/glibc/wiki/MallocInternals?action=AttachFile&amp;do=get&amp;target=MallocInternals-chunk-inuse.svg" title="" type="image/svg+xml">MallocInternals-chunk-inuse.svg</object></p></td>
+  <td><p class="line891"><object data="https://sourceware.org/glibc/wiki/MallocInternals?action=AttachFile&amp;do=get&amp;target=MallocInternals-chunk-free.svg" title="" type="image/svg+xml">MallocInternals-chunk-free.svg</object></p></td>
+</tr>
+</tbody></table>
+
+此外，在chunck结构体之后，还有一个隐含的冗余`size`字段，它用于保护chunck。当用户不慎使用了错误的指针运算修改了`mchunk_size`字段时，glibc可以通过冗余的`size`字段判断出异常，并发出警告
+
+
+一个arena通过四个链表记录了空闲的chuck，这些链表被称为bins
+
+#### fastbin
+arena的`mfastbinptr fastbinsY[NFASTBINS];`字段表示了fastbin，它是一个数组，数组的每个元素都是一个单链表的表头，链表中的所有chunck的大小都是相同的
+
+与python相似，fastbinsY的索引也表示大小类别，通过申请内存的大小可以快速确定索引。fastbin是`malloc`申请内存的快速通道
+
+fastbin的`P`位置零，用于阻止chunck合并
+#### unsorted bin
+释放后的chunck会先进入unsorted bin，随后（触发某个条件后）它们会被排序，然后进入其他bin
+#### small bin
+small bin是normal bin的一部分，它们通过双向链表组织。normal bin即arena的`mchunkptr bins[NBINS * 2 - 2];`成员
+
+当unsorted bin排序后，chunck如果足够小，会进入small bin。此时尝试将该chunck与small bin中已有的chunck进行合并，合并后的chunck进入large bin。因此，small bin不存在邻接的chunck
+
+当从small bin中取出chunck时，只需要取出第一个足够大的chunck即可
+#### large bin
+当unsorted bin排序后，chunck如果足够大，会进入large bin，此外，还可以由small bin中的chunck合并得来
+
+当从large bin中取出chunck时，需要寻找足够大的chunck中最小的一个，此时的chunck可能还是比需要的大小更大，需要将该chunck分为两个chunck，一个chunck可以恰好满足需要的大小，剩下的chunck可以继续使用
+
+### tcache
+为了加快`malloc`的速度，可以缓存一些空闲的chunck，这些chunck是每个线程都有的（Thread Local Storage），即per thread cache，简称tcache
+
+tcache定义如下
+```C
+typedef struct tcache_perthread_struct
+{
+  uint16_t counts[TCACHE_MAX_BINS];
+  tcache_entry *entries[TCACHE_MAX_BINS];
+} tcache_perthread_struct;
+static __thread tcache_perthread_struct *tcache = NULL;
+```
+`__thread`是GCC的私有关键字，用于声明线程局部存储。当一个线程第一次使用`malloc`时，会触发tcache的初始化流程
+
+tcache表示一个数组，其中每个元素是单链表的表头，但指向的不是chunck首地址而是payload，这样的chunck可以直接返回给用户。每个单链表的所有chunck的大小都是相等的，entries的索引表示大小类别，就像fastbin，可以通过需要申请的大小快速计算出tcache的索引
+
+由于tache是线程局部的，访问tcache不必加锁，比fastbin更快（fastbin可以通过原子操作访问）。当tcache不存在恰好满足的chunck时，会回退到fastbin
+
+### 总结
+glibc源码非常晦涩，有许多GCC特性，它是一个比较通用的内存管理系统，在空间开销、速度、减少内存碎片三个角度做了充分的权衡。这也导致了它在一些场合下性能不足某些
+特化的内存管理系统
+
+## python vs glibc
+相同
+- 使用大小类别使大部分内存请求都在在 O(1) 的时间复杂度内完成
+- 都使用了缓存加快速度（usedpools、tcache）
+
+不同
+- Python的内存管理系统开销非常大，实际上，Python语言本身就是一个开销比较高的语言
+  > **Note**: 
+- Python的内存管理系统强调规整化内存请求，减少内存碎片。glibc强调通用性
+  
+
+最后，来复习一下计算机系统结构中的8个伟大思想，以及他们在内存管理系统中的应用
+- 面向摩尔定律的设计
+- 使用抽象简化设计
+  Python使用`arena`、`pool`、`block`抽象描述内存分配系统，而glibc使用`arena`，`heap`，`chunck`，使用上述抽象将内存管理系统简化为
+  操作各个对象
+- 加速大概率事件
+  Python使用`usedpools`，glibc使用tcache和fastbin。对于绝大部分内存请求，只需要根据请求的大小类别就可在常数时间内完成内存的分配
+- 通过并行提高性能
+  glibc提供了多个arena，本质是降低锁的粒度，提高内存管理系统的并发度。此外，glibc还使用了原子操作访问fastbin，甚至使用线程局部的tcache，实现“无锁并发”（实际上操作的数据都不是同一个）  
+  python由于GIL的存在，内存管理系统并没有考虑并发
+- 通过流水线提高性能
+- 通过预测提高性能
+  现代CPU通过分支预测提高流水线的吞吐率，分支预测失败时，需要清空流水线，开销较大。Python和glibc都使用了GNU的`__builtin_expect`控制分支的汇编代码生成，有利于提高流水线的吞吐率
+- 存储器层次
+  内存管理系统并没有涉及主存以外的存储器，但从缓存的角度，`tcache`和`usedpools`都充当了缓存加快了内存分配速度  
+  此外，`usedpools`去除了`pool_header`中无用的其他数据，使得cache line中能存放更多的`usedpools`元素，有利于使用高速缓存加快速度
+- 通过冗余提高可靠性
+  glibc通过冗余`size`字段，实现了一定程度的发现内存错误甚至是修复错误的功能  
+  python由于其内存分配系统的用户是CPyhton和Python C扩展的开发者，CPython提供了`_PyMem_DebugMalloc`帮助他们发现内存错误。`_PyMem_DebugMalloc`的实现中实际上包含了一些冗余信息，但不在本文范围之内
+
+## 关于内存分配系统
+我认为内存分配系统实际上是一个内存分时复用系统。提及分时复用，大部分人也许会想到计算机网络学到的分时复用（Time Division Multiplexing，TDM）
+
+如果将每次的内存申请看作用户请求使用一定的带宽，而进程拥有的所有内存看作线路，就能看出内存分配系统与分时复用系统的相似性
+
+内存分配系统存在的必要基于两个事实
+- 内存不是无限的
+- 进程需要长期运行，如果不分时复用内存，迟早用完所有的物理内存
+  
+由此可以推出，某些短期运行的进程，也许可以不手动释放内存，可以依靠进程退出时操作系统释放进程占据的所有页这一手段来释放内存
