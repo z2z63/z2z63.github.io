@@ -6,20 +6,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noodp" /><title>推荐系统简单介绍 - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://example.org/posts/recsys-summary/">
+    <meta name="robots" content="noodp" /><title>第十周：杂谈与碎碎念 - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://example.org/posts/week10/">
   <meta property="og:site_name" content="z2z63/Virtualfuture&#39;s Blog">
-  <meta property="og:title" content="推荐系统简单介绍">
-  <meta property="og:description" content="这篇文章是wikipedia的recsys词条的翻译以及简化版本，原文见https://en.wikipedia.org/wiki/Reco">
+  <meta property="og:title" content="第十周：杂谈与碎碎念">
+  <meta property="og:description" content="近来也算看了不少别人的博客，有些文章非常优秀，还有一些很无趣。在我看来，一篇好的博文首先不能是官方文档的复读机，也不能让读者完全看不懂，其次">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-08-04T15:26:51+00:00">
-    <meta property="article:modified_time" content="2024-06-07T23:07:37+08:00">
-    <meta property="article:tag" content="Mechine Learning">
+    <meta property="article:published_time" content="2024-08-18T14:36:32+08:00">
+    <meta property="article:modified_time" content="2024-08-18T14:36:32+08:00">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="推荐系统简单介绍">
-  <meta name="twitter:description" content="这篇文章是wikipedia的recsys词条的翻译以及简化版本，原文见https://en.wikipedia.org/wiki/Reco">
+  <meta name="twitter:title" content="第十周：杂谈与碎碎念">
+  <meta name="twitter:description" content="近来也算看了不少别人的博客，有些文章非常优秀，还有一些很无趣。在我看来，一篇好的博文首先不能是官方文档的复读机，也不能让读者完全看不懂，其次">
 <meta name="application-name" content="z2z63/Virtualfuture&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="z2z63/Virtualfuture&#39;s Blog">
 
@@ -27,15 +26,15 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-<link rel="canonical" href="http://example.org/posts/recsys-summary/" /><link rel="prev" href="http://example.org/posts/kde-setting-cli/" /><link rel="next" href="http://example.org/posts/linux-font/" />
+<link rel="canonical" href="http://example.org/posts/week10/" /><link rel="prev" href="http://example.org/posts/week8/" />
 <link rel="stylesheet" href="/css/main.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">{"@context": "https://schema.org","@type": "BlogPosting",
-        "headline": "推荐系统简单介绍",
+        "headline": "第十周：杂谈与碎碎念",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http://example.org/posts/recsys-summary/"
-        },"genre": "posts","keywords":["Mechine Learning"],"wordcount":  1519 ,
-        "url": "http://example.org/posts/recsys-summary/","datePublished": "2023-08-04T15:26:51+00:00","dateModified": "2024-06-07T23:07:37+08:00","publisher": {
+            "@id": "http://example.org/posts/week10/"
+        },"genre": "posts","wordcount":  3285 ,
+        "url": "http://example.org/posts/week10/","datePublished": "2024-08-18T14:36:32+08:00","dateModified": "2024-08-18T14:36:32+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
                 "@type": "Person",
@@ -157,109 +156,97 @@
 </div><main class="main">
             <div class="container"><div class="toc print:!tw-hidden" id="toc-auto">
         <h2 class="toc-title">Contents</h2>
-        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents"></nav></div>
-    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title">推荐系统简单介绍</h1><div class="post-meta">
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#实践">实践</a>
+      <ul>
+        <li><a href="#再谈分层">再谈分层</a></li>
+        <li><a href="#我的想法">我的想法</a></li>
+      </ul>
+    </li>
+    <li><a href="#cc">C/C++</a></li>
+    <li><a href="#关于批评">关于批评</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title">第十周：杂谈与碎碎念</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src="https://avatars.githubusercontent.com/z2z63"   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2023-08-04">2023-08-04</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-06-07">2024-06-07</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;1519 words&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;4 minutes&nbsp;</div>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2024-08-18">2024-08-18</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-08-18">2024-08-18</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;3285 words&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;7 minutes&nbsp;</div>
         </div><div class="details toc print:!tw-block" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span class="details-icon"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"><p>这篇文章是wikipedia的recsys词条的翻译以及简化版本，原文见<a href="https://en.wikipedia.org/wiki/Recommender_system" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Recommender_system</a>
-recsys(推荐系统)的种类</p>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#实践">实践</a>
+      <ul>
+        <li><a href="#再谈分层">再谈分层</a></li>
+        <li><a href="#我的想法">我的想法</a></li>
+      </ul>
+    </li>
+    <li><a href="#cc">C/C++</a></li>
+    <li><a href="#关于批评">关于批评</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>近来也算看了不少别人的博客，有些文章非常优秀，还有一些很无趣。在我看来，一篇好的博文首先不能是官方文档的复读机，也不能让读者完全看不懂，其次，信息来源应该尽量保持一手。从某方面来说，学习知识-输出知识的过程就好比咀嚼或消化。不知道转了多少手的知识好比被多次咀嚼消化后的粘稠状半消化物，多少令人反胃。我曾经也是被百度与CSDN之流坑过，所以看到 <a href="https://csdiy.wiki/%E5%BF%85%E5%AD%A6%E5%B7%A5%E5%85%B7/workflow/#_1" target="_blank" rel="noopener noreferrer">csdiy.wiki</a> 中相同的观点时，感同身受。</p>
+<p>我希望博客可以介绍解决一个问题的方案，分析问题场景，找出问题本质，再对比几个方案，给出我对它们的评价和偏好；也可以是将网上的回答非常零碎，但别人肯定会遇到的问题进行总结。总之，我希望文章能体现出作者的思考和观点。这篇文章我将输出一些观点和我的一些偏好</p>
+<h2 id="实践" class="headerLink">
+    <a href="#%e5%ae%9e%e8%b7%b5" class="header-mark" aria-label="Header mark for '实践'"></a>实践</h2><p>实习以来，见过公司内部不少的奇技淫巧。因为别人的框架不能满足业务需求，就为自己量身打造了一个新轮子；为了加快上线速度，将JS动态翻译成dart，为flutter接入了动态化能力，见 <a href="https://cloud.tencent.com/developer/article/1472361" target="_blank" rel="noopener noreferrer">基于JS的高性能Flutter动态化框架MXFlutter-腾讯云开发者社区-腾讯云</a>；一个仓库同时开发多个产品，跨桌面端移动端，支持私有化部署，同时服务个人用户和企业用户，开放能力给扩展应用，甚至还开放SDK给第三方定制。在公司里看到了他们为了解决问题的热情和努力，对此我的认识是</p>
 <ul>
-<li>collaborative filtering（协同过滤）根据相似用户的行为为用户推荐内容，推荐理由是“与你相似的人都喜欢xx”，
-缺点是需要大量用户行为数据，冷启动慢</li>
-<li>content-based filtering（基于内容过滤）给物打上标签，推荐具有相似标签的物，推荐理由是“与你喜欢的xx有关”，
-少量用户行为数据即可启动，但是只能推荐相似的物，无法推荐新物</li>
-<li>knowledge-based systems</li>
+<li>程序员（虽然比较俗的称呼，但大差不差）的工作简单来说，就是解决硬件以上的、所有的软件的问题</li>
+<li>现实是非常复杂的，为了应对复杂的需求，需要不断地修改设计或架构</li>
 </ul>
-<h1 id="collaborative-filtering" class="headerLink">
-    <a href="#collaborative-filtering" class="header-mark" aria-label="Header mark for 'collaborative filtering'"></a>collaborative filtering</h1><p>协同过滤的假定是</p>
+<p>这里又会掉进一个陷阱，一般来说，设计越复杂，就越能应对复杂的需求。可以认为，设计的复杂性是它能力的一个指标，但增加设计的复杂性应该是被迫的，即增加设计的原因只能是为了应对复杂的需求。简单来说，不要为了复杂而复杂；或者说，认清需求，不要过度复杂</p>
+<p>现实是非常复杂而深刻的，虽然人们面临的问题总是相似的，并且总结出了很多范式或通用解法，也发明了不少理论，造出了不少轮子，但很遗憾的是“软件工程没有最终银弹”，为了解决复杂问题，总是需要反范式、发明新理论、重复造轮子</p>
+<blockquote>
+<p><strong>Note:</strong> 欧美古老传说中使用银弹可以杀死吸血鬼、狼人或怪兽，因此”最终银弹“引申为解决所有问题的最佳方法</p>
+</blockquote>
+<h3 id="再谈分层" class="headerLink">
+    <a href="#%e5%86%8d%e8%b0%88%e5%88%86%e5%b1%82" class="header-mark" aria-label="Header mark for '再谈分层'"></a>再谈分层</h3><p>在前几篇文章中，我已经谈论过<a href="./week2.md#%e5%88%86%e5%b1%82" rel="">分层</a>。简单来说，分层尝试屏蔽底层细节，但它不仅仅不能完全屏蔽，而且还会导致上层只能访问底层共同能力，而无法访问其全部能力。分层是为了减少开发者心智负担，但不代表开发者可以完全不考虑底层、对底层一无所知。如果一个人工作在上层也许可以解决99%的问题，但无论如何，总有一些问题是上层一定无法解决的。如果只工作在上层，使用别人提供的优秀的框架，而不了解其底层原理、机制、概念，这样的人顶多叫做“框架使用者”，而不是“开发者”。很遗憾的是大部分人都是“框架使用者”，熟练使用框架与“熟练使用缝纫机”没有本质区别。我始终认为程序员的工作是一个发明、创造的工作，而不是机械的、流水线的工作。这个话题在reddit已经有讨论: <a href="https://www.reddit.com/r/webdev/comments/15mryl1/be_an_dev_not_a_frameworker/" target="_blank" rel="noopener noreferrer">Be an Dev, not a Frameworker</a></p>
+<h3 id="我的想法" class="headerLink">
+    <a href="#%e6%88%91%e7%9a%84%e6%83%b3%e6%b3%95" class="header-mark" aria-label="Header mark for '我的想法'"></a>我的想法</h3><p>以上已经可以看出我的想法了。相比上层，我更倾向底层，从大二到现在，我也是一直在这个方向努力。底层开发者面临着更复杂、更深刻、更广泛的问题，他们的工作成果决定了上层的形状，底层的革新会带来更长久更广泛的进步。如果将底层开发者的工作比作生产各种玩具，那么上层开发者的工作就是将几种玩具打包、装进漂亮包装盒、缠上红缎带，定高价在商场中出售。很明显上层开发者会获得更多的利益，包括名誉、知名度、金钱。也许未来的我会后悔，但至少现在还有热爱与激情支撑</p>
+<h2 id="cc" class="headerLink">
+    <a href="#cc" class="header-mark" aria-label="Header mark for 'C/C&#43;&#43;'"></a>C/C++</h2><p>最近也是打算深入学习一下C/C++了，说来惭愧我连C++ primer都没看完。b乎上关于C++的批评也不少，虽然大部分都是站在高级语言的角度踩一脚C++<br>
+我的反驳理由也非常简单：很多高级语言的解释器、虚拟机都是用C/C++写的，例如Python，java，dart，js等</p>
+<p>C/C++可以说是又古老又现代，诞生了不少历史悠久的工程，其中不乏postgresql这样的老牌开源项目，也有windows这样的商业工程。这些工程经过了广泛的实践与验证，即使是C/C++标准大变样，操作系统、软件工程方法长足进步的现在， 它们解决一些问题的方法也是非常具有参考意义的。这些历史可以认为是C/C++的资产，有了这样的资产，开发大型项目时选择C/C++就不奇怪了</p>
+<p>此外，C/C++与其他语言最大的优势有两点</p>
 <ul>
-<li>过去相似的用户，在未来也是相似的</li>
-<li>过去用户喜欢的物，在未来也是喜欢的</li>
+<li>操作系统基本是用C/C++写的<br>
+所以操作系统的API，即系统调用也往往是以C/C++的形式提供的，因此C/C++能访问操作系统的全部能力</li>
+<li>C API已经成了跨语言互操作的公认事实标准<br>
+使用其他语言容易陷入一个困局：无法在其他语言中调用，所以其他语言总是需要重复实现一些功能</li>
 </ul>
-<p>推荐系统只使用了不同用户对不同物的评分，通过使用评分，推荐系统定位用户和物，使用邻居生成推荐<br>
-协同推荐的分类</p>
-<ul>
-<li>memory-based 基于内存的协同过滤，例子是user-based algorithm(基于用户的推荐算法)</li>
-<li>model-based，基于模型的协同过滤，例子是matrix factorization（矩阵分解）</li>
-</ul>
-<p>优点是不需要机器分析内容（使用NLP分析文本并打上标签等等），能准确推荐复杂的物，缺点是需要大量用户行为数据，冷启动慢</p>
-<p>判断用户的相似度使用的算法有</p>
-<ul>
-<li>k-nearest neighbors(kNN算法)</li>
-<li>Pearson correlation coefficient(皮尔逊相关系数)</li>
-<li>approximate nearest neighbors(ANN,近似最近邻算法)</li>
-</ul>
-<p>协同过滤的缺点</p>
-<ul>
-<li>冷启动<br>
-新用户和新物缺少数据，无法推荐</li>
-<li>可扩展性<br>
-随着用户和物的增加，计算量增加，大型推荐系统需要很高的算力</li>
-<li>稀疏性<br>
-用户和物的数量都很大，但一个用户只会和极少的物交互，数据很稀疏</li>
-</ul>
-<p>item-to-item collaborative filtering（基于物的协同过滤）也是协同过滤的一个例子，它的推荐理由是“喜欢x的人也喜欢y ”</p>
-<h1 id="content-based-filtering" class="headerLink">
-    <a href="#content-based-filtering" class="header-mark" aria-label="Header mark for 'Content-based filtering'"></a>Content-based filtering</h1><p>基于内容过滤的推荐系统使用的数据是物的特征（打的标签）和用户的偏好资料，
-它将推荐问题转换成了将一群用户分为喜欢某特征和不喜欢某特征的分类问题</p>
-<p>为了创建用户偏好资料，推荐系统集中于两种信息</p>
-<ul>
-<li>xxxxxxxxxx         fn(5);    118e:       bf 05 00 00 00          mov    $0x5,%edi    1193:       e8 b1 ff ff ff          call   1149 &lt;_Z2fni&gt;text</li>
-<li>用户与推荐系统交互的历史</li>
-</ul>
-<p>为了获取物的特征，推荐系统常用TF-IDF（又称向量空间表示）算法<br>
-推荐系统基于权重向量创建用户的偏好资料，权重向量中的每一个权重表达了每个特征对用户的重要性。计算权重向量的方法有：
-取用户有关的物的权重向量的平均值，还有贝叶斯分类器，聚类分析，决策树，神经网络</p>
-<p>基于内容过滤的一个关键问题是，推荐系统不能从一个内容源中学习到用户的偏好然后在其他类型的内容中使用学习到的用户偏好。例如
-推荐系统从用户阅读新闻的行为中学习到了用户的偏好，但不能在推荐音乐，视频，产品等物时使用这些偏好。为了克服这个问题，
-大多数基于内容过滤的系统都会使用混合式的系统</p>
-<h1 id="hybrid-recommender-systems" class="headerLink">
-    <a href="#hybrid-recommender-systems" class="header-mark" aria-label="Header mark for 'Hybrid recommender systems'"></a>Hybrid recommender systems</h1><p>大多数推荐系统都采用混合式的方案，结合协同过滤、基于内容过滤等等。<br>
-混合式的方案有几种实现方法，可以让不同的推荐系统分别生成推荐然后将结果合并，也可以将协同过滤的能力加入到
-基于内容过滤的系统中（或者相反）<br>
-混合式的推荐系统的准确度一般比单一的推荐系统高，而且能够克服单一推荐系统的缺点，例如冷启动和稀疏性问题<br>
-一些混合式的技术有</p>
-<ul>
-<li>Weighted
-将不同推荐系统给一个物的评分求加权平均值，仅仅通过数值的方法来结合不同的推荐系统</li>
-<li>Switching
-在不同的推荐系统中切换，采用所选的系统</li>
-<li>Mixed
-将不同推荐系统的结果合并</li>
-<li>Feature Combination
-将来自不同知识源的特征结合起来，输入给一个推荐系统</li>
-<li>Feature Augmentation
-计算一个或一组特征，其结果作为下一个推荐系统的输入</li>
-<li>Cascade
-不同推荐系统被赋予不同的优先级，当高优先级的推荐系统给一些物打分相同时，低优先级的推荐系统继续打分，改变评分相同的情况</li>
-<li>Meta-level
-一个推荐系统的输出作为另一个推荐系统的输入</li>
-</ul>
-<hr>
-<p>reference:
-[1] wikipedia, Recommender system <a href="https://en.wikipedia.org/wiki/Recommender_system" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Recommender_system</a></p>
+<p>此外，因为很多高级语言的解释器、虚拟机都是用C/C++写的，所以这些解释器、虚拟机也依赖于C/C++的运行时。然而高级语言的运行时很多时候会造成不少麻烦。很多高级语言的运行时不容易嵌入到其他运行时中，在部署时，还需要带上运行时。C/C++的优点是就体现在这里，因为操作系统基本是用C/C++写的，所以绝大部分操作系统都有C/C++的运行时，基本不用考虑C/C++的运行时问题</p>
+<h2 id="关于批评" class="headerLink">
+    <a href="#%e5%85%b3%e4%ba%8e%e6%89%b9%e8%af%84" class="header-mark" aria-label="Header mark for '关于批评'"></a>关于批评</h2><p>很想评价一下b乎的风气了。经过长时间使用b乎，我也是发现b乎用户平均水平了。b乎的计算机话题充斥着不少半吊子毫不客气地批评各种东西。看了这些内容后，我产生了一个观点：没有调查就没有发言权</p>
+<blockquote>
+<p>b乎指知乎</p>
+</blockquote>
+<p>一个框架、语言、系统、产品，诸如这样的东西肯定不是完美的，它从诞生时就有各种问题，但在实践中人们总是会用其他方法来弥补甚至绕过这个问题。只有参与到广泛的实践中，才能真正认识到它的优劣。一个原则就是，如果它已经部署在许多生产环境并创造了价值，那么它一定是有可取之处的，至少轮不到b乎用户来批评</p>
+<p>这也让我反思，我过去对windows的评价可以说是非常低了，自从主力切换到archlinux后，虽然在archlinux遇到了数不尽的问题，但还是非常喜欢使用linux，并且如果不从事windows开发，我想我可能都不会主动使用windows开发了。认识到 没有调查就没有发言权 后，我也改变了我的观点。</p>
+<p>我现在对windows的观点是，它确实存在不少我非常不喜欢的东西，微软雅黑和新宋体非常丑陋，cmd和powershell不好用，GBK编码特别坑，POSIX不兼容，C/C++开发比linux麻烦得多等等。但作为PC市场的霸主，还有windows server跑在服务器，它能取得成功是有原因的。因此我对windows的意见暂时保留，并且开始学习win32、阅读windows文档、计划阅读<a href="https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals" target="_blank" rel="noopener noreferrer">windows internals</a>(<del>深入理解windows的目地是为了更好的批评windows</del>)</p>
+<p>windows有很多老古董，虽然windows的技术栈在不断迭代，但其背后的核心并没有改变。例如
+Component Object Model（COM）虽然最开始被使用在ActiveX, IE这样的老古董上，但时至今日，COM仍然是Windows一个非常强大的技术，它间接地解决了C++ ABI问题，让C++开发者之间的协作变得更加容易。即使是2024年的现在，标准委员会也没有要解决C++ ABI问题的意图。linux基本没有解决C++ ABI的问题，在我的认知中，linux是通过以下方式缓解的</p>
+<ol>
+<li>linux许多软件包都是源码发行的，只要软件将他们依赖的软件包源码一并编译，就不会遇到ABI问题。而windows商业软件很多，让商业公司重新编译的难度非常高</li>
+<li>GNU为了ABI兼容做了许多努力，简单来说，GCC前向兼容跨越了许多个大版本，覆盖了绝大部分linux发行版软件源中gcc版本</li>
+<li>导出C接口，避免C++ ABI问题</li>
+</ol>
+<p>此外，Windows Side by Side(WinSxS)解决了动态库依赖问题，这样的技术即使现在放到linux也是非常先进的，而且WinSxS居然在Windows 2000就被发明出来了。linux并没有类似的技术解决这个问题，相反，linux通过包管理器、appimage这些手段避免了动态库依赖问题</p>
 </div>
 
         <div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-06-07&nbsp;<a class="git-hash" href="https://github.com/z2z63/z2z63.github.io/commit/a2142c950abbbc2dffddb8fbfcb645c874417a51" target="_blank" title="commit by z2z63(vituralfuture@gmail.com) a2142c950abbbc2dffddb8fbfcb645c874417a51: update" rel="noopener noreferrer">
-                                    <svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M440.667 182.109l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l14.623-81.891C377.123 38.754 371.468 32 363.997 32h-40.632a12 12 0 0 0-11.813 9.891L296.175 128H197.54l14.623-81.891C213.477 38.754 207.822 32 200.35 32h-40.632a12 12 0 0 0-11.813 9.891L132.528 128H53.432a12 12 0 0 0-11.813 9.891l-7.143 40C33.163 185.246 38.818 192 46.289 192h74.81L98.242 320H19.146a12 12 0 0 0-11.813 9.891l-7.143 40C-1.123 377.246 4.532 384 12.003 384h74.81L72.19 465.891C70.877 473.246 76.532 480 84.003 480h40.632a12 12 0 0 0 11.813-9.891L151.826 384h98.634l-14.623 81.891C234.523 473.246 240.178 480 247.65 480h40.632a12 12 0 0 0 11.813-9.891L315.472 384h79.096a12 12 0 0 0 11.813-9.891l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l22.857-128h79.096a12 12 0 0 0 11.813-9.891zM261.889 320h-98.634l22.857-128h98.634l-22.857 128z"/></svg>a2142c9</a></span>
+                <span>Updated on 2024-08-18</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -270,17 +257,14 @@ recsys(推荐系统)的种类</p>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"/></svg>&nbsp;<a href=""></a></section>
+        <section class="post-tags"></section>
         <section class="print:!tw-hidden">
             <span><button class="tw-text-fgColor-link-muted hover:tw-text-fgColor-link-muted-hover" onclick="window.history.back();">Back</button></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav print:tw-hidden"><a href="/posts/kde-setting-cli/" class="prev" rel="prev" title="KDE折腾之自动化设置"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>KDE折腾之自动化设置</a>
-            <a href="/posts/linux-font/" class="next" rel="next" title="Linux字体">Linux字体<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></a></div>
+    <div class="post-nav print:tw-hidden"><a href="/posts/week8/" class="prev" rel="prev" title="努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？</a></div>
 </div>
 <div id="comments" class="print:!tw-hidden tw-pt-32 tw-pb-8"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -303,7 +287,7 @@ recsys(推荐系统)的种类</p>
             <svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 32C114.6 32 0 125.1 0 240c0 49.6 21.4 95 57 130.7C44.5 421.1 2.7 466 2.2 466.5c-2.2 2.3-2.8 5.7-1.5 8.7S4.8 480 8 480c66.3 0 116-31.8 140.6-51.4 32.7 12.3 69 19.4 107.4 19.4 141.4 0 256-93.1 256-208S397.4 32 256 32z"/></svg>
         </a></div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css">
-<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2023-08-04T15:26:51Z","owner":"z2z63","repo":"z2z63.github.io","title":"推荐系统简单介绍"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null},"sharerjs":true};</script><script
+<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2024-08-18T14:36:32+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"第十周：杂谈与碎碎念"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null},"sharerjs":true};</script><script
     src="/lib/sharer/sharer.min.js"
     
   ></script><script

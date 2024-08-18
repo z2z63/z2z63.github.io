@@ -4,9 +4,16 @@
         <link>http://example.org/</link>
         <description>z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sun, 04 Aug 2024 14:21:56 &#43;0800</lastBuildDate>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sun, 18 Aug 2024 14:36:32 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>第十周：杂谈与碎碎念</title>
+    <link>http://example.org/posts/week10/</link>
+    <pubDate>Sun, 18 Aug 2024 14:36:32 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/week10/</guid>
+    <description><![CDATA[近来也算看了不少别人的博客，有些文章非常优秀，还有一些很无趣。在我看来，一篇好的博文首先不能是官方文档的复读机，也不能让读者完全看不懂，其次]]></description>
+</item><item>
     <title>努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？</title>
     <link>http://example.org/posts/week8/</link>
     <pubDate>Sun, 04 Aug 2024 14:21:56 &#43;0800</pubDate><author>
@@ -69,12 +76,5 @@
         <name>z2z63</name>
     </author><guid>http://example.org/posts/hash_dos_and_python_hash/</guid>
     <description><![CDATA[这篇文章讨论了哈希函数的安全问题和python的哈希实现 Hash DOS所谓Hash DOS即利用hash碰撞增加服务器负担、使其无法响应正常用户的请]]></description>
-</item><item>
-    <title>fctix5-rime设置配色方案</title>
-    <link>http://example.org/posts/fcitx5_rime_color_style/</link>
-    <pubDate>Sat, 30 Mar 2024 23:43:03 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/fcitx5_rime_color_style/</guid>
-    <description><![CDATA[<p>rime是一个开源、高度可定制、多平台支持的输入法框架，然而在配置fctix5-rime的配色方案时我又踩了坑，记录一下解决方案</p>]]></description>
 </item></channel>
 </rss>
