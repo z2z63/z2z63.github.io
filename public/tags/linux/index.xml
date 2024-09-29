@@ -3,8 +3,7 @@
         <title>Linux - Tag - z2z63/Virtualfuture&#39;s Blog</title>
         <link>http://example.org/tags/linux/</link>
         <description>Linux - Tag - z2z63/Virtualfuture&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/linux/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/linux/" rel="self" type="application/rss+xml" /><item>
     <title>docker 使用方法</title>
     <link>http://example.org/posts/docker-tutorial/</link>
     <pubDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</pubDate><author>
@@ -32,14 +31,23 @@
     <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-font/</guid>
-    <description><![CDATA[之前安装archlinux，随便配置的中文字体，显示中文时总有一些奇奇怪怪的字形，最近翻了archlinux的文档，把字体配置搞清楚了 字体是]]></description>
+    <description><![CDATA[<p>之前安装archlinux，随便配置的中文字体，显示中文时总有一些奇奇怪怪的字形，最近翻了archlinux的文档，把字体配置搞清楚了</p>
+<h1 id="字体是什么" class="headerLink">
+    <a href="#%e5%ad%97%e4%bd%93%e6%98%af%e4%bb%80%e4%b9%88" class="header-mark"></a>字体是什么</h1><p>简单来说，字体告诉屏幕如何显示一个字，字体常见的格式有Bitmap和Outline，大致区别就是Bitmap直接指定了每一个像素，有点类似于字模，而Outline指定的是字的轮廓，至于具体怎么显示还需要根据屏幕分辨率，字号等信息来计算。很明显，Outline格式是更加现代的格式，所以此文就忽略Bitmap<br>
+Outline格式有以下几种格式</p>]]></description>
 </item><item>
     <title>KDE折腾之自动化设置</title>
     <link>http://example.org/posts/kde-setting-cli/</link>
     <pubDate>Fri, 21 Jul 2023 13:14:56 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/kde-setting-cli/</guid>
-    <description><![CDATA[需求我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个]]></description>
+    <description><![CDATA[<h1 id="需求" class="headerLink">
+    <a href="#%e9%9c%80%e6%b1%82" class="header-mark"></a>需求</h1><p>我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个配置：</p>
+<ul>
+<li>内置屏幕：缩放比例150%，字体DPI 144</li>
+<li>外置屏幕1：缩放比例100%，字体DPI 96</li>
+</ul>
+<p>然后残念的是KDE并不支持同时连接不同显示器并设置不同的缩放比例和分辨率，所以我采用的设置是</p>]]></description>
 </item><item>
     <title>Linux 神级文件管理器ranger</title>
     <link>http://example.org/posts/file-manager-ranger/</link>
@@ -53,20 +61,35 @@
     <pubDate>Tue, 04 Apr 2023 23:33:26 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-terminal-shortcut/</guid>
-    <description><![CDATA[在linux使用shell时常常会遇到一些使用场景需要大量重复敲击按键，带来了一些麻烦，所以学会一些快捷键是 必备的，但是有些快捷键几乎没用，]]></description>
+    <description><![CDATA[<p>在linux使用shell时常常会遇到一些使用场景需要大量重复敲击按键，带来了一些麻烦，所以学会一些快捷键是
+必备的，但是有些快捷键几乎没用，也没用记忆的必要<br>
+首先声明一点，重点是记住快捷键的功能，而不是快捷键的按键绑定，因为对于不同的终端模拟程序，这些功能基本都是
+提供的，但是按键绑定可能有所不同(说的就是PowerShell)，另外有些终端是支持修改按键绑定的<br>
+以下的快捷键按键绑定都是标准的linux shell按键绑定，在Konsole上测试通过</p>]]></description>
 </item><item>
     <title>matplotlib在linux平台上显示中文的解决方案</title>
     <link>http://example.org/posts/matplotlib-chinese-font/</link>
     <pubDate>Sun, 02 Apr 2023 22:12:22 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/matplotlib-chinese-font/</guid>
-    <description><![CDATA[matplotlib 是python的可视化库，但是如果在matplotlib的图表中使用了中文， 会找不到中文字体而显示乱码，网上有很多教程解决这个问题，但是在]]></description>
+    <description><![CDATA[<p>matplotlib 是python的可视化库，但是如果在matplotlib的图表中使用了中文，
+会找不到中文字体而显示乱码，网上有很多教程解决这个问题，但是在我的linux上都不管用
+经过不断尝试和google，终于找到了方法<br>
+可以随便选择能够选择中文的字体，但是要注意font family和字体名称的问题，以下以微软
+雅黑为例</p>]]></description>
 </item><item>
     <title>Linux搜索神器</title>
     <link>http://example.org/posts/linux-file-search/</link>
     <pubDate>Sat, 01 Apr 2023 23:35:22 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-file-search/</guid>
-    <description><![CDATA[使用Linux时，常常需要在文件系统中快速搜索到内容，比如说 在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径 想找某个文件，但]]></description>
+    <description><![CDATA[<p>使用Linux时，常常需要在文件系统中快速搜索到内容，比如说</p>
+<ol>
+<li>在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径</li>
+<li>想找某个文件，但是完全不知道它在哪里，需要全局搜索</li>
+<li>在一个项目中想要搜索一个特定字符串的出现</li>
+</ol>
+<h3 id="需求1-根据文件名搜索路径--find" class="headerLink">
+    <a href="#%e9%9c%80%e6%b1%821-%e6%a0%b9%e6%8d%ae%e6%96%87%e4%bb%b6%e5%90%8d%e6%90%9c%e7%b4%a2%e8%b7%af%e5%be%84--find" class="header-mark"></a>需求1: 根据文件名搜索路径&ndash;<code>find</code></h3><p>可以使用find命令，它是linux大多数发行版都自带的命令</p>]]></description>
 </item></channel>
 </rss>

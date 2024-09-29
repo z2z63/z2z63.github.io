@@ -3,13 +3,22 @@
         <title>Mechine Learning - Tag - z2z63/Virtualfuture&#39;s Blog</title>
         <link>http://example.org/tags/mechine-learning/</link>
         <description>Mechine Learning - Tag - z2z63/Virtualfuture&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/mechine-learning/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/mechine-learning/" rel="self" type="application/rss+xml" /><item>
     <title>推荐系统简单介绍</title>
     <link>http://example.org/posts/recsys-summary/</link>
     <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/recsys-summary/</guid>
-    <description><![CDATA[这篇文章是wikipedia的recsys词条的翻译以及简化版本，原文见https://en.wikipedia.org/wiki/Reco]]></description>
+    <description><![CDATA[<p>这篇文章是wikipedia的recsys词条的翻译以及简化版本，原文见<a href="https://en.wikipedia.org/wiki/Recommender_system" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Recommender_system</a>
+recsys(推荐系统)的种类</p>
+<ul>
+<li>collaborative filtering（协同过滤）根据相似用户的行为为用户推荐内容，推荐理由是“与你相似的人都喜欢xx”，
+缺点是需要大量用户行为数据，冷启动慢</li>
+<li>content-based filtering（基于内容过滤）给物打上标签，推荐具有相似标签的物，推荐理由是“与你喜欢的xx有关”，
+少量用户行为数据即可启动，但是只能推荐相似的物，无法推荐新物</li>
+<li>knowledge-based systems</li>
+</ul>
+<h1 id="collaborative-filtering" class="headerLink">
+    <a href="#collaborative-filtering" class="header-mark"></a>collaborative filtering</h1><p>协同过滤的假定是</p>]]></description>
 </item></channel>
 </rss>

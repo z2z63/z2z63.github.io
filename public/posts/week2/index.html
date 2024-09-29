@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -9,7 +7,8 @@
     <meta name="robots" content="noodp" /><title>第二周：败者树、范式与反范式 - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://example.org/posts/week2/">
   <meta property="og:site_name" content="z2z63/Virtualfuture&#39;s Blog">
   <meta property="og:title" content="第二周：败者树、范式与反范式">
-  <meta property="og:description" content="新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情 归并排序与败者树上篇文章提到的归并">
+  <meta property="og:description" content="新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情
+归并排序与败者树上篇文章提到的归并排序，经过两次重构已经很完善了，最终的结果是一个归并排序类ExternalMergeSorter，通过一个头文件引入external_merge_sort.h, 非常优雅地隔离了归并排序的细节，只需要给sorter提供记录，然后指示sorter开始排序，最后依次从sorter中取出记录，取出的记录已经是有序的了">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -18,7 +17,8 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="第二周：败者树、范式与反范式">
-  <meta name="twitter:description" content="新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情 归并排序与败者树上篇文章提到的归并">
+  <meta name="twitter:description" content="新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情
+归并排序与败者树上篇文章提到的归并排序，经过两次重构已经很完善了，最终的结果是一个归并排序类ExternalMergeSorter，通过一个头文件引入external_merge_sort.h, 非常优雅地隔离了归并排序的细节，只需要给sorter提供记录，然后指示sorter开始排序，最后依次从sorter中取出记录，取出的记录已经是有序的了">
 <meta name="application-name" content="z2z63/Virtualfuture&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="z2z63/Virtualfuture&#39;s Blog">
 
@@ -39,7 +39,7 @@
             "name": "z2z63"},"author": {
                 "@type": "Person",
                 "name": "z2z63",
-                "url": "https://github.com/z2z63"
+                "url": "/"
             },"description": ""
     }</script></head>
 
@@ -185,15 +185,17 @@
     <li><a href="#附件条件a反复消费相同数据">附件条件：A反复消费相同数据</a></li>
   </ul>
 </nav></div>
-    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title">第二周：败者树、范式与反范式</h1><div class="post-meta">
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2024-06-25" data-pagefind-body>第二周：败者树、范式与反范式</h1><div class="post-meta">
             <div class="post-meta-line">
-                <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src="https://avatars.githubusercontent.com/z2z63"   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
+                <span class="post-author"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"/></svg><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2024-06-25">2024-06-25</time>&nbsp;<svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-07-01">2024-07-01</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;6744 words&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;14 minutes&nbsp;</div>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;6744 words&nbsp;
+                    <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;30 minutes&nbsp;</div>
         </div><div class="details toc print:!tw-block" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -229,11 +231,11 @@
     <li><a href="#附件条件a反复消费相同数据">附件条件：A反复消费相同数据</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情</p>
+            </div><div class="content" id="content" data-pagefind-body><p>新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情</p>
 <h1 id="归并排序与败者树" class="headerLink">
-    <a href="#%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f%e4%b8%8e%e8%b4%a5%e8%80%85%e6%a0%91" class="header-mark" aria-label="Header mark for '归并排序与败者树'"></a>归并排序与败者树</h1><p>上篇文章提到的归并排序，经过两次重构已经很完善了，最终的结果是一个归并排序类<code>ExternalMergeSorter</code>，通过一个头文件引入<a href="https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h" target="_blank" rel="noopener noreferrer"><code>external_merge_sort.h</code></a>, 非常优雅地隔离了归并排序的细节，只需要给<code>sorter</code>提供记录，然后指示<code>sorter</code>开始排序，最后依次从<code>sorter</code>中取出记录，取出的记录已经是有序的了</p>
+    <a href="#%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f%e4%b8%8e%e8%b4%a5%e8%80%85%e6%a0%91" class="header-mark"></a>归并排序与败者树</h1><p>上篇文章提到的归并排序，经过两次重构已经很完善了，最终的结果是一个归并排序类<code>ExternalMergeSorter</code>，通过一个头文件引入<a href="https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h" target="_blank" rel="noopener noreferrer"><code>external_merge_sort.h</code></a>, 非常优雅地隔离了归并排序的细节，只需要给<code>sorter</code>提供记录，然后指示<code>sorter</code>开始排序，最后依次从<code>sorter</code>中取出记录，取出的记录已经是有序的了</p>
 <h2 id="io" class="headerLink">
-    <a href="#io" class="header-mark" aria-label="Header mark for 'IO'"></a>IO</h2><p>关于IO的方式也考虑了很多，<code>mmap</code>，<code>read</code>， <code>fread</code>，<code>std::fstrean</code>都能实现需要的功能，最终选择了<code>std::fstream</code></p>
+    <a href="#io" class="header-mark"></a>IO</h2><p>关于IO的方式也考虑了很多，<code>mmap</code>，<code>read</code>， <code>fread</code>，<code>std::fstrean</code>都能实现需要的功能，最终选择了<code>std::fstream</code></p>
 <ul>
 <li>
 <p>mmap<br>
@@ -243,13 +245,13 @@ mmap时： 外存中的文件 &ndash;&gt; 内核分配给进程的页</p>
 <p>mmap分配的页是惰性分配的，<code>mmap</code>调用返回时，分配的页仍然是用户地址空间非法的页，进程第一次访问时，陷入内核态（因为访问了非法的页），然后内核完成页的分配，并填入正确的数据</p>
 <p>此外，mmap分配的页也会正常的换出换入内存，实际内存使用量不会很高</p>
 <blockquote>
-<p>Q：为什么<code>read</code>读取文件时有内核维护的缓冲区和进程维护的缓冲区？<br>
+  <p>Q：为什么<code>read</code>读取文件时有内核维护的缓冲区和进程维护的缓冲区？<br>
 A: 内核维护的缓冲区是对进程隐藏的，进程无法访问（在进程的地址空间中不存在），这是为了防止恶意进程破坏操作系统</p>
-</blockquote>
-<blockquote>
-<p>部署数据库的服务器可能会关闭内存交换功能，此时操作系统不会将近期不使用的页换出内存</p>
-</blockquote>
-<p>不过缺点也很明显，需要手动维护读写指针，而且如果设置了每次mmap的页（不是操作系统的页）的大小，还需要再实现大文件分页，包括不满一页，刚好满一页，满n页不满n+1页各种corner case，并需要给corner case写测试，非常繁琐</p>
+
+</blockquote><blockquote>
+  <p>部署数据库的服务器可能会关闭内存交换功能，此时操作系统不会将近期不使用的页换出内存</p>
+
+</blockquote><p>不过缺点也很明显，需要手动维护读写指针，而且如果设置了每次mmap的页（不是操作系统的页）的大小，还需要再实现大文件分页，包括不满一页，刚好满一页，满n页不满n+1页各种corner case，并需要给corner case写测试，非常繁琐</p>
 </li>
 <li>
 <p>read
@@ -265,12 +267,12 @@ libc++的IO函数，<code>fread</code>已经能满足要求了，但使用<code>
 </li>
 </ul>
 <h2 id="k路归并排序" class="headerLink">
-    <a href="#k%e8%b7%af%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f" class="header-mark" aria-label="Header mark for 'k路归并排序'"></a>k路归并排序</h2><p>归并排序处理大规模数据时，会形成多个文件，假设为k个，最终将k个已排序块合并的过程，就是k路归并排序<br>
+    <a href="#k%e8%b7%af%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f" class="header-mark"></a>k路归并排序</h2><p>归并排序处理大规模数据时，会形成多个文件，假设为k个，最终将k个已排序块合并的过程，就是k路归并排序<br>
 k路归并时，每次取出k个已排序块中最小的记录，如何确定哪个记录是最小的，可以简单的遍历k个记录，找出其中最小的一个，也可以使用胜者树、败者树加快归并的过程</p>
 <p>遍历k个记录，可以被称为暴力查找，时间复杂度是$$O(k)$$  而胜者树、败者树的时间复杂度为$$O(\log k)$$</p>
 <p>k值一般不会很大，经典值有8，16。虽然k很小，但因为取出每条记录都需要经过归并，此处的算法优化效果是非常可观的，我测试的情况是64M规模排序，使用暴力查找耗时5min，使用败者树耗时大约5s</p>
 <h2 id="胜者树" class="headerLink">
-    <a href="#%e8%83%9c%e8%80%85%e6%a0%91" class="header-mark" aria-label="Header mark for '胜者树'"></a>胜者树</h2><p>胜者树的思想是，假设有八个选手A，B，C，D，E，F，G，H参与比赛，他们两两配对并参与比赛，比赛的胜者参与下一轮比赛，只需要三轮比赛就能比出冠军</p>
+    <a href="#%e8%83%9c%e8%80%85%e6%a0%91" class="header-mark"></a>胜者树</h2><p>胜者树的思想是，假设有八个选手A，B，C，D，E，F，G，H参与比赛，他们两两配对并参与比赛，比赛的胜者参与下一轮比赛，只需要三轮比赛就能比出冠军</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -379,7 +381,7 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 </ol>
 <p>胜者树的算法思想是动态规划，八个选手比赛的过程中，有很多重复的子问题，例如，A的排名需要重新确定时，C和D的胜负关系是不会改变的，所以C和D没必要再比赛，同理E和H也没必要再比赛，胜者树这样的数据结构在归并过程中维护了最优子结构，避免了重复完成子问题</p>
 <h2 id="败者树" class="headerLink">
-    <a href="#%e8%b4%a5%e8%80%85%e6%a0%91" class="header-mark" aria-label="Header mark for '败者树'"></a>败者树</h2><p>将胜者树中的节点的值换成这轮比赛中的败者，其他不变，就形成了败者树</p>
+    <a href="#%e8%b4%a5%e8%80%85%e6%a0%91" class="header-mark"></a>败者树</h2><p>将胜者树中的节点的值换成这轮比赛中的败者，其他不变，就形成了败者树</p>
 <p>败者树的一个缺点就是不直观，因为节点记录了败者，但参赛的仍然是胜者，事实上，在构建败者树的过程中仍然需要构建胜者树。</p>
 <p>败者树相比胜者树的优点是，重新确定冠军时，当前参赛选手需要和上次当轮比赛的败者比赛（例如第一轮比赛中，X1需要和D比赛），胜者树需要从兄弟节点获取败者，而败者树可以直接从父节点获取败者</p>
 <p>败者树的另一个理解是，败者树的节点中存储的是左右子树两胜者中比赛产生的次胜者，而优胜者进入下一轮比赛。例如败者树中存储了D的节点，D来源于第一轮比赛中A和D比赛，其中A是优胜者，D是次胜者</p>
@@ -485,7 +487,7 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 </div>
 <p>此外败者树的根节点记录的是败者，所以还需要额外记录一个冠军</p>
 <h2 id="实现" class="headerLink">
-    <a href="#%e5%ae%9e%e7%8e%b0" class="header-mark" aria-label="Header mark for '实现'"></a>实现</h2><p>我使用堆模拟了败者树，败者树也是一种二叉树，堆模拟二叉树的优点如下</p>
+    <a href="#%e5%ae%9e%e7%8e%b0" class="header-mark"></a>实现</h2><p>我使用堆模拟了败者树，败者树也是一种二叉树，堆模拟二叉树的优点如下</p>
 <ol>
 <li>内存碎片小</li>
 <li>节点在内存中是紧邻的，能充分利用高速缓存的性能，cache友好</li>
@@ -601,11 +603,11 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 <li>堆模拟的败者树消除了败者树的优势：直接从父节点获取败者，因为堆访问兄弟节点非常方便，而且没有额外的空间开销。此外败者树非常不直观，如果使用堆模拟，可以考虑胜者树</li>
 </ol>
 <h3 id="corner-case" class="headerLink">
-    <a href="#corner-case" class="header-mark" aria-label="Header mark for 'corner case'"></a>corner case</h3><p>外部归并排序中产生多少个辅助排序文件，一般是不可控制的，选手数量往往不是2的幂<br>
+    <a href="#corner-case" class="header-mark"></a>corner case</h3><p>外部归并排序中产生多少个辅助排序文件，一般是不可控制的，选手数量往往不是2的幂<br>
 此时增加若干个哑节点(dumb node)，使选手数量达到2的幂，哑节点参与比赛一定败北</p>
 <p>最终实现见<a href="https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h" target="_blank" rel="noopener noreferrer">external_merge_sort.h</a>，在木兰宽松许可证下开源</p>
 <h1 id="exit" class="headerLink">
-    <a href="#exit" class="header-mark" aria-label="Header mark for 'exit'"></a>exit</h1><p>在对比<code>fread</code>，<code>fwrite</code>和<code>std::fstream</code>时，看到有篇回答提及，如果程序异常退出，<code>std::fstream</code>可能来不及把缓冲区的内容落盘</p>
+    <a href="#exit" class="header-mark"></a>exit</h1><p>在对比<code>fread</code>，<code>fwrite</code>和<code>std::fstream</code>时，看到有篇回答提及，如果程序异常退出，<code>std::fstream</code>可能来不及把缓冲区的内容落盘</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -712,13 +714,13 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 </div>
 <p>这里又涉及一个问题，<code>std::fstream</code>需要手动关闭吗？</p>
 <h2 id="fstream自动关闭" class="headerLink">
-    <a href="#fstream%e8%87%aa%e5%8a%a8%e5%85%b3%e9%97%ad" class="header-mark" aria-label="Header mark for '&lt;code&gt;fstream&lt;/code&gt;自动关闭'"></a><code>fstream</code>自动关闭</h2><p>答案是可以不手动关闭，因为<code>fstream</code>会在析构时自动关闭。见cppreference对<code>basic_fstream</code>的析构函数的<a href="https://en.cppreference.com/w/cpp/io/basic_fstream" target="_blank" rel="noopener noreferrer">说明</a></p>
+    <a href="#fstream%e8%87%aa%e5%8a%a8%e5%85%b3%e9%97%ad" class="header-mark"></a><code>fstream</code>自动关闭</h2><p>答案是可以不手动关闭，因为<code>fstream</code>会在析构时自动关闭。见cppreference对<code>basic_fstream</code>的析构函数的<a href="https://en.cppreference.com/w/cpp/io/basic_fstream" target="_blank" rel="noopener noreferrer">说明</a></p>
 <blockquote>
-<p>destructs the basic_fstream and the associated buffer, closes the file</p>
-</blockquote>
-<p>然后来翻源码证实一下<br>
+  <p>destructs the basic_fstream and the associated buffer, closes the file</p>
+
+</blockquote><p>然后来翻源码证实一下<br>
 首先看一下cppreference对<code>fstream</code>，<code>ifstream</code>，<code>ofstream</code>的说明
-<img class="tw-inline" loading="lazy" src="https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg"     ><br>
+<img class="tw-inline" loading="lazy" src=https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg     ><br>
 <code>basic_istream</code>最终实例化为<code>ifstream</code>，<code>basic_ostream</code>最终实例化为<code>ofstream</code>，<code>basic_iostream</code>最终实例化为<code>fstream</code>，所以<code>fstream</code>相当于<code>ifstream</code>和<code>ofstream</code>的父类</p>
 <p>以<code>ofstream</code>举例，它的析构函数在glibc的头文件<code>fstream</code>中</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
@@ -1151,11 +1153,11 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 </div>
 <p>这个特性在其他语言中很少出现，因为C++无GC，对象销毁时机是完全确定的，而GC语言即使提供了析构函数，因为无法确定对象销毁时机，实现某些对销毁时机非常敏感的特性（例如RAII的锁）时，会出现很多无法预料的情况</p>
 <blockquote>
-<p>libc在进程退出和<code>exit</code>时会自动将所有<code>FILE</code>缓冲区残留的数据落盘，并释放缓冲区 <br>
+  <p>libc在进程退出和<code>exit</code>时会自动将所有<code>FILE</code>缓冲区残留的数据落盘，并释放缓冲区 <br>
 linux在进程exit系统调用时会自动关闭进程未关闭的文件，并释放进程的内存</p>
-</blockquote>
-<h2 id="无法自动关闭的特殊情况" class="headerLink">
-    <a href="#%e6%97%a0%e6%b3%95%e8%87%aa%e5%8a%a8%e5%85%b3%e9%97%ad%e7%9a%84%e7%89%b9%e6%ae%8a%e6%83%85%e5%86%b5" class="header-mark" aria-label="Header mark for '无法自动关闭的特殊情况'"></a>无法自动关闭的特殊情况</h2><p><code>fstream</code>的关闭依赖于其析构函数的调用，只需要绕过析构函数即可，绕过方法其一就是<code>exit</code>函数</p>
+
+</blockquote><h2 id="无法自动关闭的特殊情况" class="headerLink">
+    <a href="#%e6%97%a0%e6%b3%95%e8%87%aa%e5%8a%a8%e5%85%b3%e9%97%ad%e7%9a%84%e7%89%b9%e6%ae%8a%e6%83%85%e5%86%b5" class="header-mark"></a>无法自动关闭的特殊情况</h2><p><code>fstream</code>的关闭依赖于其析构函数的调用，只需要绕过析构函数即可，绕过方法其一就是<code>exit</code>函数</p>
 <p>前文提及libc的<code>exit</code>函数会关闭所有打开的<code>FILE</code>，关闭的过程包括缓冲区残留的数据落盘和释放缓冲区，但<code>exit</code>函数不会关闭<code>ofstream</code>，因为<code>ofstream</code>自己维护了一个缓冲区，而没有使用<code>FILE</code>对象的缓冲区</p>
 <p>首先确定一点，<code>ofstream</code>会自动分配缓冲区，也可以由用户手动设置缓冲区</p>
 <p><code>ofstream</code>的<code>open</code>方法实现如下</p>
@@ -1382,12 +1384,12 @@ linux在进程exit系统调用时会自动关闭进程未关闭的文件，并�
 </div>
 <p>使用默认内存分配器申请了一块内存用于缓冲区，可以看到并没有把这块内存交给<code>FILE</code>管理</p>
 <blockquote>
-<p>libc和libc++的实现都会随着版本迭代而变化，具体实现一般都对用户隐藏，而只暴露必要的接口，libc和libc++需要保持彼此独立所以也不能使用对方的非公开API</p>
-</blockquote>
-<p>至此已经能回答之前的问题，为什么<code>fstream</code>在调用<code>exit</code>后数据没有落盘？因为数据残留在<code>fstream</code>内部维护的缓冲区中，没有同步到外存，而<code>exit</code>不负责为<code>fstream</code>清理残局</p>
+  <p>libc和libc++的实现都会随着版本迭代而变化，具体实现一般都对用户隐藏，而只暴露必要的接口，libc和libc++需要保持彼此独立所以也不能使用对方的非公开API</p>
+
+</blockquote><p>至此已经能回答之前的问题，为什么<code>fstream</code>在调用<code>exit</code>后数据没有落盘？因为数据残留在<code>fstream</code>内部维护的缓冲区中，没有同步到外存，而<code>exit</code>不负责为<code>fstream</code>清理残局</p>
 <h1 id="范式与反范式" class="headerLink">
-    <a href="#%e8%8c%83%e5%bc%8f%e4%b8%8e%e5%8f%8d%e8%8c%83%e5%bc%8f" class="header-mark" aria-label="Header mark for '范式与反范式'"></a>范式与反范式</h1><h2 id="分层" class="headerLink">
-    <a href="#%e5%88%86%e5%b1%82" class="header-mark" aria-label="Header mark for '分层'"></a>分层</h2><p>纵观整个计算机体系，分层的思想从底层到上层都在不断的使用。有句名言：计算机中的一切问题都能使用分层解决<br>
+    <a href="#%e8%8c%83%e5%bc%8f%e4%b8%8e%e5%8f%8d%e8%8c%83%e5%bc%8f" class="header-mark"></a>范式与反范式</h1><h2 id="分层" class="headerLink">
+    <a href="#%e5%88%86%e5%b1%82" class="header-mark"></a>分层</h2><p>纵观整个计算机体系，分层的思想从底层到上层都在不断的使用。有句名言：计算机中的一切问题都能使用分层解决<br>
 分层解决实际问题的例子</p>
 <ul>
 <li>计算机网络仅仅使用五层就实现了世界上规模最大最复杂的网络</li>
@@ -1419,10 +1421,10 @@ linux在进程exit系统调用时会自动关闭进程未关闭的文件，并�
 <li>libc提供的字符串处理函数安全性不够，实际上很多大型项目都会重新造一遍字符串处理函数，为了解决诸如缓冲区溢出，零结尾等问题</li>
 </ul>
 <h2 id="关系型数据库六范式" class="headerLink">
-    <a href="#%e5%85%b3%e7%b3%bb%e5%9e%8b%e6%95%b0%e6%8d%ae%e5%ba%93%e5%85%ad%e8%8c%83%e5%bc%8f" class="header-mark" aria-label="Header mark for '关系型数据库六范式'"></a>关系型数据库六范式</h2><p>关系型数据库的六范式的作用是减小数据冗余，消除插入异常，删除异常等，但在实践中，往往不会完全遵循六范式，因为划分实体和关联的工作非常复杂，只有领域专家才有可能做到。一般往往只遵循到第三范式</p>
+    <a href="#%e5%85%b3%e7%b3%bb%e5%9e%8b%e6%95%b0%e6%8d%ae%e5%ba%93%e5%85%ad%e8%8c%83%e5%bc%8f" class="header-mark"></a>关系型数据库六范式</h2><p>关系型数据库的六范式的作用是减小数据冗余，消除插入异常，删除异常等，但在实践中，往往不会完全遵循六范式，因为划分实体和关联的工作非常复杂，只有领域专家才有可能做到。一般往往只遵循到第三范式</p>
 <p>此外，关系型数据库的范式会使越拆越小，在查询时需要做大量的连接操作，连接操作可以使用索引，使用归并连接，使用哈希等方式加快连接速度，但对时间复杂度的减小效果有限，数据量极大时仍然非常耗时。大数据和NoSQL就完全违反了关系型数据库的范式，但换来了非常快的查询速度</p>
 <h2 id="唯一事实原则" class="headerLink">
-    <a href="#%e5%94%af%e4%b8%80%e4%ba%8b%e5%ae%9e%e5%8e%9f%e5%88%99" class="header-mark" aria-label="Header mark for '唯一事实原则'"></a>唯一事实原则</h2><p>如果一个人有很多钟，反而无法确定时间，因为不同钟显示的时间不一样。在工程实践中为了避免这种问题，往往遵循single source of truth，即唯一事实原则，例如</p>
+    <a href="#%e5%94%af%e4%b8%80%e4%ba%8b%e5%ae%9e%e5%8e%9f%e5%88%99" class="header-mark"></a>唯一事实原则</h2><p>如果一个人有很多钟，反而无法确定时间，因为不同钟显示的时间不一样。在工程实践中为了避免这种问题，往往遵循single source of truth，即唯一事实原则，例如</p>
 <ul>
 <li>将一些参数提升为配置，其他要使用参数的地方只能引用参数，不能内联</li>
 <li>JS的ORM框架prisma使用<code>prisma.schema</code>作为唯一事实，并使用这一事实同步数据库和生成的类型</li>
@@ -1435,19 +1437,19 @@ linux在进程exit系统调用时会自动关闭进程未关闭的文件，并�
 </ul>
 <p>此外cache的存在对DMA非常不友好，让DMA变得更加复杂了，因为DMA能在不经过CPU的情况下读写内存</p>
 <h1 id="buffer-vs-cache" class="headerLink">
-    <a href="#buffer-vs-cache" class="header-mark" aria-label="Header mark for 'buffer vs cache'"></a>buffer vs cache</h1><p>最近突发奇想，使用另一个角度理解缓冲与缓存</p>
+    <a href="#buffer-vs-cache" class="header-mark"></a>buffer vs cache</h1><p>最近突发奇想，使用另一个角度理解缓冲与缓存</p>
 <p>首先，我认为缓存的译名不准确，因为缓存的“缓”，在字典中是“慢”的意思，而缓存明显是用来加快速度用的，参考cache的台湾译名“快取”</p>
 <p>有两个系统A和B，它们通过接口相连，然而A和B的速度是不匹配的（A速度远大于B）。基于以上事实，才有必要使用buffer或cache，这也是现实中非常常见的情况</p>
 <p>两个速度不匹配的系统为了能够一起工作，必定还有其他条件，否则认为这两个系统不应该相互连接</p>
 <blockquote>
-<p>如果两个系统不应该连接，此时有两种方案改进</p>
+  <p>如果两个系统不应该连接，此时有两种方案改进</p>
 <ol>
 <li>使用性能更好的B1， 提高系统整体性能</li>
 <li>使用性能低但更便宜的A1，降低系统的造价</li>
 </ol>
-</blockquote>
-<h2 id="附加条件a猝发生产而b持续消费" class="headerLink">
-    <a href="#%e9%99%84%e5%8a%a0%e6%9d%a1%e4%bb%b6a%e7%8c%9d%e5%8f%91%e7%94%9f%e4%ba%a7%e8%80%8cb%e6%8c%81%e7%bb%ad%e6%b6%88%e8%b4%b9" class="header-mark" aria-label="Header mark for '附加条件：A猝发生产而B持续消费'"></a>附加条件：A猝发生产而B持续消费</h2><p>此时使用buffer，即缓冲</p>
+
+</blockquote><h2 id="附加条件a猝发生产而b持续消费" class="headerLink">
+    <a href="#%e9%99%84%e5%8a%a0%e6%9d%a1%e4%bb%b6a%e7%8c%9d%e5%8f%91%e7%94%9f%e4%ba%a7%e8%80%8cb%e6%8c%81%e7%bb%ad%e6%b6%88%e8%b4%b9" class="header-mark"></a>附加条件：A猝发生产而B持续消费</h2><p>此时使用buffer，即缓冲</p>
 <ul>
 <li>网络流量往往是猝发的，而操作系统或用户程序无法保证立马响应，所以网卡往往有缓冲区</li>
 <li>用户读写文件的操作往往是猝发的（例如一个文本编辑器，用户随时按下按键输入字符），libc维护缓冲区，延迟写入外存，提高IO性能</li>
@@ -1455,7 +1457,7 @@ linux在进程exit系统调用时会自动关闭进程未关闭的文件，并�
 <li>在加入少量的酸或碱时，溶液的PH值发生突变（扩散作用很快），而缓冲液可以在这个情况下减小溶液PH值变化速度和范围（化学反应速度比扩散作用慢）。缓冲剂往往远多于酸或碱的量（使用滴管加入的）。如果酸或碱的量太多，缓冲液的效果就不好</li>
 </ul>
 <h2 id="附件条件a反复消费相同数据" class="headerLink">
-    <a href="#%e9%99%84%e4%bb%b6%e6%9d%a1%e4%bb%b6a%e5%8f%8d%e5%a4%8d%e6%b6%88%e8%b4%b9%e7%9b%b8%e5%90%8c%e6%95%b0%e6%8d%ae" class="header-mark" aria-label="Header mark for '附件条件：A反复消费相同数据'"></a>附件条件：A反复消费相同数据</h2><p>此时使用cache，即快取</p>
+    <a href="#%e9%99%84%e4%bb%b6%e6%9d%a1%e4%bb%b6a%e5%8f%8d%e5%a4%8d%e6%b6%88%e8%b4%b9%e7%9b%b8%e5%90%8c%e6%95%b0%e6%8d%ae" class="header-mark"></a>附件条件：A反复消费相同数据</h2><p>此时使用cache，即快取</p>
 <ul>
 <li>许多包管理器都有cache的功能，因为用户往往重复下载相同的软件包</li>
 <li>CPU有cache，因为程序往往在一段时间内重复访问一块区域的内存，具有时间局部性和空间局部性</li>
@@ -1497,10 +1499,10 @@ linux在进程exit系统调用时会自动关闭进程未关闭的文件，并�
             </noscript></div></article></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.133.0">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><svg class="icon"
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.135.0">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg> DoIt</a>
                 </div><div class="footer-line"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 448c-110.532 0-200-89.451-200-200 0-110.531 89.451-200 200-200 110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200zm107.351-101.064c-9.614 9.712-45.53 41.396-104.065 41.396-82.43 0-140.484-61.425-140.484-141.567 0-79.152 60.275-139.401 139.762-139.401 55.531 0 88.738 26.62 97.593 34.779a11.965 11.965 0 0 1 1.936 15.322l-18.155 28.113c-3.841 5.95-11.966 7.282-17.499 2.921-8.595-6.776-31.814-22.538-61.708-22.538-48.303 0-77.916 35.33-77.916 80.082 0 41.589 26.888 83.692 78.277 83.692 32.657 0 56.843-19.039 65.726-27.225 5.27-4.857 13.596-4.039 17.82 1.738l19.865 27.17a11.947 11.947 0 0 1-1.152 15.518z"/></svg>2023 - 2024<span class="author">&nbsp;<a href="https://github.com/z2z63" target="_blank" rel="noopener noreferrer">z2z63</a></span></div>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 448c-110.532 0-200-89.451-200-200 0-110.531 89.451-200 200-200 110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200zm107.351-101.064c-9.614 9.712-45.53 41.396-104.065 41.396-82.43 0-140.484-61.425-140.484-141.567 0-79.152 60.275-139.401 139.762-139.401 55.531 0 88.738 26.62 97.593 34.779a11.965 11.965 0 0 1 1.936 15.322l-18.155 28.113c-3.841 5.95-11.966 7.282-17.499 2.921-8.595-6.776-31.814-22.538-61.708-22.538-48.303 0-77.916 35.33-77.916 80.082 0 41.589 26.888 83.692 78.277 83.692 32.657 0 56.843-19.039 65.726-27.225 5.27-4.857 13.596-4.039 17.82 1.738l19.865 27.17a11.947 11.947 0 0 1-1.152 15.518z"/></svg>2023 - 2024<span class="author">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">
             </div>

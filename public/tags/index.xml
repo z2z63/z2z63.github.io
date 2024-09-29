@@ -3,75 +3,74 @@
         <title>Tags - Tag - z2z63/Virtualfuture&#39;s Blog</title>
         <link>http://example.org/tags/</link>
         <description>Tags - Tag - z2z63/Virtualfuture&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
     <title>C/C&#43;&#43;</title>
     <link>http://example.org/tags/c/c&#43;&#43;/</link>
     <pubDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</pubDate><author>
-        <name>z2z63</name>
+        <name>Author</name>
     </author><guid>http://example.org/tags/c/c&#43;&#43;/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Docker</title>
     <link>http://example.org/tags/docker/</link>
     <pubDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</pubDate><author>
-        <name>z2z63</name>
+        <name>Author</name>
     </author><guid>http://example.org/tags/docker/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Linux</title>
     <link>http://example.org/tags/linux/</link>
     <pubDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</pubDate><author>
-        <name>z2z63</name>
+        <name>Author</name>
     </author><guid>http://example.org/tags/linux/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Java</title>
     <link>http://example.org/tags/java/</link>
     <pubDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</pubDate><author>
-        <name>z2z63</name>
+        <name>Author</name>
     </author><guid>http://example.org/tags/java/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Jetbrains IDE</title>
     <link>http://example.org/tags/jetbrains-ide/</link>
     <pubDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</pubDate><author>
-        <name>z2z63</name>
+        <name>Author</name>
     </author><guid>http://example.org/tags/jetbrains-ide/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Font</title>
     <link>http://example.org/tags/font/</link>
     <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
-        <name>z2z63</name>
+        <name>Author</name>
     </author><guid>http://example.org/tags/font/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Linux Desktop</title>
     <link>http://example.org/tags/linux-desktop/</link>
     <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
-        <name>z2z63</name>
+        <name>Author</name>
     </author><guid>http://example.org/tags/linux-desktop/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Mechine Learning</title>
     <link>http://example.org/tags/mechine-learning/</link>
     <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
-        <name>z2z63</name>
+        <name>Author</name>
     </author><guid>http://example.org/tags/mechine-learning/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>JS</title>
     <link>http://example.org/tags/js/</link>
     <pubDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</pubDate><author>
-        <name>z2z63</name>
+        <name>Author</name>
     </author><guid>http://example.org/tags/js/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>科学计算</title>
     <link>http://example.org/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
     <pubDate>Fri, 26 May 2023 15:51:48 &#43;0000</pubDate><author>
-        <name>z2z63</name>
+        <name>Author</name>
     </author><guid>http://example.org/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</guid>
     <description><![CDATA[]]></description>
 </item></channel>

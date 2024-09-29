@@ -3,8 +3,7 @@
         <title>C/C&#43;&#43; - Tag - z2z63/Virtualfuture&#39;s Blog</title>
         <link>http://example.org/tags/c/c&#43;&#43;/</link>
         <description>C/C&#43;&#43; - Tag - z2z63/Virtualfuture&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/c/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/c/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
     <title>PostgreSQL源码阅读报告</title>
     <link>http://example.org/posts/postgresql_source/</link>
     <pubDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</pubDate><author>
@@ -24,6 +23,20 @@
     <pubDate>Mon, 29 May 2023 22:20:02 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/rvalue-reference/</guid>
-    <description><![CDATA[C++11后引入了右值引用等特性，用来支持移动语义和完美转发，在了解右值引用前，需要了解一些前置的概念 左值(lvalue) 左值字面意义是在等]]></description>
+    <description><![CDATA[<p>C++11后引入了右值引用等特性，用来支持移动语义和完美转发，在了解右值引用前，需要了解一些前置的概念</p>
+<ol>
+<li>左值(lvalue)
+左值字面意义是在等号左边的值，左值是寻址的，具名的，有标识符的<br>
+有一个特点是，所有声明的变量都是左值</li>
+<li>右值(rvalue)
+右值字面意义是在等号右边的值，右值不可寻址，不具名
+具体而言：
+<ul>
+<li>一个整数字面量是右值，因为它不对应一个内存存储位置，在汇编中，它存在于指令中的立即数字段</li>
+<li>一个临时对象是右值，临时对象是为了写连续的表达式而被编译器支持的，当有例如<code>func(obj())</code>时，首先建立一个obj对象，这个对象没有名字，它实际上有一个对于的内存存储位置，但在这行代码执行完后就会被销毁，所以它叫做临时对象</li>
+</ul>
+</li>
+</ol>
+<p>cpp对临时对象有一个限制，因为临时对象是马上就会被销毁的，所以对临时对象的修会被抛弃</p>]]></description>
 </item></channel>
 </rss>

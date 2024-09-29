@@ -3,8 +3,7 @@
         <title>Shell - Tag - z2z63/Virtualfuture&#39;s Blog</title>
         <link>http://example.org/tags/shell/</link>
         <description>Shell - Tag - z2z63/Virtualfuture&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/shell/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/shell/" rel="self" type="application/rss+xml" /><item>
     <title>Linux 神级文件管理器ranger</title>
     <link>http://example.org/posts/file-manager-ranger/</link>
     <pubDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</pubDate><author>
@@ -17,13 +16,24 @@
     <pubDate>Tue, 04 Apr 2023 23:33:26 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-terminal-shortcut/</guid>
-    <description><![CDATA[在linux使用shell时常常会遇到一些使用场景需要大量重复敲击按键，带来了一些麻烦，所以学会一些快捷键是 必备的，但是有些快捷键几乎没用，]]></description>
+    <description><![CDATA[<p>在linux使用shell时常常会遇到一些使用场景需要大量重复敲击按键，带来了一些麻烦，所以学会一些快捷键是
+必备的，但是有些快捷键几乎没用，也没用记忆的必要<br>
+首先声明一点，重点是记住快捷键的功能，而不是快捷键的按键绑定，因为对于不同的终端模拟程序，这些功能基本都是
+提供的，但是按键绑定可能有所不同(说的就是PowerShell)，另外有些终端是支持修改按键绑定的<br>
+以下的快捷键按键绑定都是标准的linux shell按键绑定，在Konsole上测试通过</p>]]></description>
 </item><item>
     <title>Linux搜索神器</title>
     <link>http://example.org/posts/linux-file-search/</link>
     <pubDate>Sat, 01 Apr 2023 23:35:22 &#43;0000</pubDate><author>
         <name>z2z63</name>
     </author><guid>http://example.org/posts/linux-file-search/</guid>
-    <description><![CDATA[使用Linux时，常常需要在文件系统中快速搜索到内容，比如说 在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径 想找某个文件，但]]></description>
+    <description><![CDATA[<p>使用Linux时，常常需要在文件系统中快速搜索到内容，比如说</p>
+<ol>
+<li>在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径</li>
+<li>想找某个文件，但是完全不知道它在哪里，需要全局搜索</li>
+<li>在一个项目中想要搜索一个特定字符串的出现</li>
+</ol>
+<h3 id="需求1-根据文件名搜索路径--find" class="headerLink">
+    <a href="#%e9%9c%80%e6%b1%821-%e6%a0%b9%e6%8d%ae%e6%96%87%e4%bb%b6%e5%90%8d%e6%90%9c%e7%b4%a2%e8%b7%af%e5%be%84--find" class="header-mark"></a>需求1: 根据文件名搜索路径&ndash;<code>find</code></h3><p>可以使用find命令，它是linux大多数发行版都自带的命令</p>]]></description>
 </item></channel>
 </rss>

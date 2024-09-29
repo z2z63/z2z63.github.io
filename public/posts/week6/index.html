@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -9,7 +7,7 @@
     <meta name="robots" content="noodp" /><title>第六周：关于C/C&#43;&#43;开发，我了解的一切 —— 编译器、构建工具 - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://example.org/posts/week6/">
   <meta property="og:site_name" content="z2z63/Virtualfuture&#39;s Blog">
   <meta property="og:title" content="第六周：关于C/C&#43;&#43;开发，我了解的一切 —— 编译器、构建工具">
-  <meta property="og:description" content="最近两个月也是基本一直在写C&#43;&#43;了，尤其是实习以来，从linux的C&#43;&#43;开发切换到windows &#43; visual c&#43;&#43;，这其中遇到的问题非常多，也让我不">
+  <meta property="og:description" content="最近两个月也是基本一直在写C&#43;&#43;了，尤其是实习以来，从linux的C&#43;&#43;开发切换到windows &#43; visual c&#43;&#43;，这其中遇到的问题非常多，也让我不断的思考究竟怎样才是最佳实践。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -18,7 +16,7 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="第六周：关于C/C&#43;&#43;开发，我了解的一切 —— 编译器、构建工具">
-  <meta name="twitter:description" content="最近两个月也是基本一直在写C&#43;&#43;了，尤其是实习以来，从linux的C&#43;&#43;开发切换到windows &#43; visual c&#43;&#43;，这其中遇到的问题非常多，也让我不">
+  <meta name="twitter:description" content="最近两个月也是基本一直在写C&#43;&#43;了，尤其是实习以来，从linux的C&#43;&#43;开发切换到windows &#43; visual c&#43;&#43;，这其中遇到的问题非常多，也让我不断的思考究竟怎样才是最佳实践。">
 <meta name="application-name" content="z2z63/Virtualfuture&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="z2z63/Virtualfuture&#39;s Blog">
 
@@ -39,7 +37,7 @@
             "name": "z2z63"},"author": {
                 "@type": "Person",
                 "name": "z2z63",
-                "url": "https://github.com/z2z63"
+                "url": "/"
             },"description": ""
     }</script></head>
 
@@ -177,15 +175,17 @@
     <li><a href="#分层配置">分层配置</a></li>
   </ul>
 </nav></div>
-    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title">第六周：关于C/C&#43;&#43;开发，我了解的一切 —— 编译器、构建工具</h1><div class="post-meta">
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2024-07-20" data-pagefind-body>第六周：关于C/C&#43;&#43;开发，我了解的一切 —— 编译器、构建工具</h1><div class="post-meta">
             <div class="post-meta-line">
-                <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src="https://avatars.githubusercontent.com/z2z63"   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
+                <span class="post-author"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"/></svg><a href="/" title="Author" rel=" author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2024-07-20">2024-07-20</time>&nbsp;<svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-07-21">2024-07-21</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;7628 words&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;16 minutes&nbsp;</div>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;7628 words&nbsp;
+                    <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;34 minutes&nbsp;</div>
         </div><div class="details toc print:!tw-block" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -213,10 +213,10 @@
     <li><a href="#分层配置">分层配置</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>最近两个月也是基本一直在写C++了，尤其是实习以来，从linux的C++开发切换到windows + visual c++，这其中遇到的问题非常多，也让我不断的思考究竟怎样才是最佳实践。</p>
+            </div><div class="content" id="content" data-pagefind-body><p>最近两个月也是基本一直在写C++了，尤其是实习以来，从linux的C++开发切换到windows + visual c++，这其中遇到的问题非常多，也让我不断的思考究竟怎样才是最佳实践。</p>
 <p>此外，实习期间摸鱼时，也阅读了不少python源码，为了理解python的内存管理系统，还翻了四五遍glibc的wiki，粗略看了<code>malloc</code>源码，也算是学到了不少知识，为了分享这些知识，我决定先将我从各种项目中学习到的C/C++开发应该了解的知识系统总结一下</p>
 <h2 id="前置概念" class="headerLink">
-    <a href="#%e5%89%8d%e7%bd%ae%e6%a6%82%e5%bf%b5" class="header-mark" aria-label="Header mark for '前置概念'"></a>前置概念</h2><ul>
+    <a href="#%e5%89%8d%e7%bd%ae%e6%a6%82%e5%bf%b5" class="header-mark"></a>前置概念</h2><ul>
 <li>C/C++是系统开发语言，绝大部分操作系统的系统调用都是以C/C++的API形式提供的</li>
 <li>C++不应该被视为一种语言，而是一个松散的语言联邦。可以认为GNU的C++是gnu-cpp语言，而Microsoft的C++是visual-cpp语言。而这些xxx-cpp语言恰好满足了一个名为C++的语言联邦的约定，于是都称为C++</li>
 <li>接上，以上观点的原因是，不同平台的C++开发区别实在是太大了。Windows的C++开发者和Linux的C++开发者表面上都在开发C++，但是他们的考虑到底层的方式，使用的工具，使用工具的方式都是截然不同的。例如同一个<code>printf</code>，linux的C++开发者会想到文件描述符，会想到tty等等，而Windows的C++开发者会想到Win32 API，会想到回车换行符，会想到控制台主机等等</li>
@@ -226,13 +226,13 @@
 <li>UB，IB的行为往往是根据当前架构，当前实现方式中选取的性能最好的一种行为，即C++跨平台时需要考虑避免UB和IB</li>
 </ul>
 <h2 id="工具链" class="headerLink">
-    <a href="#%e5%b7%a5%e5%85%b7%e9%93%be" class="header-mark" aria-label="Header mark for '工具链'"></a>工具链</h2><p>为了将源码转变为最终的二进制，需要编译器、汇编器、链接器、调试器共同工作<br>
+    <a href="#%e5%b7%a5%e5%85%b7%e9%93%be" class="header-mark"></a>工具链</h2><p>为了将源码转变为最终的二进制，需要编译器、汇编器、链接器、调试器共同工作<br>
 此外，往往还需要配套的构建工具例如makefile、cmake等，他们共同组成了C++工具链</p>
 <p>工具链往往跟平台有关，linux往往使用GCC工具链中的<code>gcc</code>作为编译器，<code>as</code>作为汇编器，<code>ld</code>作为链接器，<code>gdb</code>作为调试器</p>
 <p>此外，一套工具链中的工具是相互协作，共同生成二进制。例如gcc会在编译时，将一些信息嵌入ELF某些段中，指示<code>ld</code>如何工作，因此gcc编译的中间产物不能被其他链接器使用，不同平台的汇编代码也不同，例如GCC的汇编器是<code>GAS</code>(GNU Assember)，其语法与visual c++的汇编器<code>MASM</code>不同。因此，生成二进制产物必须由一套工具链的工具相互协作，不能混用工具链</p>
 <p>对于传统开源项目，常常使用GNU的autotools，makeilfe作为构建工具。对于现代C++项目，通常使用CMake作为构建工具，CMake在linux平台往往使用makefile完成最终的构建；而windows可以选择microsoft提供的visual c++工具链，并使用Visual Studio进行开发，Visual Studio往往会调用<code>msbuild</code>或<code>nmake</code>完成构建</p>
 <h2 id="编译参数" class="headerLink">
-    <a href="#%e7%bc%96%e8%af%91%e5%8f%82%e6%95%b0" class="header-mark" aria-label="Header mark for '编译参数'"></a>编译参数</h2><p>编译参数即传给编译器的参数。广义的编译参数包括任何字面上传递的参数，狭义的编译参数指一些控制编译器行为的标志，而不包括诸如头文件搜索路径，源文件路径等等</p>
+    <a href="#%e7%bc%96%e8%af%91%e5%8f%82%e6%95%b0" class="header-mark"></a>编译参数</h2><p>编译参数即传给编译器的参数。广义的编译参数包括任何字面上传递的参数，狭义的编译参数指一些控制编译器行为的标志，而不包括诸如头文件搜索路径，源文件路径等等</p>
 <p>以gcc为例，编译参数一般有一下部分</p>
 <ul>
 <li>头文件搜索路径</li>
@@ -271,7 +271,7 @@ gcc会在内部调用<code>ld</code>，链接器参数会直接传递给<code>ld
 部分宏定义需要在编译时传入，以控制程序的行为</li>
 </ul>
 <h2 id="如何编译" class="headerLink">
-    <a href="#%e5%a6%82%e4%bd%95%e7%bc%96%e8%af%91" class="header-mark" aria-label="Header mark for '如何编译'"></a>如何编译</h2><p>大部分场合下，编译时需要指定的编译参数如下</p>
+    <a href="#%e5%a6%82%e4%bd%95%e7%bc%96%e8%af%91" class="header-mark"></a>如何编译</h2><p>大部分场合下，编译时需要指定的编译参数如下</p>
 <ul>
 <li>头文件搜索路径</li>
 <li>库搜索路径</li>
@@ -286,7 +286,7 @@ gcc会在内部调用<code>ld</code>，链接器参数会直接传递给<code>ld
 <li>如果需要传入参数以控制编译行为，脚本就会变得越来越复杂</li>
 </ul>
 <h2 id="makefile" class="headerLink">
-    <a href="#makefile" class="header-mark" aria-label="Header mark for 'Makefile'"></a>Makefile</h2><p>Makefile就是为了解决以上问题而出现的，它可以认为是shell脚本的一种封装<br>
+    <a href="#makefile" class="header-mark"></a>Makefile</h2><p>Makefile就是为了解决以上问题而出现的，它可以认为是shell脚本的一种封装<br>
 Makefile有以下内容：</p>
 <ul>
 <li>规则<br>
@@ -312,7 +312,7 @@ Makefile有以下内容：</p>
 <li><code>CFLAGS</code>为默认编译时，传递给<code>CC</code>的编译参数，同理<code>CXXFLAGS</code>是默认传递给<code>CXX</code>的编译参数</li>
 </ul>
 <h2 id="autotools" class="headerLink">
-    <a href="#autotools" class="header-mark" aria-label="Header mark for 'autotools'"></a>autotools</h2><p>C的一个特点是利用宏定义和条件编译，可以控制参与编译的代码，做到适应各种平台，例如</p>
+    <a href="#autotools" class="header-mark"></a>autotools</h2><p>C的一个特点是利用宏定义和条件编译，可以控制参与编译的代码，做到适应各种平台，例如</p>
 <ul>
 <li>跨平台软件实现子进程时，利用条件编译可以在不同的平台调用相应的系统调用
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
@@ -733,7 +733,7 @@ Makefile有以下内容：</p>
 <li>autotools是GNU三板斧之一，GNU认为自由软件构建所需的工具链也得是自由的</li>
 </ul>
 <h2 id="树外构建" class="headerLink">
-    <a href="#%e6%a0%91%e5%a4%96%e6%9e%84%e5%bb%ba" class="header-mark" aria-label="Header mark for '树外构建'"></a>树外构建</h2><p>大部分构建工具都会缓存构建中间产物以加快构建速度，套用本博客的文章<a href="../week2#%e5%94%af%e4%b8%80%e4%ba%8b%e5%ae%9e%e5%8e%9f%e5%88%99" rel="">《第二周：败者树、范式与反范式》</a>的观点，构建中间产物是cache，它违反了唯一事实原则。其后果是在某些情况下，中间产物可能不是最新的，这时需要强制清空所有构建产物，执行一次干净的构建。因此，构建工具往往提供<code>clean</code>的功能</p>
+    <a href="#%e6%a0%91%e5%a4%96%e6%9e%84%e5%bb%ba" class="header-mark"></a>树外构建</h2><p>大部分构建工具都会缓存构建中间产物以加快构建速度，套用本博客的文章<a href="../week2#%e5%94%af%e4%b8%80%e4%ba%8b%e5%ae%9e%e5%8e%9f%e5%88%99" rel="">《第二周：败者树、范式与反范式》</a>的观点，构建中间产物是cache，它违反了唯一事实原则。其后果是在某些情况下，中间产物可能不是最新的，这时需要强制清空所有构建产物，执行一次干净的构建。因此，构建工具往往提供<code>clean</code>的功能</p>
 <p>如果将源文件在文件系统中的分布看作源码树，那么直接在项目根目录进行构建，构建的中间产物就会和源码树混杂在一起，这样的构建被称为树内构建，在<code>clean</code>时，需要深入源码树每个层级，精准删除构建中间产物而不删除源文件。Makefile的<code>clean</code>目标一般是使用<code>find</code>命令实现的</p>
 <p>构建的中间产物就会和源码树混杂在一起后，会产生如下问题</p>
 <ul>
@@ -1040,7 +1040,7 @@ Makefile有以下内容：</p>
 </li>
 </ol>
 <h2 id="cmake" class="headerLink">
-    <a href="#cmake" class="header-mark" aria-label="Header mark for 'CMake'"></a>CMake</h2><p>前文提及的autotools + Makefile在许多老牌开源项目中被使用，但它也有很多问题</p>
+    <a href="#cmake" class="header-mark"></a>CMake</h2><p>前文提及的autotools + Makefile在许多老牌开源项目中被使用，但它也有很多问题</p>
 <ol>
 <li>只能在linux平台使用</li>
 <li>命令式语法，经常需要重复处理一些琐碎细节</li>
@@ -1059,22 +1059,22 @@ Makefile有以下内容：</p>
 <li>库可以携带属性，控制其输出产物，例如<code>SHARED</code>输出共享库，<code>STATIC</code>输出静态库，<code>MODULE</code>输出不参与链接其他target，可供<code>dlopen</code>在运行时动态链接的库</li>
 </ul>
 <h3 id="cmake的跨平台特性" class="headerLink">
-    <a href="#cmake%e7%9a%84%e8%b7%a8%e5%b9%b3%e5%8f%b0%e7%89%b9%e6%80%a7" class="header-mark" aria-label="Header mark for 'CMake的跨平台特性'"></a>CMake的跨平台特性</h3><p>CMake在不同的平台有不同的行为</p>
+    <a href="#cmake%e7%9a%84%e8%b7%a8%e5%b9%b3%e5%8f%b0%e7%89%b9%e6%80%a7" class="header-mark"></a>CMake的跨平台特性</h3><p>CMake在不同的平台有不同的行为</p>
 <ul>
 <li>CMake会自动调整输出产物的格式，在windows平台输出exe、dll、lib，在linux平台输出可执行（无扩展名）、so（共享库）、a（静态库）</li>
 <li>CMake在不同平台生成对应的工程，例如在linux平台默认生成Makefile工程，在windows平台默认生成Visual Studio工程，在MacOS平台默认生成XCode工程</li>
 <li><code>find_pacakge</code>时，在不同平台采用不同的搜索策略，符合这些平台组织软件包的方式</li>
 </ul>
 <h3 id="第三方库" class="headerLink">
-    <a href="#%e7%ac%ac%e4%b8%89%e6%96%b9%e5%ba%93" class="header-mark" aria-label="Header mark for '第三方库'"></a>第三方库</h3><p>CMake大大简化了C++项目使用第三方库的过程，经过实践，我认为<code>find_package</code>和<code>ExternalProject_Add</code>是非常方便的功能</p>
+    <a href="#%e7%ac%ac%e4%b8%89%e6%96%b9%e5%ba%93" class="header-mark"></a>第三方库</h3><p>CMake大大简化了C++项目使用第三方库的过程，经过实践，我认为<code>find_package</code>和<code>ExternalProject_Add</code>是非常方便的功能</p>
 <h4 id="find_package" class="headerLink">
-    <a href="#find_package" class="header-mark" aria-label="Header mark for '&lt;code&gt;find_package&lt;/code&gt;'"></a><code>find_package</code></h4><p>在linux平台，许多C++第三方库可以通过包管理器安装，只要第三方库支持CMake，就会将<code>Find&lt;PackageName&gt;.cmake</code>或<code>&lt;PackageName&gt;Config.cmake</code>或相似名称的CMake文件安装到<code>/usr/lib/cmake/&lt;package-name&gt;/</code>下</p>
+    <a href="#find_package" class="header-mark"></a><code>find_package</code></h4><p>在linux平台，许多C++第三方库可以通过包管理器安装，只要第三方库支持CMake，就会将<code>Find&lt;PackageName&gt;.cmake</code>或<code>&lt;PackageName&gt;Config.cmake</code>或相似名称的CMake文件安装到<code>/usr/lib/cmake/&lt;package-name&gt;/</code>下</p>
 <blockquote>
-<p><strong>Note:</strong> 在Linux平台，安装指的是带权限的复制。man描述<code>install</code>命令为“install - copy files and set attributes”</p>
-</blockquote>
-<p><code>find_package</code>在linux平台会搜索此目录，并执行其中的CMake文件，执行的结果通常包括设置了头文件搜索路径变量，添加了若干库；随后只需使用<code>target_include_directories</code>添加头文件搜索路径，使用<code>target_link_libraries</code>链接到此库即可</p>
+  <p><strong>Note:</strong> 在Linux平台，安装指的是带权限的复制。man描述<code>install</code>命令为“install - copy files and set attributes”</p>
+
+</blockquote><p><code>find_package</code>在linux平台会搜索此目录，并执行其中的CMake文件，执行的结果通常包括设置了头文件搜索路径变量，添加了若干库；随后只需使用<code>target_include_directories</code>添加头文件搜索路径，使用<code>target_link_libraries</code>链接到此库即可</p>
 <h3 id="externalproject" class="headerLink">
-    <a href="#externalproject" class="header-mark" aria-label="Header mark for '&lt;code&gt;ExternalProject&lt;/code&gt;'"></a><code>ExternalProject</code></h3><p><code>ExternalProject</code>是一个非常强大的功能，可以说是C++第三方库的最终银弹。<br>
+    <a href="#externalproject" class="header-mark"></a><code>ExternalProject</code></h3><p><code>ExternalProject</code>是一个非常强大的功能，可以说是C++第三方库的最终银弹。<br>
 <code>find_package</code>在Linux平台的一个缺点是，它默认使用系统的软件包，而linux系统的软件包版本一般无法选择，由发行版软件源控制。许多项目使用的第三方库的版本比系统软件包的版本旧。linux软件包大部分也使用语义化版本（参考<a href="../week5/" rel="">《第五周：CI/CD、git workflow与软件发行》</a>）。如果主版本号不一致，一般是无法使用的。</p>
 <p>此外，使用<code>find_package</code>的前提是第三方库提供了诸如<code>Find&lt;PackageName&gt;.cmake</code>这样的文件，然而还有些时候第三方库没有提供</p>
 <p>以上问题都能通过<code>ExternalProject</code>解决，它提供了丰富的选项，支持使用HTTP下载，使用git拉取源码包，支持自定义configure、build、install</p>
@@ -1196,14 +1196,14 @@ Makefile有以下内容：</p>
 </div>
 <p>由于<code>ExternalProject</code>可以完全控制configure，可以在configure时，传入编译参数、功能开关等，实现第三方库携带调试符号，根据项目需求裁剪第三方库功能等需求。例如AnyQ就去掉了libcurl自带的ssl功能，在不需要HTTPS的场合下可以大大减小二进制大小</p>
 <h3 id="fetchcontent" class="headerLink">
-    <a href="#fetchcontent" class="header-mark" aria-label="Header mark for '&lt;code&gt;FetchContent&lt;/code&gt;'"></a><code>FetchContent</code></h3><p><code>FetchContent</code>也能用来将其他C++项目集成进来，但这个项目必须也使用CMake</p>
+    <a href="#fetchcontent" class="header-mark"></a><code>FetchContent</code></h3><p><code>FetchContent</code>也能用来将其他C++项目集成进来，但这个项目必须也使用CMake</p>
 <p>以上我并没有使用“第三方库”这样的字眼，因为<code>FetchContent</code>会将其他CMake工程的所有target全部添加到本CMake工程内，容易会造成名称冲突</p>
 <p>相反，<code>ExternalProject</code>将第三方库转变成了一个target，并且能够指定target的名称，就不会出现名称冲突的情况</p>
 <blockquote>
-<p>The ExternalProject_Add() function creates a custom target to drive download, update/patch, configure, build, install and test steps of an external project:</p>
-</blockquote>
-<h3 id="cmake缺点" class="headerLink">
-    <a href="#cmake%e7%bc%ba%e7%82%b9" class="header-mark" aria-label="Header mark for 'CMake缺点'"></a>CMake缺点</h3><p>写了这么多CMake的优点，终于轮到吐槽CMake了。没错，CMake本身的问题实在是太多了，但苦于CMake已经成了C++项目的事实标准，很多时候并没有更好的选择</p>
+  <p>The ExternalProject_Add() function creates a custom target to drive download, update/patch, configure, build, install and test steps of an external project:</p>
+
+</blockquote><h3 id="cmake缺点" class="headerLink">
+    <a href="#cmake%e7%bc%ba%e7%82%b9" class="header-mark"></a>CMake缺点</h3><p>写了这么多CMake的优点，终于轮到吐槽CMake了。没错，CMake本身的问题实在是太多了，但苦于CMake已经成了C++项目的事实标准，很多时候并没有更好的选择</p>
 <p>所有指令都是无返回值的，任何输出都是输出到一个变量上，非常不符合大部分编程语言的习惯<br>
 不仅仅无返回值，很多指令的行为依赖于各种变量的定义，也就是输入不明显，行为依赖于执行到此指令时各种变量的值</p>
 <p>甚至if else还有这种逆天语法</p>
@@ -1390,7 +1390,7 @@ Makefile有以下内容：</p>
     </div>
   </div>
   <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-1" 
+    id="codeblock-id-10" 
     class="
       chroma 
       !tw-block 
@@ -1490,7 +1490,7 @@ Makefile有以下内容：</p>
     </div>
   </div>
   <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-2" 
+    id="codeblock-id-11" 
     class="
       chroma 
       !tw-block 
@@ -1516,7 +1516,7 @@ Makefile有以下内容：</p>
 <p>此外，许多第三方库提供的<code>Find&lt;PackageName&gt;.cmake</code>等文件，并没有文档说明它添加了哪些库，设置了哪些变量。官网文档大部分不会提及如何使用<code>find_package</code>引入他们的库，在<code>Find&lt;PackageName&gt;.cmake</code>文件开头写段注释已经算是&quot;well documentated&quot;的做法（相信大部分人都不会去看这个文件里面的注释吧）</p>
 <p>CMake的文档也是又臭又长，许多指令的行为很复杂，因为传参很多，还能依赖于各种变量（通常是CMAKE开头）的定义，读文档非常考验耐心。CMake Tutorial写的也是又臭又长的风格，当然这也是C++项目的通病了</p>
 <h2 id="分层配置" class="headerLink">
-    <a href="#%e5%88%86%e5%b1%82%e9%85%8d%e7%bd%ae" class="header-mark" aria-label="Header mark for '分层配置'"></a>分层配置</h2><p>如果在源码树中非常深的位置想要git不追踪某个文件，可以在项目的根目录写下这个文件相对根目录的路径</p>
+    <a href="#%e5%88%86%e5%b1%82%e9%85%8d%e7%bd%ae" class="header-mark"></a>分层配置</h2><p>如果在源码树中非常深的位置想要git不追踪某个文件，可以在项目的根目录写下这个文件相对根目录的路径</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -1597,7 +1597,7 @@ Makefile有以下内容：</p>
     </div>
   </div>
   <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-3" 
+    id="codeblock-id-12" 
     class="
       chroma 
       !tw-block 
@@ -1695,7 +1695,7 @@ Makefile有以下内容：</p>
     </div>
   </div>
   <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-4" 
+    id="codeblock-id-13" 
     class="
       chroma 
       !tw-block 
@@ -1795,7 +1795,7 @@ Makefile可以通过<code>Include</code>指令添加子目录的Makefile，CMake
     </div>
   </div>
   <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-5" 
+    id="codeblock-id-14" 
     class="
       chroma 
       !tw-block 
@@ -1883,10 +1883,10 @@ Makefile可以通过<code>Include</code>指令添加子目录的Makefile，CMake
             </noscript></div></article></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.133.0">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><svg class="icon"
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.135.0">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg> DoIt</a>
                 </div><div class="footer-line"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 448c-110.532 0-200-89.451-200-200 0-110.531 89.451-200 200-200 110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200zm107.351-101.064c-9.614 9.712-45.53 41.396-104.065 41.396-82.43 0-140.484-61.425-140.484-141.567 0-79.152 60.275-139.401 139.762-139.401 55.531 0 88.738 26.62 97.593 34.779a11.965 11.965 0 0 1 1.936 15.322l-18.155 28.113c-3.841 5.95-11.966 7.282-17.499 2.921-8.595-6.776-31.814-22.538-61.708-22.538-48.303 0-77.916 35.33-77.916 80.082 0 41.589 26.888 83.692 78.277 83.692 32.657 0 56.843-19.039 65.726-27.225 5.27-4.857 13.596-4.039 17.82 1.738l19.865 27.17a11.947 11.947 0 0 1-1.152 15.518z"/></svg>2023 - 2024<span class="author">&nbsp;<a href="https://github.com/z2z63" target="_blank" rel="noopener noreferrer">z2z63</a></span></div>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 448c-110.532 0-200-89.451-200-200 0-110.531 89.451-200 200-200 110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200zm107.351-101.064c-9.614 9.712-45.53 41.396-104.065 41.396-82.43 0-140.484-61.425-140.484-141.567 0-79.152 60.275-139.401 139.762-139.401 55.531 0 88.738 26.62 97.593 34.779a11.965 11.965 0 0 1 1.936 15.322l-18.155 28.113c-3.841 5.95-11.966 7.282-17.499 2.921-8.595-6.776-31.814-22.538-61.708-22.538-48.303 0-77.916 35.33-77.916 80.082 0 41.589 26.888 83.692 78.277 83.692 32.657 0 56.843-19.039 65.726-27.225 5.27-4.857 13.596-4.039 17.82 1.738l19.865 27.17a11.947 11.947 0 0 1-1.152 15.518z"/></svg>2023 - 2024<span class="author">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">
             </div>
