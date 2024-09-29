@@ -136,7 +136,7 @@ enableGitInfo = true
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 # 作者配置
-[author]
+[params.author]
   name = "z2z63"
   email = "virtualfuture@gmail.com"
   link = "https://github.com/z2z63"
