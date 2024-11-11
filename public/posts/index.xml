@@ -4,7 +4,17 @@
         <link>http://example.org/posts/</link>
         <description>All Posts | z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sun, 18 Aug 2024 14:36:32 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sun, 10 Nov 2024 15:38:53 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>OceanBase 数据库大赛初赛结束之后</title>
+    <link>http://example.org/posts/miniob/</link>
+    <pubDate>Sun, 10 Nov 2024 15:38:53 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/miniob/</guid>
+    <description><![CDATA[<h2 id="写在前面" class="headerLink">
+    <a href="#%e5%86%99%e5%9c%a8%e5%89%8d%e9%9d%a2" class="header-mark"></a>写在前面</h2><p>仔细数来快三个月没写博客了，虽然我也能找到各种各样的原因，实习离职、秋招、比赛等等，归根结底还是懈怠了。最近各种事项也基本结束，整天忙着无所事事，是时候重新动笔了</p>
+<p>本文我将围绕即将结束初赛的 oceanbase 数据库大赛展开，但由于我不喜欢向别人讲解我敲的代码如何如何，所以我会偏向这次比赛涉及的理论、设计、想法</p>
+<p>在这次比赛前我因为准备秋招，花了一些时间读了两本书，我认为对比赛帮助非常大，本文提及的很多想法和设计也是参考了这些书</p>]]></description>
+</item><item>
     <title>第十周：杂谈与碎碎念</title>
     <link>http://example.org/posts/week10/</link>
     <pubDate>Sun, 18 Aug 2024 14:36:32 &#43;0800</pubDate><author>
@@ -74,14 +84,5 @@
     <description><![CDATA[<p>最近发现身边有些同学并不知道在我看来入门级别的浏览器小技巧，所以专门写一篇文章介绍和总结一下我使用的浏览器小技巧</p>
 <h1 id="ctrlf-搜索" class="headerLink">
     <a href="#ctrlf-%e6%90%9c%e7%b4%a2" class="header-mark"></a>Ctrl+F 搜索</h1><p>Ctrl+F弹出的搜索框会自动聚焦，我的常用流程是</p>]]></description>
-</item><item>
-    <title>Hash_dos_and_python_hash</title>
-    <link>http://example.org/posts/hash_dos_and_python_hash/</link>
-    <pubDate>Wed, 10 Apr 2024 16:35:31 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/hash_dos_and_python_hash/</guid>
-    <description><![CDATA[<p>这篇文章讨论了哈希函数的安全问题和python的哈希实现</p>
-<h1 id="hash-dos" class="headerLink">
-    <a href="#hash-dos" class="header-mark"></a>Hash DOS</h1><p>所谓Hash DOS即利用hash碰撞增加服务器负担、使其无法响应正常用户的请求的情况，以下说明为什么可以利用哈希碰撞发起DOS攻击</p>]]></description>
 </item></channel>
 </rss>

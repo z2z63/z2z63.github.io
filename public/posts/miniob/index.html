@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" /><title>OceanBase 数据库大赛初赛结束之后 - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://example.org/posts/miniob/">
+  <meta property="og:site_name" content="z2z63/Virtualfuture&#39;s Blog">
+  <meta property="og:title" content="OceanBase 数据库大赛初赛结束之后">
+  <meta property="og:description" content="写在前面仔细数来快三个月没写博客了，虽然我也能找到各种各样的原因，实习离职、秋招、比赛等等，归根结底还是懈怠了。最近各种事项也基本结束，整天忙着无所事事，是时候重新动笔了
+本文我将围绕即将结束初赛的 oceanbase 数据库大赛展开，但由于我不喜欢向别人讲解我敲的代码如何如何，所以我会偏向这次比赛涉及的理论、设计、想法
+在这次比赛前我因为准备秋招，花了一些时间读了两本书，我认为对比赛帮助非常大，本文提及的很多想法和设计也是参考了这些书">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-11-10T15:38:53+08:00">
+    <meta property="article:modified_time" content="2024-11-10T15:38:53+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="OceanBase 数据库大赛初赛结束之后">
+  <meta name="twitter:description" content="写在前面仔细数来快三个月没写博客了，虽然我也能找到各种各样的原因，实习离职、秋招、比赛等等，归根结底还是懈怠了。最近各种事项也基本结束，整天忙着无所事事，是时候重新动笔了
+本文我将围绕即将结束初赛的 oceanbase 数据库大赛展开，但由于我不喜欢向别人讲解我敲的代码如何如何，所以我会偏向这次比赛涉及的理论、设计、想法
+在这次比赛前我因为准备秋招，花了一些时间读了两本书，我认为对比赛帮助非常大，本文提及的很多想法和设计也是参考了这些书">
+<meta name="application-name" content="z2z63/Virtualfuture&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="z2z63/Virtualfuture&#39;s Blog">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<link rel="canonical" href="http://example.org/posts/miniob/" /><link rel="prev" href="http://example.org/posts/week10/" />
+<link rel="stylesheet" href="/css/main.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">{"@context": "https://schema.org","@type": "BlogPosting",
+        "headline": "OceanBase 数据库大赛初赛结束之后",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http://example.org/posts/miniob/"
+        },"genre": "posts","wordcount":  7531 ,
+        "url": "http://example.org/posts/miniob/","datePublished": "2024-11-10T15:38:53+08:00","dateModified": "2024-11-10T15:38:53+08:00","publisher": {
+            "@type": "Organization",
+            "name": "z2z63"},"author": {
+                "@type": "Person",
+                "name": "z2z63",
+                "url": "https://github.com/z2z63"
+            },"description": ""
+    }</script></head>
+
+
+<body data-instant-intensity="viewport" ><script type="text/javascript">
+        function setTheme(theme) {
+          document.body.setAttribute('theme', theme); 
+          document.documentElement.className = theme;
+          document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark');
+          if (theme === 'light') {
+            document.documentElement.classList.remove('tw-dark')
+          } else {
+            document.documentElement.classList.add('tw-dark')
+          }
+          window.theme = theme;   
+          window.isDark = window.theme !== 'light' 
+        }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {
+            let theme = localStorage.getItem('theme');
+            if (theme === 'light' || theme === 'dark') {
+            setTheme(theme);
+            } else {
+                if ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            }
+         } else { 
+            if ('auto' === 'light' || 'auto' === 'dark') 
+                setTheme('auto'), saveTheme('auto'); 
+            else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');
+        }
+        let metaColors = {'light': '#f8f8f8','dark': '#161b22'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop print:!tw-hidden" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="z2z63/Virtualfuture&#39;s Blog">z2z63/Virtualfuture&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item"
+                    href="/posts/" > Posts </a><a class="menu-item"
+                    href="/friends" > Friends </a><a class="menu-item"
+                    href="/about" > About </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                    <input type="text"
+                        placeholder="Search titles or contents..."
+                        id="search-input-desktop">
+                    <button class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                        <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+                    </button>
+                    <button class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                        <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"/></svg>
+                    </button>
+                    <span class="search-button search-loading tw-animate-spin" id="search-loading-desktop">
+                        <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z"/></svg>
+                    </span>
+                </span><button class="menu-item theme-switch" aria-label="Switch Theme">
+                    <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M8 256c0 136.966 111.033 248 248 248s248-111.034 248-248S392.966 8 256 8 8 119.033 8 256zm248 184V72c101.705 0 184 82.311 184 184 0 101.705-82.311 184-184 184z"/></svg>
+                </button></div>
+        </div>
+    </div>
+</header><header class="mobile print:!tw-hidden" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="z2z63/Virtualfuture&#39;s Blog">z2z63/Virtualfuture&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                <div class="search mobile" id="search-mobile">
+                    <input type="text"
+                        placeholder="Search titles or contents..."
+                        id="search-input-mobile">
+                    <button class="search-button search-toggle tw-h-10" id="search-toggle-mobile" title="Search">
+                        <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+                    </button>
+                    <button class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                        <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"/></svg>
+                    </button>
+                    <span class="search-button search-loading tw-animate-spin" id="search-loading-mobile">
+                        <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z"/></svg>
+                    </span>
+                </div>
+                <button class="search-cancel" id="search-cancel-mobile">
+                    Cancel
+                </button>
+            </div><a class="menu-item" href="/posts/" title="" >Posts</a><a class="menu-item" href="/friends" title="" >Friends</a><a class="menu-item" href="/about" title="" >About</a><button class="menu-item theme-switch tw-w-full" aria-label="Switch Theme">
+                <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M8 256c0 136.966 111.033 248 248 248s248-111.034 248-248S392.966 8 256 8 8 119.033 8 256zm248 184V72c101.705 0 184 82.311 184 184 0 101.705-82.311 184-184 184z"/></svg>
+            </button></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+            <div class="container"><div class="toc print:!tw-hidden" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#写在前面">写在前面</a></li>
+    <li><a href="#现代语言的基础设施">现代语言的基础设施</a>
+      <ul>
+        <li><a href="#miniob-使用的基础设施">miniob 使用的基础设施</a></li>
+      </ul>
+    </li>
+    <li><a href="#解题思路的简单介绍">解题思路的简单介绍</a>
+      <ul>
+        <li><a href="#update">update</a></li>
+        <li><a href="#null">null</a></li>
+        <li><a href="#text">text</a></li>
+        <li><a href="#vector">vector</a></li>
+      </ul>
+    </li>
+    <li><a href="#提高-sql-执行的性能">提高 sql 执行的性能</a>
+      <ul>
+        <li><a href="#减少-io-次数">减少 IO 次数</a></li>
+        <li><a href="#减少系统调用次数">减少系统调用次数</a></li>
+        <li><a href="#使用编译器优化使用高性能库">使用编译器优化/使用高性能库</a></li>
+      </ul>
+    </li>
+    <li><a href="#感想">感想</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2024-11-10" data-pagefind-body>OceanBase 数据库大赛初赛结束之后</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src=https://avatars.githubusercontent.com/z2z63   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
+                </span></div>
+            <div class="post-meta-line"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2024-11-10">2024-11-10</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-11-10">2024-11-10</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;7531 words&nbsp;
+                    <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;34 minutes&nbsp;</div>
+        </div><div class="details toc print:!tw-block" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span class="details-icon"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#写在前面">写在前面</a></li>
+    <li><a href="#现代语言的基础设施">现代语言的基础设施</a>
+      <ul>
+        <li><a href="#miniob-使用的基础设施">miniob 使用的基础设施</a></li>
+      </ul>
+    </li>
+    <li><a href="#解题思路的简单介绍">解题思路的简单介绍</a>
+      <ul>
+        <li><a href="#update">update</a></li>
+        <li><a href="#null">null</a></li>
+        <li><a href="#text">text</a></li>
+        <li><a href="#vector">vector</a></li>
+      </ul>
+    </li>
+    <li><a href="#提高-sql-执行的性能">提高 sql 执行的性能</a>
+      <ul>
+        <li><a href="#减少-io-次数">减少 IO 次数</a></li>
+        <li><a href="#减少系统调用次数">减少系统调用次数</a></li>
+        <li><a href="#使用编译器优化使用高性能库">使用编译器优化/使用高性能库</a></li>
+      </ul>
+    </li>
+    <li><a href="#感想">感想</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content" data-pagefind-body><h2 id="写在前面" class="headerLink">
+    <a href="#%e5%86%99%e5%9c%a8%e5%89%8d%e9%9d%a2" class="header-mark"></a>写在前面</h2><p>仔细数来快三个月没写博客了，虽然我也能找到各种各样的原因，实习离职、秋招、比赛等等，归根结底还是懈怠了。最近各种事项也基本结束，整天忙着无所事事，是时候重新动笔了</p>
+<p>本文我将围绕即将结束初赛的 oceanbase 数据库大赛展开，但由于我不喜欢向别人讲解我敲的代码如何如何，所以我会偏向这次比赛涉及的理论、设计、想法</p>
+<p>在这次比赛前我因为准备秋招，花了一些时间读了两本书，我认为对比赛帮助非常大，本文提及的很多想法和设计也是参考了这些书</p>
+<ul>
+<li>C++ primer<br>
+一本挺厚的书，讲解 C++ 的各种特性，不过说实话看完这本书我也只能自称基本掌握 C++</li>
+<li>DataBase System Concepts<br>
+讲解数据库的基本理论，基本上大部分成熟的数据库涉及的理论都能在这本书里找到</li>
+</ul>
+<h2 id="现代语言的基础设施" class="headerLink">
+    <a href="#%e7%8e%b0%e4%bb%a3%e8%af%ad%e8%a8%80%e7%9a%84%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd" class="header-mark"></a>现代语言的基础设施</h2><p>所谓基础设施只是我自己胡编乱造的词。其他高级语言有各种完善的措施来发现错误或避免错误，比如 java，python， rust 等，基本来说，这些措施的目的都是尽量提前暴露错误，或者在出现错误时尽可能的采取合理的措施，防止错误扩大<br>
+为了实现这个目的，有两种方向</p>
+<ol>
+<li>给编译器提供更多信息，在编译期检查出潜在的问题</li>
+<li>在运行时插入检查</li>
+</ol>
+<p>按照以上的观点，C++的基础设施可以说非常少，首先是各种指针运算，指针访问，内存的申请释放等语言特性就有很多不仅仅没有编译期检查，也没有运行时检查，一旦出错了就是各种 undefined behavior（以下简称 UB）。其次就是标准库也存在许多 UB。例如容器访问越界也是 UB。那么 UB 到底是什么 behavoir 呢，这个问题我想无法解答。有时候 UB 导致程序异常，所以我们发现了这个问题并修复，但更多时候 UB 是无法依靠的，因为他完全可能在开发时符合我们的预期并使程序正常执行，并且在正式的生产环境就引发严重的问题</p>
+<p>按照上篇文章批评b乎用户时我的观点，一定存在某种方法使得我们可以克服 C++的“缺陷“，否则不可能有大公司愿意使用 C++ 开发项目。而这些”方法“，也就是我在比赛初期尝试引入的基础设施</p>
+<h3 id="miniob-使用的基础设施" class="headerLink">
+    <a href="#miniob-%e4%bd%bf%e7%94%a8%e7%9a%84%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd" class="header-mark"></a>miniob 使用的基础设施</h3><h4 id="核心基础设施" class="headerLink">
+    <a href="#%e6%a0%b8%e5%bf%83%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd" class="header-mark"></a>核心基础设施</h4><p>sanitizer总的来说，就是编译器在一些关键处插入检查代码，检查程序中潜在的问题。它的一个非常大的优点是，可以在开发时使用 sanitizer 检查问题，然后在 release 时关闭 sanitizer，提高性能。这样即保证了正确性又不牺牲性能。这也是 do things in cpp&rsquo;s  way的方法，即尽量在编译期提供更多的特性，并且不影响运行时的性能（对于 sanitizer，就是不影响 release 运行时的性能），也就是运行时零开销</p>
+<p>在初赛中，项目已有address sanitizer，这是一个用于检查指针越界、悬垂指针等内存相关问题的一个 sanitizer。我引入了undefined behavior sanitizer，这是一个检查 UB 的 sanitizer，可以说是消除 UB 的利器。<br>
+除此之外，还开启了libstdc++ debug mode，它能检查 STL 容器的错误用例，解决了容器访问越界，迭代器失效等问题</p>
+<p>以上提及的基础设施中sanitizer主要是对语言特性进行检查，因此非常依赖编译器为 sanitizer 开洞，并且某些 sanitizer 依赖一些平台特性，因此不同编译器 + 不同平台对 sanitizer 的支持程度不同，其中 gcc + linux x64 是支持最好的一个。而 libstdc++ debug mode 主要是靠编译和链接时的小技巧，因此只需要在构建系统中传入<code>-D_GLIBCXX_DEBUG</code>就行了</p>
+<p>充分利用编译器的警告也是很好的方法，只需在构建系统中传入<code>-Wall -Werror</code>，就能强制开发者消除所有的警告，否则无法通过编译。由于 C++ 的特殊性，编译器一个不起眼的警告很有可能导致程序出现严重的错误，消除警告是一个虽然繁琐但绝对值得做的事情</p>
+<p>一个非常好的实践是同时使用 gcc 和 clang 编译代码，并消除两个编译器的警告，因为 clang 的静态分析功能更加强大，能够在编译期发现更多问题</p>
+<h4 id="次要基础设施" class="headerLink">
+    <a href="#%e6%ac%a1%e8%a6%81%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd" class="header-mark"></a>次要基础设施</h4><h5 id="clang-tidy-检查代码规范" class="headerLink">
+    <a href="#clang-tidy-%e6%a3%80%e6%9f%a5%e4%bb%a3%e7%a0%81%e8%a7%84%e8%8c%83" class="header-mark"></a>clang-tidy 检查代码规范</h5><p>C++ 做一件事有很多种方法，这些方法中，有些是过时的，有些是不必要的， 有些是极易导致错误的，有些是风格良好的，有些是严谨的。因此 linter 在 C++ 开发中是非常必要的。同时，开启 linter 也能帮助自己学习现代的、工程化的 C++<br>
+如果使用 CLion，就已经内置了clang-tidy和一系列checker，不需要自己配置，因此我非常推荐 C++ 初学者使用 CLion
+VSCode 使用 clang-tidy 需要使用 clangd 扩展，并调整一些设置。实际上 VSCode 只要花时间配置，也差不多能达到 CLion 的高度，不过目前我并没有发现一个快速在父类/子类、重载函数的不同版本、头文件声明/源文件定义之间跳转的方法，所以这次比赛还是用的 CLion</p>
+<h5 id="clang-format-格式化代码" class="headerLink">
+    <a href="#clang-format-%e6%a0%bc%e5%bc%8f%e5%8c%96%e4%bb%a3%e7%a0%81" class="header-mark"></a>clang-format 格式化代码</h5><p>可能有人认为代码风格只是一个个人偏好问题，但在工程中一致的代码风格不仅仅能促进合作，还能消除因为合并代码时格式化造成的无意义的冲突（上次数据库比赛的前车之鉴）<br>
+引入 clang-format时，应该注意以下几点</p>
+<ol>
+<li>保证团队中每个人都使用 clang-fromat，否则就失去了格式化的意义</li>
+<li>减少对存量代码的修改</li>
+</ol>
+<p>git 提供一个非常方便的功能，能够只格式化工作树中修改过的行</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    code-block-title 
+    
+    tw-flex 
+    tw-flex-row 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        tw-select-none 
+        tw-mx-2 
+        tw-block
+        group-[.is-open]:tw-rotate-90
+        tw-transition-[transform] 
+        tw-duration-500 
+        tw-ease-in-out
+        print:!tw-hidden"
+      disabled
+      aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+
+    <div class="code-block-title-bar tw-w-full">
+      <p class="tw-select-none !tw-my-1">shell</p>
+    </div>
+    <div class="tw-flex">
+      <button 
+        class="
+          line-number-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.show-line-numbers]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.is-wrap]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw-select-none
+          tw-mx-2 
+          tw-hidden
+          group-[.is-open]:tw-block
+          hover:tw-text-fgColor-link 
+          print:!tw-hidden"
+        title="Copy code">
+          <span class="copy-icon tw-block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw-hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw-select-none 
+          tw-mx-2 
+          tw-block 
+          group-[.is-open]:tw-hidden 
+          print:!tw-hidden" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
+    id="codeblock-id-1" 
+    class="
+      chroma 
+      !tw-block 
+      tw-p-0
+      tw-m-0
+      tw-transition-[max-height] 
+      tw-duration-500 
+      tw-ease-in-out 
+      group-[.is-closed]:!tw-max-h-0 
+      group-[.is-wrap]:tw-text-wrap
+      tw-overflow-y-hidden
+      tw-overflow-x-auto
+      tw-scrollbar-thin
+      "><span class="line"><span class="cl">git clang-format --force --extensions cpp,h <span class="o">||</span> true</span></span></code></pre>
+</div>
+<p>其中<code>|| true</code>是因为如果 clang-format 需要格式化代码，会返回非零值，这个设计是为了给自动化系统提供更多的信息，使脚本更加简洁，但会使 <code>make</code>认为命令执行失败</p>
+<h5 id="git-hook-保证每次提交可通过编译" class="headerLink">
+    <a href="#git-hook-%e4%bf%9d%e8%af%81%e6%af%8f%e6%ac%a1%e6%8f%90%e4%ba%a4%e5%8f%af%e9%80%9a%e8%bf%87%e7%bc%96%e8%af%91" class="header-mark"></a>git hook 保证每次提交可通过编译</h5><p>我使用了非常简单粗暴的方法 —— 只要编译过了就是能通过编译，因此我添加了一个precommit hook，它会在每次提交前编译整个项目，如果编译失败就会拒绝提交<br>
+实际使用效果有限，因为编译比较花时间，而且只保证当前工作树的代码时能通过编译的，但这不保证提交后的代码可以通过编译，例如局部提交的情况</p>
+<h4 id="基础设施在初赛中帮了多少忙" class="headerLink">
+    <a href="#%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e5%9c%a8%e5%88%9d%e8%b5%9b%e4%b8%ad%e5%b8%ae%e4%ba%86%e5%a4%9a%e5%b0%91%e5%bf%99" class="header-mark"></a>基础设施在初赛中帮了多少忙？</h4><p>address sanitizer， undefined behavior sanitizer，libstdc++ debug mode 可以说是帮助最大，避免了因为内存问题或 UB 花大量时间调试，也避免了本地能通过而测评无法通过这种“赛博灵异现象”</p>
+<p>不得不说 C++ 的未定义行为挺多的，以下是我在比赛中遇到的</p>
+<ul>
+<li>使用未对齐的指针，<a href="https://stackoverflow.com/questions/51203570/is-it-well-defined-to-hold-a-misaligned-pointer-as-long-as-you-dont-ever-deref" target="_blank" rel="noopener noreferrer">其行为未定义</a><br>
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/20241110183949.png   alt="unaligned pointer"  >
+解决办法：使用<code>memcpy</code>逐字节复制到对齐的地址上</li>
+<li>singular iterator 与其他 iterator 比较，<a href="https://stackoverflow.com/questions/49059404/is-comparing-against-singular-iterator-illegal" target="_blank" rel="noopener noreferrer">其行为未定义</a><br>
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411101846897.png   alt="singular iterator"  >
+解决办法：singular iterator即不跟任何容器关联的迭代器，一般是因为容器改变后迭代器失效，注意更新迭代器即可</li>
+<li>移位运算符右边是负数，<a href="https://stackoverflow.com/questions/8415895/is-left-and-right-shifting-negative-integers-defined-behavior" target="_blank" rel="noopener noreferrer">其行为未定义</a><br>
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411101848026.png   alt="delete pointer"  ></li>
+<li>使用<code>delete</code>运算符删除<code>new[]</code>运算符获取的指针，<a href="https://en.cppreference.com/w/cpp/memory/new/operator_delete" target="_blank" rel="noopener noreferrer">其行为未定义</a>，反之亦然</li>
+<li><code>memcpy</code>的指针参数是非法指针或空指针时，<a href="https://en.cppreference.com/w/cpp/string/byte/memcpy" target="_blank" rel="noopener noreferrer">其行为未定义</a>，即使复制长度为零<br>
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411101909458.png   alt="memcpy null pointer"  >
+解决办法：单独处理这种情况，此时不复制</li>
+</ul>
+<p>很幸运 UB sanitizer 和 libstdc++ debug mode 都帮忙检查出来了</p>
+<p>其次 address sanitizer 也检查出不少 use-after-free, heap-buffer-overflow等问题，非常省心</p>
+<h4 id="我对基础设施的看法" class="headerLink">
+    <a href="#%e6%88%91%e5%af%b9%e5%9f%ba%e7%a1%80%e8%ae%be%e6%96%bd%e7%9a%84%e7%9c%8b%e6%b3%95" class="header-mark"></a>我对基础设施的看法</h4><p>人使用计算机是为了让人干更少的活，机器干更多的活。我认为这就是基础设施的意义，人总是靠不住的，也常常懒得检查、或者无力检查一些潜在的问题，不过幸好我们有 sanitizer 这样强大的工具帮我们检查。<br>
+此外，一些现代语言的特点就是基础设施完善而且往往是官方开发，和语言开发工具一并发行。可以认为现代语言的基础设施离开发者更距离更近，C++的基础设施不比现代语言少，甚至还有一些工具是其他语言没有的。但距离开发者更远，从我开始学习 C++ 到真正使用这些基础设施，已经有 2 年多了。</p>
+<h4 id="我对-ub-的看法" class="headerLink">
+    <a href="#%e6%88%91%e5%af%b9-ub-%e7%9a%84%e7%9c%8b%e6%b3%95" class="header-mark"></a>我对 UB 的看法</h4><p>既然有 undefined behavior，就一定有 well defined behavior，UB 存在的意义就是形成 C++ 这个语言的良定义子集。实际上，C++标准没有规定平台的大小端，没有规定一个字节有多少个比特，也没有规定指针类型有多少个字节，也没有规定<code>char</code>有没有符号。但这不妨碍我们使用 C++ 的良定义子集解决问题。还可以认为标准定义 UB 是将执行一些操作的自由从开发者手中剥夺并交给编译器厂商，编译器厂商就不必对良定义子集以外的任何行为做出保证，并且还能在这片标准为他们提供的“自由空间”内任意发挥</p>
+<p>例如 C++ 并没有规定函数调用约定，而是交给编译器厂商和硬件平台自己决定，这是因为不同传参方式在不同平台的性能不同，甚至某些传参方式在某些平台是不支持的，标准没必要对此做出任何限制。我在实习时见到的一个例子就是由于x64+windows+msvc和arm64+macos+clang两个平台的传参顺序不同，导致一个函数调用表达式在 macos 能按预期运行，在 windows 就报错</p>
+<p>又例如由于编译器不必对 UB 做出任何保证，所以编译器优化只需保证在良定义子集内的行为产生的结果在优化前后保持相同即可，也就是说编译器可以根据优化的需要任意改变 UB 产生的结果。以我在初赛中遇到的情况为例，关闭优化时产生段错误，开启O2 优化时产生空指针的成员访问
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411102008791.png   alt="null reference"  >
+众所周知引用不能为空，但这里的确产生了一个空的引用并导致了错误<br>
+原因是因为传入这个引用的地方是空指针解引用
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411102014727.png   alt="null pointer dereference"  >
+提到空指针解引用，我的第一想法就是段错误、非法内存访问等，但实际上，空指针解引用也<a href="https://stackoverflow.com/questions/2727834/c-standard-dereferencing-null-pointer-to-get-a-reference" target="_blank" rel="noopener noreferrer">是未定义行为</a></p>
+<p>对于引用，标准规定引用必须初始化成一个合法对象或者函数的引用，因此在良定义的程序中空引用不可能存在。而保证「引用必须初始化成一个合法对象或者函数的引用」的工作就由编译器来完成，例如，当开发者尝试初始化一个空引用时，编译器应该拒绝编译。
+因此在这个场景下，编译器应当保证不会出现空引用，又由于传入引用的地方是一个指针解引用，而空指针解引用是未定义行为，编译器不必保证空指针解引用时的行为，因此只需保证在不出现空指针解引用时不会出现空引用，因此编译器在开启 O2优化时就能将解引用优化掉并遵守空引用的承诺</p>
+<p>更加明确的提出来这个观点，<strong>编译器假定不会出现未定义行为，并以此为前提进行优化</strong>，在这个场景可以解释为，由于有指针解引用，编译器就获得了一个信息：这个指针不能为空，因此优化掉解引用运算符也能保证不出现空引用</p>
+<h5 id="其他语言的-ub-" class="headerLink">
+    <a href="#%e5%85%b6%e4%bb%96%e8%af%ad%e8%a8%80%e7%9a%84-ub-" class="header-mark"></a>其他语言的 UB ？</h5><p>似乎只有 C++ 才有 UB，其他高级语言很少提及这个词。这是因为其他高级语言的运行时依赖于该语言的虚拟机，而实现这个虚拟机的目的之一就是消除未定义行为和平台差异，即其他高级语言的虚拟机是 C/C++ 写的，而实现虚拟机也就是尝试使用一个有 UB 的语言/平台去实现一个没有 UB 的理想乡。然而消除 UB 是有代价的，这也是 C++ 允许 UB 存在的一个原因</p>
+<h2 id="解题思路的简单介绍" class="headerLink">
+    <a href="#%e8%a7%a3%e9%a2%98%e6%80%9d%e8%b7%af%e7%9a%84%e7%ae%80%e5%8d%95%e4%bb%8b%e7%bb%8d" class="header-mark"></a>解题思路的简单介绍</h2><p>首先来简单介绍一下 miniob 的设计。和其他数据库相似，miniob 中一条 sql 执行的全流程如下</p>
+<pre class="mermaid">graph LR
+    用户输入的sql语句原始字符串 --语法解析--> 结构化的sql语法树 --语义分析--> 携带相关信息的sql语句 --生成逻辑查询计划--> 逻辑算子树 --优化--> 物理算子树 --执行计划--> 输出执行结果
+</pre><h3 id="update" class="headerLink">
+    <a href="#update" class="header-mark"></a>update</h3><p>从原理上来说，数据库将磁盘物理快读入内存形成缓冲块，任何读取或修改行为都发生在缓冲块上，再注意以下索引更新即可</p>
+<h3 id="null" class="headerLink">
+    <a href="#null" class="header-mark"></a>null</h3><p>翻开 DataBase System Concepts 的数据存储结构章节，里面给出了一个存储 null 值一个非常经典的实现，即在记录内存一个bitmap，其中每个比特标记字段是否为 null
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411102116441.png   alt="null bitmap"  ></p>
+<h3 id="text" class="headerLink">
+    <a href="#text" class="header-mark"></a>text</h3><p>翻开 DataBase System Concepts 的数据存储结构章节，里面提及了一个非常重要的原则：<strong>一条记录不能横跨两页</strong>，而 text 字段支持的大小可以超过一页，为了避免这个问题，可以参考程序设计中常见的方法，把变长转化为定长，也就是 text 的数据在外部单独存储，而记录内只存储指向这个记录的指针
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411102120748.png   alt="no record span two page"  ></p>
+<h3 id="vector" class="headerLink">
+    <a href="#vector" class="header-mark"></a>vector</h3><p>高维向量的大小可以超过页的大小，所以存储方式类似于 text，也是外部存储数据。向量的索引查询需要通过 10min 的 benchmark 测试，我主要想法在于提高向量查询的性能，以下内容展开说明如何提高性能</p>
+<h2 id="提高-sql-执行的性能" class="headerLink">
+    <a href="#%e6%8f%90%e9%ab%98-sql-%e6%89%a7%e8%a1%8c%e7%9a%84%e6%80%a7%e8%83%bd" class="header-mark"></a>提高 sql 执行的性能</h2><h3 id="减少-io-次数" class="headerLink">
+    <a href="#%e5%87%8f%e5%b0%91-io-%e6%ac%a1%e6%95%b0" class="header-mark"></a>减少 IO 次数</h3><p>首先，数据库最慢的部分是 IO，而基于磁盘的数据库无法避免 IO，所以提高性能的第一步就是如何减少 IO<br>
+也许读者早就清楚应该使用缓冲，但我这里想清晰明确的指出为什么需要缓冲，还有为什么数据库都使用了相似的设计：分块缓冲</p>
+<h4 id="为什么需要缓冲" class="headerLink">
+    <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81%e7%bc%93%e5%86%b2" class="header-mark"></a>为什么需要缓冲</h4><p>翻开 Database System Concepts 的数据存储结构章节
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411102134930.png   alt="database storage"  >
+这里指出了冯诺依曼架构下数据库的最基本的矛盾：数据库需要持久化，因此将数据存储到非易失存储介质，但 CPU 只能读取内存中的数据，所以读取任何记录都必须先将记录加载到内存，而记录加载到内存后形成的结构，就可以称为缓冲<br>
+我希望破除一个固有观点，就是认为只有申请了多少 KB 的内存，然后里面存放了记录，这样才能被称之为缓冲。实际上如果只需要一个读取一个 int 字段，在栈上开辟一个 int 变量（声明函数内的自动变量），然后将数据从磁盘读取到这个变量，也是缓冲。可以认为前者是缓冲的形式而后者是缓冲的本质</p>
+<h4 id="为什么要分块缓冲" class="headerLink">
+    <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e5%88%86%e5%9d%97%e7%bc%93%e5%86%b2" class="header-mark"></a>为什么要分块缓冲</h4><h5 id="存储设备按块读写" class="headerLink">
+    <a href="#%e5%ad%98%e5%82%a8%e8%ae%be%e5%a4%87%e6%8c%89%e5%9d%97%e8%af%bb%e5%86%99" class="header-mark"></a>存储设备按块读写</h5><p>翻开 Database System Concepts 的物理存储系统章节，里面提及了闪存、磁盘、光盘、磁带等非易失存储介质，由于价格、容量、速度、通用性等考量，数据库常常使用闪存或磁盘作为存储介质</p>
+<p>对于磁盘，磁盘表面划分为磁道，磁道进一步划分为扇区，而扇区是磁盘读写的最小单元
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411111404356.png   alt="magnetic disk"  ></p>
+<p>对于闪存，常用的 NAND 闪存的读写单元也是一个闪存物理快
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411111403825.png   alt="flash memory"  ></p>
+<p>从 IO 设备划分的角度，常见的非易失存储介质都是块设备，这意味着他们执行一次数据传输的单元是一块数据，而不是一个字符</p>
+<p>如果需要读取的数据小于一个存储设备的物理快，实际上硬件仍然会执行整个物理快的读写，即使多读取的数据可能不需要；如果需要写入的数据小于一个物理快，需要先读取需要更新的物理块到内存，完成局部更新后，将更新后的物理快写回存储设备（这一过程也有可能由存储硬件完成）</p>
+<h5 id="按块读写速度最快" class="headerLink">
+    <a href="#%e6%8c%89%e5%9d%97%e8%af%bb%e5%86%99%e9%80%9f%e5%ba%a6%e6%9c%80%e5%bf%ab" class="header-mark"></a>按块读写速度最快</h5><p>由于存储设备按块读写，读写 1B 的数据和读写一个物理块的数据所花费的时间相差不大<br>
+除了这个原因，读写前的准备工作和读写后收尾工作也需要花费时间，而且它们花费的时间随读写数据大小的曲线往往是阶梯形的。</p>
+<ul>
+<li>磁盘从发起读写请求到数据开始传输，需要先找到磁道，然后马达控制磁盘旋转直到找到需要读写的扇区。对于磁盘这样传统的设备，机械部分的速度远远低于电子部分的速度，所以寻道和旋转花费的时间实际上比传输时间还要多</li>
+<li>外设传输数据到内存需要使用总线，而计算机有许多外设，申请使用总线和释放总线的耗时基本是固定的，如果采取频繁申请总线、单次传输少量数据的策略，申请总线和释放总线的耗时占比将会提升</li>
+</ul>
+<p>此外，存储设备的主控单元和操作系统也针对按块读写进行优化，例如存储设备可能会预先读取后续的更多数据，缓存在主控的缓存中。操作系统也会按块读写存储设备，即使用户程序没有发出按块读写的 IO 请求</p>
+<h4 id="如何减少io次数" class="headerLink">
+    <a href="#%e5%a6%82%e4%bd%95%e5%87%8f%e5%b0%91io%e6%ac%a1%e6%95%b0" class="header-mark"></a>如何减少IO次数</h4><p>一个非常经典的方法就是将磁盘物理块加载到内存，形成缓冲块，数据库系统使用有限的内存维护若干缓冲块，并在合适的时机释放缓冲块（可能包括写回脏块）
+何时、如何释放缓冲块，一个简单的方法是 LRU，但我想提及一点，在数据库场合下，LRU 不一定是最适合的</p>
+<p>LRU 有效的前提是对 IO 请求的局部性假设，即 LRU 策略无法知道上层的 IO 请求有什么规律，而只能根据大部分场合做出这种通用的假设。但在数据库场合中，select 算子扫描表时，最新访问的缓冲块反而是未来最少使用的。数据库完全可以根据自己的场合定制一个特化的缓冲区管理策略，不过在 miniob 中不必追求这么高的性能也能通过初赛</p>
+<h3 id="减少系统调用次数" class="headerLink">
+    <a href="#%e5%87%8f%e5%b0%91%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8%e6%ac%a1%e6%95%b0" class="header-mark"></a>减少系统调用次数</h3><p>系统调用同样很慢，即使系统调用不涉及 IO。如果每次 SQL 语句执行都有许多次系统调用，性能会明显的下降。接下来我将说明为什么系统调用很慢</p>
+<ol>
+<li>系统调用涉及 CPU 现场保存和上下文切换，需要大量栈帧读写</li>
+<li>系统调用破坏了程序执行的局部性，使得 TLB、高速缓存等诸多基于局部性原理工作的组件性能降低</li>
+<li>系统调用结束后程序不一定立刻恢复执行，而是转为就绪态，而何时转为执行态取决于操作系统的进程调度。即系统调用浪费了当前执行轮次获取到的时间片</li>
+</ol>
+<p>但减少系统调用是一个非常 low level 的操作，或者说与操作系统打交道本来就是比较 low level 的操作。如果使用高级语言，可以看到从高级语言运行时、libc 一路往下到操作系统，都在围绕着如何减少系统调用，也就是说，这个工作已经由底层开发者完成了大半，作为上层开发者不必太过操心这件事</p>
+<p>例如申请一块内存，如果直接找操作系统要一块内存，通常使用 <code>brk</code> 系统调用扩张堆区，或者使用 <code>mmap</code> 系统调用得到一块文件映射的内存。而申请内存是一个非常高频的操作，从 libc 到高级语言运行时的内存管理系统都在尽力减少这个开销，比如维护内存池是为了在用户态满足更多内存请求，减少内存碎片是为了提高内存利用率，减少向操作系统要内存的需求。很幸运的是对于上层开发者，申请内存的成本已经非常低了，对于 glibc，可能几条或者十几条机器指令就能完成了，时间复杂度也降低到了<code>O(1)</code>（最好的情况）</p>
+<p>对于上层开发者，不需要在这些 low level 的层级去追求性能（甚至可能导致负优化），牺牲一定的性能去换来可读性都是可以的</p>
+<h3 id="使用编译器优化使用高性能库" class="headerLink">
+    <a href="#%e4%bd%bf%e7%94%a8%e7%bc%96%e8%af%91%e5%99%a8%e4%bc%98%e5%8c%96%e4%bd%bf%e7%94%a8%e9%ab%98%e6%80%a7%e8%83%bd%e5%ba%93" class="header-mark"></a>使用编译器优化/使用高性能库</h3><p>这可能对于我们来说是最简单也是起效最快的方式，以这次比赛为例，我在 release build 中关闭了所有不需要的功能，例如 sanitizer、glibcxx debug mode、调试支持等，性能肉眼可见的提高了</p>
+<p>sanitizer、glibcxx debug mode会在运行时检查一些条件，会影响性能很合理。调试功能也会间接的影响 release build 的性能，例如某些优化规则会使调试功能失效，所以可能会被禁用。此外调试会在生成的 elf 中嵌入调试信息，包括符号名、机器指令与行号的映射等，可能降低程序的空间局部性</p>
+<p>此外，使用 C++非常大的一个优点就是性能完全不用担心，有非常多的高性能库可以轻松调用。向量索引题目中，编制索引是一个计算密集型任务，合理的使用多线程能大大加快速度，而我引入的高性能计算库也支持多线程，不过我已经轻松将ann benchmark的时间优化到了 5min (赛题要求 10min 以内)，就不必再抠这点性能了</p>
+<h2 id="感想" class="headerLink">
+    <a href="#%e6%84%9f%e6%83%b3" class="header-mark"></a>感想</h2><p>与其说是初赛的感想不如说是看完 C++ primer，再经过一个 C++ 项目实践后的感想</p>
+<p>我个人非常不推荐大学把 C++ 作为大学生学习的第一门编程语言，也不推荐计算机以外的专业要求学生学习 C/C++。因为 C++涵盖的东西实在太多了，C++ primer 是一本 800-900 页讲解语法特性的书，但看完了这本书，也只是了解了 C++11 的特性的一部分，还有 C++11 - C++23 的新特性，当然也包括废弃的 C++11 特性。以我所了解的领域为例，现代 C++一直在提高其编译期计算的能力，在过去这是通过模板实现的，这也是大学的C++课程会教的内容（也许？），但在更新的标准里，随着<code>constexpr</code>，<code>consteval</code>等 const 系列关键字的引入，concept 的引入，编译期计算领域可以说已经翻天覆地了；C++ 的对象模型，内存模型，内存序也是一个非常大的话题，而且他们还和 C++ 的面向对象、对象生命期、指针等问题纠缠在一起；C++20 前已有许多协程的第三方实现，C++20又引入了 <code>co_wait</code> 和 <code>co_return</code> 关键字，提供了语言内置的协程解决方案；</p>
+<p>就算掌握了新标准，理解了 C++ 的各种特性并能够充分运用，只会 C++ 仍然什么也做不到；往左是各大操作系统提供的能力和机制，往右是各种工程化方法，例如如何加快编译？如何组织构建系统？如何保证 ABI 兼容性？</p>
+<p>更不用说现在多少学校教的还是 C++98，而现在生产环境有些已经上 C++20 了。一个很好笑的现状是课程结束后学生基本只学了 C++语法，但连 C++语法都没学完，实际上我只到现在也没学完。如果只是培养计算思维，大可选择 python，java 这样的语言，而不是选择一个极难入门的语言</p>
+<p>总结一句话，一入 C++ 就是入了一个大坑，不花个五年十年没法出来的大坑。。。</p>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-11-10</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line print:!tw-hidden">
+            <div class="post-info-md"></div>
+            <div class="post-info-share"></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section class="print:!tw-hidden">
+            <span><button class="tw-text-fgColor-link-muted hover:tw-text-fgColor-link-muted-hover" onclick="window.history.back();">Back</button></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav print:tw-hidden"><a href="/posts/week10/" class="prev" rel="prev" title="第十周：杂谈与碎碎念"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>第十周：杂谈与碎碎念</a></div>
+</div>
+<div id="comments" class="print:!tw-hidden tw-pt-32 tw-pb-8"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.138.0">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg> DoIt</a>
+                </div><div class="footer-line"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 448c-110.532 0-200-89.451-200-200 0-110.531 89.451-200 200-200 110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200zm107.351-101.064c-9.614 9.712-45.53 41.396-104.065 41.396-82.43 0-140.484-61.425-140.484-141.567 0-79.152 60.275-139.401 139.762-139.401 55.531 0 88.738 26.62 97.593 34.779a11.965 11.965 0 0 1 1.936 15.322l-18.155 28.113c-3.841 5.95-11.966 7.282-17.499 2.921-8.595-6.776-31.814-22.538-61.708-22.538-48.303 0-77.916 35.33-77.916 80.082 0 41.589 26.888 83.692 78.277 83.692 32.657 0 56.843-19.039 65.726-27.225 5.27-4.857 13.596-4.039 17.82 1.738l19.865 27.17a11.947 11.947 0 0 1-1.152 15.518z"/></svg>2023 - 2024<span class="author">&nbsp;<a href="https://github.com/z2z63" target="_blank" rel="noopener noreferrer">z2z63</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons" class="print:!tw-hidden"><a href="#back-to-top" id="back-to-top-button" class="fixed-button tw-transition-opacity tw-opacity-0" title="Back to Top">
+            <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/></svg>
+        </a><a href="#comments" id="view-comments" class="fixed-button" title="View Comments">
+            <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 32C114.6 32 0 125.1 0 240c0 49.6 21.4 95 57 130.7C44.5 421.1 2.7 466 2.2 466.5c-2.2 2.3-2.8 5.7-1.5 8.7S4.8 480 8 480c66.3 0 116-31.8 140.6-51.4 32.7 12.3 69 19.4 107.4 19.4 141.4 0 256-93.1 256-208S397.4 32 256 32z"/></svg>
+        </a></div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css">
+<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"7156e4335b80dc5f38c0","clientSecret":"f6118f46792df390e800c05b52300a8da0114474","id":"2024-11-10T15:38:53+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"OceanBase 数据库大赛初赛结束之后"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null},"sharerjs":true};</script><script
+    src="/lib/sharer/sharer.min.js"
+    
+  ></script><script
+    src="/js/theme.min.js"
+    
+      defer
+    
+  ></script><script
+    src="/lib/gitalk/gitalk.min.js"
+    
+  ></script><script
+    src="/js/gitalk.min.js"
+    
+      defer
+    
+  ></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-48XH0QHHK3');
+        </script><script
+    src="https://www.googletagmanager.com/gtag/js?id=G-48XH0QHHK3"
+    async
+  ></script>
+    
+    <script type="speculationrules">
+        {
+          "prerender": [
+            {
+              "where": { "href_matches": "/*" },
+              "eagerness": "moderate"
+            }
+          ]
+        }
+    </script>
+      
+</body>
+
+</html>
