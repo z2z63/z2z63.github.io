@@ -17,6 +17,13 @@ date: 2024-11-10T15:38:53+08:00
 - DataBase System Concepts  
   讲解数据库的基本理论，基本上大部分成熟的数据库涉及的理论都能在这本书里找到
 
+---
+append:  
+两位非常厉害的队友: [@Soulter](https://soulter.top/)、[@bosswnx](https://bosswnx.xyz/)  
+他们的 github: [@Soulter](https://github.com/soulter), [@bosswnx](https://github.com/bosswnx)  
+我们的仓库: [bosswnx/miniob-2024](https://github.com/bosswnx/miniob-2024)  
+队友的赛后记: [OceanBase 2024 初赛 MiniOB 开发记录](https://zhuanlan.zhihu.com/p/5953505884)、[OceanBase 数据库内核实现赛 / 自己实现一个数据库](https://blog.virtualfuture.top/posts/miniob/)  
+
 ## 现代语言的基础设施
 
 所谓基础设施只是我自己胡编乱造的词。其他高级语言有各种完善的措施来发现错误或避免错误，比如 java，python， rust 等，基本来说，这些措施的目的都是尽量提前暴露错误，或者在出现错误时尽可能的采取合理的措施，防止错误扩大  
