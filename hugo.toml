@@ -34,8 +34,8 @@ enableGitInfo = true
     enable = true
     owner = "z2z63"
     repo = "z2z63.github.io"
-    clientId = "7156e4335b80dc5f38c0"
-    clientSecret = "f6118f46792df390e800c05b52300a8da0114474"
+    clientId = "Ov23liMtTBdWPdBDJjuQ"
+    clientSecret = "5c5e82f1b10ce323ce7efae32b1b8f0a87773577"
 [params.page.toc]
   # 是否使用目录
   enable = true

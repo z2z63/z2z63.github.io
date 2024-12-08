@@ -118,7 +118,7 @@ mac 的逻辑比较像移动系统，比如台前调度侧面的窗口，mac 会
 - 如果需要使用 redis，在 windows 就只能安装到 docker 容器里或者安装到 wsl 中，因为 redis 不支持 windows
 - 如果需要使用 docker，虽然各个平台都有 docker desktop ，但 linux host 的性能是最好的
 
-其次考虑 C/C++。C/C++开发中一个很重要的领域就是和系统交互，而这里指的系统往往是 linux。加上我对操作系统的熟悉程度为linux > windows > macos，在 mac 开发时遇到和操作系统交互的场景就比较头疼  
+其次考虑 C/C++，C/C++开发中一个很重要的领域就是和系统交互，而这里指的系统往往是 linux。加上我对操作系统的熟悉程度为linux > windows > macos，在 mac 开发时遇到和操作系统交互的场景就比较头疼  
 当然 macos 基于 freeBSD，而且是 POSIX-certified，同时也符合Single Unix Specification，所以在操作系统接口层面很多地方和 linux 非常相似  
 然而遵守 POSIX 和 Single Unix Specification 标准只是听起来很美好。现实情况是，POSIX 和 Single Unix Specification 标准有许多版本，而且有各自的标准扩展。但一个系统只需要符合其中若干版本就能够被称为是符合标准。例如 macos 实际上只遵守 Single Unix Specification 的 UNIX 03版本
 
