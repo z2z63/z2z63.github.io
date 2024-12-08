@@ -4,7 +4,18 @@
         <link>http://example.org/posts/</link>
         <description>All Posts | z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sun, 10 Nov 2024 15:38:53 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Tue, 03 Dec 2024 20:41:46 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>八月到十一月</title>
+    <link>http://example.org/posts/since_aguast/</link>
+    <pubDate>Tue, 03 Dec 2024 20:41:46 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://example.org/posts/since_aguast/</guid>
+    <description><![CDATA[<p>自八月底实习结束，可以说经历了各种事情，现在回想起实习甚至有点陌生<br>
+这篇文章我想向各位读者讲述一下从八月到十一月，从实习离职、秋招、oceanbase 比赛发生的许多有意义的事情，顺便也记录一下我对这些事情的观点。同时这篇博客应该也是我的第一篇非纯技术分享的文章<br>
+不过在回顾之前，我想先宣布一件最近发生的事情</p>
+<h2 id="买了新域名" class="headerLink">
+    <a href="#%e4%b9%b0%e4%ba%86%e6%96%b0%e5%9f%9f%e5%90%8d" class="header-mark"></a>买了新域名！</h2>]]></description>
+</item><item>
     <title>OceanBase 数据库大赛初赛结束之后</title>
     <link>http://example.org/posts/miniob/</link>
     <pubDate>Sun, 10 Nov 2024 15:38:53 &#43;0800</pubDate><author>
@@ -75,14 +86,5 @@
         <name>z2z63</name>
     </author><guid>http://example.org/posts/week1/</guid>
     <description><![CDATA[<p>最近关于博客的内容考虑了很多，怎样让博客的内容更有价值、怎样输出内容等等。也考虑了未来如果内容做好了，可以开始做SEO等等。因为我认为博客还是一种比较轻松的阅读内容，如果选择输出干货，一来读者不一定了解这方面的知识，二来读者如果非常了解这方面的知识，这篇文章也没有价值；如果想加深对某领域的了解，完全可以看一些经典的书籍，他们的内容比博客好多了，于是我决定改变博客的内容。希望我的博客是启发性的，读者看完后能够对某个小领域有个大致的理解，或者看完后产生兴趣，去阅读更专业的书籍、文档等等。换而言之以后的文章相比深度更倾向广度，比起话题更像随谈。另外我能力也不足以输出深度足够的文章。</p>]]></description>
-</item><item>
-    <title>浏览器小技巧总结</title>
-    <link>http://example.org/posts/browser_tricks/</link>
-    <pubDate>Fri, 07 Jun 2024 15:15:14 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://example.org/posts/browser_tricks/</guid>
-    <description><![CDATA[<p>最近发现身边有些同学并不知道在我看来入门级别的浏览器小技巧，所以专门写一篇文章介绍和总结一下我使用的浏览器小技巧</p>
-<h1 id="ctrlf-搜索" class="headerLink">
-    <a href="#ctrlf-%e6%90%9c%e7%b4%a2" class="header-mark"></a>Ctrl+F 搜索</h1><p>Ctrl+F弹出的搜索框会自动聚焦，我的常用流程是</p>]]></description>
 </item></channel>
 </rss>
