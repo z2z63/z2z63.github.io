@@ -1,29 +1,29 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>C/C&#43;&#43; - Tag - z2z63/Virtualfuture&#39;s Blog</title>
-        <link>http://example.org/tags/c/c&#43;&#43;/</link>
+        <link>http://blog.z2z63.dev/tags/c/c&#43;&#43;/</link>
         <description>C/C&#43;&#43; - Tag - z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/c/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</lastBuildDate><atom:link href="http://blog.z2z63.dev/tags/c/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
     <title>PostgreSQL源码阅读报告</title>
-    <link>http://example.org/posts/postgresql_source/</link>
+    <link>http://blog.z2z63.dev/posts/postgresql_source/</link>
     <pubDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/postgresql_source/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/postgresql_source/</guid>
     <description><![CDATA[<p>这篇文章是数据库系统原理课程的任务“阅读postgresql源码“的报告</p>]]></description>
 </item><item>
     <title>coreutils之hash table</title>
-    <link>http://example.org/posts/coreutils_hash/</link>
+    <link>http://blog.z2z63.dev/posts/coreutils_hash/</link>
     <pubDate>Sat, 14 Oct 2023 16:08:58 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/coreutils_hash/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/coreutils_hash/</guid>
     <description><![CDATA[<p>最近在阅读coreutils，发现很多有意思的部分，比如哈希表的链表实现</p>]]></description>
 </item><item>
     <title>右值引用</title>
-    <link>http://example.org/posts/rvalue-reference/</link>
+    <link>http://blog.z2z63.dev/posts/rvalue-reference/</link>
     <pubDate>Mon, 29 May 2023 22:20:02 &#43;0000</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/rvalue-reference/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/rvalue-reference/</guid>
     <description><![CDATA[<p>C++11后引入了右值引用等特性，用来支持移动语义和完美转发，在了解右值引用前，需要了解一些前置的概念</p>
 <ol>
 <li>左值(lvalue)

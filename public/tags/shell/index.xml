@@ -1,22 +1,22 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Shell - Tag - z2z63/Virtualfuture&#39;s Blog</title>
-        <link>http://example.org/tags/shell/</link>
+        <link>http://blog.z2z63.dev/tags/shell/</link>
         <description>Shell - Tag - z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/shell/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</lastBuildDate><atom:link href="http://blog.z2z63.dev/tags/shell/" rel="self" type="application/rss+xml" /><item>
     <title>Linux 神级文件管理器ranger</title>
-    <link>http://example.org/posts/file-manager-ranger/</link>
+    <link>http://blog.z2z63.dev/posts/file-manager-ranger/</link>
     <pubDate>Thu, 13 Apr 2023 12:29:06 &#43;0000</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/file-manager-ranger/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/file-manager-ranger/</guid>
     <description><![CDATA[<p><a href="https://github.com/ranger/ranger" target="_blank" rel="noopener noreferrer">ranger</a>是linux的一个终端文件管理器</p>]]></description>
 </item><item>
     <title>Linux shell常用快捷键</title>
-    <link>http://example.org/posts/linux-terminal-shortcut/</link>
+    <link>http://blog.z2z63.dev/posts/linux-terminal-shortcut/</link>
     <pubDate>Tue, 04 Apr 2023 23:33:26 &#43;0000</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/linux-terminal-shortcut/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/linux-terminal-shortcut/</guid>
     <description><![CDATA[<p>在linux使用shell时常常会遇到一些使用场景需要大量重复敲击按键，带来了一些麻烦，所以学会一些快捷键是
 必备的，但是有些快捷键几乎没用，也没用记忆的必要<br>
 首先声明一点，重点是记住快捷键的功能，而不是快捷键的按键绑定，因为对于不同的终端模拟程序，这些功能基本都是
@@ -24,10 +24,10 @@
 以下的快捷键按键绑定都是标准的linux shell按键绑定，在Konsole上测试通过</p>]]></description>
 </item><item>
     <title>Linux搜索神器</title>
-    <link>http://example.org/posts/linux-file-search/</link>
+    <link>http://blog.z2z63.dev/posts/linux-file-search/</link>
     <pubDate>Sat, 01 Apr 2023 23:35:22 &#43;0000</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/linux-file-search/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/linux-file-search/</guid>
     <description><![CDATA[<p>使用Linux时，常常需要在文件系统中快速搜索到内容，比如说</p>
 <ol>
 <li>在一个项目中需要快速找到一个文件的路径，需要按照文件名搜索出路径</li>

@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Mechine Learning - Tag - z2z63/Virtualfuture&#39;s Blog</title>
-        <link>http://example.org/tags/mechine-learning/</link>
+        <link>http://blog.z2z63.dev/tags/mechine-learning/</link>
         <description>Mechine Learning - Tag - z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/mechine-learning/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</lastBuildDate><atom:link href="http://blog.z2z63.dev/tags/mechine-learning/" rel="self" type="application/rss+xml" /><item>
     <title>推荐系统简单介绍</title>
-    <link>http://example.org/posts/recsys-summary/</link>
+    <link>http://blog.z2z63.dev/posts/recsys-summary/</link>
     <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/recsys-summary/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/recsys-summary/</guid>
     <description><![CDATA[<p>这篇文章是wikipedia的recsys词条的翻译以及简化版本，原文见<a href="https://en.wikipedia.org/wiki/Recommender_system" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Recommender_system</a>
 recsys(推荐系统)的种类</p>
 <ul>

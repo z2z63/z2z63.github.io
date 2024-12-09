@@ -1,4 +1,4 @@
-baseURL = 'http://example.org/'
+baseURL = 'http://blog.z2z63.dev/'
 defaultContentLanguage = "en"
 languageCode = 'zh-CN'
 title = "z2z63/Virtualfuture's Blog"

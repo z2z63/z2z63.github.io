@@ -1,24 +1,24 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>科学计算 - Tag - z2z63/Virtualfuture&#39;s Blog</title>
-        <link>http://example.org/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
+        <link>http://blog.z2z63.dev/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
         <description>科学计算 - Tag - z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Fri, 26 May 2023 15:51:48 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Fri, 26 May 2023 15:51:48 &#43;0000</lastBuildDate><atom:link href="http://blog.z2z63.dev/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/" rel="self" type="application/rss+xml" /><item>
     <title>MATLAB微积分</title>
-    <link>http://example.org/posts/matlab-calculus/</link>
+    <link>http://blog.z2z63.dev/posts/matlab-calculus/</link>
     <pubDate>Fri, 26 May 2023 15:51:48 &#43;0000</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/matlab-calculus/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/matlab-calculus/</guid>
     <description><![CDATA[<h2 id="matlab数值求解微分方程" class="headerLink">
     <a href="#matlab%e6%95%b0%e5%80%bc%e6%b1%82%e8%a7%a3%e5%be%ae%e5%88%86%e6%96%b9%e7%a8%8b" class="header-mark"></a>MATLAB数值求解微分方程</h2><p>所谓数值求解，也就是无法获得解的方程，只能获得y(x)函数在x取值范围内的近似值
 所有MATALB的DOE solver都可以解决形如$\frac{\mathrm{d}y}{\mathrm{d}t}=f(t,y)$的微分方程，所以很多时候需要把待求解微分方程化成这种形式，这种形式有几种特点</p>]]></description>
 </item><item>
     <title>matplotlib在linux平台上显示中文的解决方案</title>
-    <link>http://example.org/posts/matplotlib-chinese-font/</link>
+    <link>http://blog.z2z63.dev/posts/matplotlib-chinese-font/</link>
     <pubDate>Sun, 02 Apr 2023 22:12:22 &#43;0000</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/matplotlib-chinese-font/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/matplotlib-chinese-font/</guid>
     <description><![CDATA[<p>matplotlib 是python的可视化库，但是如果在matplotlib的图表中使用了中文，
 会找不到中文字体而显示乱码，网上有很多教程解决这个问题，但是在我的linux上都不管用
 经过不断尝试和google，终于找到了方法<br>

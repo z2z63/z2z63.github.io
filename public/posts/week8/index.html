@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noodp" /><title>努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？ - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://example.org/posts/week8/">
+    <meta name="robots" content="noodp" /><title>努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？ - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://blog.z2z63.dev/posts/week8/">
   <meta property="og:site_name" content="z2z63/Virtualfuture&#39;s Blog">
   <meta property="og:title" content="努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？">
   <meta property="og:description" content="实习期间摸了不少的鱼，通勤路上在看各种文档，在公司摸鱼时就在看glibc或cpython的源码，花了不少时间总算是理解了部分。所谓内存管理系统充斥着各种指针运算，抽象程度非常高，这篇文章我希望是定性的去描述内存分配系统，因为源码总是枯燥又无聊的，如果不是它出现了问题，我想大部分人都不会去看源码吧">
@@ -24,15 +24,15 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-<link rel="canonical" href="http://example.org/posts/week8/" /><link rel="prev" href="http://example.org/posts/week7/" /><link rel="next" href="http://example.org/posts/week10/" />
+<link rel="canonical" href="http://blog.z2z63.dev/posts/week8/" /><link rel="prev" href="http://blog.z2z63.dev/posts/week7/" /><link rel="next" href="http://blog.z2z63.dev/posts/week10/" />
 <link rel="stylesheet" href="/css/main.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">{"@context": "https://schema.org","@type": "BlogPosting",
         "headline": "努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http://example.org/posts/week8/"
+            "@id": "http://blog.z2z63.dev/posts/week8/"
         },"genre": "posts","wordcount":  8968 ,
-        "url": "http://example.org/posts/week8/","datePublished": "2024-08-04T14:21:56+08:00","dateModified": "2024-08-18T17:58:57+08:00","publisher": {
+        "url": "http://blog.z2z63.dev/posts/week8/","datePublished": "2024-08-04T14:21:56+08:00","dateModified": "2024-08-18T17:58:57+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
                 "@type": "Person",

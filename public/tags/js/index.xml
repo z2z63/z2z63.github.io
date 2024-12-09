@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>JS - Tag - z2z63/Virtualfuture&#39;s Blog</title>
-        <link>http://example.org/tags/js/</link>
+        <link>http://blog.z2z63.dev/tags/js/</link>
         <description>JS - Tag - z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/js/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</lastBuildDate><atom:link href="http://blog.z2z63.dev/tags/js/" rel="self" type="application/rss+xml" /><item>
     <title>JS中的this</title>
-    <link>http://example.org/posts/this-in-js/</link>
+    <link>http://blog.z2z63.dev/posts/this-in-js/</link>
     <pubDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/this-in-js/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/this-in-js/</guid>
     <description><![CDATA[<p>箭头函数和普通函数中的this</p>
 <div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="

@@ -1,0 +1,6 @@
+{{- $images := split  (.Get "images") " " -}}
+<div style="display:flex;justify-content: space-around;align-items: center">
+    {{- range $images -}}
+        <img src="{{.}}" alt="" />
+    {{- end -}}
+</div>

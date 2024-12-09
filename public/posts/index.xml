@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>All Posts - z2z63/Virtualfuture&#39;s Blog</title>
-        <link>http://example.org/posts/</link>
+        <link>http://blog.z2z63.dev/posts/</link>
         <description>All Posts | z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Tue, 03 Dec 2024 20:41:46 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Tue, 03 Dec 2024 20:41:46 &#43;0800</lastBuildDate><atom:link href="http://blog.z2z63.dev/posts/" rel="self" type="application/rss+xml" /><item>
     <title>八月到十一月</title>
-    <link>http://example.org/posts/since_aguast/</link>
+    <link>http://blog.z2z63.dev/posts/since_aguast/</link>
     <pubDate>Tue, 03 Dec 2024 20:41:46 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/since_aguast/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/since_aguast/</guid>
     <description><![CDATA[<p>自八月底实习结束，可以说经历了各种事情，现在回想起实习甚至有点陌生<br>
 这篇文章我想向各位读者讲述一下从八月到十一月，从实习离职、秋招、oceanbase 比赛发生的许多有意义的事情，顺便也记录一下我对这些事情的观点。同时这篇博客应该也是我的第一篇非纯技术分享的文章<br>
 不过在回顾之前，我想先宣布一件最近发生的事情</p>
@@ -17,74 +17,74 @@
     <a href="#%e4%b9%b0%e4%ba%86%e6%96%b0%e5%9f%9f%e5%90%8d" class="header-mark"></a>买了新域名！</h2>]]></description>
 </item><item>
     <title>OceanBase 数据库大赛初赛结束之后</title>
-    <link>http://example.org/posts/miniob/</link>
+    <link>http://blog.z2z63.dev/posts/miniob/</link>
     <pubDate>Sun, 10 Nov 2024 15:38:53 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/miniob/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/miniob/</guid>
     <description><![CDATA[<h2 id="写在前面" class="headerLink">
     <a href="#%e5%86%99%e5%9c%a8%e5%89%8d%e9%9d%a2" class="header-mark"></a>写在前面</h2><p>仔细数来快三个月没写博客了，虽然我也能找到各种各样的原因，实习离职、秋招、比赛等等，归根结底还是懈怠了。最近各种事项也基本结束，整天忙着无所事事，是时候重新动笔了</p>
 <p>本文我将围绕即将结束初赛的 oceanbase 数据库大赛展开，但由于我不喜欢向别人讲解我敲的代码如何如何，所以我会偏向这次比赛涉及的理论、设计、想法</p>
 <p>在这次比赛前我因为准备秋招，花了一些时间读了两本书，我认为对比赛帮助非常大，本文提及的很多想法和设计也是参考了这些书</p>]]></description>
 </item><item>
     <title>第十周：杂谈与碎碎念</title>
-    <link>http://example.org/posts/week10/</link>
+    <link>http://blog.z2z63.dev/posts/week10/</link>
     <pubDate>Sun, 18 Aug 2024 14:36:32 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/week10/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/week10/</guid>
     <description><![CDATA[<p>近来也算看了不少别人的博客，有些文章非常优秀，还有一些很无趣。在我看来，一篇好的博文首先不能是官方文档的复读机，也不能让读者完全看不懂，其次，信息来源应该尽量保持一手。从某方面来说，学习知识-输出知识的过程就好比咀嚼或消化。不知道转了多少手的知识好比被多次咀嚼消化后的粘稠状半消化物，多少令人反胃。我曾经也是被百度与CSDN之流坑过，所以看到 <a href="https://csdiy.wiki/%E5%BF%85%E5%AD%A6%E5%B7%A5%E5%85%B7/workflow/#_1" target="_blank" rel="noopener noreferrer">csdiy.wiki</a> 中相同的观点时，感同身受。</p>]]></description>
 </item><item>
     <title>努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？</title>
-    <link>http://example.org/posts/week8/</link>
+    <link>http://blog.z2z63.dev/posts/week8/</link>
     <pubDate>Sun, 04 Aug 2024 14:21:56 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/week8/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/week8/</guid>
     <description><![CDATA[<p>实习期间摸了不少的鱼，通勤路上在看各种文档，在公司摸鱼时就在看glibc或cpython的源码，花了不少时间总算是理解了部分。所谓内存管理系统充斥着各种指针运算，抽象程度非常高，这篇文章我希望是定性的去描述内存分配系统，因为源码总是枯燥又无聊的，如果不是它出现了问题，我想大部分人都不会去看源码吧</p>]]></description>
 </item><item>
     <title>第七周：关于C/C&#43;&#43;开发，我了解的一切 —— LSP、debugger与IDE</title>
-    <link>http://example.org/posts/week7/</link>
+    <link>http://blog.z2z63.dev/posts/week7/</link>
     <pubDate>Sat, 27 Jul 2024 18:57:33 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/week7/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/week7/</guid>
     <description><![CDATA[<p>解决了工具链的问题，还只能在命令行完成项目的构建。要使用IDE进行C++开发，除了工具链的知识外，还需要了解其他知识才能配置出一个好用的C++ IDE</p>]]></description>
 </item><item>
     <title>第六周：关于C/C&#43;&#43;开发，我了解的一切 —— 编译器、构建工具</title>
-    <link>http://example.org/posts/week6/</link>
+    <link>http://blog.z2z63.dev/posts/week6/</link>
     <pubDate>Sat, 20 Jul 2024 20:59:10 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/week6/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/week6/</guid>
     <description><![CDATA[<p>最近两个月也是基本一直在写C++了，尤其是实习以来，从linux的C++开发切换到windows + visual c++，这其中遇到的问题非常多，也让我不断的思考究竟怎样才是最佳实践。</p>]]></description>
 </item><item>
     <title>第五周：CI/CD、git workflow与软件发行</title>
-    <link>http://example.org/posts/week5/</link>
+    <link>http://blog.z2z63.dev/posts/week5/</link>
     <pubDate>Sun, 14 Jul 2024 14:46:02 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/week5/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/week5/</guid>
     <description><![CDATA[<p>git相关文章在各种技术论坛、博客都能找到不少，可以说讲git已经是烂大街的文章了，这篇文章虽然跟git有关，但我希望避开各种无聊而且每篇文章都在谈论的话题，输出一些我从各种角落中积累的知识</p>]]></description>
 </item><item>
     <title>第三周：来拷打一下小程序</title>
-    <link>http://example.org/posts/week3/</link>
+    <link>http://blog.z2z63.dev/posts/week3/</link>
     <pubDate>Mon, 01 Jul 2024 20:54:15 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/week3/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/week3/</guid>
     <description><![CDATA[<h2 id="写在前面" class="headerLink">
     <a href="#%e5%86%99%e5%9c%a8%e5%89%8d%e9%9d%a2" class="header-mark"></a>写在前面</h2><p>博客新增了许多功能，包括作者资料，友链，样式优化，社交链接等等，其中Steam社交链接格式不正确，我给博客主题的作者提了一个
 <a href="https://github.com/HEIGE-PCloud/DoIt/pull/1311" target="_blank" rel="noopener noreferrer">pull request</a>，这是我的第一个pr，只修改了一个单词，很幸运地被merge了，
 如果你也在使用<a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer">DoIt主题</a>，那么说不定其中某行代码就是我写的😋</p>]]></description>
 </item><item>
     <title>第二周：败者树、范式与反范式</title>
-    <link>http://example.org/posts/week2/</link>
+    <link>http://blog.z2z63.dev/posts/week2/</link>
     <pubDate>Tue, 25 Jun 2024 23:35:03 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/week2/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/week2/</guid>
     <description><![CDATA[<p>新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情</p>
 <h1 id="归并排序与败者树" class="headerLink">
     <a href="#%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f%e4%b8%8e%e8%b4%a5%e8%80%85%e6%a0%91" class="header-mark"></a>归并排序与败者树</h1><p>上篇文章提到的归并排序，经过两次重构已经很完善了，最终的结果是一个归并排序类<code>ExternalMergeSorter</code>，通过一个头文件引入<a href="https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h" target="_blank" rel="noopener noreferrer"><code>external_merge_sort.h</code></a>, 非常优雅地隔离了归并排序的细节，只需要给<code>sorter</code>提供记录，然后指示<code>sorter</code>开始排序，最后依次从<code>sorter</code>中取出记录，取出的记录已经是有序的了</p>]]></description>
 </item><item>
     <title>第一周：归并排序，运行时与标准</title>
-    <link>http://example.org/posts/week1/</link>
+    <link>http://blog.z2z63.dev/posts/week1/</link>
     <pubDate>Mon, 17 Jun 2024 19:36:40 &#43;0800</pubDate><author>
         <name>z2z63</name>
-    </author><guid>http://example.org/posts/week1/</guid>
+    </author><guid>http://blog.z2z63.dev/posts/week1/</guid>
     <description><![CDATA[<p>最近关于博客的内容考虑了很多，怎样让博客的内容更有价值、怎样输出内容等等。也考虑了未来如果内容做好了，可以开始做SEO等等。因为我认为博客还是一种比较轻松的阅读内容，如果选择输出干货，一来读者不一定了解这方面的知识，二来读者如果非常了解这方面的知识，这篇文章也没有价值；如果想加深对某领域的了解，完全可以看一些经典的书籍，他们的内容比博客好多了，于是我决定改变博客的内容。希望我的博客是启发性的，读者看完后能够对某个小领域有个大致的理解，或者看完后产生兴趣，去阅读更专业的书籍、文档等等。换而言之以后的文章相比深度更倾向广度，比起话题更像随谈。另外我能力也不足以输出深度足够的文章。</p>]]></description>
 </item></channel>
 </rss>
