@@ -4,23 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noodp" /><title>KDE折腾之自动化设置 - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://blog.z2z63.dev/posts/kde-setting-cli/">
+    <meta name="robots" content="noodp" /><title>《Inside the C&#43;&#43; Object Model》读后记 —— 为什么 C&#43;&#43; 和 C 可以互操作 - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://blog.z2z63.dev/posts/cpp_object_model_overview/">
   <meta property="og:site_name" content="z2z63/Virtualfuture&#39;s Blog">
-  <meta property="og:title" content="KDE折腾之自动化设置">
-  <meta property="og:description" content="需求我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个配置：
-内置屏幕：缩放比例150%，字体DPI 144 外置屏幕1：缩放比例100%，字体DPI 96 然后残念的是KDE并不支持同时连接不同显示器并设置不同的缩放比例和分辨率，所以我采用的设置是">
+  <meta property="og:title" content="《Inside the C&#43;&#43; Object Model》读后记 —— 为什么 C&#43;&#43; 和 C 可以互操作">
+  <meta property="og:description" content="正如标题所说，这篇文章是读后记，但我不想成为作者的传声筒，也不想将这篇文章变成只有自己能看懂的阅读笔记。所谓一千个读者就有一千个哈姆雷特，我想将读完这本书后的感想、思考、观点讲述出来，我想这也是我能写出的有价值的文字">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-07-21T13:14:56+00:00">
-    <meta property="article:modified_time" content="2023-12-21T16:29:10+08:00">
-    <meta property="article:tag" content="Linux">
-    <meta property="article:tag" content="Linux Desktop">
+    <meta property="article:published_time" content="2024-12-19T16:09:46+08:00">
+    <meta property="article:modified_time" content="2024-12-19T16:09:46+08:00">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="KDE折腾之自动化设置">
-  <meta name="twitter:description" content="需求我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个配置：
-内置屏幕：缩放比例150%，字体DPI 144 外置屏幕1：缩放比例100%，字体DPI 96 然后残念的是KDE并不支持同时连接不同显示器并设置不同的缩放比例和分辨率，所以我采用的设置是">
+  <meta name="twitter:title" content="《Inside the C&#43;&#43; Object Model》读后记 —— 为什么 C&#43;&#43; 和 C 可以互操作">
+  <meta name="twitter:description" content="正如标题所说，这篇文章是读后记，但我不想成为作者的传声筒，也不想将这篇文章变成只有自己能看懂的阅读笔记。所谓一千个读者就有一千个哈姆雷特，我想将读完这本书后的感想、思考、观点讲述出来，我想这也是我能写出的有价值的文字">
 <meta name="application-name" content="z2z63/Virtualfuture&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="z2z63/Virtualfuture&#39;s Blog">
 
@@ -28,15 +24,15 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-<link rel="canonical" href="http://blog.z2z63.dev/posts/kde-setting-cli/" /><link rel="prev" href="http://blog.z2z63.dev/posts/this-in-js/" /><link rel="next" href="http://blog.z2z63.dev/posts/recsys-summary/" />
+<link rel="canonical" href="http://blog.z2z63.dev/posts/cpp_object_model_overview/" /><link rel="prev" href="http://blog.z2z63.dev/posts/since_aguast/" />
 <link rel="stylesheet" href="/css/main.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">{"@context": "https://schema.org","@type": "BlogPosting",
-        "headline": "KDE折腾之自动化设置",
+        "headline": "《Inside the C++ Object Model》读后记 —— 为什么 C++ 和 C 可以互操作",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http://blog.z2z63.dev/posts/kde-setting-cli/"
-        },"genre": "posts","keywords":["Linux","Linux Desktop"],"wordcount":  3313 ,
-        "url": "http://blog.z2z63.dev/posts/kde-setting-cli/","datePublished": "2023-07-21T13:14:56+00:00","dateModified": "2023-12-21T16:29:10+08:00","publisher": {
+            "@id": "http://blog.z2z63.dev/posts/cpp_object_model_overview/"
+        },"genre": "posts","wordcount":  6559 ,
+        "url": "http://blog.z2z63.dev/posts/cpp_object_model_overview/","datePublished": "2024-12-19T16:09:46+08:00","dateModified": "2024-12-19T16:09:46+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
                 "@type": "Person",
@@ -160,31 +156,33 @@
         <h2 class="toc-title">Contents</h2>
         <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
   <ul>
-    <li><a href="#xrandr">xrandr</a></li>
-    <li><a href="#kscreen-doctor">kscreen-doctor</a></li>
-    <li><a href="#qt_screen_scale_factors">QT_SCREEN_SCALE_FACTORS</a></li>
-    <li><a href="#寻找kde设置文件">寻找KDE设置文件</a></li>
-    <li><a href="#监控读写文件">监控读写文件</a>
+    <li><a href="#这本书是什么">这本书是什么</a></li>
+    <li><a href="#c对象的内存布局">C++对象的内存布局</a>
       <ul>
-        <li><a href="#通过文件修改时间监控文件写入">通过文件修改时间监控文件写入</a></li>
-        <li><a href="#更简单的做法">更简单的做法</a></li>
+        <li><a href="#普通对象的内存布局">普通对象的内存布局</a></li>
+        <li><a href="#单继承时">单继承时</a></li>
+        <li><a href="#使用虚拟函数时">使用虚拟函数时</a></li>
+        <li><a href="#使用多继承时使用虚拟继承时">使用多继承时/使用虚拟继承时</a></li>
       </ul>
     </li>
-    <li><a href="#修改配置文件">修改配置文件</a></li>
-    <li><a href="#命令行注销">命令行注销</a></li>
-    <li><a href="#检测外置屏幕连接状态">检测外置屏幕连接状态</a></li>
+    <li><a href="#构造析构复制移动语义">构造、析构、复制、移动语义</a></li>
+    <li><a href="#为什么说-c-和-c兼容">为什么说 C 和 C++兼容</a></li>
+    <li><a href="#异常处理和对象生命期">异常处理和对象生命期</a></li>
+    <li><a href="#正确看待某些特性">正确看待某些特性</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#append">append</a></li>
   </ul>
 </nav></div>
-    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2023-07-21" data-pagefind-body>KDE折腾之自动化设置</h1><div class="post-meta">
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2024-12-19" data-pagefind-body>《Inside the C&#43;&#43; Object Model》读后记 —— 为什么 C&#43;&#43; 和 C 可以互操作</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src=https://avatars.githubusercontent.com/z2z63   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2023-07-21">2023-07-21</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2023-12-21">2023-12-21</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;3313 words&nbsp;
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2024-12-19">2024-12-19</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-12-19">2024-12-19</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;6559 words&nbsp;
                     <svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;15 minutes&nbsp;</div>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;29 minutes&nbsp;</div>
         </div><div class="details toc print:!tw-block" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -193,41 +191,43 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#xrandr">xrandr</a></li>
-    <li><a href="#kscreen-doctor">kscreen-doctor</a></li>
-    <li><a href="#qt_screen_scale_factors">QT_SCREEN_SCALE_FACTORS</a></li>
-    <li><a href="#寻找kde设置文件">寻找KDE设置文件</a></li>
-    <li><a href="#监控读写文件">监控读写文件</a>
+    <li><a href="#这本书是什么">这本书是什么</a></li>
+    <li><a href="#c对象的内存布局">C++对象的内存布局</a>
       <ul>
-        <li><a href="#通过文件修改时间监控文件写入">通过文件修改时间监控文件写入</a></li>
-        <li><a href="#更简单的做法">更简单的做法</a></li>
+        <li><a href="#普通对象的内存布局">普通对象的内存布局</a></li>
+        <li><a href="#单继承时">单继承时</a></li>
+        <li><a href="#使用虚拟函数时">使用虚拟函数时</a></li>
+        <li><a href="#使用多继承时使用虚拟继承时">使用多继承时/使用虚拟继承时</a></li>
       </ul>
     </li>
-    <li><a href="#修改配置文件">修改配置文件</a></li>
-    <li><a href="#命令行注销">命令行注销</a></li>
-    <li><a href="#检测外置屏幕连接状态">检测外置屏幕连接状态</a></li>
+    <li><a href="#构造析构复制移动语义">构造、析构、复制、移动语义</a></li>
+    <li><a href="#为什么说-c-和-c兼容">为什么说 C 和 C++兼容</a></li>
+    <li><a href="#异常处理和对象生命期">异常处理和对象生命期</a></li>
+    <li><a href="#正确看待某些特性">正确看待某些特性</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#append">append</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content" data-pagefind-body><h1 id="需求" class="headerLink">
-    <a href="#%e9%9c%80%e6%b1%82" class="header-mark"></a>需求</h1><p>我有两个外置屏幕，一个1K 23.8英寸，一个1K 21英寸，同时内置屏幕在1K和2K之间（2240x1400）但只有13英寸，所以需要这个配置：</p>
+            </div><div class="content" id="content" data-pagefind-body><p>正如标题所说，这篇文章是读后记，但我不想成为作者的传声筒，也不想将这篇文章变成只有自己能看懂的阅读笔记。所谓一千个读者就有一千个哈姆雷特，我想将读完这本书后的感想、思考、观点讲述出来，我想这也是我能写出的有价值的文字</p>
+<h2 id="这本书是什么" class="headerLink">
+    <a href="#%e8%bf%99%e6%9c%ac%e4%b9%a6%e6%98%af%e4%bb%80%e4%b9%88" class="header-mark"></a>这本书是什么</h2><p><a href="https://book.douban.com/subject/1484262/" target="_blank" rel="noopener noreferrer">《Inside the C++ Object Model》</a> 的作者 <a href="https://en.wikipedia.org/wiki/Stanley_B._Lippman" target="_blank" rel="noopener noreferrer">Stanley B. Lippman</a>，同时也是《C++ primer》、《C++ primer plus》的作者，曾在贝尔实验室作为领导者参与 <a href="https://en.wikipedia.org/wiki/Cfront" target="_blank" rel="noopener noreferrer">cfront</a> 项目，cfront 是“远古”时期的 C++编译器，它做的工作就是将 C++转变为 C，剩下的编译链接都交给 C 编译器完成</p>
+<p>这本书的大致内容</p>
 <ul>
-<li>内置屏幕：缩放比例150%，字体DPI 144</li>
-<li>外置屏幕1：缩放比例100%，字体DPI 96</li>
+<li>The Semantics of Constructors<br>
+编译器如何合成构造函数、逐步完成对象的构造过程</li>
+<li>The Semantics of Data<br>
+编译器是如何决定对象的内存布局以保证面向对象语义和运行时性能，又是如何根据内存布局改写数据成员的访问</li>
+<li>The Semantics of Function
+编译器如何将成员方法调用转化为更加底层的普通函数调用，从而能够在现有编译体系下实现</li>
+<li>Semantics of Construction, Destruction, and Copy<br>
+编译器如何合成构造函数、析构函数，以保证面向对象语义</li>
+<li>Runtime Semantics<br>
+必须由运行时系统提供的面向对象的运行时支持，追踪临时对象生命期、正确初始化全局变量、局部静态变量、局部变量和数组</li>
 </ul>
-<p>然后残念的是KDE并不支持同时连接不同显示器并设置不同的缩放比例和分辨率，所以我采用的设置是</p>
-<ul>
-<li>接上外置屏幕时，关闭内置屏幕，设置缩放比例100%，字体DPI 96</li>
-<li>断开外置屏幕时，设置缩放比例150%，字体DPI 144</li>
-</ul>
-<p>然而每次设置，都需要打开KDE systemsetting，修改设置后注销，很麻烦，再加上我使用的主题问题（见末尾），需要在不同字体DPI下设置不同的window decoration，而设置window decoration只能修改配置文件。当接上或者断开外置屏幕时，需要改很多设置，非常麻烦！</p>
-<p>于是我就想，能不能写一个脚本，自动化这个过程呢？</p>
-<h1 id="踩坑过程" class="headerLink">
-    <a href="#%e8%b8%a9%e5%9d%91%e8%bf%87%e7%a8%8b" class="header-mark"></a>踩坑过程</h1><h2 id="xrandr" class="headerLink">
-    <a href="#xrandr" class="header-mark"></a>xrandr</h2><p>在google搜索 kde change scale command line，大部分内容都是<code>xrandr</code>，这东西并没有满足我的需求，使用<code>xrandr --output DisplayPort-0 --scale 1.5x1.5</code>后，发现它是将屏幕的帧缩放后输出，它会直接修改屏幕的逻辑分辨率，而我想要的是保持逻辑分辨率在物理分辨率（1K）的情况下，缩放显示内容</p>
-<h2 id="kscreen-doctor" class="headerLink">
-    <a href="#kscreen-doctor" class="header-mark"></a>kscreen-doctor</h2><p>又发现能够通过<code>kscreen-doctor output.eDP.scale.1,5</code>修改指定屏幕的缩放比例，然而并没有效果，查阅文档后发现这个命令只能对wayland起作用</p>
-<h2 id="qt_screen_scale_factors" class="headerLink">
-    <a href="#qt_screen_scale_factors" class="header-mark"></a>QT_SCREEN_SCALE_FACTORS</h2><p>仔细想了一下，可能缩放比例这个概念就不太正确，分辨率并没有问题，KDE只是一个桌面环境，在KDE修改了缩放比例后，它会以某种方式通知GUI程序，告诉他们应该采用什么样的缩放比例，然后GUI程序就能根据缩放比例调整按钮，文字，图标的大小，达到一个与屏幕大小观感协调的效果。查阅了<a href="https://wiki.archlinux.org/title/HiDPI#Qt_5" target="_blank" rel="noopener noreferrer">archlinux wiki</a>后，我发现了这个环境变量<code>QT_SCREEN_SCALE_FACTORS</code></p>
+<p>这本书发版于 1996 年，在 C++20 已经进入生产环境的今天，书中提及的一些概念已经被新标准废弃，但仍有很多内容对理解标准帮助很大。C++面向对象特性是如何影响对象的布局的，对象的布局又是怎样影响构造函数和析构函数，怎样影响 C++的运行时系统，又是怎样影响 C++和 C 互操作。在我看来其中最重要的就是从 C++的领域中划分出了一片区域，这片区域可以安全的和 C 互操作，所以接下来这篇文章将以一个实用、朴实的角度说明 C++和 C 为什么可以互操作（实用、朴实、不严谨、不太符合C++20标准的定义）</p>
+<h2 id="c对象的内存布局" class="headerLink">
+    <a href="#c%e5%af%b9%e8%b1%a1%e7%9a%84%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%80" class="header-mark"></a>C++对象的内存布局</h2><h3 id="普通对象的内存布局" class="headerLink">
+    <a href="#%e6%99%ae%e9%80%9a%e5%af%b9%e8%b1%a1%e7%9a%84%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%80" class="header-mark"></a>普通对象的内存布局</h3><p>普通对象也是我胡编乱造的词，指类中不存在虚拟函数、继承。此时 C++对象包括所有非静态数据成员</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -252,7 +252,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">bash</p>
+      <p class="tw-select-none !tw-my-1">cpp</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -322,15 +322,19 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">➜  ~ env <span class="p">|</span> grep QT     
-</span></span><span class="line"><span class="cl"><span class="nv">QT_AUTO_SCREEN_SCALE_FACTOR</span><span class="o">=</span><span class="m">0</span>
-</span></span><span class="line"><span class="cl"><span class="nv">QT_IM_MODULE</span><span class="o">=</span>fcitx
-</span></span><span class="line"><span class="cl"><span class="nv">QT_SCREEN_SCALE_FACTORS</span><span class="o">=</span><span class="nv">eDP</span><span class="o">=</span>1<span class="p">;</span>DisplayPort-0<span class="o">=</span>1<span class="p">;</span>DisplayPort-1<span class="o">=</span>1<span class="p">;</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span><span class="o">:</span>    <span class="c1">// private access section
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>    <span class="c1">// public access section
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">char</span> <span class="n">z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre>
 </div>
-<p>QT会遵循这个环境变量调整缩放比例，所以修改这个环境变量就能达到目的了，于是我把这个环境变量保存在<code>~/.xprofile</code>，但重新登录后发现没有起作用，发现环境变量并没有被修改</p>
-<p>考虑了一下，应该是修改后，又被KDE修改了，因为缩放比例这个设置保存在KDE中，KDE会根据这个设置去修改底层的一些设置，所以还是要从KDE入手</p>
-<h2 id="寻找kde设置文件" class="headerLink">
-    <a href="#%e5%af%bb%e6%89%bekde%e8%ae%be%e7%bd%ae%e6%96%87%e4%bb%b6" class="header-mark"></a>寻找KDE设置文件</h2><p>在网上搜索能知道KDE的配置文件都在<code>~/.config/</code>下，然而具体是哪一个，网上并不能搜索到。于是我先按照名字找到了<code>~/.config/xsettingd/xsettingd.conf</code>，我发现有一个选项在修改缩放比例后会改变</p>
+<ul>
+<li>标准规定：同一个 access section 内，声明顺序在后的数据成员具有更大的地址，即在 <code>A</code> 的对象中，<code>y</code> 的偏移比 <code>x</code> 更大。标准如是规定的意图是允许编译器根据需要在数据成员的间隙插入额外的数据（见下文）</li>
+<li>标准规定：存在多个不同级别的 access section 时，不同 section 的相对位置由编译器自己决定</li>
+</ul>
+<p>根据以上两个信息，可以得出：普通对象只有一个 access section 时，编译器不需要在数据成员的间隙中插入额外数据，也不需要决定多个 section 的相对位置，此时对象的内存布局和 C 的结构体是兼容的</p>
 <div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -355,7 +359,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">text</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -425,27 +429,24 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">➜  ~ cat ~/.config/xsettingsd/xsettingsd.conf 
-</span></span><span class="line"><span class="cl">Gdk/UnscaledDPI <span class="m">147456</span>
-</span></span><span class="line"><span class="cl">Gdk/WindowScalingFactor <span class="m">1</span>
-</span></span><span class="line"><span class="cl">Net/ThemeName <span class="s2">&#34;Breeze&#34;</span>
-</span></span><span class="line"><span class="cl">Gtk/EnableAnimations <span class="m">1</span>
-</span></span><span class="line"><span class="cl">Gtk/DecorationLayout <span class="s2">&#34;icon:minimize,maximize,close&#34;</span>
-</span></span><span class="line"><span class="cl">Gtk/PrimaryButtonWarpsSlider <span class="m">0</span>
-</span></span><span class="line"><span class="cl">Gtk/ToolbarStyle <span class="m">3</span>
-</span></span><span class="line"><span class="cl">Gtk/MenuImages <span class="m">1</span>
-</span></span><span class="line"><span class="cl">Gtk/ButtonImages <span class="m">1</span>
-</span></span><span class="line"><span class="cl">Gtk/CursorThemeSize <span class="m">24</span>
-</span></span><span class="line"><span class="cl">Gtk/CursorThemeName <span class="s2">&#34;breeze_cursors&#34;</span>
-</span></span><span class="line"><span class="cl">Net/IconThemeName <span class="s2">&#34;Win11&#34;</span>
-</span></span><span class="line"><span class="cl">Gtk/FontName <span class="s2">&#34;Noto Sans,  8&#34;</span></span></span></code></pre>
+      "><span class="line"><span class="cl">+-----------+
+</span></span><span class="line"><span class="cl">|           |
+</span></span><span class="line"><span class="cl">|   int x   |
+</span></span><span class="line"><span class="cl">|           |
+</span></span><span class="line"><span class="cl">+-----------+
+</span></span><span class="line"><span class="cl">|           |
+</span></span><span class="line"><span class="cl">|   int y   |
+</span></span><span class="line"><span class="cl">|           |
+</span></span><span class="line"><span class="cl">+-----------+
+</span></span><span class="line"><span class="cl">|   char z  |
+</span></span><span class="line"><span class="cl">+-----------+
+</span></span><span class="line"><span class="cl">|           |
+</span></span><span class="line"><span class="cl">|  padding  |
+</span></span><span class="line"><span class="cl">|           |
+</span></span><span class="line"><span class="cl">+-----------+</span></span></code></pre>
 </div>
-<p>我发现Gdk/UnscaledDPI这个选项，当缩放比例是100%时为98304，当缩放比例为150%时为147456，而Gdk/WindowScalingFactor这个选项并不会改变，猜测它就是xrandr中的scale选项，于是我尝试修改这个选项，发现也没有起作用。</p>
-<h2 id="监控读写文件" class="headerLink">
-    <a href="#%e7%9b%91%e6%8e%a7%e8%af%bb%e5%86%99%e6%96%87%e4%bb%b6" class="header-mark"></a>监控读写文件</h2><p>根据我的猜想，在KDE修改设置后，重新登录或者重启就能够生效，一定是把修改保存到了文件，然后启动的时候根据配置文件来设置一些选项，于是我就考虑监控文件读写，进而找到配置文件</p>
-<h3 id="通过文件修改时间监控文件写入" class="headerLink">
-    <a href="#%e9%80%9a%e8%bf%87%e6%96%87%e4%bb%b6%e4%bf%ae%e6%94%b9%e6%97%b6%e9%97%b4%e7%9b%91%e6%8e%a7%e6%96%87%e4%bb%b6%e5%86%99%e5%85%a5" class="header-mark"></a>通过文件修改时间监控文件写入</h3><p>文件写入后，文件的修改时间会更新，于是我利用find命令查找文件修改时间满足一个范围内的文件</p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<p>确定了 <code>A</code> 的内存布局后，<code>A</code> 的非静态数据成员的偏移也就可以在编译期确定，在 <code>A</code> 的非静态成员函数中，访问<code>x</code> <code>y</code> <code>z</code>时，通过隐含的<code>this</code>指针间接访问，等价于 C 的结构体成员的访问</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -469,7 +470,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">cpp</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -539,39 +540,13 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">➜  ~ <span class="c1">#!/bin/bash</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 定义要监测的目录</span>
-</span></span><span class="line"><span class="cl"><span class="nv">directory</span><span class="o">=</span>~/.config
-</span></span><span class="line"><span class="cl"><span class="c1"># 转换路径为绝对路径</span>
-</span></span><span class="line"><span class="cl"><span class="nv">directory</span><span class="o">=</span><span class="k">$(</span>realpath <span class="s2">&#34;</span><span class="nv">$directory</span><span class="s2">&#34;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 获取脚本启动时的时间戳</span>
-</span></span><span class="line"><span class="cl"><span class="nv">script_start_time</span><span class="o">=</span><span class="k">$(</span>date +%s<span class="k">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 创建一个关联数组来存储文件的修改时间</span>
-</span></span><span class="line"><span class="cl"><span class="nb">declare</span> -A mod_times
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">while</span> true<span class="p">;</span> <span class="k">do</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 使用find命令查找目录下所有在脚本启动后被写入的文件    </span>
-</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> -rd <span class="s1">&#39;&#39;</span> file<span class="p">;</span> <span class="k">do</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">current_mod_time</span><span class="o">=</span><span class="k">$(</span>stat -c %Y <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1"># 获取文件的修改时间是否在脚本启动之后        </span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$current_mod_time</span><span class="s2">&#34;</span> -gt <span class="s2">&#34;</span><span class="nv">$script_start_time</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 如果文件在之前的记录中不存在或修改时间不同，则输出文件路径            </span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">[[</span> ! <span class="s2">&#34;</span><span class="si">${</span><span class="nv">mod_times</span><span class="p">[</span><span class="nv">$file</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">||</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">mod_times</span><span class="p">[</span><span class="nv">$file</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span> -ne <span class="s2">&#34;</span><span class="nv">$current_mod_time</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">echo</span> <span class="s2">&#34;文件已被修改：</span><span class="nv">$file</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">                mod_times<span class="o">[</span><span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span><span class="o">]=</span><span class="nv">$current_mod_time</span>
-</span></span><span class="line"><span class="cl">            <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">        <span class="k">fi</span>
-</span></span><span class="line"><span class="cl">    <span class="k">done</span> &lt; &lt;<span class="o">(</span>find <span class="s2">&#34;</span><span class="nv">$directory</span><span class="s2">&#34;</span> -type f -print0<span class="o">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    sleep <span class="m">1</span>  <span class="c1"># 每秒检查一次done</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="n">A</span><span class="o">::</span><span class="n">foo</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>  <span class="c1">// this-&gt;x + this-&gt;y
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre>
 </div>
-<p>启动这个脚本，然后打开KDE systemsetting，修改缩放比例，找到一些文件被修改了，其中有<code>~/.config/kcmfonts</code>
-它的内容如下</p>
-<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+<p>末尾加的 padding 是为了对齐，但这句话太过教科书了。<code>A</code> 的对齐要求是首地址必须是 4 的倍数，在末尾加上 3 字节的 padding 是为了保证在一块内存中连续存放 A 的对象时，下一个对象能够紧邻上一个对象并保证对齐要求。而且在逐字节复制时，在 CISC 架构上可以使用效率更高的专用指令</p>
+<h3 id="单继承时" class="headerLink">
+    <a href="#%e5%8d%95%e7%bb%a7%e6%89%bf%e6%97%b6" class="header-mark"></a>单继承时</h3><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -595,7 +570,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">cpp</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -665,14 +640,17 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">➜  ~ cat ~/.config/kcmfonts 
-</span></span><span class="line"><span class="cl"><span class="o">[</span>General<span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="nv">forceFontDPI</span><span class="o">=</span><span class="m">0</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Base</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Derived</span><span class="o">:</span> <span class="n">Base</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre>
 </div>
-<p>根据文件的修改时间，文件名的提示，还有文件内容的提示，只需要修改这个配置文件，就能达到修改字体DPI的目的</p>
-<h3 id="更简单的做法" class="headerLink">
-    <a href="#%e6%9b%b4%e7%ae%80%e5%8d%95%e7%9a%84%e5%81%9a%e6%b3%95" class="header-mark"></a>更简单的做法</h3><p>在reddit上看到了另一个做法，修改设置后按照修改时间对文件进行排序，找到最新修改的文件。这个方法确实很简单，我找到了<code>~/.config/kdeglobals</code>这个文件，而且非常巧妙的是，它有一段内容为</p>
-<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+<p><code>Derived</code> 对象分为两个部分，一个是完整的 <code>Base</code> 对象，另一个时 <code>Derived</code> 的所有非静态成员。也可以说 <code>Derived</code> 对象中有 Base subobject<br>
+这两个部分如何排放，标准没有要求。但编译器往往把 <code>Base</code> 放在开头而 <code>Derived</code> 放到末尾，这样就能实现<code>Base* b = new Derived</code>派生类向上 cast 到基类时，cast 没有运行时开销</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -766,29 +744,27 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">[KScreen]
-</span></span><span class="line"><span class="cl">ScaleFactor=1.5
-</span></span><span class="line"><span class="cl">ScreenScaleFactors=eDP=1;DisplayPort-0=1;DisplayPort-1=1;</span></span></code></pre>
+      "><span class="line"><span class="cl">     Base                       Derived                        ??
+</span></span><span class="line"><span class="cl">+-----------+                +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">|           |                |           |                |           |
+</span></span><span class="line"><span class="cl">|   int x   |                |   int x   |                |  int x    |
+</span></span><span class="line"><span class="cl">|           |                |           |                |           |
+</span></span><span class="line"><span class="cl">+-----------+                +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">|   char y  |                |   char y  |                |   char y  |
+</span></span><span class="line"><span class="cl">+-----------+                +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">|           |                |           |                |   char z  |
+</span></span><span class="line"><span class="cl">|  padding  |                |  padding  |                +-----------+
+</span></span><span class="line"><span class="cl">|           |                |           |                |  padding  |
+</span></span><span class="line"><span class="cl">+-----------+                +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">                             |   char z  |                
+</span></span><span class="line"><span class="cl">                             +-----------+
+</span></span><span class="line"><span class="cl">                             |           |
+</span></span><span class="line"><span class="cl">                             |  padding  |
+</span></span><span class="line"><span class="cl">                             |           |
+</span></span><span class="line"><span class="cl">                             +-----------+</span></span></code></pre>
 </div>
-<p>根据这个group名和key名，可以确定<code>ScaleFactor</code>就是最终的答案了</p>
-<h2 id="修改配置文件" class="headerLink">
-    <a href="#%e4%bf%ae%e6%94%b9%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6" class="header-mark"></a>修改配置文件</h2><p>最开始我使用<code>sed</code>修改文件，缺点就是</p>
-<ul>
-<li>写sed很麻烦</li>
-<li>担心改错，所以最开始不敢写回文件</li>
-<li>保存修改很麻烦，需要写入一个临时文件，然后再把临时文件重命名为原文件</li>
-</ul>
-<p>在reddit上看到有一个命令是<code>kwriteconfig5</code>，是KDE提供的用来修改那些&rsquo;hidden&rsquo;（没有提供GUI配置选项）的配置选项，它明显比直接修改文件要方便而且安全</p>
-<p>要修改缩放比例，只需要<code>kwriteconfig5 --file ~/.config/kdeglobals --group KScreen --key ScaleFactor 1.5</code></p>
-<h2 id="命令行注销" class="headerLink">
-    <a href="#%e5%91%bd%e4%bb%a4%e8%a1%8c%e6%b3%a8%e9%94%80" class="header-mark"></a>命令行注销</h2><p>也许是X11或者QT的缺陷，修改了缩放比例和字体DPI后，只能对新启动的应用生效，所以通常会注销然后重新登录，所以脚本修改这些设置后，也应该注销</p>
-<p>然而这个注销就麻烦了，命令行，注销，一看到这两个词，我就在想，这不就是一个Ctrl+D或者exit就解决的问题吗。然而，这个是ssh会话中使用的，而我想要注销的应该是桌面会话</p>
-<p>在网上找到了一些注销方法，有注销X会话的，直接让屏幕卡住了，我的猜想是，X是GUI的底层，而KDE作为桌面环境明显在它之上，也就是说应该注销KDE的会话</p>
-<p>在网上找到了这个方法<code>qdbus org.kde.ksmserver /KSMServer logout 0 0 0</code>，非常有用，是通过类似进程间通信的方式通知KDE注销，跟手动注销的功能完全一模一样</p>
-<h2 id="检测外置屏幕连接状态" class="headerLink">
-    <a href="#%e6%a3%80%e6%b5%8b%e5%a4%96%e7%bd%ae%e5%b1%8f%e5%b9%95%e8%bf%9e%e6%8e%a5%e7%8a%b6%e6%80%81" class="header-mark"></a>检测外置屏幕连接状态</h2><p>脚本需要检测现在使用的是什么屏幕，然后作出不同的设置<br>
-为了简单，我就只检测屏幕连接的数量，如果连接的屏幕数量为2，就认为外置屏幕已经连接，为1就认为外置屏幕已经断开
-脚本如下</p>
+<p>派生类的大小为 12 字节，其中有 6 个字节的 padding，为什么不能像<code>??</code>中表示的那样<code>char z</code>利用<code>Base</code>末尾的 padding 呢？</p>
+<p>这里提出一个标准中没有，但书中有的词：Bitwise Semantics. 与 Bitwise 相对的还有 member-wise。一个好的编译器应当在大部分情况下都能生成 Bitwise 的复制构造函数，即当复制对象时，不需要 member-wise 复制而是 Bitwise 的复制。当遵守 Bitwise Semantics 时，编译器能够省去函数调用、逐个复制数据的开销，转而使用高效的专用指令</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -813,7 +789,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">cpp</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -883,10 +859,27 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">xrandr --listactivemonitors <span class="p">|</span> awk <span class="s1">&#39;/Monitors:/ {print $2}&#39;</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="n">Base</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Base</span> <span class="o">*</span><span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Derived</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span><span class="n">d</span> <span class="o">=</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span></span></span></code></pre>
 </div>
-<h1 id="最终成果" class="headerLink">
-    <a href="#%e6%9c%80%e7%bb%88%e6%88%90%e6%9e%9c" class="header-mark"></a>最终成果</h1><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<p>这段代码显然是良定义的，他产生的效果是 Base 对象复制到 Derived 对象的 Base subobject 中，而<code>Derived::z</code>不会被覆盖。为了能够遵守 Bitwise Semantics，编译器仍然保留了 Base subobject 中的 padding，否则<code>Derived::z</code>被 padding 覆盖，其值是未定义的</p>
+<h3 id="使用虚拟函数时" class="headerLink">
+    <a href="#%e4%bd%bf%e7%94%a8%e8%99%9a%e6%8b%9f%e5%87%bd%e6%95%b0%e6%97%b6" class="header-mark"></a>使用虚拟函数时</h3><p>所谓多态，可以理解为派生类对象能够完美的嵌入到基类对象的地方。USB3.0 公口能够完美的插入到 USB2.0 的母口中并正常传输数据，这是因为 USB3.0 接口在电气特性和物理特性上兼容 USB2.0 接口，例如任何 USB2.0 定义的针脚也是 USB3.0 定义的针脚；USB2.0 接口具有和 USB3.0 相同的形状，这提示我们：派生类对象和基类对象在内存布局上具有相似性</p>
+<p>但是在不使用虚拟机制时，派生类对象和基类对象在内存布局上也具有相似性。于是这里引入第二个条件：虚拟机制需要在对象中开辟一块空间存放运行时信息，用于完成多态的运行时绑定。结合两个信息可以得知：派生类和基类对象中都有这块空间，而且他们的非静态数据成员和这块空间形成的整体在内存布局上具有相似性</p>
+<p>那么如何保存这个信息呢，以下使用渐进的思考方式解释为什么编译器都使用了相同的多态实现方法：虚函数表指针</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+        <span class="icon"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg></span>Note<span class="details-icon"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></span>
+    </div>
+    <div class="details-content">
+        <div class="admonition-content"><p>以下方案只是我的猜想，不保证可行性</p></div></div></div><h4 id="多态方案-1" class="headerLink">
+    <a href="#%e5%a4%9a%e6%80%81%e6%96%b9%e6%a1%88-1" class="header-mark"></a>多态方案 1</h4><p>第一个想法是编译器为每一个类确定一个唯一的 id，然后将 id 嵌入到对象中，运行时系统可以取出 id，根据 id 查询到对应的类，并通过这个类保存的元信息找到需要调用的虚拟函数</p>
+<p>这个方案已经有 <a href="https://en.wikipedia.org/wiki/Run-time_type_information" target="_blank" rel="noopener noreferrer">Runtime Type Identification</a>(RTTI) 的雏形，通过从对象中取出 id，可以在运行时获取到对象的运行时类型，以支持基类指针尝试向下 cast，即<code>dynamic_cast</code></p>
+<p>考虑 id 嵌入的位置，标准允许嵌入到任何数据成员的间隙，但一般的做法是放到对象开头或结尾，因为这样可以维护最少的元数据</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -910,7 +903,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">shell</p>
+      <p class="tw-select-none !tw-my-1">cpp</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -980,32 +973,24 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl"><span class="cp">#!/usr/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="nv">SCALE</span><span class="o">=</span><span class="k">$(</span>xrandr --listactivemonitors <span class="p">|</span> awk <span class="s1">&#39;/Monitors:/ {print $2}&#39;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">THEME_CONFIG</span><span class="o">=</span>/home/arch/.local/share/aurorae/themes/Win11OS-dark/Win11OS-darkrc
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$SCALE</span><span class="s2">&#34;</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">    kwriteconfig5 --file /home/arch/.config/kdeglobals --group KScreen --key ScaleFactor 1.5
-</span></span><span class="line"><span class="cl">    kwriteconfig5 --file /home/arch/.config/kcmfonts --group General --key forceFontDPI <span class="m">144</span>
-</span></span><span class="line"><span class="cl">    cp  <span class="s2">&#34;</span><span class="nv">$THEME_CONFIG</span><span class="s2">-150&#34;</span> <span class="s2">&#34;</span><span class="nv">$THEME_CONFIG</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;one monitor connected, scaling to 150%&#34;</span> 
-</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$SCALE</span><span class="s2">&#34;</span> -eq <span class="m">2</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span></span><span class="line"><span class="cl">    kwriteconfig5 --file /home/arch/.config/kdeglobals --group KScreen --key ScaleFactor <span class="m">1</span>
-</span></span><span class="line"><span class="cl">    kwriteconfig5 --file /home/arch/.config/kcmfonts --group General --key forceFontDPI <span class="m">96</span>
-</span></span><span class="line"><span class="cl">    cp  <span class="s2">&#34;</span><span class="nv">$THEME_CONFIG</span><span class="s2">-100&#34;</span> <span class="s2">&#34;</span><span class="nv">$THEME_CONFIG</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;two monitors connected, scaling to 100%&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span><span class="line"><span class="cl">sleep <span class="m">1</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># loginctl terminate-session $XDG_SESSION_ID</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># qdbus org.kde.KWin /Session org.kde.KWin.Session.quit</span>
-</span></span><span class="line"><span class="cl">qdbus org.kde.ksmserver /KSMServer <span class="nb">logout</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Point</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Point2d</span><span class="o">:</span> <span class="k">public</span> <span class="n">Point</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">int</span> <span class="n">z</span><span class="p">(){</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">_y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Point3d</span><span class="o">:</span> <span class="k">public</span> <span class="n">Point2d</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">int</span> <span class="n">z</span><span class="p">(){</span> <span class="k">return</span> <span class="n">_z</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">_z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
 </div>
-<p>运行这个脚本，就能做到自动化设置了</p>
-<hr>
-<p>KDE窗口超大外边距
-参考<a href="https://www.reddit.com/r/kde/comments/p5nji9/custom_window_decoration_causes_extremely_large/" target="_blank" rel="noopener noreferrer">reddit</a>和<a href="https://github.com/andreyorst/Breezemite/issues/8" target="_blank" rel="noopener noreferrer">github issue</a>,这其实是主题在字体高DPI时的一个bug，解决办法就是修改主题的配置文件，我使用的win11 dark主题，配置文件在<code>~/.local/share/aurorae/themes/Win11OS-dark/Win11OS-darkrc</code>，修改</p>
-<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+<p>考虑这样的类，内存布局如下</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
     
@@ -1099,26 +1084,353 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">PaddingTop=32
-</span></span><span class="line"><span class="cl">PaddingBottom=76
-</span></span><span class="line"><span class="cl">PaddingRight=47
-</span></span><span class="line"><span class="cl">PaddingLeft=47</span></span></code></pre>
+      "><span class="line"><span class="cl">                            object header
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Point                       Point2d                      Point3d
+</span></span><span class="line"><span class="cl">+-----------+                +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">|   int  x  |                |    id     |                |    id     |
+</span></span><span class="line"><span class="cl">+-----------+                +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">                             |   int x   |                |   int x   |
+</span></span><span class="line"><span class="cl">                             +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">                             |   int y   |                |   int y   |
+</span></span><span class="line"><span class="cl">                             +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">                                                          |   int z   |
+</span></span><span class="line"><span class="cl">                                                          +-----------+
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                                                        
+</span></span><span class="line"><span class="cl">                            object footer
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Point                       Point2d                      Point3d
+</span></span><span class="line"><span class="cl">+-----------+                +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">|   int  x  |                |   int x   |                |   int x   |
+</span></span><span class="line"><span class="cl">+-----------+                +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">                             |   int y   |                |   int y   |
+</span></span><span class="line"><span class="cl">                             +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">                             |    id     |                |    id     |
+</span></span><span class="line"><span class="cl">                             +-----------+                +-----------+
+</span></span><span class="line"><span class="cl">                                                          |   int z   |
+</span></span><span class="line"><span class="cl">                                                          +-----------+</span></span></code></pre>
 </div>
-<p>这四个值，就能控制窗口的外边距<br>
-这个问题，最麻烦的就是，它并没有提供GUI的修改方式，只能通过配置文件来修改，所以定位问题相当麻烦</p>
-<p>此外在150%缩放比例下修改主题配置后，切换到100%缩放比例下，发现窗口边距直接挤压到窗口内部了，非常难看。。。。</p>
-<p>解决办法就是，分别在150%缩放比例和100%缩放比例下修改主题配置，然后在脚本中根据缩放比例来选择不同的配置文件，这样就能解决这个问题了</p>
-<h1 id="总结" class="headerLink">
-    <a href="#%e6%80%bb%e7%bb%93" class="header-mark"></a>总结</h1><p>不得不说linux桌面真是够折腾的，也许搞了半天，只不过是实现一个windows早就有的功能。linux桌面真不适合个人用户使用。不过，linux是自由的，windows是商业的，专有的，这注定了大部分人会选择windows，而linux因为市场小，发展更慢，桌面体验肯定是不及windows的（如果商业软件体验都不如自由软件，那么商业软件怎么存活？）。虽然折腾桌面很麻烦，但确实方便了不少。使用linux是自由的，桌面哪里看不顺眼都能改，甚至还能换桌面环境和窗口管理器，还能自由选择X11和wayland，而用windows只能微软喂什么就吃什么。小小的自由的代价，还是能接受的</p>
+<p>以上给出了将 id 分别放到对象开头或结尾的例子，我称之为 object header 方案和 object footer 方案<br>
+这两种方案孰优孰劣？</p>
+<ul>
+<li>将 id 放到开头时，任何支持虚拟机制的对象都能在首地址找到 id，即 id 的偏移为零，不需要额外的偏移加法计算，性能最好。而且零是编译期常量，省去了维护元信息的开销。但继承了没有虚拟函数的类时，向上 cast 需要额外操作</li>
+<li>将 id 放到结尾时，向上 cast 到没有虚拟函数的类时没有额外操作。运行时取出 id 也只需要 inheritance hierachy 中有虚拟函数的最基类的类型的大小，这也是编译期常量</li>
+</ul>
+<p>这个方案有不少问题：为了支持不同编译器的编译产物链接到一起能够正常运行，需要保证不同编译器对同一个类产生的 id 是相同的，而且两个不同类的 id 不能相同。人们可以写下几乎无穷个类，但 id 的大小需要在编译期确定下来而且在不同编译器之间达成约定，即 id 的大小是固定的。根据 <a href="https://en.wikipedia.org/wiki/Pigeonhole_principle" target="_blank" rel="noopener noreferrer">鸽笼原理</a>，一定会有两不同的类，他们的 id 相同</p>
+<p>更进一步，什么是同一个类？C++的类型系统是 Nominal type system，即使存在两个类名之外完全相同的类</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    code-block-title 
+    
+    tw-flex 
+    tw-flex-row 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        tw-select-none 
+        tw-mx-2 
+        tw-block
+        group-[.is-open]:tw-rotate-90
+        tw-transition-[transform] 
+        tw-duration-500 
+        tw-ease-in-out
+        print:!tw-hidden"
+      disabled
+      aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+
+    <div class="code-block-title-bar tw-w-full">
+      <p class="tw-select-none !tw-my-1">cpp</p>
+    </div>
+    <div class="tw-flex">
+      <button 
+        class="
+          line-number-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.show-line-numbers]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.is-wrap]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw-select-none
+          tw-mx-2 
+          tw-hidden
+          group-[.is-open]:tw-block
+          hover:tw-text-fgColor-link 
+          print:!tw-hidden"
+        title="Copy code">
+          <span class="copy-icon tw-block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw-hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw-select-none 
+          tw-mx-2 
+          tw-block 
+          group-[.is-open]:tw-hidden 
+          print:!tw-hidden" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
+    id="codeblock-id-9" 
+    class="
+      chroma 
+      !tw-block 
+      tw-p-0
+      tw-m-0
+      tw-transition-[max-height] 
+      tw-duration-500 
+      tw-ease-in-out 
+      group-[.is-closed]:!tw-max-h-0 
+      group-[.is-wrap]:tw-text-wrap
+      tw-overflow-y-hidden
+      tw-overflow-x-auto
+      tw-scrollbar-thin
+      "><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">B</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
+</div>
+<p>这两个类也是不同的<br>
+那么什么类是相同的？根据 Nominal type system 的定义，只有显式声明两个类相同或两个类名称相同</p>
+<blockquote>
+  <p>In computer science, a type system is nominal (also called nominative or name-based) if compatibility and equivalence of data types is determined by explicit declarations and/or the name of the types</p>
+
+</blockquote><p>这句话就是废话，C++不存在声明两个类具有相同关系的语法，也不允许重复声明一个类。但 Nominal type system 的定义暗示我们，类的名称可以作为唯一标识类的方法，当然在 C++，还得加上一个条件，名称中必须包含或者能够反映它所在的名称空间。于是提出第二个方案</p>
+<h4 id="多态方案-2" class="headerLink">
+    <a href="#%e5%a4%9a%e6%80%81%e6%96%b9%e6%a1%88-2" class="header-mark"></a>多态方案 2</h4><p>将类的名称作为唯一标识类的方法，其他与多态方案 1 保持一致。</p>
+<p>由于类的名称是变长而且不存在运行时修改手段，所以可以在编译期确定类的名称并保存在数据段中，对象中仅仅存放指针。不同编译器的编译产物链接到一起时，它们应当是 ABI 兼容的，所以无论类的名称有没有经过符号修饰，不同编译器都能在类的名称上取得一致</p>
+<p>接下来考虑第二个问题：如何组织元信息管理系统，能够在运行时取得类的名称后，查询到具体调用的函数？<br>
+C++没有提供运行时给一个类增加、删除、修改虚拟函数的方法，所以一个类有哪些虚拟函数是编译期能够确定的，即编译期常量。所以完全可以把查询这个动作在编译期完成，所以可以直接把这个类所有的虚拟函数的指针嵌入到对象中</p>
+<p>但是这个方法又引入了新的问题，派生类能够增加新的虚拟函数，导致虚拟函数的指针个数增加，给「保证派生类对象的内存布局和基类相似」增加了难度。这里给出一个巧妙的方法，将虚拟函数的指针和类的名称组织在一起（因为它们都在数据段中，这是可行的）</p>
+<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
+  <div class="
+    code-block-title 
+    
+    tw-flex 
+    tw-flex-row 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        tw-select-none 
+        tw-mx-2 
+        tw-block
+        group-[.is-open]:tw-rotate-90
+        tw-transition-[transform] 
+        tw-duration-500 
+        tw-ease-in-out
+        print:!tw-hidden"
+      disabled
+      aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+
+    <div class="code-block-title-bar tw-w-full">
+      <p class="tw-select-none !tw-my-1">text</p>
+    </div>
+    <div class="tw-flex">
+      <button 
+        class="
+          line-number-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.show-line-numbers]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle line numbers"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
+
+      <button 
+        class="
+          wrap-code-button
+          tw-select-none 
+          tw-mx-2 
+          tw-hidden 
+          group-[.is-open]:tw-block 
+          group-[.is-wrap]:tw-text-fgColor-link 
+          print:!tw-hidden" 
+        title="Toggle code wrap"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
+      
+      <button 
+        class="
+          copy-code-button
+          tw-select-none
+          tw-mx-2 
+          tw-hidden
+          group-[.is-open]:tw-block
+          hover:tw-text-fgColor-link 
+          print:!tw-hidden"
+        title="Copy code">
+          <span class="copy-icon tw-block"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
+          <span class="check-icon tw-hidden"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
+      </button>
+        
+      <button 
+        class="
+          tw-select-none 
+          tw-mx-2 
+          tw-block 
+          group-[.is-open]:tw-hidden 
+          print:!tw-hidden" 
+        disabled
+        aria-hidden="true"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
+    </div>
+  </div>
+  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
+    id="codeblock-id-10" 
+    class="
+      chroma 
+      !tw-block 
+      tw-p-0
+      tw-m-0
+      tw-transition-[max-height] 
+      tw-duration-500 
+      tw-ease-in-out 
+      group-[.is-closed]:!tw-max-h-0 
+      group-[.is-wrap]:tw-text-wrap
+      tw-overflow-y-hidden
+      tw-overflow-x-auto
+      tw-scrollbar-thin
+      "><span class="line"><span class="cl">+------------+              +-------------+ 
+</span></span><span class="line"><span class="cl">|     ptr    |------------&gt; | class name  |
+</span></span><span class="line"><span class="cl">+------------+              +-------------+ 
+</span></span><span class="line"><span class="cl">|            |              | ptr to func |
+</span></span><span class="line"><span class="cl">|    class   |              +-------------+ 
+</span></span><span class="line"><span class="cl">|    data    |              | ptr to func |
+</span></span><span class="line"><span class="cl">|            |              +-------------+ 
+</span></span><span class="line"><span class="cl">+------------+</span></span></code></pre>
+</div>
+<p><del>到了这步，恭喜你重新发明了虚函数表</del></p>
+<h4 id="编译器的方案" class="headerLink">
+    <a href="#%e7%bc%96%e8%af%91%e5%99%a8%e7%9a%84%e6%96%b9%e6%a1%88" class="header-mark"></a>编译器的方案</h4><p><img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202412211906651.png     ><br>
+图中<code>Point</code>也有虚拟方法，作者给出的是 cfront 实现，cfront 选择将运行时信息插入到对象尾部</p>
+<p>这个方案当然也不是完美的，使用函数指针引入了一层间接，使用 vptr 又引入了一层间接，降低了性能</p>
+<p>一个提高性能的方法是将函数指针直接嵌入到对象中，代价是增加了对象大小，而且派生类中增加的虚拟函数可能无法嵌入</p>
+<h3 id="使用多继承时使用虚拟继承时" class="headerLink">
+    <a href="#%e4%bd%bf%e7%94%a8%e5%a4%9a%e7%bb%a7%e6%89%bf%e6%97%b6%e4%bd%bf%e7%94%a8%e8%99%9a%e6%8b%9f%e7%bb%a7%e6%89%bf%e6%97%b6" class="header-mark"></a>使用多继承时/使用虚拟继承时</h3><p>一个非常经典的多继承用例是标准库中的 <code>iostream</code><br>
+<img class="tw-inline" loading="lazy" src=https://upload.cppreference.com/mwiki/images/7/7c/std-basic_iostream-inheritance.svg     ></p>
+<p><code>iostream</code> 既是 <code>istream</code> 也是 <code>ostream</code>，即 <code>iostream</code> 既是 <code>istream</code> 的派生类也是 <code>ostream</code> 的派生类<br>
+我不想花太多篇幅在虚拟继承上，因为我认为这是一个“不值得”的特性，他的实现方式比较复杂，需要考虑的 corner case 比较多，但使用场景少，而且也有一些坑点</p>
+<ol>
+<li><code>iostream</code> 对象中既有 <code>istream</code> subobect 也有 <code>ostream</code> subobject</li>
+<li><code>istream</code> subobect 和 <code>ostream</code> subobject 共享一个 ios 对象，这需要虚拟继承机制</li>
+<li><code>istream</code> 对象和 <code>ostream</code> subobject 中增加类一个指针用于指向 <code>ios</code> 基类对象，这样的设计允许他们共享一个 <code>ios</code> 对象</li>
+<li>棱形继承的对象构造比较复杂，而且它的复制构造函数难以正确安全的实现，标准没有给出一个可靠的方案</li>
+<li>尽量不使用棱形继承，不了解棱形继承就不要使用棱形继承</li>
+</ol>
+<p>多继承、无虚拟继承的布局
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202412211925700.png     ></p>
+<p>棱形继承时的布局
+<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202412211927051.png     ></p>
+<h2 id="构造析构复制移动语义" class="headerLink">
+    <a href="#%e6%9e%84%e9%80%a0%e6%9e%90%e6%9e%84%e5%a4%8d%e5%88%b6%e7%a7%bb%e5%8a%a8%e8%af%ad%e4%b9%89" class="header-mark"></a>构造、析构、复制、移动语义</h2><p>可以非常粗略的认为，C++中的对象生命期开始于构造函数的调用，结束于析构函数的调用<br>
+在构造具有继承关系的对象时，编译器根据分散在基类构造函数、类内初始化代码、初始化列表、构造函数的代码合成一个最终的构造函数。这个构造函数按照以下次序完成对象的构造</p>
+<ol>
+<li>按声明顺序调用基类构造函数（单继承、多继承时），如果用户没有显示调用，则执行默认初始化</li>
+<li>将类内构造代码和初始化列表合并，按照声明顺序逐个完成所有非静态数据成员的初始化。如果用户没有提供某个数据成员的初始化代码，则执行默认初始化</li>
+<li>将 vptr（如果有虚拟机制）设为当前类对应的虚拟函数表的地址</li>
+<li>执行构造函数的函数体中用户提供的代码</li>
+</ol>
+<p>如果有棱形继承，为了保证虚拟基类对象在合适的时机只初始化一次，编译器会在背后做更多工作<br>
+第三步保证了在初始化多层单继承关系的中间对象时，虚拟机制被禁用。以 <code>Point3d</code> 继承 <code>Point2d</code> 继承 Point 为例，初始化 <code>Point3d</code> 对象需要先初始化 <code>Point</code>，然后初始化 <code>Point2d</code>，最后初始化 <code>Point3d</code>，即 <code>Point3d</code> 是沿着 inheritance hierachy 逐步完成初始化的，在这个过程中，当前正在初始化的对象依次是合法的 <code>Point</code> 对象、<code>Point2d</code> 对象、<code>Point3d</code> 对象</p>
+<p>由于以上所说的初始化顺序，导致初始化 <code>Point3d</code> 的 <code>Point2d</code> subobject 时，<code>Point3d</code> 还未完成初始化，形象的表述就是还未存在，自然不能使用虚拟机制调用 <code>Point3d</code> 的虚拟函数</p>
+<p>与构造函数相反，析构函数会按照初始化的顺序逆序完成析构</p>
+<p>当用户没有提供复制构造函数、复制操作符、移动构造函数、移动操作符（以下简称四件套函数）时，编译器会合成（如果可行）member-wise 的四件套函数，这些函数调用逐个成员的四件套函数和基类的四件套函数</p>
+<p>一个好的编译器也应当尽可能的实现 Bitwise Semantics，此时编译器可以生成逐字节复制的四件套函数。在实践中此时的四件套函数不会被合成也不会被调用，而是直接内联</p>
+<p>编译器实现 Bitwise Semantics 时应当保证它和 member-wise 的行为产生的结果相同，因此至少会增加以下条件</p>
+<ol>
+<li>用户没有提供四件套函数，因为一般认为用户提供的代码可能有副作用</li>
+<li>编译器没有“悄悄”在对象中插入一些额外的数据（包括虚拟函数表指针，虚拟基类对象指针），因为派生类和基类的「额外数据」一般不同，而四件套函数应当正确处理派生类和基类<br>
+由此可以得出有虚拟函数的类、inheritance hierachy 中存在虚拟继承的类不能实现四件套函数的 Bitwise Semantics</li>
+</ol>
+<p>同样，构造函数和析构函数也有 Bitwise Semantics，如果实现了 Bitwise Semantics，不严谨的说，编译器可以执行和原始数据类型相同的默认初始化，原始数据类型的默认初始化就是不初始化，其值分为若干种</p>
+<ul>
+<li>函数内部的自动变量，其值为定义</li>
+<li>全局变量，其值为零</li>
+<li>堆上的变量，其值为定义</li>
+</ul>
+<p>同样的，构造函数和析构函数能够实现 Bitwise Semantics 也至少有一些条件</p>
+<ol>
+<li>用户没有提供构造函数或析构函数，因为一般认为用户提供的代码可能有副作用</li>
+<li>编译器没有“悄悄”在对象中插入一些额外的数据（包括虚拟函数表指针，虚拟基类对象指针）<br>
+由此可以得出有虚拟函数的类、inheritance hierachy 中存在虚拟继承的类不能实现构造函数和析构函的 Bitwise Semantics</li>
+</ol>
+<p>如果一个类的四件套函数和构造函数、析构函数都能实现 Bitwise Semantics，此时它就具有和原始数据类型、或者说 C 的结构体相同的特性，能够随意复制到一块内存，又从一块内存中复制回来，这样的类能够随意传入 C 写的库被处理，C 库返回的结构体也能零运行时开销的 cast 到这个类的对象而符合 C++语义，这就是 C++和 C 能够安全互操作的区域</p>
+<h2 id="为什么说-c-和-c兼容" class="headerLink">
+    <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%af%b4-c-%e5%92%8c-c%e5%85%bc%e5%ae%b9" class="header-mark"></a>为什么说 C 和 C++兼容</h2><p>作者并没有在书中回答这个问题，只是我在阅读过程中产生了这个问题的答案<br>
+我认为原因是 C 和 C++的编译系统、链接系统（这个词是我胡编乱造出来的）、运行时系统是兼容的，这里的兼容包括两个层面，第一个层面是 C++与 C 共用相同的底层原语，第二个层面是 C++和 C 的系统能够安全的共存，例如</p>
+<ul>
+<li>C 和 C++在 linux 平台编译后都会产生 ELF，都能使用静态链接器或动态链接器识别和处理，这也决定了 C 和 C++可以相互链接</li>
+<li>C++拥有 C 的原始数据类型，C++也能使用 C 的语法，这决定了在语言层面上 C 和 C++互操作几乎不需要胶水代码</li>
+<li>C++的内存分配系统虽然多了构造对象和销毁对象的功能，但内部也会使用 libc 的内存分配系统，而且两者的符号名不一样，所以 C++的内存分配系统和 C 的内存分配系统能够共存</li>
+<li>C++的对象如果不使用虚拟函数、继承等 C++特性，可以在符合 C++面向对象语义要求的同时具有和 C 的结构体相同的内存布局，这决定了数据结构能够跨运行时传递，或者说无缝互操作</li>
+</ul>
+<h2 id="异常处理和对象生命期" class="headerLink">
+    <a href="#%e5%bc%82%e5%b8%b8%e5%a4%84%e7%90%86%e5%92%8c%e5%af%b9%e8%b1%a1%e7%94%9f%e5%91%bd%e6%9c%9f" class="header-mark"></a>异常处理和对象生命期</h2><p>异常可能在任何地方抛出、终止当前流程并执行栈倒带，但异常处理也应当遵守 C++对象生命期的语义，所以在栈倒带之前，需要销毁当前函数执行迄今构造的所有的栈上的对象，这个是编译器插入额外代码追踪对象构造情况、根据对象构造情况条件地销毁对象实现的。当然这些额外插入的代码会降低运行时性能、增大二进制体积，我想这也是 google 说“we don&rsquo;t use exceptions”的原因之一</p>
+<h2 id="正确看待某些特性" class="headerLink">
+    <a href="#%e6%ad%a3%e7%a1%ae%e7%9c%8b%e5%be%85%e6%9f%90%e4%ba%9b%e7%89%b9%e6%80%a7" class="header-mark"></a>正确看待某些特性</h2><p>前文我提到了棱形继承的缺点，但我更想强调的是要合理的看待缺点<br>
+在批评棱形继承前，应该先清楚，「没有调查就没有发言权」，作为一个技术，它想解决什么问题，实际解决了什么问题，又带来了哪些新问题。于是在使用棱形继承时，我们就能够利用它解决问题并避免它带来的问题。</p>
+<p>还要知道这一点：任何技术只要进入了生产环境并创造了价值，那就说明这个技术是有可取之处的</p>
+<h2 id="总结" class="headerLink">
+    <a href="#%e6%80%bb%e7%bb%93" class="header-mark"></a>总结</h2><p>《Inside the C++ Object Model》我个人评价非常高，可以说是 C++必读书籍。读完后再来看 C++20，就会发现虽然二十多年过去了，标准大变样，但其背后的原理、核心没有改变。这本书的精华也就在其讲述的原理、核心，而它提及的一些标准只能作为“过去的标准”的参考</p>
+<p>看完这本书就精通 C++了？当然不可能，还差的多，不过至少算是前进了一步吧。</p>
+<h2 id="append" class="headerLink">
+    <a href="#append" class="header-mark"></a>append</h2><p>最近看了很多人的文章和书籍，逐渐认识到了读许多书、提升内在才能写出有价值的文章。未来我也会写更多本文这样偏读后记的文章，下篇大概率是《最好的告别》的读后记，敬请期待！</p>
+<p>最后，附上最近反复听的一首音乐</p>
+<blockquote>
+  <p>独りきりで泣いた夜に出会った<br>
+この世で一番孤独なこえ<br>
+独りきりで泣いたと思っていた<br>
+ふたりきりだった<br>
+同じ温度で唄えたなら</p>
+
+</blockquote>
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/IjlO1oX_SKo?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
 </div>
 
         <div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-12-21&nbsp;<a class="git-hash" href="https://github.com/z2z63/z2z63.github.io/commit/ab518b0e2e9167e6f99476d71b29478648abce23" target="_blank" title="commit by z2z63(vituralfuture@gmail.com) ab518b0e2e9167e6f99476d71b29478648abce23: update" rel="noopener noreferrer">
-                                    <svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M440.667 182.109l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l14.623-81.891C377.123 38.754 371.468 32 363.997 32h-40.632a12 12 0 0 0-11.813 9.891L296.175 128H197.54l14.623-81.891C213.477 38.754 207.822 32 200.35 32h-40.632a12 12 0 0 0-11.813 9.891L132.528 128H53.432a12 12 0 0 0-11.813 9.891l-7.143 40C33.163 185.246 38.818 192 46.289 192h74.81L98.242 320H19.146a12 12 0 0 0-11.813 9.891l-7.143 40C-1.123 377.246 4.532 384 12.003 384h74.81L72.19 465.891C70.877 473.246 76.532 480 84.003 480h40.632a12 12 0 0 0 11.813-9.891L151.826 384h98.634l-14.623 81.891C234.523 473.246 240.178 480 247.65 480h40.632a12 12 0 0 0 11.813-9.891L315.472 384h79.096a12 12 0 0 0 11.813-9.891l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l22.857-128h79.096a12 12 0 0 0 11.813-9.891zM261.889 320h-98.634l22.857-128h98.634l-22.857 128z"/></svg>ab518b0</a></span>
+                <span>Updated on 2024-12-19</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -1129,17 +1441,14 @@
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"/></svg>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/linux-desktop/">Linux Desktop</a></section>
+        <section class="post-tags"></section>
         <section class="print:!tw-hidden">
             <span><button class="tw-text-fgColor-link-muted hover:tw-text-fgColor-link-muted-hover" onclick="window.history.back();">Back</button></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav print:tw-hidden"><a href="/posts/this-in-js/" class="prev" rel="prev" title="JS中的this"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>JS中的this</a>
-            <a href="/posts/recsys-summary/" class="next" rel="next" title="推荐系统简单介绍">推荐系统简单介绍<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></a></div>
+    <div class="post-nav print:tw-hidden"><a href="/posts/since_aguast/" class="prev" rel="prev" title="八月到十一月"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>八月到十一月</a></div>
 </div>
 <div id="comments" class="print:!tw-hidden tw-pt-32 tw-pb-8"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -1162,7 +1471,7 @@
             <svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 32C114.6 32 0 125.1 0 240c0 49.6 21.4 95 57 130.7C44.5 421.1 2.7 466 2.2 466.5c-2.2 2.3-2.8 5.7-1.5 8.7S4.8 480 8 480c66.3 0 116-31.8 140.6-51.4 32.7 12.3 69 19.4 107.4 19.4 141.4 0 256-93.1 256-208S397.4 32 256 32z"/></svg>
         </a></div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css">
-<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"Ov23liMtTBdWPdBDJjuQ","clientSecret":"5c5e82f1b10ce323ce7efae32b1b8f0a87773577","id":"2023-07-21T13:14:56Z","owner":"z2z63","repo":"z2z63.github.io","title":"KDE折腾之自动化设置"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null},"sharerjs":true};</script><script
+<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"Ov23liMtTBdWPdBDJjuQ","clientSecret":"5c5e82f1b10ce323ce7efae32b1b8f0a87773577","id":"2024-12-19T16:09:46+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"《Inside the C++ Object Model》读后记 —— 为什么 C++ 和 C 可以互操作"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null},"sharerjs":true};</script><script
     src="/lib/sharer/sharer.min.js"
     
   ></script><script
