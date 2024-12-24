@@ -4,9 +4,16 @@
         <link>http://blog.z2z63.dev/</link>
         <description>z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Thu, 19 Dec 2024 16:09:46 &#43;0800</lastBuildDate>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Mon, 23 Dec 2024 15:42:06 &#43;0800</lastBuildDate>
             <atom:link href="http://blog.z2z63.dev/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Being Mortal: 身为必有一死的凡人，我们将如何赴死</title>
+    <link>http://blog.z2z63.dev/posts/being-mortal/</link>
+    <pubDate>Mon, 23 Dec 2024 15:42:06 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://blog.z2z63.dev/posts/being-mortal/</guid>
+    <description><![CDATA[<p>两年前的某一天，我回想起 JOJO 中登场的名为 <a href="https://www.bilibili.com/video/BV1wJ411E72A" target="_blank" rel="noopener noreferrer">齐贝林</a> 的角色，他在向僧人学习波纹气功最终奥义时被告知了自己的命运：“在一间古老而弥漫尸臭的密室，孩童将门打开之时，为了解放被锁链禁锢的年轻雄狮，你将燃烧自己的伤口，在不久后迎来残酷的死亡”。在预言的时刻到来时，齐贝林为了打败石面鬼，坦然地走向了死亡。感慨于齐贝林的精神，我在 Notion 上写下：“我将如何赴死”。</p>]]></description>
+</item><item>
     <title>《Inside the C&#43;&#43; Object Model》读后记 —— 为什么 C&#43;&#43; 和 C 可以互操作</title>
     <link>http://blog.z2z63.dev/posts/cpp_object_model_overview/</link>
     <pubDate>Thu, 19 Dec 2024 16:09:46 &#43;0800</pubDate><author>
@@ -79,14 +86,5 @@
     <a href="#%e5%86%99%e5%9c%a8%e5%89%8d%e9%9d%a2" class="header-mark"></a>写在前面</h2><p>博客新增了许多功能，包括作者资料，友链，样式优化，社交链接等等，其中Steam社交链接格式不正确，我给博客主题的作者提了一个
 <a href="https://github.com/HEIGE-PCloud/DoIt/pull/1311" target="_blank" rel="noopener noreferrer">pull request</a>，这是我的第一个pr，只修改了一个单词，很幸运地被merge了，
 如果你也在使用<a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer">DoIt主题</a>，那么说不定其中某行代码就是我写的😋</p>]]></description>
-</item><item>
-    <title>第二周：败者树、范式与反范式</title>
-    <link>http://blog.z2z63.dev/posts/week2/</link>
-    <pubDate>Tue, 25 Jun 2024 23:35:03 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/posts/week2/</guid>
-    <description><![CDATA[<p>新内容的博客主题并不明显，基本是最近学习到的知识，平日突然浮现在头脑中的随想，或者很久以前遇到过的一些事情</p>
-<h1 id="归并排序与败者树" class="headerLink">
-    <a href="#%e5%bd%92%e5%b9%b6%e6%8e%92%e5%ba%8f%e4%b8%8e%e8%b4%a5%e8%80%85%e6%a0%91" class="header-mark"></a>归并排序与败者树</h1><p>上篇文章提到的归并排序，经过两次重构已经很完善了，最终的结果是一个归并排序类<code>ExternalMergeSorter</code>，通过一个头文件引入<a href="https://github.com/bosswnx/DB2024-OSCore/blob/f3539869a89275d659d5ac654ab1523d207414d9/src/execution/external_merge_sort.h" target="_blank" rel="noopener noreferrer"><code>external_merge_sort.h</code></a>, 非常优雅地隔离了归并排序的细节，只需要给<code>sorter</code>提供记录，然后指示<code>sorter</code>开始排序，最后依次从<code>sorter</code>中取出记录，取出的记录已经是有序的了</p>]]></description>
 </item></channel>
 </rss>
