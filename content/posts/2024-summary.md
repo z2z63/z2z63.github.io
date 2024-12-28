@@ -36,7 +36,7 @@ date: 2024-12-28T18:36:45+08:00
 
 这个博客最开始建立的原因只是两年前我觉得在世界互联网上有个属于自己的网站很帅，最开始的文章只能算是学习笔记或者备忘录，这样的文章只有自己能看懂，只对自己有价值。想象一下作为读者打开这样的博客网站，看到各种不明所以的文章，就像打开了某人的笔记本——笔记本里龙飞凤舞，充斥着大量看不懂的缩写。
 
-促使我改变的契机也许是读了 [《程序员的自我修养——链接、装载和库》](https://book.douban.com/subject/3652388/) 和 [《Advanced Programming in the UNIX® Environment》](https://www.oreilly.com/library/view/advanced-programming-in/9780321638014/)，又和 @bosswnx 和 @soulter 参加了 [数据库管理系统设计赛](https://db.educg.net/#/index?TYPE=DB_S)。此后我基本按照一周一篇的更新频率写了十周
+促使我改变的契机也许是读了 [《程序员的自我修养——链接、装载和库》](https://book.douban.com/subject/3652388/) 和 [《Advanced Programming in the UNIX® Environment》](https://www.oreilly.com/library/view/advanced-programming-in/9780321638014/)，又和 [@Soulter](https://soulter.top/) 和 [@bosswnx](https://bosswnx.xyz/) 参加了 [数据库管理系统设计赛](https://db.educg.net/#/index?TYPE=DB_S)。此后我基本按照一周一篇的更新频率写了十周
 
 写博客获得了什么呢？从功利的角度来说，优秀的博客在秋招时也许能帮上忙，从非功利的角度来说，写博客督促我尽快学习更多知识、不断的思考、形成自己的观点，最后在文章中用文字思路清晰的表达出来，有些博客将这个过程称为 IO，这大概就是博客驱动学习的过程吧
 

@@ -2,9 +2,9 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://blog.z2z63.dev/posts/2024-summary/</loc><lastmod>2024-12-28T18:36:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://blog.z2z63.dev/posts/</loc><lastmod>2024-12-28T18:36:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://blog.z2z63.dev/</loc><lastmod>2024-12-28T18:36:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://blog.z2z63.dev/posts/2024-summary/</loc><lastmod>2024-12-28T22:44:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://blog.z2z63.dev/posts/</loc><lastmod>2024-12-28T22:44:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://blog.z2z63.dev/</loc><lastmod>2024-12-28T22:44:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/being-mortal/</loc><lastmod>2024-12-24T21:16:10&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/cpp_object_model_overview/</loc><lastmod>2024-12-24T21:16:10&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/since_aguast/</loc><lastmod>2024-12-09T20:08:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
@@ -14,9 +14,9 @@
             <loc>http://blog.z2z63.dev/posts/week7/</loc><lastmod>2024-08-04T18:36:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/week6/</loc><lastmod>2024-07-21T16:22:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/week5/</loc><lastmod>2024-07-20T21:22:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://blog.z2z63.dev/about/</loc><lastmod>2024-07-12T21:06:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://blog.z2z63.dev/about/</loc><lastmod>2024-12-28T22:44:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/week3/</loc><lastmod>2024-07-02T18:13:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>http://blog.z2z63.dev/links/</loc><lastmod>2024-07-01T18:37:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>http://blog.z2z63.dev/links/</loc><lastmod>2024-12-28T22:44:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/week2/</loc><lastmod>2024-07-01T18:05:06&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/week1/</loc><lastmod>2024-07-01T18:05:06&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/browser_tricks/</loc><lastmod>2024-12-08T23:51:36&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
