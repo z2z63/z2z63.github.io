@@ -107,11 +107,11 @@ enableGitInfo = true
   #   title = ""
   #   weight = 3
   [[menu.main]]
-    identifier = "friends"
+    identifier = "links"
     pre = ""
     post = ""
-    name = "Friends"
-    url = "/friends"
+    name = "Links"
+    url = "/links"
     title = ""
     weight = 2
   [[menu.main]]

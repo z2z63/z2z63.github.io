@@ -4,9 +4,18 @@
         <link>http://blog.z2z63.dev/</link>
         <description>z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Mon, 23 Dec 2024 15:42:06 &#43;0800</lastBuildDate>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 28 Dec 2024 18:36:45 &#43;0800</lastBuildDate>
             <atom:link href="http://blog.z2z63.dev/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>2024 年终总结</title>
+    <link>http://blog.z2z63.dev/posts/2024-summary/</link>
+    <pubDate>Sat, 28 Dec 2024 18:36:45 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://blog.z2z63.dev/posts/2024-summary/</guid>
+    <description><![CDATA[<p>回顾 2024 可以说越来越好了：专业水平更高了，博客也不再是托管笔记的网站了，决定了未来的去向等等。废话结束，开始正题</p>
+<h2 id="为什么不去读书呢" class="headerLink">
+    <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e5%8e%bb%e8%af%bb%e4%b9%a6%e5%91%a2" class="header-mark"></a>为什么不去读书呢</h2>]]></description>
+</item><item>
     <title>Being Mortal: 身为必有一死的凡人，我们将如何赴死</title>
     <link>http://blog.z2z63.dev/posts/being-mortal/</link>
     <pubDate>Mon, 23 Dec 2024 15:42:06 &#43;0800</pubDate><author>
@@ -76,15 +85,5 @@
         <name>z2z63</name>
     </author><guid>http://blog.z2z63.dev/posts/week5/</guid>
     <description><![CDATA[<p>git相关文章在各种技术论坛、博客都能找到不少，可以说讲git已经是烂大街的文章了，这篇文章虽然跟git有关，但我希望避开各种无聊而且每篇文章都在谈论的话题，输出一些我从各种角落中积累的知识</p>]]></description>
-</item><item>
-    <title>第三周：来拷打一下小程序</title>
-    <link>http://blog.z2z63.dev/posts/week3/</link>
-    <pubDate>Mon, 01 Jul 2024 20:54:15 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/posts/week3/</guid>
-    <description><![CDATA[<h2 id="写在前面" class="headerLink">
-    <a href="#%e5%86%99%e5%9c%a8%e5%89%8d%e9%9d%a2" class="header-mark"></a>写在前面</h2><p>博客新增了许多功能，包括作者资料，友链，样式优化，社交链接等等，其中Steam社交链接格式不正确，我给博客主题的作者提了一个
-<a href="https://github.com/HEIGE-PCloud/DoIt/pull/1311" target="_blank" rel="noopener noreferrer">pull request</a>，这是我的第一个pr，只修改了一个单词，很幸运地被merge了，
-如果你也在使用<a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer">DoIt主题</a>，那么说不定其中某行代码就是我写的😋</p>]]></description>
 </item></channel>
 </rss>

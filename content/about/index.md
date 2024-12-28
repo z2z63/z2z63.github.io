@@ -4,25 +4,23 @@ author: z2z63
 date: 2024-07-12T20:44:32+08:00
 ---
 ## About me
-无故事王国的居民，即将大四的计算机科学专业学生
-## 兴趣
-- 游戏： ACGN中的G，想成为galgame领域大神
-- 音乐： 日语流行，听音乐时长约等于敲代码时长
-- 书籍：刘慈欣的科幻小说
-- 论坛：
-    - v2ex 摸鱼常去
-    - galgame吧：业界要完~
-## Goals
-- 学习日语，希望能无障碍游玩生肉作品
-- 成为python的contributor
 
-## hates
-- 华为：什么遥遥领先
-- 知乎：你乎平均水平真是让我大开眼界
+[USTB](https://en.ustb.edu.cn/) 的计算机专业大四学生，即将进入互联网公司的准社畜  
+我的portfolio: [z2z63.dev](https://z2z63.dev/)
 
-## 开发环境
-- archlinux
-- jetbrains IDEs
-- vscode
-- terminal
-- chrome
+## 技能
+
+对什么感兴趣就会学一下，许多技术都了解但了解不多
+
+1. linux 平台的 C/C++开发  
+   主要的努力方向
+2. 前端 HTML CSS(TailwindCSS) JS(vue react next.js)  
+   配合 vercel 和 cloudflare 能快速做一个好玩的小玩意
+3. java python rust go dart(flutter) ...  
+   主要用生态强势框架
+
+技术方向比较靠近 OS，DB 之类比较 low level 的东西，虽然本科生也没啥机会做这些东西，笑
+
+## 业余
+
+看各种书(不是小说)，技术的非技术的、推 galgame (~~同好务必加我~~)
