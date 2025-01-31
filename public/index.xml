@@ -4,9 +4,17 @@
         <link>http://blog.z2z63.dev/</link>
         <description>z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 28 Dec 2024 18:36:45 &#43;0800</lastBuildDate>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Fri, 31 Jan 2025 13:44:36 &#43;0800</lastBuildDate>
             <atom:link href="http://blog.z2z63.dev/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>但愿人长久，千里共婵娟</title>
+    <link>http://blog.z2z63.dev/posts/kazoku/</link>
+    <pubDate>Fri, 31 Jan 2025 13:44:36 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://blog.z2z63.dev/posts/kazoku/</guid>
+    <description><![CDATA[<p>这篇文章的契机是看到一篇谈论家庭关系的 <a href="https://www.zhihu.com/question/494433447/answer/88785731925" target="_blank" rel="noopener noreferrer">文章</a>，随后又不禁回想起各种事，对于家庭、家人、亲密关系，我也有许多自己的观点。</p>
+<p>与之前的文章不同，这篇文章的观点可能是完全错误的，它只是我情绪化的思考，但这样的观点让我在孤独和不被理解中得到一点慰藉。</p>]]></description>
+</item><item>
     <title>2024 年终总结</title>
     <link>http://blog.z2z63.dev/posts/2024-summary/</link>
     <pubDate>Sat, 28 Dec 2024 18:36:45 &#43;0800</pubDate><author>
@@ -78,12 +86,5 @@
         <name>z2z63</name>
     </author><guid>http://blog.z2z63.dev/posts/week6/</guid>
     <description><![CDATA[<p>最近两个月也是基本一直在写C++了，尤其是实习以来，从linux的C++开发切换到windows + visual c++，这其中遇到的问题非常多，也让我不断的思考究竟怎样才是最佳实践。</p>]]></description>
-</item><item>
-    <title>第五周：CI/CD、git workflow与软件发行</title>
-    <link>http://blog.z2z63.dev/posts/week5/</link>
-    <pubDate>Sun, 14 Jul 2024 14:46:02 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/posts/week5/</guid>
-    <description><![CDATA[<p>git相关文章在各种技术论坛、博客都能找到不少，可以说讲git已经是烂大街的文章了，这篇文章虽然跟git有关，但我希望避开各种无聊而且每篇文章都在谈论的话题，输出一些我从各种角落中积累的知识</p>]]></description>
 </item></channel>
 </rss>
