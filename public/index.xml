@@ -4,9 +4,18 @@
         <link>http://blog.z2z63.dev/</link>
         <description>z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Fri, 31 Jan 2025 13:44:36 &#43;0800</lastBuildDate>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Mon, 17 Mar 2025 16:11:02 &#43;0800</lastBuildDate>
             <atom:link href="http://blog.z2z63.dev/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>二月以来的随想&#34;</title>
+    <link>http://blog.z2z63.dev/posts/thought-on-the-future/</link>
+    <pubDate>Mon, 17 Mar 2025 16:11:02 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://blog.z2z63.dev/posts/thought-on-the-future/</guid>
+    <description><![CDATA[<p>这篇文章是三月中旬的我对二月以来流经头脑的随想的总结，可以说反映了二月以来我的精神状态</p>
+<h2 id="比妄想还要妄想的妄想" class="headerLink">
+    <a href="#%e6%af%94%e5%a6%84%e6%83%b3%e8%bf%98%e8%a6%81%e5%a6%84%e6%83%b3%e7%9a%84%e5%a6%84%e6%83%b3" class="header-mark"></a>比妄想还要妄想的妄想</h2>]]></description>
+</item><item>
     <title>但愿人长久，千里共婵娟</title>
     <link>http://blog.z2z63.dev/posts/kazoku/</link>
     <pubDate>Fri, 31 Jan 2025 13:44:36 &#43;0800</pubDate><author>
@@ -79,12 +88,5 @@
         <name>z2z63</name>
     </author><guid>http://blog.z2z63.dev/posts/week7/</guid>
     <description><![CDATA[<p>解决了工具链的问题，还只能在命令行完成项目的构建。要使用IDE进行C++开发，除了工具链的知识外，还需要了解其他知识才能配置出一个好用的C++ IDE</p>]]></description>
-</item><item>
-    <title>第六周：关于C/C&#43;&#43;开发，我了解的一切 —— 编译器、构建工具</title>
-    <link>http://blog.z2z63.dev/posts/week6/</link>
-    <pubDate>Sat, 20 Jul 2024 20:59:10 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/posts/week6/</guid>
-    <description><![CDATA[<p>最近两个月也是基本一直在写C++了，尤其是实习以来，从linux的C++开发切换到windows + visual c++，这其中遇到的问题非常多，也让我不断的思考究竟怎样才是最佳实践。</p>]]></description>
 </item></channel>
 </rss>

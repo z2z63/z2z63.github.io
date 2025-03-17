@@ -42,7 +42,7 @@
     }</script></head>
 
 
-<body data-instant-intensity="viewport"><script type="text/javascript">
+<body data-instant-intensity="viewport" class="tw-flex tw-min-h-screen tw-flex-col"><script type="text/javascript">
     function setTheme(theme) {
       document.body.setAttribute('theme', theme); 
       document.documentElement.className = theme;
@@ -150,7 +150,7 @@
 </div>
 <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-</div><main class="tw-mx-4"><div class="toc print:!tw-hidden" id="toc-auto">
+</div><main class="tw-mx-4 tw-flex-1"><div class="toc print:!tw-hidden" id="toc-auto">
         <h2 class="toc-title">Contents</h2>
         <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
   <ul>
@@ -210,7 +210,7 @@
         </div>
     </dialog><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2024-08-04" data-pagefind-body>努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？</h1><div class="post-meta">
             <div class="post-meta-line">
-                <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src=https://avatars.githubusercontent.com/z2z63   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
+                <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src='https://avatars.githubusercontent.com/z2z63'   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2024-08-04">2024-08-04</time>&nbsp;<svg class="icon"
@@ -258,7 +258,6 @@
 <p>glibc提供了一个内存管理系统，在linux平台，几乎所有进程都会链接到glibc。包括解释语言，诸如shell、python。它们如果需要访问操作系统，也要链接到glibc。因此glibc是用户程序的最底层，简化用户程序与操作系统的交互</p>
 <blockquote>
   <p>如果只使用系统调用的ABI接口，就不必链接到glibc。但需要写内联汇编，而且直接使用系统调用难度高，移植性差</p>
-
 </blockquote><p>分层并不能解决所有问题，许多用户程序会在glibc提供的内存管理系统之上再实现一个自己的内存管理系统。python在编译时，可以选择是否使用python内置的内存管理系统，如果选择否，就会直接使用libc的内存管理系统。为了性能和开销、这个选项是默认打开的</p>
 <h2 id="前置知识" class="headerLink">
     <a href="#%e5%89%8d%e7%bd%ae%e7%9f%a5%e8%af%86" class="header-mark"></a>前置知识</h2><p>阅读glibc和python的源码需要不少的指针经验，还需要有从汇编角度理解C代码的能力</p>
@@ -1115,7 +1114,6 @@
 <p>与原<code>block</code>定义是等价的，<code>*(block**)b</code>也可以改写成<code>b-&gt;next</code>，这样可读性更好</p>
 <blockquote>
   <p><strong>Note:</strong> 以上改写基于一个事实：next成员的偏移为零，其地址与结构体首地址相同</p>
-
 </blockquote><p><code>block</code>记录了这一小块内存的起始地址，假设该<code>block</code>所属<code>pool</code>的大小类别为<code>16</code>，即<code>block</code>表示的一小块内存的大小为<code>16</code></p>
 <ul>
 <li><code>block</code>正在被使用时，它表示的<code>16</code>字节的内存完全交给上层使用，<code>block</code>本身不额外占据空间</li>
@@ -1332,7 +1330,6 @@
 <p><code>usedpools</code>非常巧妙地组织了正在使用的<code>pool</code>，它是分配内存时的快速通道。</p>
 <blockquote>
   <p><strong>Note:</strong> 理解<code>usedpools</code>需要画一些草稿辅助</p>
-
 </blockquote><p><code>usedpools</code>被视为一个数组，每两个<code>poolp</code>表示数组的一个元素（entry），数组的一个元素即一个链表头，链表头是一个环形双向链表的哨兵节点（哨兵节点不存储数据），数组的索引即大小类别的索引</p>
 <p>假设要分配<code>27</code>个字节，首先向上取整到<code>16</code>的倍数，即取整到<code>32</code>，<code>32</code>对应的大小类别的索引为<code>2</code>,于是访问<code>usedpools[2 + 2]</code>，得到一个<code>poolp</code>。在初始化时，<code>usedpools[2 + 2]-&gt;nextpool</code>和<code>usedpools[2 + 2]-&gt;prevpool</code>指向的值都是<code>usedpools[2 + 2]</code>的地址，即表示该环形双向链表为空；如果该大小类别已经有<code>pool</code>分配了，<code>usedpools[2 + 2]</code>表示的环形双向链表就会有两个节点（包括哨兵节点）</p>
 <p><code>usedpools</code>第一次见时，理解起来很费劲。但理解其意图后，<code>usedpools</code>的用法还是有些可读性。它去除了<code>pool_header</code>结构体中不必要的部分，可以认为是一种索引。<code>usedpools</code>的元素大小越小，cache line就能放下更多的<code>usedpools</code>元素，性能就越高</p>
@@ -1401,7 +1398,6 @@
 <p>为了缓解多线程环境下的互斥时间开销，一个进程可以有多个arena，一个arena可以有一个或多个heap（此处的heap仅仅指连续内存，不是进程的heap），一个heap有多个chunck，chunck是glibc管理内存的最小单位，返回给用户的内存首地址也是chunck的<strong>一部分</strong></p>
 <blockquote>
   <p><strong>Note:</strong> arena拥有的内存不一定不是连续的，因为只有heap才是连续的，而一个arena可以拥有多个heap</p>
-
 </blockquote><p>arena的结构如下（省略部分），bin相关介绍见下文</p>
 <div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
@@ -1618,7 +1614,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">char</span> <span class="n">pad</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span> <span class="o">*</span> <span class="n">SIZE_SZ</span> <span class="o">&amp;</span> <span class="n">MALLOC_ALIGN_MASK</span><span class="p">];</span>   <span class="c1">// 用于使后续数据对齐
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="n">heap_info</span><span class="p">;</span></span></span></code></pre>
 </div>
-<p><img class="tw-inline" loading="lazy" src=https://sourceware.org/glibc/wiki/MallocInternals?action=AttachFile&do=get&target=MallocInternals-heaps.svg     ></p>
+<p><img class="tw-inline" loading="lazy" src='https://sourceware.org/glibc/wiki/MallocInternals?action=AttachFile&do=get&target=MallocInternals-heaps.svg'     ></p>
 <h3 id="chunck" class="headerLink">
     <a href="#chunck" class="header-mark"></a>chunck</h3><p>Q：为什么<code>malloc</code>需要提供申请的内存的大小，而<code>free</code>不需要
 A：因为<code>malloc</code>返回的内存是chunck的一部分，而chunck记录了该chunck的大小</p>
@@ -2037,7 +2033,7 @@ python由于其内存分配系统的用户是CPyhton和Python C扩展的开发�
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.142.0">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><svg class="icon"
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.145.0">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg> DoIt</a>
                 </div><div class="footer-line"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 448c-110.532 0-200-89.451-200-200 0-110.531 89.451-200 200-200 110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200zm107.351-101.064c-9.614 9.712-45.53 41.396-104.065 41.396-82.43 0-140.484-61.425-140.484-141.567 0-79.152 60.275-139.401 139.762-139.401 55.531 0 88.738 26.62 97.593 34.779a11.965 11.965 0 0 1 1.936 15.322l-18.155 28.113c-3.841 5.95-11.966 7.282-17.499 2.921-8.595-6.776-31.814-22.538-61.708-22.538-48.303 0-77.916 35.33-77.916 80.082 0 41.589 26.888 83.692 78.277 83.692 32.657 0 56.843-19.039 65.726-27.225 5.27-4.857 13.596-4.039 17.82 1.738l19.865 27.17a11.947 11.947 0 0 1-1.152 15.518z"/></svg>2023 - 2025<span class="author">&nbsp;<a href="https://github.com/z2z63" target="_blank" rel="noopener noreferrer">z2z63</a></span></div>

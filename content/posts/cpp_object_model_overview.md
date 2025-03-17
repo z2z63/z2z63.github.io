@@ -85,7 +85,7 @@ class Derived: Base{
 };
 ```
 
-`Derived` 对象分为两个部分，一个是完整的 `Base` 对象，另一个时 `Derived` 的所有非静态成员。也可以说 `Derived` 对象中有 Base subobject  
+`Derived` 对象分为两个部分，一个是完整的 `Base` 对象，另一个是 `Derived` 的所有非静态成员。也可以说 `Derived` 对象中有 Base subobject  
 这两个部分如何排放，标准没有要求。但编译器往往把 `Base` 放在开头而 `Derived` 放到末尾，这样就能实现`Base* b = new Derived`派生类向上 cast 到基类时，cast 没有运行时开销
 
 ```text
@@ -256,7 +256,7 @@ C++没有提供运行时给一个类增加、删除、修改虚拟函数的方�
 
 1. `iostream` 对象中既有 `istream` subobect 也有 `ostream` subobject
 2. `istream` subobect 和 `ostream` subobject 共享一个 ios 对象，这需要虚拟继承机制
-3. `istream` 对象和 `ostream` subobject 中增加类一个指针用于指向 `ios` 基类对象，这样的设计允许他们共享一个 `ios` 对象
+3. `istream` 对象和 `ostream` subobject 中增加一个指针用于指向 `ios` 基类对象，这样的设计允许他们共享一个 `ios` 对象
 4. 棱形继承的对象构造比较复杂，而且它的复制构造函数难以正确安全的实现，标准没有给出一个可靠的方案
 5. 尽量不使用棱形继承，不了解棱形继承就不要使用棱形继承
 

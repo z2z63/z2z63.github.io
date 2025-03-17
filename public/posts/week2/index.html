@@ -44,7 +44,7 @@
     }</script></head>
 
 
-<body data-instant-intensity="viewport"><script type="text/javascript">
+<body data-instant-intensity="viewport" class="tw-flex tw-min-h-screen tw-flex-col"><script type="text/javascript">
     function setTheme(theme) {
       document.body.setAttribute('theme', theme); 
       document.documentElement.className = theme;
@@ -152,7 +152,7 @@
 </div>
 <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-</div><main class="tw-mx-4"><div class="toc print:!tw-hidden" id="toc-auto">
+</div><main class="tw-mx-4 tw-flex-1"><div class="toc print:!tw-hidden" id="toc-auto">
         <h2 class="toc-title">Contents</h2>
         <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
   <ul>
@@ -218,7 +218,7 @@
         </div>
     </dialog><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2024-06-25" data-pagefind-body>第二周：败者树、范式与反范式</h1><div class="post-meta">
             <div class="post-meta-line">
-                <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src=https://avatars.githubusercontent.com/z2z63   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
+                <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src='https://avatars.githubusercontent.com/z2z63'   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2024-06-25">2024-06-25</time>&nbsp;<svg class="icon"
@@ -277,10 +277,8 @@ mmap时： 外存中的文件 &ndash;&gt; 内核分配给进程的页</p>
 <blockquote>
   <p>Q：为什么<code>read</code>读取文件时有内核维护的缓冲区和进程维护的缓冲区？<br>
 A: 内核维护的缓冲区是对进程隐藏的，进程无法访问（在进程的地址空间中不存在），这是为了防止恶意进程破坏操作系统</p>
-
 </blockquote><blockquote>
   <p>部署数据库的服务器可能会关闭内存交换功能，此时操作系统不会将近期不使用的页换出内存</p>
-
 </blockquote><p>不过缺点也很明显，需要手动维护读写指针，而且如果设置了每次mmap的页（不是操作系统的页）的大小，还需要再实现大文件分页，包括不满一页，刚好满一页，满n页不满n+1页各种corner case，并需要给corner case写测试，非常繁琐</p>
 </li>
 <li>
@@ -747,10 +745,9 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
     <a href="#fstream%e8%87%aa%e5%8a%a8%e5%85%b3%e9%97%ad" class="header-mark"></a><code>fstream</code>自动关闭</h2><p>答案是可以不手动关闭，因为<code>fstream</code>会在析构时自动关闭。见cppreference对<code>basic_fstream</code>的析构函数的<a href="https://en.cppreference.com/w/cpp/io/basic_fstream" target="_blank" rel="noopener noreferrer">说明</a></p>
 <blockquote>
   <p>destructs the basic_fstream and the associated buffer, closes the file</p>
-
 </blockquote><p>然后来翻源码证实一下<br>
 首先看一下cppreference对<code>fstream</code>，<code>ifstream</code>，<code>ofstream</code>的说明
-<img class="tw-inline" loading="lazy" src=https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg     ><br>
+<img class="tw-inline" loading="lazy" src='https://upload.cppreference.com/mwiki/images/f/f1/std-basic_fstream-inheritance.svg'     ><br>
 <code>basic_istream</code>最终实例化为<code>ifstream</code>，<code>basic_ostream</code>最终实例化为<code>ofstream</code>，<code>basic_iostream</code>最终实例化为<code>fstream</code>，所以<code>fstream</code>相当于<code>ifstream</code>和<code>ofstream</code>的父类</p>
 <p>以<code>ofstream</code>举例，它的析构函数在glibc的头文件<code>fstream</code>中</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
@@ -1185,7 +1182,6 @@ k路归并时，每次取出k个已排序块中最小的记录，如何确定哪
 <blockquote>
   <p>libc在进程退出和<code>exit</code>时会自动将所有<code>FILE</code>缓冲区残留的数据落盘，并释放缓冲区 <br>
 linux在进程exit系统调用时会自动关闭进程未关闭的文件，并释放进程的内存</p>
-
 </blockquote><h2 id="无法自动关闭的特殊情况" class="headerLink">
     <a href="#%e6%97%a0%e6%b3%95%e8%87%aa%e5%8a%a8%e5%85%b3%e9%97%ad%e7%9a%84%e7%89%b9%e6%ae%8a%e6%83%85%e5%86%b5" class="header-mark"></a>无法自动关闭的特殊情况</h2><p><code>fstream</code>的关闭依赖于其析构函数的调用，只需要绕过析构函数即可，绕过方法其一就是<code>exit</code>函数</p>
 <p>前文提及libc的<code>exit</code>函数会关闭所有打开的<code>FILE</code>，关闭的过程包括缓冲区残留的数据落盘和释放缓冲区，但<code>exit</code>函数不会关闭<code>ofstream</code>，因为<code>ofstream</code>自己维护了一个缓冲区，而没有使用<code>FILE</code>对象的缓冲区</p>
@@ -1415,7 +1411,6 @@ linux在进程exit系统调用时会自动关闭进程未关闭的文件，并�
 <p>使用默认内存分配器申请了一块内存用于缓冲区，可以看到并没有把这块内存交给<code>FILE</code>管理</p>
 <blockquote>
   <p>libc和libc++的实现都会随着版本迭代而变化，具体实现一般都对用户隐藏，而只暴露必要的接口，libc和libc++需要保持彼此独立所以也不能使用对方的非公开API</p>
-
 </blockquote><p>至此已经能回答之前的问题，为什么<code>fstream</code>在调用<code>exit</code>后数据没有落盘？因为数据残留在<code>fstream</code>内部维护的缓冲区中，没有同步到外存，而<code>exit</code>不负责为<code>fstream</code>清理残局</p>
 <h1 id="范式与反范式" class="headerLink">
     <a href="#%e8%8c%83%e5%bc%8f%e4%b8%8e%e5%8f%8d%e8%8c%83%e5%bc%8f" class="header-mark"></a>范式与反范式</h1><h2 id="分层" class="headerLink">
@@ -1477,7 +1472,6 @@ linux在进程exit系统调用时会自动关闭进程未关闭的文件，并�
 <li>使用性能更好的B1， 提高系统整体性能</li>
 <li>使用性能低但更便宜的A1，降低系统的造价</li>
 </ol>
-
 </blockquote><h2 id="附加条件a猝发生产而b持续消费" class="headerLink">
     <a href="#%e9%99%84%e5%8a%a0%e6%9d%a1%e4%bb%b6a%e7%8c%9d%e5%8f%91%e7%94%9f%e4%ba%a7%e8%80%8cb%e6%8c%81%e7%bb%ad%e6%b6%88%e8%b4%b9" class="header-mark"></a>附加条件：A猝发生产而B持续消费</h2><p>此时使用buffer，即缓冲</p>
 <ul>
@@ -1528,7 +1522,7 @@ linux在进程exit系统调用时会自动关闭进程未关闭的文件，并�
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.142.0">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><svg class="icon"
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.145.0">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg> DoIt</a>
                 </div><div class="footer-line"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 448c-110.532 0-200-89.451-200-200 0-110.531 89.451-200 200-200 110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200zm107.351-101.064c-9.614 9.712-45.53 41.396-104.065 41.396-82.43 0-140.484-61.425-140.484-141.567 0-79.152 60.275-139.401 139.762-139.401 55.531 0 88.738 26.62 97.593 34.779a11.965 11.965 0 0 1 1.936 15.322l-18.155 28.113c-3.841 5.95-11.966 7.282-17.499 2.921-8.595-6.776-31.814-22.538-61.708-22.538-48.303 0-77.916 35.33-77.916 80.082 0 41.589 26.888 83.692 78.277 83.692 32.657 0 56.843-19.039 65.726-27.225 5.27-4.857 13.596-4.039 17.82 1.738l19.865 27.17a11.947 11.947 0 0 1-1.152 15.518z"/></svg>2023 - 2025<span class="author">&nbsp;<a href="https://github.com/z2z63" target="_blank" rel="noopener noreferrer">z2z63</a></span></div>

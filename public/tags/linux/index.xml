@@ -90,7 +90,7 @@ Outline格式有以下几种格式</p>]]></description>
 <li>想找某个文件，但是完全不知道它在哪里，需要全局搜索</li>
 <li>在一个项目中想要搜索一个特定字符串的出现</li>
 </ol>
-<h3 id="需求1-根据文件名搜索路径--find" class="headerLink">
-    <a href="#%e9%9c%80%e6%b1%821-%e6%a0%b9%e6%8d%ae%e6%96%87%e4%bb%b6%e5%90%8d%e6%90%9c%e7%b4%a2%e8%b7%af%e5%be%84--find" class="header-mark"></a>需求1: 根据文件名搜索路径&ndash;<code>find</code></h3><p>可以使用find命令，它是linux大多数发行版都自带的命令</p>]]></description>
+<h3 id="需求1-根据文件名搜索路径find" class="headerLink">
+    <a href="#%e9%9c%80%e6%b1%821-%e6%a0%b9%e6%8d%ae%e6%96%87%e4%bb%b6%e5%90%8d%e6%90%9c%e7%b4%a2%e8%b7%af%e5%be%84find" class="header-mark"></a>需求1: 根据文件名搜索路径&ndash;<code>find</code></h3><p>可以使用find命令，它是linux大多数发行版都自带的命令</p>]]></description>
 </item></channel>
 </rss>

@@ -46,7 +46,7 @@
     }</script></head>
 
 
-<body data-instant-intensity="viewport"><script type="text/javascript">
+<body data-instant-intensity="viewport" class="tw-flex tw-min-h-screen tw-flex-col"><script type="text/javascript">
     function setTheme(theme) {
       document.body.setAttribute('theme', theme); 
       document.documentElement.className = theme;
@@ -154,7 +154,7 @@
 </div>
 <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-</div><main class="tw-mx-4"><div class="toc print:!tw-hidden" id="toc-auto">
+</div><main class="tw-mx-4 tw-flex-1"><div class="toc print:!tw-hidden" id="toc-auto">
         <h2 class="toc-title">Contents</h2>
         <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
   <ul>
@@ -214,7 +214,7 @@
         </div>
     </dialog><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2024-11-10" data-pagefind-body>OceanBase 数据库大赛初赛结束之后</h1><div class="post-meta">
             <div class="post-meta-line">
-                <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src=https://avatars.githubusercontent.com/z2z63   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
+                <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src='https://avatars.githubusercontent.com/z2z63'   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2024-11-10">2024-11-10</time>&nbsp;<svg class="icon"
@@ -405,16 +405,16 @@ VSCode 使用 clang-tidy 需要使用 clangd 扩展，并调整一些设置。�
 <p>不得不说 C++ 的未定义行为挺多的，以下是我在比赛中遇到的</p>
 <ul>
 <li>使用未对齐的指针，<a href="https://stackoverflow.com/questions/51203570/is-it-well-defined-to-hold-a-misaligned-pointer-as-long-as-you-dont-ever-deref" target="_blank" rel="noopener noreferrer">其行为未定义</a><br>
-<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/20241110183949.png   alt="unaligned pointer"  >
+<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/20241110183949.png'   alt="unaligned pointer"  >
 解决办法：使用<code>memcpy</code>逐字节复制到对齐的地址上</li>
 <li>singular iterator 与其他 iterator 比较，<a href="https://stackoverflow.com/questions/49059404/is-comparing-against-singular-iterator-illegal" target="_blank" rel="noopener noreferrer">其行为未定义</a><br>
-<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411101846897.png   alt="singular iterator"  >
+<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/202411101846897.png'   alt="singular iterator"  >
 解决办法：singular iterator即不跟任何容器关联的迭代器，一般是因为容器改变后迭代器失效，注意更新迭代器即可</li>
 <li>移位运算符右边是负数，<a href="https://stackoverflow.com/questions/8415895/is-left-and-right-shifting-negative-integers-defined-behavior" target="_blank" rel="noopener noreferrer">其行为未定义</a><br>
-<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411101848026.png   alt="delete pointer"  ></li>
+<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/202411101848026.png'   alt="delete pointer"  ></li>
 <li>使用<code>delete</code>运算符删除<code>new[]</code>运算符获取的指针，<a href="https://en.cppreference.com/w/cpp/memory/new/operator_delete" target="_blank" rel="noopener noreferrer">其行为未定义</a>，反之亦然</li>
 <li><code>memcpy</code>的指针参数是非法指针或空指针时，<a href="https://en.cppreference.com/w/cpp/string/byte/memcpy" target="_blank" rel="noopener noreferrer">其行为未定义</a>，即使复制长度为零<br>
-<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411101909458.png   alt="memcpy null pointer"  >
+<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/202411101909458.png'   alt="memcpy null pointer"  >
 解决办法：单独处理这种情况，此时不复制</li>
 </ul>
 <p>很幸运 UB sanitizer 和 libstdc++ debug mode 都帮忙检查出来了</p>
@@ -426,10 +426,10 @@ VSCode 使用 clang-tidy 需要使用 clangd 扩展，并调整一些设置。�
     <a href="#%e6%88%91%e5%af%b9-ub-%e7%9a%84%e7%9c%8b%e6%b3%95" class="header-mark"></a>我对 UB 的看法</h4><p>既然有 undefined behavior，就一定有 well defined behavior，UB 存在的意义就是形成 C++ 这个语言的良定义子集。实际上，C++标准没有规定平台的大小端，没有规定一个字节有多少个比特，也没有规定指针类型有多少个字节，也没有规定<code>char</code>有没有符号。但这不妨碍我们使用 C++ 的良定义子集解决问题。还可以认为标准定义 UB 是将执行一些操作的自由从开发者手中剥夺并交给编译器厂商，编译器厂商就不必对良定义子集以外的任何行为做出保证，并且还能在这片标准为他们提供的“自由空间”内任意发挥</p>
 <p>例如 C++ 并没有规定函数调用约定，而是交给编译器厂商和硬件平台自己决定，这是因为不同传参方式在不同平台的性能不同，甚至某些传参方式在某些平台是不支持的，标准没必要对此做出任何限制。我在实习时见到的一个例子就是由于x64+windows+msvc和arm64+macos+clang两个平台的传参顺序不同，导致一个函数调用表达式在 macos 能按预期运行，在 windows 就报错</p>
 <p>又例如由于编译器不必对 UB 做出任何保证，所以编译器优化只需保证在良定义子集内的行为产生的结果在优化前后保持相同即可，也就是说编译器可以根据优化的需要任意改变 UB 产生的结果。以我在初赛中遇到的情况为例，关闭优化时产生段错误，开启O2 优化时产生空指针的成员访问
-<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411102008791.png   alt="null reference"  >
+<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/202411102008791.png'   alt="null reference"  >
 众所周知引用不能为空，但这里的确产生了一个空的引用并导致了错误<br>
 原因是因为传入这个引用的地方是空指针解引用
-<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411102014727.png   alt="null pointer dereference"  >
+<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/202411102014727.png'   alt="null pointer dereference"  >
 提到空指针解引用，我的第一想法就是段错误、非法内存访问等，但实际上，空指针解引用也<a href="https://stackoverflow.com/questions/2727834/c-standard-dereferencing-null-pointer-to-get-a-reference" target="_blank" rel="noopener noreferrer">是未定义行为</a></p>
 <p>对于引用，标准规定引用必须初始化成一个合法对象或者函数的引用，因此在良定义的程序中空引用不可能存在。而保证「引用必须初始化成一个合法对象或者函数的引用」的工作就由编译器来完成，例如，当开发者尝试初始化一个空引用时，编译器应该拒绝编译。
 因此在这个场景下，编译器应当保证不会出现空引用，又由于传入引用的地方是一个指针解引用，而空指针解引用是未定义行为，编译器不必保证空指针解引用时的行为，因此只需保证在不出现空指针解引用时不会出现空引用，因此编译器在开启 O2优化时就能将解引用优化掉并遵守空引用的承诺</p>
@@ -444,10 +444,10 @@ VSCode 使用 clang-tidy 需要使用 clangd 扩展，并调整一些设置。�
     <a href="#update" class="header-mark"></a>update</h3><p>从原理上来说，数据库将磁盘物理快读入内存形成缓冲块，任何读取或修改行为都发生在缓冲块上，再注意以下索引更新即可</p>
 <h3 id="null" class="headerLink">
     <a href="#null" class="header-mark"></a>null</h3><p>翻开 DataBase System Concepts 的数据存储结构章节，里面给出了一个存储 null 值一个非常经典的实现，即在记录内存一个bitmap，其中每个比特标记字段是否为 null
-<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411102116441.png   alt="null bitmap"  ></p>
+<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/202411102116441.png'   alt="null bitmap"  ></p>
 <h3 id="text" class="headerLink">
     <a href="#text" class="header-mark"></a>text</h3><p>翻开 DataBase System Concepts 的数据存储结构章节，里面提及了一个非常重要的原则：<strong>一条记录不能横跨两页</strong>，而 text 字段支持的大小可以超过一页，为了避免这个问题，可以参考程序设计中常见的方法，把变长转化为定长，也就是 text 的数据在外部单独存储，而记录内只存储指向这个记录的指针
-<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411102120748.png   alt="no record span two page"  ></p>
+<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/202411102120748.png'   alt="no record span two page"  ></p>
 <h3 id="vector" class="headerLink">
     <a href="#vector" class="header-mark"></a>vector</h3><p>高维向量的大小可以超过页的大小，所以存储方式类似于 text，也是外部存储数据。向量的索引查询需要通过 10min 的 benchmark 测试，我主要想法在于提高向量查询的性能，以下内容展开说明如何提高性能</p>
 <h2 id="提高-sql-执行的性能" class="headerLink">
@@ -456,16 +456,16 @@ VSCode 使用 clang-tidy 需要使用 clangd 扩展，并调整一些设置。�
 也许读者早就清楚应该使用缓冲，但我这里想清晰明确的指出为什么需要缓冲，还有为什么数据库都使用了相似的设计：分块缓冲</p>
 <h4 id="为什么需要缓冲" class="headerLink">
     <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81%e7%bc%93%e5%86%b2" class="header-mark"></a>为什么需要缓冲</h4><p>翻开 Database System Concepts 的数据存储结构章节
-<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411102134930.png   alt="database storage"  >
+<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/202411102134930.png'   alt="database storage"  >
 这里指出了冯诺依曼架构下数据库的最基本的矛盾：数据库需要持久化，因此将数据存储到非易失存储介质，但 CPU 只能读取内存中的数据，所以读取任何记录都必须先将记录加载到内存，而记录加载到内存后形成的结构，就可以称为缓冲<br>
 我希望破除一个固有观点，就是认为只有申请了多少 KB 的内存，然后里面存放了记录，这样才能被称之为缓冲。实际上如果只需要一个读取一个 int 字段，在栈上开辟一个 int 变量（声明函数内的自动变量），然后将数据从磁盘读取到这个变量，也是缓冲。可以认为前者是缓冲的形式而后者是缓冲的本质</p>
 <h4 id="为什么要分块缓冲" class="headerLink">
     <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e5%88%86%e5%9d%97%e7%bc%93%e5%86%b2" class="header-mark"></a>为什么要分块缓冲</h4><h5 id="存储设备按块读写" class="headerLink">
     <a href="#%e5%ad%98%e5%82%a8%e8%ae%be%e5%a4%87%e6%8c%89%e5%9d%97%e8%af%bb%e5%86%99" class="header-mark"></a>存储设备按块读写</h5><p>翻开 Database System Concepts 的物理存储系统章节，里面提及了闪存、磁盘、光盘、磁带等非易失存储介质，由于价格、容量、速度、通用性等考量，数据库常常使用闪存或磁盘作为存储介质</p>
 <p>对于磁盘，磁盘表面划分为磁道，磁道进一步划分为扇区，而扇区是磁盘读写的最小单元
-<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411111404356.png   alt="magnetic disk"  ></p>
+<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/202411111404356.png'   alt="magnetic disk"  ></p>
 <p>对于闪存，常用的 NAND 闪存的读写单元也是一个闪存物理快
-<img class="tw-inline" loading="lazy" src=https://raw.githubusercontent.com/z2z63/image/main/202411111403825.png   alt="flash memory"  ></p>
+<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/202411111403825.png'   alt="flash memory"  ></p>
 <p>从 IO 设备划分的角度，常见的非易失存储介质都是块设备，这意味着他们执行一次数据传输的单元是一块数据，而不是一个字符</p>
 <p>如果需要读取的数据小于一个存储设备的物理快，实际上硬件仍然会执行整个物理快的读写，即使多读取的数据可能不需要；如果需要写入的数据小于一个物理快，需要先读取需要更新的物理块到内存，完成局部更新后，将更新后的物理快写回存储设备（这一过程也有可能由存储硬件完成）</p>
 <h5 id="按块读写速度最快" class="headerLink">
@@ -534,7 +534,7 @@ VSCode 使用 clang-tidy 需要使用 clangd 扩展，并调整一些设置。�
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.142.0">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.0"><svg class="icon"
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.145.0">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg> DoIt</a>
                 </div><div class="footer-line"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 448c-110.532 0-200-89.451-200-200 0-110.531 89.451-200 200-200 110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200zm107.351-101.064c-9.614 9.712-45.53 41.396-104.065 41.396-82.43 0-140.484-61.425-140.484-141.567 0-79.152 60.275-139.401 139.762-139.401 55.531 0 88.738 26.62 97.593 34.779a11.965 11.965 0 0 1 1.936 15.322l-18.155 28.113c-3.841 5.95-11.966 7.282-17.499 2.921-8.595-6.776-31.814-22.538-61.708-22.538-48.303 0-77.916 35.33-77.916 80.082 0 41.589 26.888 83.692 78.277 83.692 32.657 0 56.843-19.039 65.726-27.225 5.27-4.857 13.596-4.039 17.82 1.738l19.865 27.17a11.947 11.947 0 0 1-1.152 15.518z"/></svg>2023 - 2025<span class="author">&nbsp;<a href="https://github.com/z2z63" target="_blank" rel="noopener noreferrer">z2z63</a></span></div>
