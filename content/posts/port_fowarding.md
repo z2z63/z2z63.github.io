@@ -18,7 +18,7 @@ date: 2025-05-17T14:20:07+08:00
 这条命令可以实现 服务器使用 PC 的 clash 科学上网
 
 ```shell
-ssh -R server:8888:localhost:7890 -R server:5037:localhost:5037  user@server
+ssh -R server:8888:localhost:7890 user@server
 # 登录之后
 export ALL_PROXY="http://localhost:8888"
 ```
