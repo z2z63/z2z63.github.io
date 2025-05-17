@@ -29,7 +29,7 @@ export ALL_PROXY="http://localhost:8888"
 
 许多软件都应用了 server-client 架构，例如 docker, adb, systemd, ssh 等等。archlinux wiki 将 daemon 描述为 any program that runs as a "background" process (without a terminal or user interface), commonly waiting for events to occur and offering services。简单来说就是 daemoon 没有 contorl terminal，大部分时间都在等待某个文件描述符产生事件。为什么要使用 server-client 的架构呢？我认为最直接的原因就是 server 的生命期与 client 的生命期不一样。例如 `docker`命令作为一个 cli，生命期结束于`docker`命令执行完毕进程退出，显然 dockerd 的生命期远大于`docker`的生命期。又例如 adb 在第一次执行时，会自动启动 adbd，我不了解 adb 的诸多细节，但大致原因也许就是 adbd 负责维护 PC 和 android 设备的连接，否则每次执行 adb 命令都要重新建立连接，这显然是不可接受的。
 
-软件被分为 server 和 client 后，往往通过端口或者 unix socket 通信，其中通过端口通信是跨平台最友好的。因此许多 server-client 架构的软件都可以使用端口转发实现一些神奇的效果
+软件被分为 server 和 client 后，往往通过网络或者 unix socket 通信，其中通过网络通信是跨平台最友好的。因此许多 server-client 架构的软件都可以使用端口转发实现一些神奇的效果
 
 ### 科学上网与魔法上网
 
@@ -80,7 +80,7 @@ adb 也是 server-client 的架构。adb 在第一次启动时会自动启动 ad
 使用这样的方法，我不再需要接入显示器和键鼠，接线少了一半，工作流程变得非常流畅。指导毕设的学长评价说“我真是每天被线缠着，苦大仇深啊。”
 
 那么 adb 端口转发有什么神奇的地方吗？在我看来就是 adb 连接提供了一个供 TCP 流量通行的隧道，而 adb 连接往下就是 USB 协议栈，仔细考虑一下就会觉得很神奇，TCP 流量跑在 USB 数据线里了，这也许就是计算机网络分层的魅力吧  
-一定需要 adb 端口转发吗？其实也不一定，因为校园网有 ap 隔离，导致我的手机、mac、笔记本电脑、android 开发板即使连接了校园网也无法相互通信，这在很长一段时间内都给我造成了麻烦。而用手机开热点一来无法固定 ip 二来手机拿远了就会断开。设想一下校园网没有 AP 隔离，我也许直接使用 android 开发板的 ip + vnc 端口就能访问远程桌面了。
+一定需要 adb 端口转发吗？其实也不一定，因为校园网有 AP 隔离，导致我的手机、mac、笔记本电脑、android 开发板即使连接了校园网也无法相互通信，这在很长一段时间内都给我造成了麻烦。而用手机开热点一来无法固定 ip 二来手机拿远了就会断开。设想一下校园网没有 AP 隔离，我也许直接使用 android 开发板的 ip + vnc 端口就能访问远程桌面了。
 
 不管怎么说，这个方案是目前我非常满意的方式，不需要记住任何 ip，每次插上数据线执行`adb forward`命令就能访问 android 桌面。在搞硬件的看来已经是非常方便了。
 

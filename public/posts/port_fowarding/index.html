@@ -13,7 +13,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2025-05-17T14:20:07+08:00">
-    <meta property="article:modified_time" content="2025-05-17T16:42:33+08:00">
+    <meta property="article:modified_time" content="2025-05-17T16:54:02+08:00">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="端口转发的妙用">
@@ -34,7 +34,7 @@
             "@type": "WebPage",
             "@id": "http://blog.z2z63.dev/posts/port_fowarding/"
         },"genre": "posts","wordcount":  3186 ,
-        "url": "http://blog.z2z63.dev/posts/port_fowarding/","datePublished": "2025-05-17T14:20:07+08:00","dateModified": "2025-05-17T16:42:33+08:00","publisher": {
+        "url": "http://blog.z2z63.dev/posts/port_fowarding/","datePublished": "2025-05-17T14:20:07+08:00","dateModified": "2025-05-17T16:54:02+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
                 "@type": "Person",
@@ -332,7 +332,7 @@
 <h2 id="原理解释篇" class="headerLink">
     <a href="#%e5%8e%9f%e7%90%86%e8%a7%a3%e9%87%8a%e7%af%87" class="header-mark"></a>原理解释篇</h2><h3 id="server-client-软件架构" class="headerLink">
     <a href="#server-client-%e8%bd%af%e4%bb%b6%e6%9e%b6%e6%9e%84" class="header-mark"></a>server-client 软件架构</h3><p>许多软件都应用了 server-client 架构，例如 docker, adb, systemd, ssh 等等。archlinux wiki 将 daemon 描述为 any program that runs as a &ldquo;background&rdquo; process (without a terminal or user interface), commonly waiting for events to occur and offering services。简单来说就是 daemoon 没有 contorl terminal，大部分时间都在等待某个文件描述符产生事件。为什么要使用 server-client 的架构呢？我认为最直接的原因就是 server 的生命期与 client 的生命期不一样。例如 <code>docker</code>命令作为一个 cli，生命期结束于<code>docker</code>命令执行完毕进程退出，显然 dockerd 的生命期远大于<code>docker</code>的生命期。又例如 adb 在第一次执行时，会自动启动 adbd，我不了解 adb 的诸多细节，但大致原因也许就是 adbd 负责维护 PC 和 android 设备的连接，否则每次执行 adb 命令都要重新建立连接，这显然是不可接受的。</p>
-<p>软件被分为 server 和 client 后，往往通过端口或者 unix socket 通信，其中通过端口通信是跨平台最友好的。因此许多 server-client 架构的软件都可以使用端口转发实现一些神奇的效果</p>
+<p>软件被分为 server 和 client 后，往往通过网络或者 unix socket 通信，其中通过网络通信是跨平台最友好的。因此许多 server-client 架构的软件都可以使用端口转发实现一些神奇的效果</p>
 <h3 id="科学上网与魔法上网" class="headerLink">
     <a href="#%e7%a7%91%e5%ad%a6%e4%b8%8a%e7%bd%91%e4%b8%8e%e9%ad%94%e6%b3%95%e4%b8%8a%e7%bd%91" class="header-mark"></a>科学上网与魔法上网</h3><p>所谓魔法上网只是我随意编的词，从我学会科学上网后很长一段时间，我从来没有考虑过科学上网的原理是怎样的。clash 可以说是我使用时间最长的一个软件，几年来我也从来没有考虑过这个软件的原理是怎样的，所谓魔法上网是我对自己的调侃：不去了解背后的原理，出了问题不知道怎么解决，并将其归为玄学、魔法。</p>
 <p>所谓科学上网或者魔法上网，本质是代理，能工作的最关键的原因是至今为止防火墙是以黑名单的方式工作的，也就是说仍有许多 ip 地址是防火墙未知并且不会拦截的，于是我们就能通过代理的方式利用尚未被屏蔽的服务器去访问已经被屏蔽的服务器。当然，如果哪天防火墙切换到了白名单模式，任何通过代理绕过防火墙的方法也会失效。</p>
@@ -366,7 +366,7 @@ macos 的 finder 自带了 vnc viewer，无需额外安装 vnc viewer</li>
 </ol>
 <p>使用这样的方法，我不再需要接入显示器和键鼠，接线少了一半，工作流程变得非常流畅。指导毕设的学长评价说“我真是每天被线缠着，苦大仇深啊。”</p>
 <p>那么 adb 端口转发有什么神奇的地方吗？在我看来就是 adb 连接提供了一个供 TCP 流量通行的隧道，而 adb 连接往下就是 USB 协议栈，仔细考虑一下就会觉得很神奇，TCP 流量跑在 USB 数据线里了，这也许就是计算机网络分层的魅力吧<br>
-一定需要 adb 端口转发吗？其实也不一定，因为校园网有 ap 隔离，导致我的手机、mac、笔记本电脑、android 开发板即使连接了校园网也无法相互通信，这在很长一段时间内都给我造成了麻烦。而用手机开热点一来无法固定 ip 二来手机拿远了就会断开。设想一下校园网没有 AP 隔离，我也许直接使用 android 开发板的 ip + vnc 端口就能访问远程桌面了。</p>
+一定需要 adb 端口转发吗？其实也不一定，因为校园网有 AP 隔离，导致我的手机、mac、笔记本电脑、android 开发板即使连接了校园网也无法相互通信，这在很长一段时间内都给我造成了麻烦。而用手机开热点一来无法固定 ip 二来手机拿远了就会断开。设想一下校园网没有 AP 隔离，我也许直接使用 android 开发板的 ip + vnc 端口就能访问远程桌面了。</p>
 <p>不管怎么说，这个方案是目前我非常满意的方式，不需要记住任何 ip，每次插上数据线执行<code>adb forward</code>命令就能访问 android 桌面。在搞硬件的看来已经是非常方便了。</p>
 <h2 id="总结" class="headerLink">
     <a href="#%e6%80%bb%e7%bb%93" class="header-mark"></a>总结</h2><p>去研究日常工作中使用次数最多的软件，花费时间与精力探索如何善用工具优化工作流程，是一个绝对值得的投资</p>
@@ -378,9 +378,9 @@ macos 的 finder 自带了 vnc viewer，无需额外安装 vnc viewer</li>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2025-05-17&nbsp;<a class="git-hash" href="https://github.com/z2z63/z2z63.github.io/commit/f08a1e34b8174a2a7485d8cc03dec1bd91a44f3f" target="_blank" title="commit by z2z63(vituralfuture@gmail.com) f08a1e34b8174a2a7485d8cc03dec1bd91a44f3f: update" rel="noopener noreferrer">
+                <span>Updated on 2025-05-17&nbsp;<a class="git-hash" href="https://github.com/z2z63/z2z63.github.io/commit/38e27ca413241b26363061213824d8e38cebc338" target="_blank" title="commit by z2z63(vituralfuture@gmail.com) 38e27ca413241b26363061213824d8e38cebc338: update" rel="noopener noreferrer">
                                     <svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M440.667 182.109l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l14.623-81.891C377.123 38.754 371.468 32 363.997 32h-40.632a12 12 0 0 0-11.813 9.891L296.175 128H197.54l14.623-81.891C213.477 38.754 207.822 32 200.35 32h-40.632a12 12 0 0 0-11.813 9.891L132.528 128H53.432a12 12 0 0 0-11.813 9.891l-7.143 40C33.163 185.246 38.818 192 46.289 192h74.81L98.242 320H19.146a12 12 0 0 0-11.813 9.891l-7.143 40C-1.123 377.246 4.532 384 12.003 384h74.81L72.19 465.891C70.877 473.246 76.532 480 84.003 480h40.632a12 12 0 0 0 11.813-9.891L151.826 384h98.634l-14.623 81.891C234.523 473.246 240.178 480 247.65 480h40.632a12 12 0 0 0 11.813-9.891L315.472 384h79.096a12 12 0 0 0 11.813-9.891l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l22.857-128h79.096a12 12 0 0 0 11.813-9.891zM261.889 320h-98.634l22.857-128h98.634l-22.857 128z"/></svg>f08a1e3</a></span>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M440.667 182.109l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l14.623-81.891C377.123 38.754 371.468 32 363.997 32h-40.632a12 12 0 0 0-11.813 9.891L296.175 128H197.54l14.623-81.891C213.477 38.754 207.822 32 200.35 32h-40.632a12 12 0 0 0-11.813 9.891L132.528 128H53.432a12 12 0 0 0-11.813 9.891l-7.143 40C33.163 185.246 38.818 192 46.289 192h74.81L98.242 320H19.146a12 12 0 0 0-11.813 9.891l-7.143 40C-1.123 377.246 4.532 384 12.003 384h74.81L72.19 465.891C70.877 473.246 76.532 480 84.003 480h40.632a12 12 0 0 0 11.813-9.891L151.826 384h98.634l-14.623 81.891C234.523 473.246 240.178 480 247.65 480h40.632a12 12 0 0 0 11.813-9.891L315.472 384h79.096a12 12 0 0 0 11.813-9.891l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l22.857-128h79.096a12 12 0 0 0 11.813-9.891zM261.889 320h-98.634l22.857-128h98.634l-22.857 128z"/></svg>38e27ca</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
