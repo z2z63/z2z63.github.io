@@ -1,15 +1,21 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Docker - Tag - z2z63/Virtualfuture&#39;s Blog</title>
-        <link>http://blog.z2z63.dev/tags/docker/</link>
-        <description>Docker - Tag - z2z63/Virtualfuture&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</lastBuildDate><atom:link href="http://blog.z2z63.dev/tags/docker/" rel="self" type="application/rss+xml" /><item>
-    <title>docker 使用方法</title>
-    <link>http://blog.z2z63.dev/posts/docker-tutorial/</link>
-    <pubDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/posts/docker-tutorial/</guid>
-    <description><![CDATA[<p>这篇文章是完成docker的get started guide后的总结，见<a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener noreferrer">https://docs.docker.com/get-started/</a></p>]]></description>
-</item></channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on z2z63/Virtualfuture&#39;s Blog</title>
+    <link>http://blog.z2z63.dev/tags/docker/</link>
+    <description>Recent content in Docker on z2z63/Virtualfuture&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
+    <webMaster>virtualfuture@gmail.com (z2z63)</webMaster>
+    <lastBuildDate>Fri, 26 Jan 2024 00:24:11 +0800</lastBuildDate>
+    <atom:link href="http://blog.z2z63.dev/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>docker 使用方法</title>
+      <link>http://blog.z2z63.dev/posts/docker-tutorial/</link>
+      <pubDate>Sat, 16 Dec 2023 18:21:19 +0000</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/posts/docker-tutorial/</guid>
+      <description>&lt;p&gt;这篇文章是完成docker的get started guide后的总结，见&lt;a href=&#34;https://docs.docker.com/get-started/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://docs.docker.com/get-started/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

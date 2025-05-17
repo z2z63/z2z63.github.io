@@ -1,78 +1,105 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Tags - Tag - z2z63/Virtualfuture&#39;s Blog</title>
-        <link>http://blog.z2z63.dev/tags/</link>
-        <description>Tags - Tag - z2z63/Virtualfuture&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</lastBuildDate><atom:link href="http://blog.z2z63.dev/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>C/C&#43;&#43;</title>
-    <link>http://blog.z2z63.dev/tags/c/c&#43;&#43;/</link>
-    <pubDate>Thu, 21 Dec 2023 18:27:09 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/tags/c/c&#43;&#43;/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Docker</title>
-    <link>http://blog.z2z63.dev/tags/docker/</link>
-    <pubDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/tags/docker/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Linux</title>
-    <link>http://blog.z2z63.dev/tags/linux/</link>
-    <pubDate>Sat, 16 Dec 2023 18:21:19 &#43;0000</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/tags/linux/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Java</title>
-    <link>http://blog.z2z63.dev/tags/java/</link>
-    <pubDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/tags/java/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Jetbrains IDE</title>
-    <link>http://blog.z2z63.dev/tags/jetbrains-ide/</link>
-    <pubDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/tags/jetbrains-ide/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Font</title>
-    <link>http://blog.z2z63.dev/tags/font/</link>
-    <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/tags/font/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Linux Desktop</title>
-    <link>http://blog.z2z63.dev/tags/linux-desktop/</link>
-    <pubDate>Mon, 18 Sep 2023 12:17:41 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/tags/linux-desktop/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Mechine Learning</title>
-    <link>http://blog.z2z63.dev/tags/mechine-learning/</link>
-    <pubDate>Fri, 04 Aug 2023 15:26:51 &#43;0000</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/tags/mechine-learning/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>JS</title>
-    <link>http://blog.z2z63.dev/tags/js/</link>
-    <pubDate>Sun, 16 Jul 2023 00:18:01 &#43;0000</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/tags/js/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>科学计算</title>
-    <link>http://blog.z2z63.dev/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
-    <pubDate>Fri, 26 May 2023 15:51:48 &#43;0000</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</guid>
-    <description><![CDATA[]]></description>
-</item></channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on z2z63/Virtualfuture&#39;s Blog</title>
+    <link>http://blog.z2z63.dev/tags/</link>
+    <description>Recent content in Tags on z2z63/Virtualfuture&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
+    <webMaster>virtualfuture@gmail.com (z2z63)</webMaster>
+    <lastBuildDate>Sat, 20 Jul 2024 20:58:06 +0800</lastBuildDate>
+    <atom:link href="http://blog.z2z63.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C/C&#43;&#43;</title>
+      <link>http://blog.z2z63.dev/tags/c/c&#43;&#43;/</link>
+      <pubDate>Thu, 21 Dec 2023 18:27:09 +0800</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/c/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>http://blog.z2z63.dev/tags/docker/</link>
+      <pubDate>Sat, 16 Dec 2023 18:21:19 +0000</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>http://blog.z2z63.dev/tags/linux/</link>
+      <pubDate>Sat, 16 Dec 2023 18:21:19 +0000</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>http://blog.z2z63.dev/tags/java/</link>
+      <pubDate>Wed, 20 Sep 2023 15:29:39 +0800</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Jetbrains IDE</title>
+      <link>http://blog.z2z63.dev/tags/jetbrains-ide/</link>
+      <pubDate>Wed, 20 Sep 2023 15:29:39 +0800</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/jetbrains-ide/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Font</title>
+      <link>http://blog.z2z63.dev/tags/font/</link>
+      <pubDate>Mon, 18 Sep 2023 12:17:41 +0800</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/font/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux Desktop</title>
+      <link>http://blog.z2z63.dev/tags/linux-desktop/</link>
+      <pubDate>Mon, 18 Sep 2023 12:17:41 +0800</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/linux-desktop/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mechine Learning</title>
+      <link>http://blog.z2z63.dev/tags/mechine-learning/</link>
+      <pubDate>Fri, 04 Aug 2023 15:26:51 +0000</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/mechine-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JS</title>
+      <link>http://blog.z2z63.dev/tags/js/</link>
+      <pubDate>Sun, 16 Jul 2023 00:18:01 +0000</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/js/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>科学计算</title>
+      <link>http://blog.z2z63.dev/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
+      <pubDate>Fri, 26 May 2023 15:51:48 +0000</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Shell</title>
+      <link>http://blog.z2z63.dev/tags/shell/</link>
+      <pubDate>Thu, 13 Apr 2023 12:29:06 +0000</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/shell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Assemble</title>
+      <link>http://blog.z2z63.dev/tags/assemble/</link>
+      <pubDate>Thu, 06 Apr 2023 00:09:32 +0000</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/assemble/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Coding</title>
+      <link>http://blog.z2z63.dev/tags/coding/</link>
+      <pubDate>Thu, 06 Apr 2023 00:09:32 +0000</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/tags/coding/</guid>
+      <description></description>
+    </item>
+  </channel>
 </rss>

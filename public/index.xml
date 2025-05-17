@@ -4,9 +4,22 @@
         <link>http://blog.z2z63.dev/</link>
         <description>z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Mon, 17 Mar 2025 16:11:02 &#43;0800</lastBuildDate>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 17 May 2025 14:20:07 &#43;0800</lastBuildDate>
             <atom:link href="http://blog.z2z63.dev/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>端口转发的妙用</title>
+    <link>http://blog.z2z63.dev/posts/port_fowarding/</link>
+    <pubDate>Sat, 17 May 2025 14:20:07 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://blog.z2z63.dev/posts/port_fowarding/</guid>
+    <description><![CDATA[<p>最近在做毕设过程中遇到很多不方便的地方，突然想到使用端口转发去优化工作流程，于是写一篇文章介绍并总结端口转发的种种妙用</p>
+<h2 id="用途展示" class="headerLink">
+    <a href="#%e7%94%a8%e9%80%94%e5%b1%95%e7%a4%ba" class="header-mark"></a>用途展示</h2><ol>
+<li>服务器无需安装 clash，使用 PC 上的 clash 实现服务器上科学上网</li>
+<li>服务器上执行 adb 命令操纵 连接到 PC 的 android 设备</li>
+<li>无屏幕无键鼠的 android 开发板无需接入屏幕键鼠，只通过一根数据线就能访问桌面并调试</li>
+</ol>]]></description>
+</item><item>
     <title>二月以来的随想</title>
     <link>http://blog.z2z63.dev/posts/thought-on-the-future/</link>
     <pubDate>Mon, 17 Mar 2025 16:11:02 &#43;0800</pubDate><author>
@@ -81,12 +94,5 @@
         <name>z2z63</name>
     </author><guid>http://blog.z2z63.dev/posts/week8/</guid>
     <description><![CDATA[<p>实习期间摸了不少的鱼，通勤路上在看各种文档，在公司摸鱼时就在看glibc或cpython的源码，花了不少时间总算是理解了部分。所谓内存管理系统充斥着各种指针运算，抽象程度非常高，这篇文章我希望是定性的去描述内存分配系统，因为源码总是枯燥又无聊的，如果不是它出现了问题，我想大部分人都不会去看源码吧</p>]]></description>
-</item><item>
-    <title>第七周：关于C/C&#43;&#43;开发，我了解的一切 —— LSP、debugger与IDE</title>
-    <link>http://blog.z2z63.dev/posts/week7/</link>
-    <pubDate>Sat, 27 Jul 2024 18:57:33 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/posts/week7/</guid>
-    <description><![CDATA[<p>解决了工具链的问题，还只能在命令行完成项目的构建。要使用IDE进行C++开发，除了工具链的知识外，还需要了解其他知识才能配置出一个好用的C++ IDE</p>]]></description>
 </item></channel>
 </rss>

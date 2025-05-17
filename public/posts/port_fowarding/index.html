@@ -4,21 +4,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noodp" /><title>Idea配置java项目 - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://blog.z2z63.dev/posts/idea-java-configuration/">
+    <meta name="robots" content="noodp" /><title>端口转发的妙用 - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://blog.z2z63.dev/posts/port_fowarding/">
   <meta property="og:site_name" content="z2z63/Virtualfuture&#39;s Blog">
-  <meta property="og:title" content="Idea配置java项目">
-  <meta property="og:description" content="IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑">
+  <meta property="og:title" content="端口转发的妙用">
+  <meta property="og:description" content="最近在做毕设过程中遇到很多不方便的地方，突然想到使用端口转发去优化工作流程，于是写一篇文章介绍并总结端口转发的种种妙用
+用途展示 服务器无需安装 clash，使用 PC 上的 clash 实现服务器上科学上网 服务器上执行 adb 命令操纵 连接到 PC 的 android 设备 无屏幕无键鼠的 android 开发板无需接入屏幕键鼠，只通过一根数据线就能访问桌面并调试">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-09-20T15:29:39+08:00">
-    <meta property="article:modified_time" content="2024-01-26T00:24:11+08:00">
-    <meta property="article:tag" content="Java">
-    <meta property="article:tag" content="Jetbrains IDE">
+    <meta property="article:published_time" content="2025-05-17T14:20:07+08:00">
+    <meta property="article:modified_time" content="2025-05-17T14:20:07+08:00">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Idea配置java项目">
-  <meta name="twitter:description" content="IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑">
+  <meta name="twitter:title" content="端口转发的妙用">
+  <meta name="twitter:description" content="最近在做毕设过程中遇到很多不方便的地方，突然想到使用端口转发去优化工作流程，于是写一篇文章介绍并总结端口转发的种种妙用
+用途展示 服务器无需安装 clash，使用 PC 上的 clash 实现服务器上科学上网 服务器上执行 adb 命令操纵 连接到 PC 的 android 设备 无屏幕无键鼠的 android 开发板无需接入屏幕键鼠，只通过一根数据线就能访问桌面并调试">
 <meta name="application-name" content="z2z63/Virtualfuture&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="z2z63/Virtualfuture&#39;s Blog">
 
@@ -26,15 +26,15 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-<link rel="canonical" href="http://blog.z2z63.dev/posts/idea-java-configuration/" /><link rel="prev" href="http://blog.z2z63.dev/posts/linux-font/" /><link rel="next" href="http://blog.z2z63.dev/posts/linux-vmware-setup/" />
+<link rel="canonical" href="http://blog.z2z63.dev/posts/port_fowarding/" /><link rel="prev" href="http://blog.z2z63.dev/posts/thought-on-the-future/" />
 <link rel="stylesheet" href="/css/main.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">{"@context": "https://schema.org","@type": "BlogPosting",
-        "headline": "Idea配置java项目",
+        "headline": "端口转发的妙用",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http://blog.z2z63.dev/posts/idea-java-configuration/"
-        },"genre": "posts","keywords":["Java","Jetbrains IDE"],"wordcount":  1090 ,
-        "url": "http://blog.z2z63.dev/posts/idea-java-configuration/","datePublished": "2023-09-20T15:29:39+08:00","dateModified": "2024-01-26T00:24:11+08:00","publisher": {
+            "@id": "http://blog.z2z63.dev/posts/port_fowarding/"
+        },"genre": "posts","wordcount":  3188 ,
+        "url": "http://blog.z2z63.dev/posts/port_fowarding/","datePublished": "2025-05-17T14:20:07+08:00","dateModified": "2025-05-17T14:20:07+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
                 "@type": "Person",
@@ -156,7 +156,18 @@
         <h2 class="toc-title">Contents</h2>
         <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
   <ul>
-    <li><a href="#如何确定包名">如何确定包名</a></li>
+    <li><a href="#用途展示">用途展示</a></li>
+    <li><a href="#一条命令启动">一条命令启动</a></li>
+    <li><a href="#原理解释篇">原理解释篇</a>
+      <ul>
+        <li><a href="#server-client-软件架构">server-client 软件架构</a></li>
+        <li><a href="#科学上网与魔法上网">科学上网与魔法上网</a></li>
+        <li><a href="#ssh-隧道">ssh 隧道</a></li>
+        <li><a href="#adb-与-adbd">adb 与 adbd</a></li>
+        <li><a href="#adb-端口转发">adb 端口转发</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav></div>
     </div><dialog id="toc-dialog" class="tw-max-w-full tw-w-full tw-max-h-full tw-h-full tw-ml-16">
@@ -164,20 +175,31 @@
             <h2 class="tw-mx-0 tw-my-6 tw-uppercase tw-text-2xl">Contents</h2>
             <div class="toc-content"><nav id="TableOfContents">
   <ul>
-    <li><a href="#如何确定包名">如何确定包名</a></li>
+    <li><a href="#用途展示">用途展示</a></li>
+    <li><a href="#一条命令启动">一条命令启动</a></li>
+    <li><a href="#原理解释篇">原理解释篇</a>
+      <ul>
+        <li><a href="#server-client-软件架构">server-client 软件架构</a></li>
+        <li><a href="#科学上网与魔法上网">科学上网与魔法上网</a></li>
+        <li><a href="#ssh-隧道">ssh 隧道</a></li>
+        <li><a href="#adb-与-adbd">adb 与 adbd</a></li>
+        <li><a href="#adb-端口转发">adb 端口转发</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav></div>
         </div>
-    </dialog><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2023-09-20" data-pagefind-body>Idea配置java项目</h1><div class="post-meta">
+    </dialog><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2025-05-17" data-pagefind-body>端口转发的妙用</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src='https://avatars.githubusercontent.com/z2z63'   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2023-09-20">2023-09-20</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-01-26">2024-01-26</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;1090 words&nbsp;
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2025-05-17">2025-05-17</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2025-05-17">2025-05-17</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;3188 words&nbsp;
                     <svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;5 minutes&nbsp;</div>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;14 minutes&nbsp;</div>
         </div><div class="details toc print:!tw-block" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -186,47 +208,29 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#如何确定包名">如何确定包名</a></li>
+    <li><a href="#用途展示">用途展示</a></li>
+    <li><a href="#一条命令启动">一条命令启动</a></li>
+    <li><a href="#原理解释篇">原理解释篇</a>
+      <ul>
+        <li><a href="#server-client-软件架构">server-client 软件架构</a></li>
+        <li><a href="#科学上网与魔法上网">科学上网与魔法上网</a></li>
+        <li><a href="#ssh-隧道">ssh 隧道</a></li>
+        <li><a href="#adb-与-adbd">adb 与 adbd</a></li>
+        <li><a href="#adb-端口转发">adb 端口转发</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content" data-pagefind-body><p>IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑</p>
-<p>声明一下所说的运行配置是指Run/Debug Configuration</p>
-<h1 id="java项目的构建" class="headerLink">
-    <a href="#java%e9%a1%b9%e7%9b%ae%e7%9a%84%e6%9e%84%e5%bb%ba" class="header-mark"></a>java项目的构建</h1><p>众所周知java一般是用maven或者gradle构建的，他们都能做到管理依赖、管理构建任务、编译等过程。<br>
-在idea的运行配置中，也可以选择gradle和maven，然后如果你选择了它们作为运行配置，多半会看到这个界面
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920153257.png'     >
-然而一般来说希望看到的应该是这个
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920154601.png'     >
-实际上，maven和gradle作为构建工具，命令行调用时可以传入不同参数作为task，构建工具不负责运行</p>
-<h1 id="如何设置idea的运行配置" class="headerLink">
-    <a href="#%e5%a6%82%e4%bd%95%e8%ae%be%e7%bd%aeidea%e7%9a%84%e8%bf%90%e8%a1%8c%e9%85%8d%e7%bd%ae" class="header-mark"></a>如何设置idea的运行配置</h1><p>首先我们要清楚idea支持三种方式</p>
-<ul>
-<li>IDEA Build</li>
-<li>maven</li>
-<li>gradle</li>
-</ul>
-<p>和idea定位相同的eclipse也有eclipse build，不推荐使用IDE特有的方式构建，因为他们往往是跟IDE绑定的，无法直接在命令行使用，不如专业的构建工具成熟<br>
-一个新的IDEA项目，需要首先指定java SDK版本</p>
-<ol>
-<li>在设置中找到Project Structure，配置SDK
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920153950.png'     ></li>
-<li>点击File-settings，找到Build,Execution, Deployment - Build Tools - Gradle<br>
-把Build and run using和Run test using改成IntelliJ IDEA
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920154230.png'     >
-使用maven可以跳过这一步</li>
-<li>创建一个&rsquo;Run/Debug Configuration&rsquo;，选择JDK、main方法入口，保存</li>
+            </div><div class="content" id="content" data-pagefind-body><p>最近在做毕设过程中遇到很多不方便的地方，突然想到使用端口转发去优化工作流程，于是写一篇文章介绍并总结端口转发的种种妙用</p>
+<h2 id="用途展示" class="headerLink">
+    <a href="#%e7%94%a8%e9%80%94%e5%b1%95%e7%a4%ba" class="header-mark"></a>用途展示</h2><ol>
+<li>服务器无需安装 clash，使用 PC 上的 clash 实现服务器上科学上网</li>
+<li>服务器上执行 adb 命令操纵 连接到 PC 的 android 设备</li>
+<li>无屏幕无键鼠的 android 开发板无需接入屏幕键鼠，只通过一根数据线就能访问桌面并调试</li>
 </ol>
-<p>到这一步已经能够实现这样的效果
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920154601.png'     ></p>
-<h1 id="tips" class="headerLink">
-    <a href="#tips" class="header-mark"></a>Tips</h1><p>在使用第三方库的时候又踩了一个坑，整理一下java项目使用第三方库的流程</p>
-<ol>
-<li>在<a href="https://mvnrepository.com/" target="_blank" rel="noopener noreferrer">maven中心仓库</a>上搜索想要的包</li>
-<li>指定版本后，直接复制配置，粘贴到pom.xml或build.gradle即可
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920155320.png'     ></li>
-<li>pom.xml或build.gradle改变后，IDEA会重新同步它们的更新，然后可以看到新加入的包出现在文件管理器的&rsquo;External Libraries&rsquo;中</li>
-<li>至此就可以根据包名使用了。然而比较坑的一点就是包在maven中心仓库的坐标并不总是他们的包名，需要确定包名<br>
-按理来说，直接找到包的文档网站，能够看到一些代码片段有这样的语句
+<h2 id="一条命令启动" class="headerLink">
+    <a href="#%e4%b8%80%e6%9d%a1%e5%91%bd%e4%bb%a4%e5%90%af%e5%8a%a8" class="header-mark"></a>一条命令启动</h2><p>这条命令可以实现 服务器使用 PC 的 clash 科学上网</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     code-block-title 
@@ -251,7 +255,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
 
     <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">java</p>
+      <p class="tw-select-none !tw-my-1">shell</p>
     </div>
     <div class="tw-flex">
       <button 
@@ -321,119 +325,60 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.squareup.okhttp.OkHttpClient</span><span class="p">;</span></span></span></code></pre>
+      "><span class="line"><span class="cl">ssh -R server:8888:localhost:7890 -R server:5037:localhost:5037  user@server
+</span></span><span class="line"><span class="cl"><span class="c1"># 登录之后</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">ALL_PROXY</span><span class="o">=</span><span class="s2">&#34;http://localhost:8888&#34;</span></span></span></code></pre>
 </div>
-然而实际上，文档中的代码片段几乎不会有这样的语句</li>
+<h2 id="原理解释篇" class="headerLink">
+    <a href="#%e5%8e%9f%e7%90%86%e8%a7%a3%e9%87%8a%e7%af%87" class="header-mark"></a>原理解释篇</h2><h3 id="server-client-软件架构" class="headerLink">
+    <a href="#server-client-%e8%bd%af%e4%bb%b6%e6%9e%b6%e6%9e%84" class="header-mark"></a>server-client 软件架构</h3><p>许多软件都应用了 server-client 架构，例如 docker, adb, systemd, ssh 等等。archlinux wiki 将 daemon 描述为 any program that runs as a &ldquo;background&rdquo; process (without a terminal or user interface), commonly waiting for events to occur and offering services。简单来说就是 daemoon 没有 contorl terminal，大部分时间都在等待某个文件描述符产生事件。为什么要使用 server-client 的架构呢？我认为最直接的原因就是 server 的生命期与 client 的生命期不一样。例如 <code>docker</code>命令作为一个 cli，生命期结束于<code>docker</code>命令执行完毕进程退出，显然 dockerd 的生命期远大于<code>docker</code>的生命期。又例如 adb 在第一次执行时，会自动启动 adbd，我不了解 adb 的诸多细节，但大致原因也许就是 adbd 负责维护 PC 和 android 设备的连接，否则每次执行 adb 命令都要重新建立连接，这显然是不可接受的。</p>
+<p>软件被分为 server 和 client 后，往往通过端口或者 unix socket 通信，其中通过端口通信是跨平台最友好的。因此许多 server-client 架构的软件都可以使用端口转发实现一些神奇的效果</p>
+<h3 id="科学上网与魔法上网" class="headerLink">
+    <a href="#%e7%a7%91%e5%ad%a6%e4%b8%8a%e7%bd%91%e4%b8%8e%e9%ad%94%e6%b3%95%e4%b8%8a%e7%bd%91" class="header-mark"></a>科学上网与魔法上网</h3><p>所谓魔法上网只是我随意编的词，从我学会科学上网后很长一段时间，我从来没有考虑过科学上网的原理是怎样的。clash 可以说是我使用时间最长的一个软件，几年来我也从来没有考虑过这个软件的原理是怎样的，所谓魔法上网是我对自己的调侃：不去了解背后的原理，出了问题不知道怎么解决，并将其归为玄学、魔法。</p>
+<p>所谓科学上网或者魔法上网，本质是代理，能工作的最关键的原因是至今为止防火墙是以黑名单的方式工作的，也就是说仍有许多 ip 地址是防火墙未知并且不会拦截的，于是我们就能通过代理的方式利用尚未被屏蔽的服务器去访问已经被屏蔽的服务器。当然，如果哪天防火墙切换到了白名单模式，任何通过代理绕过防火墙的方法也会失效。</p>
+<p>科学上网可以分为代理协议、代理客户端。代理协议的目的是伪装成正常流量以便通过防火墙， 代理客户端的目的是将特殊的代理协议转为 socks 代理协议、http 代理协议，这是因为 socks 和 http 是受支持最广的代理协议。常见的代理协议包括 VMess, ShadowSocks, ShadowSocketR, Trojan 等。常见的代理客户端有 v2ray, clash 系等</p>
+<p>clash 是一个无 GUI 的代理客户端，有许多包装 clash 的 GUI，例如 clash for windows，clash verge 等，他们通过 clash 暴露的 external-controller 与 clash 通信，其中的 clash 往往被称作 clash 核心。</p>
+<p>理解了常用的 clash GUI 由 GUI 和 clash 核心组成后，就能认识到任何 clash GUI 的目的都是更方便的操作 clash 核心，而 clash 核心最核心的特点就是规则。围绕规则能做很多事情，以我遇到的情况为例</p>
+<ol>
+<li>常见的一条规则是对于国外的网站使用代理，但也有例外。例如 acm.org 的论文使用 ip 管控，也就是说虽然 acm.org 是国外的网站，但我必须直连才能使用学校的 ip 访问到论文，因此添加一条规则<code>DOMAIN-SUFFIX,acm.org,DIRECT</code>，这样就能正常访问 acm.org 了</li>
+<li>常见的一条规则是 google 的域名使用代理，但也有例外。由于潜在的滥用风险（SPAM），机场往往屏蔽了 SMTP 和 IMAP 协议的流量，导致邮箱客户端无法连接到 Gmail。但很幸运 Gmail 的 imap 域名和端口在大陆是可以直连的，因此加上一条规则<code>DOMAIN-KEYWORD,imap,DIRECT</code>，就解决了困扰我很长时间的无法使用邮箱客户端收发 gmail 邮件的问题</li>
 </ol>
-<h2 id="如何确定包名" class="headerLink">
-    <a href="#%e5%a6%82%e4%bd%95%e7%a1%ae%e5%ae%9a%e5%8c%85%e5%90%8d" class="header-mark"></a>如何确定包名</h2><p>首先已经知道了这个包的俗称，根据俗称可以在maven中心仓库搜索得到这个包的坐标，然后就能下载到这个包的jar文件。
-根据jar的规范，解压jar包后，在<code>META-INF/MANIFEST.MF</code>中有这个jar包的元数据。例如okhttp包，<code>META-INF/MANIFEST.MF</code>内容为</p>
-<div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
-  <div class="
-    code-block-title 
-    
-    tw-flex 
-    tw-flex-row 
-    tw-justify-between 
-    tw-w-full tw-bg-bgColor-secondary
-    ">      
-    <button 
-      class="
-        tw-select-none 
-        tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
-
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">text</p>
-    </div>
-    <div class="tw-flex">
-      <button 
-        class="
-          line-number-button
-          tw-select-none 
-          tw-mx-2 
-          tw-hidden 
-          group-[.is-open]:tw-block 
-          group-[.show-line-numbers]:tw-text-fgColor-link 
-          print:!tw-hidden" 
-        title="Toggle line numbers"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"/></svg></button>
-
-      <button 
-        class="
-          wrap-code-button
-          tw-select-none 
-          tw-mx-2 
-          tw-hidden 
-          group-[.is-open]:tw-block 
-          group-[.is-wrap]:tw-text-fgColor-link 
-          print:!tw-hidden" 
-        title="Toggle code wrap"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg></button>
-      
-      <button 
-        class="
-          copy-code-button
-          tw-select-none
-          tw-mx-2 
-          tw-hidden
-          group-[.is-open]:tw-block
-          hover:tw-text-fgColor-link 
-          print:!tw-hidden"
-        title="Copy code">
-          <span class="copy-icon tw-block"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"/></svg></span>
-          <span class="check-icon tw-hidden"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg></span>
-      </button>
-        
-      <button 
-        class="
-          tw-select-none 
-          tw-mx-2 
-          tw-block 
-          group-[.is-open]:tw-hidden 
-          print:!tw-hidden" 
-        disabled
-        aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/></svg></button>
-    </div>
-  </div>
-  <pre style="counter-reset: codeblock;" class="tw-block tw-m-0 tw-p-0"><code 
-    id="codeblock-id-2" 
-    class="
-      chroma 
-      !tw-block 
-      tw-p-0
-      tw-m-0
-      tw-transition-[max-height] 
-      tw-duration-500 
-      tw-ease-in-out 
-      group-[.is-closed]:!tw-max-h-0 
-      group-[.is-wrap]:tw-text-wrap
-      tw-overflow-y-hidden
-      tw-overflow-x-auto
-      tw-scrollbar-thin
-      "><span class="line"><span class="cl">Manifest-Version: 1.0
-</span></span><span class="line"><span class="cl">Automatic-Module-Name: okhttp3</span></span></code></pre>
-</div>
-<p>可以知道包名为okhttp3，而不是com.squareup.okhttp！</p></div>
+<p>通过以上的介绍，我们知道不论使用什么代理客户端，最终都会得到一个代理服务器，它运行着 socks 代理协议或 http 代理协议，对于 clash 来说，代理服务器默认运行在 <code>http://localhost:7890</code>，然后只需要将系统代理或软件代理设为 <code>http://localhost:7890</code>，就能科学上网了。</p>
+<p>通常情况下代理服务器绑定到本地回环网络接口，也就是说只有本机可以访问。当然可以绑定到局域网网络接口，于是局域网内其他设备就能访问这个代理服务器。于是我有个初步的想法，假设 PC 的域名是 PC，服务器的域名是 server，在 server 上将代理设为 <code>http://PC:7890</code>, 是否就能让服务器使用 PC 上的代理服务器，也就是服务器使用 PC 上的 clash 科学上网了呢？</p>
+<p>理论上是可行的，但由于 server 往往在公网上而 PC 工作在层层 NAT 之后，server 是无法主动建立与 PC 的 tcp 连接的。我在做毕设中遇到的情况是，我使用 vpn 软件加入一个 服务器所在的 VLAN，然后通过 ip 访问服务器，但服务器和 PC 的 VLAN 中的 ip 在不同网段，而且服务器的路由表中也没有 PC 网段的路由记录，我猜原因是服务器运维认为这不需要而且不安全。由于以上原因，虽然我的 server 和 PC 在同一个 VLAN 但 server 仍然无法主动建立与 PC 的连接</p>
+<h3 id="ssh-隧道" class="headerLink">
+    <a href="#ssh-%e9%9a%a7%e9%81%93" class="header-mark"></a>ssh 隧道</h3><p>ssh 隧道就能间接的解决「server 仍然无法主动建立与 PC 的连接」这个问题，man 手册描述 ssh 为</p>
+<blockquote>
+  <p>ssh (SSH client) is a program for logging into a remote machine and for executing commands on a remote machine.  It is intended to provide secure encrypted communications between two untrusted hosts over an insecure network.  X11 connections, arbitrary TCP ports and Unix-domain sockets can also be forwarded over the secure channel.</p>
+</blockquote><p>通过 ssh 隧道，可以将 PC 的 7890 端口转发到服务器的 8888 端口，于是服务器访问 <code>http://localhost:8888</code> 时，数据包就会被转发到 PC 的 7890 端口，从而被 PC 的 clash 处理</p>
+<h3 id="adb-与-adbd" class="headerLink">
+    <a href="#adb-%e4%b8%8e-adbd" class="header-mark"></a>adb 与 adbd</h3><p>adb 也是 server-client 的架构。adb 在第一次启动时会自动启动 adbd，adbd 默认监听 5037 端口，adb 通过与 adbd 通信从而操纵 android 设备。于是我将本地的 5037 端口转发到服务器的 5037 端口，于是服务器上的 adb 就能与运行在 PC 的 adbd 通信，并操纵连接到 PC 的 android 设备。</p>
+<p>这样做有什么用呢？因为我使用 rknn-toolkit2 做模型转换、模型性能分析等工作（模型运行在 android 设备），而 rknn-toolkit2 不支持 macos，于是我只能在 x64 架构的服务器上去做，但我不能物理接触到服务器，更不能将数据线插到服务器上。但使用端口转发，我近似实现了数据线插到服务器上的效果，从而简化了我的工作流</p>
+<h3 id="adb-端口转发" class="headerLink">
+    <a href="#adb-%e7%ab%af%e5%8f%a3%e8%bd%ac%e5%8f%91" class="header-mark"></a>adb 端口转发</h3><p>做毕设很烦的一件事就是乱七八糟的线实在太多，一个 android 开发板上要接电源线、数据线用于调试、 AR 眼镜的 USB 数据线、接显示器的 HDMI 线、接鼠标的 USB 线。一堆线缠在一起让我心情非常烦躁。而且显示器只有一个，同时要么给 mac 用要么给 android 开发板用，又降低了我的工作效率。于是我就在想能不能通过 adb 把 android 的屏幕流式传输到 mac，经过一番研究后我发现有一个很简单的方法实现</p>
+<p>首先在安卓开发版上运行 vnc server，然后用 adb 将 android 设备的 vnc 端口转发到 mac，于是 mac 就能通过 vnc viewer 访问 android 设备的桌面，具体操作如下</p>
+<ol>
+<li>在 android 开发板上安装 <a href="https://github.com/bk138/droidVNC-NG" target="_blank" rel="noopener noreferrer">droidVNC-NG</a>，这一步可以在 mac 下载 app 然后用 adb install 命令安装。droidVNC-NG 可以运行 vnc server，然后通过 ip+端口或浏览器就能远程访问桌面。最方便的是它能够开机后自动启动 vnc 服务</li>
+<li>给 android 设备接入显示器，设置并启用 droidVNC-NG，并打开开机自启</li>
+<li>执行<code>adb forward tcp:5901 tcp:5901</code>，将安卓设备的 5901 端口转发到 mac 本地的 5901 端口</li>
+<li>在 mac 使用 vnc viewer 登录远程桌面<br>
+macos 的 finder 自带了 vnc viewer，无需额外安装 vnc viewer</li>
+</ol>
+<p>使用这样的方法，我不再需要接入显示器和键鼠，接线少了一半，工作流程变得非常流畅。指导毕设的学长评价说“我真是每天被线缠着，苦大仇深啊。”</p>
+<p>那么 adb 端口转发有什么神奇的地方吗？在我看来就是 adb 连接提供了一个供 TCP 流量通行的隧道，而 adb 连接往下就是 USB 协议栈，仔细考虑一下就会觉得很神奇，TCP 流量跑在 USB 数据线里了，这也许就是计算机网络分层的魅力吧<br>
+一定需要 adb 端口转发吗？其实也不一定，因为校园网有 ap 隔离，导致我的手机、mac、笔记本电脑、android 开发板即使连接了校园网也无法相互通信，这在很长一段时间内都给我造成了麻烦。而用手机开热点一来无法固定 ip 二来手机拿远了就会断开。设想一下校园网没有 AP 隔离，我也许直接使用 android 开发板的 ip + vnc 端口就能访问远程桌面了。</p>
+<p>不管怎么说，这个方案是目前我非常满意的方式，不需要记住任何 ip，每次插上数据线执行<code>adb forward</code>命令就能访问 android 桌面。在搞硬件的看来已经是非常方便了。</p>
+<h2 id="总结" class="headerLink">
+    <a href="#%e6%80%bb%e7%bb%93" class="header-mark"></a>总结</h2><p>去研究日常工作中使用次数最多的软件，花费时间与精力探索如何善用工具优化工作流程，是一个绝对值得的投资</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/TYq1QInreZo?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div></div>
 
         <div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-01-26&nbsp;<a class="git-hash" href="https://github.com/z2z63/z2z63.github.io/commit/c7849309fb504c28a336cf5dbbfd8004e2c17b2b" target="_blank" title="commit by z2z63(vituralfuture@gmail.com) c7849309fb504c28a336cf5dbbfd8004e2c17b2b: update" rel="noopener noreferrer">
-                                    <svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M440.667 182.109l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l14.623-81.891C377.123 38.754 371.468 32 363.997 32h-40.632a12 12 0 0 0-11.813 9.891L296.175 128H197.54l14.623-81.891C213.477 38.754 207.822 32 200.35 32h-40.632a12 12 0 0 0-11.813 9.891L132.528 128H53.432a12 12 0 0 0-11.813 9.891l-7.143 40C33.163 185.246 38.818 192 46.289 192h74.81L98.242 320H19.146a12 12 0 0 0-11.813 9.891l-7.143 40C-1.123 377.246 4.532 384 12.003 384h74.81L72.19 465.891C70.877 473.246 76.532 480 84.003 480h40.632a12 12 0 0 0 11.813-9.891L151.826 384h98.634l-14.623 81.891C234.523 473.246 240.178 480 247.65 480h40.632a12 12 0 0 0 11.813-9.891L315.472 384h79.096a12 12 0 0 0 11.813-9.891l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l22.857-128h79.096a12 12 0 0 0 11.813-9.891zM261.889 320h-98.634l22.857-128h98.634l-22.857 128z"/></svg>c784930</a></span>
+                <span>Updated on 2025-05-17</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -444,17 +389,14 @@
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"/></svg>&nbsp;<a href="/tags/java/">Java</a>,&nbsp;<a href="/tags/jetbrains-ide/">Jetbrains IDE</a></section>
+        <section class="post-tags"></section>
         <section class="print:!tw-hidden">
             <span><button class="tw-text-fgColor-link-muted hover:tw-text-fgColor-link-muted-hover" onclick="window.history.back();">Back</button></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav print:tw-hidden"><a href="/posts/linux-font/" class="prev" rel="prev" title="Linux字体"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>Linux字体</a>
-            <a href="/posts/linux-vmware-setup/" class="next" rel="next" title="Linux使用VMware">Linux使用VMware<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></a></div>
+    <div class="post-nav print:tw-hidden"><a href="/posts/thought-on-the-future/" class="prev" rel="prev" title="二月以来的随想"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>二月以来的随想</a></div>
 </div>
 <div id="comments" class="print:!tw-hidden tw-pt-32 tw-pb-8"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -480,7 +422,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 32C114.6 32 0 125.1 0 240c0 49.6 21.4 95 57 130.7C44.5 421.1 2.7 466 2.2 466.5c-2.2 2.3-2.8 5.7-1.5 8.7S4.8 480 8 480c66.3 0 116-31.8 140.6-51.4 32.7 12.3 69 19.4 107.4 19.4 141.4 0 256-93.1 256-208S397.4 32 256 32z"/></svg>
   </a></div>
 <link rel="stylesheet" href="/lib/gitalk/gitalk.min.css">
-<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"Ov23liMtTBdWPdBDJjuQ","clientSecret":"5c5e82f1b10ce323ce7efae32b1b8f0a87773577","id":"2023-09-20T15:29:39+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"Idea配置java项目"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null},"sharerjs":true};</script><script
+<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"Ov23liMtTBdWPdBDJjuQ","clientSecret":"5c5e82f1b10ce323ce7efae32b1b8f0a87773577","id":"2025-05-17T14:20:07+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"端口转发的妙用"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null},"sharerjs":true};</script><script
     src="/lib/sharer/sharer.min.js"
     
   ></script><script

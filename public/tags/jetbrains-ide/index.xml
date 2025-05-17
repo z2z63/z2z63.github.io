@@ -1,15 +1,21 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Jetbrains IDE - Tag - z2z63/Virtualfuture&#39;s Blog</title>
-        <link>http://blog.z2z63.dev/tags/jetbrains-ide/</link>
-        <description>Jetbrains IDE - Tag - z2z63/Virtualfuture&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</lastBuildDate><atom:link href="http://blog.z2z63.dev/tags/jetbrains-ide/" rel="self" type="application/rss+xml" /><item>
-    <title>Idea配置java项目</title>
-    <link>http://blog.z2z63.dev/posts/idea-java-configuration/</link>
-    <pubDate>Wed, 20 Sep 2023 15:29:39 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/posts/idea-java-configuration/</guid>
-    <description><![CDATA[<p>IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑</p>]]></description>
-</item></channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jetbrains IDE on z2z63/Virtualfuture&#39;s Blog</title>
+    <link>http://blog.z2z63.dev/tags/jetbrains-ide/</link>
+    <description>Recent content in Jetbrains IDE on z2z63/Virtualfuture&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
+    <webMaster>virtualfuture@gmail.com (z2z63)</webMaster>
+    <lastBuildDate>Fri, 26 Jan 2024 00:24:11 +0800</lastBuildDate>
+    <atom:link href="http://blog.z2z63.dev/tags/jetbrains-ide/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Idea配置java项目</title>
+      <link>http://blog.z2z63.dev/posts/idea-java-configuration/</link>
+      <pubDate>Wed, 20 Sep 2023 15:29:39 +0800</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
+      <guid>http://blog.z2z63.dev/posts/idea-java-configuration/</guid>
+      <description>&lt;p&gt;IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>
