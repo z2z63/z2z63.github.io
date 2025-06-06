@@ -4,7 +4,14 @@
         <link>http://blog.z2z63.dev/posts/</link>
         <description>All Posts | z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 17 May 2025 14:20:07 &#43;0800</lastBuildDate><atom:link href="http://blog.z2z63.dev/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Wed, 04 Jun 2025 20:17:20 &#43;0800</lastBuildDate><atom:link href="http://blog.z2z63.dev/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Cmake_build_system</title>
+    <link>http://blog.z2z63.dev/posts/cmake_build_system/</link>
+    <pubDate>Wed, 04 Jun 2025 20:17:20 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://blog.z2z63.dev/posts/cmake_build_system/</guid>
+    <description><![CDATA[<p>众所周知 C++项目通常在开发时关闭优化以方便调试，在发布时开启优化以获得更高的性能，通常这是通过开发时给编译器传递<code>-g</code>选项，而在发布时给编译器传递<code>-O2</code>选项实现的。在某次使用 cmake 时我了解到了<code>CMAKE_BUILT_TYPE</code>的概念，这个变量有<code>Debug</code>，<code>Release</code>，<code>RelWithDebInfo</code>, <code>MinSizeRel</code>四种典型的值，但当我翻开 cmake 文档时发现 cmake 并没有说明<code>CMAKE_BUILT_TYPE</code>会对优化参数有什么影响，而经过我的实验，当<code>CMAKE_BUILT_TYPE</code>设为<code>Debug</code>时确实会传递<code>-g</code>。于是我研究了一番<code>CMAKE_BUILT_TYPE</code>如何影响到编译器参数的</p>]]></description>
+</item><item>
     <title>端口转发的妙用</title>
     <link>http://blog.z2z63.dev/posts/port_fowarding/</link>
     <pubDate>Sat, 17 May 2025 14:20:07 &#43;0800</pubDate><author>
@@ -85,12 +92,5 @@
         <name>z2z63</name>
     </author><guid>http://blog.z2z63.dev/posts/week10/</guid>
     <description><![CDATA[<p>近来也算看了不少别人的博客，有些文章非常优秀，还有一些很无趣。在我看来，一篇好的博文首先不能是官方文档的复读机，也不能让读者完全看不懂，其次，信息来源应该尽量保持一手。从某方面来说，学习知识-输出知识的过程就好比咀嚼或消化。不知道转了多少手的知识好比被多次咀嚼消化后的粘稠状半消化物，多少令人反胃。我曾经也是被百度与CSDN之流坑过，所以看到 <a href="https://csdiy.wiki/%E5%BF%85%E5%AD%A6%E5%B7%A5%E5%85%B7/workflow/#_1" target="_blank" rel="noopener noreferrer">csdiy.wiki</a> 中相同的观点时，感同身受。</p>]]></description>
-</item><item>
-    <title>努力成为Python core dev的第八周：从libc到python，我要的内存从哪儿来的？</title>
-    <link>http://blog.z2z63.dev/posts/week8/</link>
-    <pubDate>Sun, 04 Aug 2024 14:21:56 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/posts/week8/</guid>
-    <description><![CDATA[<p>实习期间摸了不少的鱼，通勤路上在看各种文档，在公司摸鱼时就在看glibc或cpython的源码，花了不少时间总算是理解了部分。所谓内存管理系统充斥着各种指针运算，抽象程度非常高，这篇文章我希望是定性的去描述内存分配系统，因为源码总是枯燥又无聊的，如果不是它出现了问题，我想大部分人都不会去看源码吧</p>]]></description>
 </item></channel>
 </rss>

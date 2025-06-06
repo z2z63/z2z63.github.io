@@ -42,7 +42,7 @@
     }</script></head>
 
 
-<body data-instant-intensity="viewport" class="tw-flex tw-min-h-screen tw-flex-col"><script type="text/javascript">
+<body data-instant-intensity="viewport" class="tw-flex tw-min-h-screen tw-flex-col"><script>
     function setTheme(theme) {
       document.body.setAttribute('theme', theme); 
       document.documentElement.className = theme;
@@ -251,35 +251,30 @@
     <a href="#%e6%99%ae%e9%80%9a%e5%af%b9%e8%b1%a1%e7%9a%84%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%80" class="header-mark"></a>普通对象的内存布局</h3><p>普通对象也是我胡编乱造的词，指类中不存在虚拟函数、继承。此时 C++对象包括所有非静态数据成员</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
-    code-block-title 
     
     tw-flex 
-    tw-flex-row 
+    tw-flex-row
+    tw-flex-1 
     tw-justify-between 
     tw-w-full tw-bg-bgColor-secondary
     ">      
     <button 
       class="
-        tw-select-none 
+        code-block-button
         tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">cpp</p>
+      </button>
 
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">cpp</p>
-    </div>
-    <div class="tw-flex">
+   <div class="tw-flex">
       <button 
         class="
           line-number-button
-          tw-select-none 
           tw-mx-2 
           tw-hidden 
           group-[.is-open]:tw-block 
@@ -358,35 +353,30 @@
 <p>根据以上两个信息，可以得出：普通对象只有一个 access section 时，编译器不需要在数据成员的间隙中插入额外数据，也不需要决定多个 section 的相对位置，此时对象的内存布局和 C 的结构体是兼容的</p>
 <div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
-    code-block-title 
     
     tw-flex 
-    tw-flex-row 
+    tw-flex-row
+    tw-flex-1 
     tw-justify-between 
     tw-w-full tw-bg-bgColor-secondary
     ">      
     <button 
       class="
-        tw-select-none 
+        code-block-button
         tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>
+      </button>
 
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">text</p>
-    </div>
-    <div class="tw-flex">
+   <div class="tw-flex">
       <button 
         class="
           line-number-button
-          tw-select-none 
           tw-mx-2 
           tw-hidden 
           group-[.is-open]:tw-block 
@@ -469,35 +459,30 @@
 <p>确定了 <code>A</code> 的内存布局后，<code>A</code> 的非静态数据成员的偏移也就可以在编译期确定，在 <code>A</code> 的非静态成员函数中，访问<code>x</code> <code>y</code> <code>z</code>时，通过隐含的<code>this</code>指针间接访问，等价于 C 的结构体成员的访问</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
-    code-block-title 
     
     tw-flex 
-    tw-flex-row 
+    tw-flex-row
+    tw-flex-1 
     tw-justify-between 
     tw-w-full tw-bg-bgColor-secondary
     ">      
     <button 
       class="
-        tw-select-none 
+        code-block-button
         tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">cpp</p>
+      </button>
 
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">cpp</p>
-    </div>
-    <div class="tw-flex">
+   <div class="tw-flex">
       <button 
         class="
           line-number-button
-          tw-select-none 
           tw-mx-2 
           tw-hidden 
           group-[.is-open]:tw-block 
@@ -569,35 +554,30 @@
 <h3 id="单继承时" class="headerLink">
     <a href="#%e5%8d%95%e7%bb%a7%e6%89%bf%e6%97%b6" class="header-mark"></a>单继承时</h3><div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
-    code-block-title 
     
     tw-flex 
-    tw-flex-row 
+    tw-flex-row
+    tw-flex-1 
     tw-justify-between 
     tw-w-full tw-bg-bgColor-secondary
     ">      
     <button 
       class="
-        tw-select-none 
+        code-block-button
         tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">cpp</p>
+      </button>
 
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">cpp</p>
-    </div>
-    <div class="tw-flex">
+   <div class="tw-flex">
       <button 
         class="
           line-number-button
-          tw-select-none 
           tw-mx-2 
           tw-hidden 
           group-[.is-open]:tw-block 
@@ -673,35 +653,30 @@
 这两个部分如何排放，标准没有要求。但编译器往往把 <code>Base</code> 放在开头而 <code>Derived</code> 放到末尾，这样就能实现<code>Base* b = new Derived</code>派生类向上 cast 到基类时，cast 没有运行时开销</p>
 <div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
-    code-block-title 
     
     tw-flex 
-    tw-flex-row 
+    tw-flex-row
+    tw-flex-1 
     tw-justify-between 
     tw-w-full tw-bg-bgColor-secondary
     ">      
     <button 
       class="
-        tw-select-none 
+        code-block-button
         tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>
+      </button>
 
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">text</p>
-    </div>
-    <div class="tw-flex">
+   <div class="tw-flex">
       <button 
         class="
           line-number-button
-          tw-select-none 
           tw-mx-2 
           tw-hidden 
           group-[.is-open]:tw-block 
@@ -788,35 +763,30 @@
 <p>这里提出一个标准中没有，但书中有的词：Bitwise Semantics. 与 Bitwise 相对的还有 member-wise。一个好的编译器应当在大部分情况下都能生成 Bitwise 的复制构造函数，即当复制对象时，不需要 member-wise 复制而是 Bitwise 的复制。当遵守 Bitwise Semantics 时，编译器能够省去函数调用、逐个复制数据的开销，转而使用高效的专用指令</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
-    code-block-title 
     
     tw-flex 
-    tw-flex-row 
+    tw-flex-row
+    tw-flex-1 
     tw-justify-between 
     tw-w-full tw-bg-bgColor-secondary
     ">      
     <button 
       class="
-        tw-select-none 
+        code-block-button
         tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">cpp</p>
+      </button>
 
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">cpp</p>
-    </div>
-    <div class="tw-flex">
+   <div class="tw-flex">
       <button 
         class="
           line-number-button
-          tw-select-none 
           tw-mx-2 
           tw-hidden 
           group-[.is-open]:tw-block 
@@ -902,35 +872,30 @@
 <p>考虑 id 嵌入的位置，标准允许嵌入到任何数据成员的间隙，但一般的做法是放到对象开头或结尾，因为这样可以维护最少的元数据</p>
 <div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
-    code-block-title 
     
     tw-flex 
-    tw-flex-row 
+    tw-flex-row
+    tw-flex-1 
     tw-justify-between 
     tw-w-full tw-bg-bgColor-secondary
     ">      
     <button 
       class="
-        tw-select-none 
+        code-block-button
         tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">cpp</p>
+      </button>
 
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">cpp</p>
-    </div>
-    <div class="tw-flex">
+   <div class="tw-flex">
       <button 
         class="
           line-number-button
-          tw-select-none 
           tw-mx-2 
           tw-hidden 
           group-[.is-open]:tw-block 
@@ -1013,35 +978,30 @@
 <p>考虑这样的类，内存布局如下</p>
 <div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
-    code-block-title 
     
     tw-flex 
-    tw-flex-row 
+    tw-flex-row
+    tw-flex-1 
     tw-justify-between 
     tw-w-full tw-bg-bgColor-secondary
     ">      
     <button 
       class="
-        tw-select-none 
+        code-block-button
         tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>
+      </button>
 
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">text</p>
-    </div>
-    <div class="tw-flex">
+   <div class="tw-flex">
       <button 
         class="
           line-number-button
-          tw-select-none 
           tw-mx-2 
           tw-hidden 
           group-[.is-open]:tw-block 
@@ -1142,35 +1102,30 @@
 <p>更进一步，什么是同一个类？C++的类型系统是 Nominal type system，即使存在两个类名之外完全相同的类</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
-    code-block-title 
     
     tw-flex 
-    tw-flex-row 
+    tw-flex-row
+    tw-flex-1 
     tw-justify-between 
     tw-w-full tw-bg-bgColor-secondary
     ">      
     <button 
       class="
-        tw-select-none 
+        code-block-button
         tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">cpp</p>
+      </button>
 
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">cpp</p>
-    </div>
-    <div class="tw-flex">
+   <div class="tw-flex">
       <button 
         class="
           line-number-button
-          tw-select-none 
           tw-mx-2 
           tw-hidden 
           group-[.is-open]:tw-block 
@@ -1254,35 +1209,30 @@ C++没有提供运行时给一个类增加、删除、修改虚拟函数的方�
 <p>但是这个方法又引入了新的问题，派生类能够增加新的虚拟函数，导致虚拟函数的指针个数增加，给「保证派生类对象的内存布局和基类相似」增加了难度。这里给出一个巧妙的方法，将虚拟函数的指针和类的名称组织在一起（因为它们都在数据段中，这是可行的）</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
-    code-block-title 
     
     tw-flex 
-    tw-flex-row 
+    tw-flex-row
+    tw-flex-1 
     tw-justify-between 
     tw-w-full tw-bg-bgColor-secondary
     ">      
     <button 
       class="
-        tw-select-none 
+        code-block-button
         tw-mx-2 
-        tw-block
-        group-[.is-open]:tw-rotate-90
-        tw-transition-[transform] 
-        tw-duration-500 
-        tw-ease-in-out
-        print:!tw-hidden"
-      disabled
-      aria-hidden="true"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></button>
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">text</p>
+      </button>
 
-    <div class="code-block-title-bar tw-w-full">
-      <p class="tw-select-none !tw-my-1">text</p>
-    </div>
-    <div class="tw-flex">
+   <div class="tw-flex">
       <button 
         class="
           line-number-button
-          tw-select-none 
           tw-mx-2 
           tw-hidden 
           group-[.is-open]:tw-block 
@@ -1476,7 +1426,7 @@ C++没有提供运行时给一个类增加、删除、修改虚拟函数的方�
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.147.3">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.1"><svg class="icon"
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.147.3">Hugo</a>&nbsp;|&nbsp;Hosted on GitHub Pages&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.4.2"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg> DoIt</a>
                 </div><div class="footer-line"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 448c-110.532 0-200-89.451-200-200 0-110.531 89.451-200 200-200 110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200zm107.351-101.064c-9.614 9.712-45.53 41.396-104.065 41.396-82.43 0-140.484-61.425-140.484-141.567 0-79.152 60.275-139.401 139.762-139.401 55.531 0 88.738 26.62 97.593 34.779a11.965 11.965 0 0 1 1.936 15.322l-18.155 28.113c-3.841 5.95-11.966 7.282-17.499 2.921-8.595-6.776-31.814-22.538-61.708-22.538-48.303 0-77.916 35.33-77.916 80.082 0 41.589 26.888 83.692 78.277 83.692 32.657 0 56.843-19.039 65.726-27.225 5.27-4.857 13.596-4.039 17.82 1.738l19.865 27.17a11.947 11.947 0 0 1-1.152 15.518z"/></svg>2023 - 2025<span class="author">&nbsp;<a href="https://github.com/z2z63" target="_blank" rel="noopener noreferrer">z2z63</a></span></div>
@@ -1512,7 +1462,7 @@ C++没有提供运行时给一个类增加、删除、修改虚拟函数的方�
     
       defer
     
-  ></script><script type="text/javascript">
+  ></script><script>
             window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
             gtag('config', 'G-48XH0QHHK3');
         </script><script

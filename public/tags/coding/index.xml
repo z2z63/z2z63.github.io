@@ -1,21 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Coding on z2z63/Virtualfuture&#39;s Blog</title>
-    <link>http://blog.z2z63.dev/tags/coding/</link>
-    <description>Recent content in Coding on z2z63/Virtualfuture&#39;s Blog</description>
-    <generator>Hugo</generator>
-    <language>zh-CN</language>
-    <managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-    <webMaster>virtualfuture@gmail.com (z2z63)</webMaster>
-    <lastBuildDate>Fri, 26 Jan 2024 00:24:11 +0800</lastBuildDate>
-    <atom:link href="http://blog.z2z63.dev/tags/coding/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>函数传参的入栈顺序造成的一些细微影响</title>
-      <link>http://blog.z2z63.dev/posts/function-parameters-push-stack-order/</link>
-      <pubDate>Thu, 06 Apr 2023 00:09:32 +0000</pubDate><author>virtualfuture@gmail.com (z2z63)</author>
-      <guid>http://blog.z2z63.dev/posts/function-parameters-push-stack-order/</guid>
-      <description>&lt;p&gt;最近遇到了一个函数传参造成的问题，于是来稍微研究一下这个东西&lt;/p&gt;</description>
-    </item>
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Coding - Tag - z2z63/Virtualfuture&#39;s Blog</title>
+        <link>http://blog.z2z63.dev/tags/coding/</link>
+        <description>Coding - Tag - z2z63/Virtualfuture&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Thu, 06 Apr 2023 00:09:32 &#43;0000</lastBuildDate><atom:link href="http://blog.z2z63.dev/tags/coding/" rel="self" type="application/rss+xml" /><item>
+    <title>函数传参的入栈顺序造成的一些细微影响</title>
+    <link>http://blog.z2z63.dev/posts/function-parameters-push-stack-order/</link>
+    <pubDate>Thu, 06 Apr 2023 00:09:32 &#43;0000</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://blog.z2z63.dev/posts/function-parameters-push-stack-order/</guid>
+    <description><![CDATA[<p>最近遇到了一个函数传参造成的问题，于是来稍微研究一下这个东西</p>]]></description>
+</item></channel>
 </rss>

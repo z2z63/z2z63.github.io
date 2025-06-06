@@ -2,9 +2,10 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://blog.z2z63.dev/posts/</loc><lastmod>2025-05-17T16:54:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://blog.z2z63.dev/</loc><lastmod>2025-05-17T16:54:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://blog.z2z63.dev/posts/port_fowarding/</loc><lastmod>2025-05-17T16:54:02&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://blog.z2z63.dev/posts/cmake_build_system/</loc><lastmod>2025-06-04T20:17:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://blog.z2z63.dev/posts/</loc><lastmod>2025-06-04T20:17:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://blog.z2z63.dev/</loc><lastmod>2025-06-04T20:17:20&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://blog.z2z63.dev/posts/port_fowarding/</loc><lastmod>2025-05-17T17:02:44&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/thought-on-the-future/</loc><lastmod>2025-03-17T22:59:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/kazoku/</loc><lastmod>2025-01-31T17:26:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>http://blog.z2z63.dev/posts/2024-summary/</loc><lastmod>2024-12-28T22:46:24&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

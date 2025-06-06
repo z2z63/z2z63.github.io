@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 git submodule update --remote --merge
 hugo
 git add .

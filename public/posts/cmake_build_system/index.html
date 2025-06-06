@@ -4,21 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noodp" /><title>Idea配置java项目 - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://blog.z2z63.dev/posts/idea-java-configuration/">
+    <meta name="robots" content="noodp" /><title>Cmake_build_system - z2z63/Virtualfuture&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://blog.z2z63.dev/posts/cmake_build_system/">
   <meta property="og:site_name" content="z2z63/Virtualfuture&#39;s Blog">
-  <meta property="og:title" content="Idea配置java项目">
-  <meta property="og:description" content="IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑">
+  <meta property="og:title" content="Cmake_build_system">
+  <meta property="og:description" content="众所周知 C&#43;&#43;项目通常在开发时关闭优化以方便调试，在发布时开启优化以获得更高的性能，通常这是通过开发时给编译器传递-g选项，而在发布时给编译器传递-O2选项实现的。在某次使用 cmake 时我了解到了CMAKE_BUILT_TYPE的概念，这个变量有Debug，Release，RelWithDebInfo, MinSizeRel四种典型的值，但当我翻开 cmake 文档时发现 cmake 并没有说明CMAKE_BUILT_TYPE会对优化参数有什么影响，而经过我的实验，当CMAKE_BUILT_TYPE设为Debug时确实会传递-g。于是我研究了一番CMAKE_BUILT_TYPE如何影响到编译器参数的">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-09-20T15:29:39+08:00">
-    <meta property="article:modified_time" content="2024-01-26T00:24:11+08:00">
-    <meta property="article:tag" content="Java">
-    <meta property="article:tag" content="Jetbrains IDE">
+    <meta property="article:published_time" content="2025-06-04T20:17:20+08:00">
+    <meta property="article:modified_time" content="2025-06-04T20:17:20+08:00">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Idea配置java项目">
-  <meta name="twitter:description" content="IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑">
+  <meta name="twitter:title" content="Cmake_build_system">
+  <meta name="twitter:description" content="众所周知 C&#43;&#43;项目通常在开发时关闭优化以方便调试，在发布时开启优化以获得更高的性能，通常这是通过开发时给编译器传递-g选项，而在发布时给编译器传递-O2选项实现的。在某次使用 cmake 时我了解到了CMAKE_BUILT_TYPE的概念，这个变量有Debug，Release，RelWithDebInfo, MinSizeRel四种典型的值，但当我翻开 cmake 文档时发现 cmake 并没有说明CMAKE_BUILT_TYPE会对优化参数有什么影响，而经过我的实验，当CMAKE_BUILT_TYPE设为Debug时确实会传递-g。于是我研究了一番CMAKE_BUILT_TYPE如何影响到编译器参数的">
 <meta name="application-name" content="z2z63/Virtualfuture&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="z2z63/Virtualfuture&#39;s Blog">
 
@@ -26,15 +24,15 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-<link rel="canonical" href="http://blog.z2z63.dev/posts/idea-java-configuration/" /><link rel="prev" href="http://blog.z2z63.dev/posts/linux-font/" /><link rel="next" href="http://blog.z2z63.dev/posts/linux-vmware-setup/" />
+<link rel="canonical" href="http://blog.z2z63.dev/posts/cmake_build_system/" /><link rel="prev" href="http://blog.z2z63.dev/posts/port_fowarding/" />
 <link rel="stylesheet" href="/css/main.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">{"@context": "https://schema.org","@type": "BlogPosting",
-        "headline": "Idea配置java项目",
+        "headline": "Cmake_build_system",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http://blog.z2z63.dev/posts/idea-java-configuration/"
-        },"genre": "posts","keywords":["Java","Jetbrains IDE"],"wordcount":  1090 ,
-        "url": "http://blog.z2z63.dev/posts/idea-java-configuration/","datePublished": "2023-09-20T15:29:39+08:00","dateModified": "2024-01-26T00:24:11+08:00","publisher": {
+            "@id": "http://blog.z2z63.dev/posts/cmake_build_system/"
+        },"genre": "posts","wordcount":  5707 ,
+        "url": "http://blog.z2z63.dev/posts/cmake_build_system/","datePublished": "2025-06-04T20:17:20+08:00","dateModified": "2025-06-04T20:17:20+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
                 "@type": "Person",
@@ -156,7 +154,22 @@
         <h2 class="toc-title">Contents</h2>
         <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
   <ul>
-    <li><a href="#如何确定包名">如何确定包名</a></li>
+    <li><a href="#read-the-fucking-doc">Read The Fucking Doc</a></li>
+    <li><a href="#read-the-fucking-source">Read The Fucking Source</a>
+      <ul>
+        <li><a href="#检测操作系统和架构">检测操作系统和架构</a></li>
+        <li><a href="#检测编译器和编译器-id">检测编译器和编译器 id</a></li>
+        <li><a href="#cmake_cxx_flags_debug_init-赋值"><code>CMAKE_CXX_FLAGS_DEBUG_INIT</code> 赋值</a></li>
+      </ul>
+    </li>
+    <li><a href="#浅谈-cmake">浅谈 cmake</a>
+      <ul>
+        <li><a href="#重新审视跨平台">重新审视跨平台</a></li>
+        <li><a href="#cmake-成功的原因">cmake 成功的原因</a></li>
+        <li><a href="#unix-的古老传承">unix 的古老传承</a></li>
+      </ul>
+    </li>
+    <li><a href="#append">append</a></li>
   </ul>
 </nav></div>
     </div><dialog id="toc-dialog" class="tw-max-w-full tw-w-full tw-max-h-full tw-h-full tw-ml-16">
@@ -164,20 +177,35 @@
             <h2 class="tw-mx-0 tw-my-6 tw-uppercase tw-text-2xl">Contents</h2>
             <div class="toc-content"><nav id="TableOfContents">
   <ul>
-    <li><a href="#如何确定包名">如何确定包名</a></li>
+    <li><a href="#read-the-fucking-doc">Read The Fucking Doc</a></li>
+    <li><a href="#read-the-fucking-source">Read The Fucking Source</a>
+      <ul>
+        <li><a href="#检测操作系统和架构">检测操作系统和架构</a></li>
+        <li><a href="#检测编译器和编译器-id">检测编译器和编译器 id</a></li>
+        <li><a href="#cmake_cxx_flags_debug_init-赋值"><code>CMAKE_CXX_FLAGS_DEBUG_INIT</code> 赋值</a></li>
+      </ul>
+    </li>
+    <li><a href="#浅谈-cmake">浅谈 cmake</a>
+      <ul>
+        <li><a href="#重新审视跨平台">重新审视跨平台</a></li>
+        <li><a href="#cmake-成功的原因">cmake 成功的原因</a></li>
+        <li><a href="#unix-的古老传承">unix 的古老传承</a></li>
+      </ul>
+    </li>
+    <li><a href="#append">append</a></li>
   </ul>
 </nav></div>
         </div>
-    </dialog><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2023-09-20" data-pagefind-body>Idea配置java项目</h1><div class="post-meta">
+    </dialog><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2025-06-04" data-pagefind-body>Cmake_build_system</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><img class="tw-inline-block tw-max-h-4 tw-rounded-full tw-translate-y-[-2px] tw-mr-1"  src='https://avatars.githubusercontent.com/z2z63'   alt="z2z63 avatar" height="16" width="16"><a href="https://github.com/z2z63" title="Author" target="_blank" rel="noopener noreferrer author" class="author">z2z63</a>
                 </span></div>
             <div class="post-meta-line"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2023-09-20">2023-09-20</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2024-01-26">2024-01-26</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;1090 words&nbsp;
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2025-06-04">2025-06-04</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2025-06-04">2025-06-04</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;5707 words&nbsp;
                     <svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;5 minutes&nbsp;</div>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;26 minutes&nbsp;</div>
         </div><div class="details toc print:!tw-block" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -186,47 +214,56 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#如何确定包名">如何确定包名</a></li>
+    <li><a href="#read-the-fucking-doc">Read The Fucking Doc</a></li>
+    <li><a href="#read-the-fucking-source">Read The Fucking Source</a>
+      <ul>
+        <li><a href="#检测操作系统和架构">检测操作系统和架构</a></li>
+        <li><a href="#检测编译器和编译器-id">检测编译器和编译器 id</a></li>
+        <li><a href="#cmake_cxx_flags_debug_init-赋值"><code>CMAKE_CXX_FLAGS_DEBUG_INIT</code> 赋值</a></li>
+      </ul>
+    </li>
+    <li><a href="#浅谈-cmake">浅谈 cmake</a>
+      <ul>
+        <li><a href="#重新审视跨平台">重新审视跨平台</a></li>
+        <li><a href="#cmake-成功的原因">cmake 成功的原因</a></li>
+        <li><a href="#unix-的古老传承">unix 的古老传承</a></li>
+      </ul>
+    </li>
+    <li><a href="#append">append</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content" data-pagefind-body><p>IDEA更新后以前的项目不知道为什么不能直接运行了，新建项目后也不会自动创建运行配置了，为了解决这个问题踩了不少坑</p>
-<p>声明一下所说的运行配置是指Run/Debug Configuration</p>
-<h1 id="java项目的构建" class="headerLink">
-    <a href="#java%e9%a1%b9%e7%9b%ae%e7%9a%84%e6%9e%84%e5%bb%ba" class="header-mark"></a>java项目的构建</h1><p>众所周知java一般是用maven或者gradle构建的，他们都能做到管理依赖、管理构建任务、编译等过程。<br>
-在idea的运行配置中，也可以选择gradle和maven，然后如果你选择了它们作为运行配置，多半会看到这个界面
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920153257.png'     >
-然而一般来说希望看到的应该是这个
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920154601.png'     >
-实际上，maven和gradle作为构建工具，命令行调用时可以传入不同参数作为task，构建工具不负责运行</p>
-<h1 id="如何设置idea的运行配置" class="headerLink">
-    <a href="#%e5%a6%82%e4%bd%95%e8%ae%be%e7%bd%aeidea%e7%9a%84%e8%bf%90%e8%a1%8c%e9%85%8d%e7%bd%ae" class="header-mark"></a>如何设置idea的运行配置</h1><p>首先我们要清楚idea支持三种方式</p>
-<ul>
-<li>IDEA Build</li>
-<li>maven</li>
-<li>gradle</li>
-</ul>
-<p>和idea定位相同的eclipse也有eclipse build，不推荐使用IDE特有的方式构建，因为他们往往是跟IDE绑定的，无法直接在命令行使用，不如专业的构建工具成熟<br>
-一个新的IDEA项目，需要首先指定java SDK版本</p>
-<ol>
-<li>在设置中找到Project Structure，配置SDK
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920153950.png'     ></li>
-<li>点击File-settings，找到Build,Execution, Deployment - Build Tools - Gradle<br>
-把Build and run using和Run test using改成IntelliJ IDEA
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920154230.png'     >
-使用maven可以跳过这一步</li>
-<li>创建一个&rsquo;Run/Debug Configuration&rsquo;，选择JDK、main方法入口，保存</li>
-</ol>
-<p>到这一步已经能够实现这样的效果
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920154601.png'     ></p>
-<h1 id="tips" class="headerLink">
-    <a href="#tips" class="header-mark"></a>Tips</h1><p>在使用第三方库的时候又踩了一个坑，整理一下java项目使用第三方库的流程</p>
-<ol>
-<li>在<a href="https://mvnrepository.com/" target="_blank" rel="noopener noreferrer">maven中心仓库</a>上搜索想要的包</li>
-<li>指定版本后，直接复制配置，粘贴到pom.xml或build.gradle即可
-<img class="tw-inline" loading="lazy" src='https://raw.githubusercontent.com/z2z63/image/main/img20230920155320.png'     ></li>
-<li>pom.xml或build.gradle改变后，IDEA会重新同步它们的更新，然后可以看到新加入的包出现在文件管理器的&rsquo;External Libraries&rsquo;中</li>
-<li>至此就可以根据包名使用了。然而比较坑的一点就是包在maven中心仓库的坐标并不总是他们的包名，需要确定包名<br>
-按理来说，直接找到包的文档网站，能够看到一些代码片段有这样的语句
+            </div><div class="content" id="content" data-pagefind-body><p>众所周知 C++项目通常在开发时关闭优化以方便调试，在发布时开启优化以获得更高的性能，通常这是通过开发时给编译器传递<code>-g</code>选项，而在发布时给编译器传递<code>-O2</code>选项实现的。在某次使用 cmake 时我了解到了<code>CMAKE_BUILT_TYPE</code>的概念，这个变量有<code>Debug</code>，<code>Release</code>，<code>RelWithDebInfo</code>, <code>MinSizeRel</code>四种典型的值，但当我翻开 cmake 文档时发现 cmake 并没有说明<code>CMAKE_BUILT_TYPE</code>会对优化参数有什么影响，而经过我的实验，当<code>CMAKE_BUILT_TYPE</code>设为<code>Debug</code>时确实会传递<code>-g</code>。于是我研究了一番<code>CMAKE_BUILT_TYPE</code>如何影响到编译器参数的</p>
+<p>阅读文档和源码是很无聊的过程，不感兴趣的读者可以直接跳到 <a href="#%e6%b5%85%e8%b0%88-cmake" rel="">浅谈 cmake</a></p>
+<h2 id="read-the-fucking-doc" class="headerLink">
+    <a href="#read-the-fucking-doc" class="header-mark"></a>Read The Fucking Doc</h2><p>首先翻开<code>CMAKE_BUILD_TYPE</code>的文档，cmake 对这个变量说明非常少，仅仅说明了在使用单生成器（makeifle，ninja）时<code>CMAKE_BUILD_TYPE</code>可以指定 build configuration，而 build configuration 表明了此次构建的规格</p>
+<p>然后翻开<code>CMAKE_&lt;LANG&gt;_FLAGS</code>的文档，其中<code>&lt;LANG&gt;</code>在编译 cpp 时其值为<code>CXX</code>，cmake 在文档中提及这些参数会被传递到所有的编译器调用，即在任何的<code>CMAKE_BUILD_TYPE</code>下<code>CMAKE_CXX_FLAGS</code>都会作为参数被传递到编译器调用，显然这不是 cmake 的最佳实践。要证明也很简单，在<code>CMakeLists.txt</code>中加上一行<code>message(STATUS CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS})</code>，能看到输出为<code>-- CMAKE_CXX_FLAGS=</code>，即<code>CMAKE_CXX_FLAGS</code>这个变量为空，因为这个值是留给用户设置的。</p>
+<p><code>CMAKE_&lt;LANG&gt;_FLAGS</code>文档还提及<code>CMAKE_&lt;LANG&gt;_FLAGS_&lt;CONFIG&gt;</code>会在对应的<code>&lt;CONFIG&gt;</code>生效时被传递到所有的编译器调用。那么<code>&lt;CONFIG&gt;</code>是什么呢？翻开<code>CMAKE_&lt;LANG&gt;_FLAGS_&lt;CONFIG&gt;</code>文档，其中第一句</p>
+<blockquote>
+  <p>Language-wide flags for language &lt;LANG&gt; used when building for the &lt;CONFIG&gt; configuration</p>
+</blockquote><p>可以勉强推断出<code>&lt;CONFIG&gt;</code>即前文提到的 build configuration，也就是<code>CMAKE_BUILT_TYPE</code>的值，那么对于 <code>CMAKE_BUILT_TYPE</code>值为 Debug 的调试模式，可以使用<code>CMAKE_CXX_FLAGS_DEBUG</code>来单独控制此模式的编译参数（顺便提一下<code>CMAKE_BUILT_TYPE</code>有时大小写敏感有时不敏感，例如<code>CMAKE_CXX_FLAGS_DEBUG</code>中 DEBUG 是全大写）</p>
+<p>在 AI 的帮助下我找到了<code>CMAKE_&lt;LANG&gt;_FLAGS_&lt;CONFIG&gt;_INIT</code>的文档，cmake 描述其为</p>
+<blockquote>
+  <p>Value used to initialize the CMAKE_&lt;LANG&gt;_FLAGS_&lt;CONFIG&gt; cache entry the first time a build tree is configured for language &lt;LANG&gt;.</p>
+</blockquote><p>即<code>CMAKE_CXX_FLAGS_DEBUG_INIT</code>可以当做<code>CMAKE_CXX_FLAGS_DEBUG</code>的初始值，而经过实验，默认情况下<code>CMAKE_BUILT_TYPE=Debug</code>，而<code>CMAKE_CXX_FLAGS_DEBUG</code>=<code>CMAKE_CXX_FLAGS_DEBUG_INIT</code>=<code>-g</code>。因此可以得出一个结论：<code>CMAKE_CXX_FLAGS_DEBUG_INIT</code>使调试模式下<code>-g</code>被传递给编译器。</p>
+<p>进一步思考，<code>CMAKE_CXX_FLAGS_DEBUG_INIT</code>的值是从哪里来的呢？文档中提及</p>
+<blockquote>
+  <p>This variable is meant to be set by a toolchain file. CMake may prepend or append content to the value based on the environment and target platform.</p>
+</blockquote><p>第一句提及的所谓 toolchain file 是 cmake 在交叉编译时声明工具链的文件，但是对于非交叉编译，即本地编译本地运行的情况，就没有 toolchain file。第二句提示这个值可能是 cmake 自行设置的</p>
+<p>由于 cmake 文档再也找不出有用的内容，我结束了文档阅读，转而阅读 cmake 的源码</p>
+<h2 id="read-the-fucking-source" class="headerLink">
+    <a href="#read-the-fucking-source" class="header-mark"></a>Read The Fucking Source</h2><p>最终对我帮助非常大的是 cmake 源码内对于 enable_launguage 的 <a href="https://github.com/Kitware/CMake/blob/c95a8348ceb5f03db0623afcee5520abe2b4832e/Source/cmGlobalGenerator.cxx#L483-L529" target="_blank" rel="noopener noreferrer">注释</a></p>
+<p>所谓 enable_language 是 cmake 的 project 命令背后完成的一项工作，任何语言都需要被 enable 才能使用，而 C 和 C++是 cmake 默认 enable 的，因此我从来没有使用过 enable_languge。顺着注释我发现了 cmake 内部很多有意思的奇技淫巧。</p>
+<p>enable_languge 的流程包括检测操作系统、检测 CPU 架构、找到语言对应的编译器、检测编译器的 id、检测编译器支持的功能。</p>
+<p>enable_languge 的流程一小部分是在 cmake 源码中使用 C++ 完成的，剩下的大部分都是使用 cmake 语言完成的，这些逻辑可以在<code>&lt;prefix&gt;/share/cmake/Modules/*.cmake</code>中找到，其中<code>&lt;prefix&gt;</code>是 cmake 的安装目录，<code>&lt;prefix&gt;/share/cmake/Modules</code>与 cmake 项目根目录下的<code>Moduels</code>目录内容相同，安装时<code>Moduels</code>下的所有<code>*.cmake</code>脚本原样不动地复制到<code>&lt;prefix&gt;/share/cmake/Modules</code></p>
+<h3 id="检测操作系统和架构" class="headerLink">
+    <a href="#%e6%a3%80%e6%b5%8b%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e5%92%8c%e6%9e%b6%e6%9e%84" class="header-mark"></a>检测操作系统和架构</h3><p>所谓交叉编译，往往是对于嵌入式操作系统或者嵌入式设备没有足够能力运行完整的开发工具，因此只能依靠其他设备/操作系统编译，常见的交叉编译有 Android 编译 C++库，ios 编译，STM32 编译等等。在交叉编译时，运行编译器的操作系统被称为 Host，而编译产物运行的平台被称为 Target，所谓检测操作系统包括检测 Host OS 和检测 Target OS，在不涉及交叉编译时可以简化为检测 Host OS</p>
+<p>对于 Host OS 的检测分为对 Windows、类 Unix（包括一众 linux 发行版和 MacOS） 的检测。 cmake 是能知道自己的目标平台，也就是 cmake 知道当前 Host OS 的大致分类，随后在类 Unix 平台使用 <code>/usr/bin/uname</code>可以获取当前平台的系统名称。例如我在 mac 上开发时，<code>uname -s</code>返回<code>Darwin</code>。</p>
+<p>随后 cmake 开始对当前 OS 的架构检测。主流 OS 往往都适配了多种架构，例如 Windows 有 x64,x86,arm，linux 也有 x64,x86,arm，还有 riscv 等一堆千奇百怪的架构，MacOS 也有 Intel 芯和 Apple Silicon 的区别。理论上 cmake 是知道自己目标平台的架构，但由于架构之间指令转译工具的存在，Apple Silicon 的 MacOS 也能照样运行 x64 的 cmake，因此 cmake 选择使用<code>uname -m</code>的结果作为 Host 架构。</p>
+<h3 id="检测编译器和编译器-id" class="headerLink">
+    <a href="#%e6%a3%80%e6%b5%8b%e7%bc%96%e8%af%91%e5%99%a8%e5%92%8c%e7%bc%96%e8%af%91%e5%99%a8-id" class="header-mark"></a>检测编译器和编译器 id</h3><p>检测编译器即 cmake 找到合适的编译器，检测编译器 id 即 cmake 识别出编译器是 gcc 还是 clang 还是 msvc&hellip;</p>
+<p>在类 Unix 平台，优先使用环境变量中指定的编译器，对于 C++，编译器通过环境变量<code>CXX</code>指定。其次 cmake 尝试搜索<code>CC</code> <code>c++</code> <code>g++</code> <code>aCC</code> <code>cl</code> <code>bcc</code> <code>xlC</code>。搜索使用 cmake 的<code>find_program</code>，<code>find_program</code>的搜索逻辑比较复杂，但总的来说，在<code>PATH</code>内的目录可以被搜索到</p>
+<p>找到编译器后，cmake 需要确认编译器 id，因为不同的编译器能够接受的参数不同，传参风格也有所不同。但检测编译器 id 并没有一个优雅的方法，cmake 采取了非常 hack 的方式实现</p>
+<p>假设 cmake 的<code>CMAKE_BINARY_DIRECTORY</code>，也就是构建目录是<code>build</code>，可以找到<code>build/CMakeFiles/&lt;CMake_version&gt;/CompilerIdCXX/CMakeCXXCompilerId.cpp</code>，这是 cmake 在 configure 阶段生成的文件，内部通过 feature macro 检测编译器 id，并将结果保持在一个全局的字符串数组中。例如在 macos 平台，会进入这段逻辑</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     
@@ -246,7 +283,7 @@
       aria-hidden="true">
           <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">java</p>
+          <p class="tw-select-none !tw-my-1">cpp</p>
       </button>
 
    <div class="tw-flex">
@@ -316,13 +353,15 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.squareup.okhttp.OkHttpClient</span><span class="p">;</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="cp">#elif defined(__clang__) &amp;&amp; defined(__apple_build_version__)
+</span></span></span><span class="line"><span class="cl"><span class="cp"># define COMPILER_ID &#34;AppleClang&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">char</span> <span class="k">const</span><span class="o">*</span> <span class="n">info_compiler</span> <span class="o">=</span> <span class="s">&#34;INFO&#34;</span> <span class="s">&#34;:&#34;</span> <span class="s">&#34;compiler[&#34;</span> <span class="n">COMPILER_ID</span> <span class="s">&#34;]&#34;</span><span class="p">;</span></span></span></code></pre>
 </div>
-然而实际上，文档中的代码片段几乎不会有这样的语句</li>
-</ol>
-<h2 id="如何确定包名" class="headerLink">
-    <a href="#%e5%a6%82%e4%bd%95%e7%a1%ae%e5%ae%9a%e5%8c%85%e5%90%8d" class="header-mark"></a>如何确定包名</h2><p>首先已经知道了这个包的俗称，根据俗称可以在maven中心仓库搜索得到这个包的坐标，然后就能下载到这个包的jar文件。
-根据jar的规范，解压jar包后，在<code>META-INF/MANIFEST.MF</code>中有这个jar包的元数据。例如okhttp包，<code>META-INF/MANIFEST.MF</code>内容为</p>
+<p>随后 CMake 调用刚刚找到的编译器编译这个文件，然后搜索目标文件中的<code>info_compiler</code>符号，正则解析出其中的<code>COMPILER_ID</code>。AppleClang 表示这个编译器是 clang 编译器的 apple 变种，clang 在不同平台都有各自的变种。</p>
+<h3 id="cmake_cxx_flags_debug_init-赋值" class="headerLink">
+    <a href="#cmake_cxx_flags_debug_init-%e8%b5%8b%e5%80%bc" class="header-mark"></a><code>CMAKE_CXX_FLAGS_DEBUG_INIT</code> 赋值</h3><p>通常我们接触到的编译器例如 gcc,g++,clang,clang++,cl 都被称为前端或者 driver，因为它们自身只是一个很小的二进制，只负责控制预处理器、汇编器、链接器等诸多工具相互协作。
+在<code>CMakeDetermineCompilerId.cmake</code>中，GNU 和 AppleClang 的<code>CMAKE_CXX_COMPILER_FRONTEND_VARIANT</code> 都被设为<code>GNU</code>，这表明 AppleClang 和 g++具有相似的传参风格，随后 cmake 加载<a href="https://github.com/Kitware/CMake/blob/0bc051c1804816ade50b7c6d506da46f143e04a0/Modules/Compiler/GNU.cmake#L58-L62" target="_blank" rel="noopener noreferrer"><code>Compiler/GNU.cmake</code></a>，在其中就能找到对<code>CMAKE_CXX_FLAGS_&lt;CONFIG&gt;_INIT</code>的初始化</p>
 <div class="code-block highlight is-open show-line-numbers  tw-group tw-my-2">
   <div class="
     
@@ -342,7 +381,7 @@
       aria-hidden="true">
           <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">text</p>
+          <p class="tw-select-none !tw-my-1">cmake</p>
       </button>
 
    <div class="tw-flex">
@@ -412,18 +451,41 @@
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">Manifest-Version: 1.0
-</span></span><span class="line"><span class="cl">Automatic-Module-Name: okhttp3</span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="nb">string</span><span class="p">(</span><span class="s">APPEND</span> <span class="s">CMAKE_</span><span class="o">${</span><span class="nv">lang</span><span class="o">}</span><span class="s">_FLAGS_INIT</span> <span class="s2">&#34; &#34;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">string</span><span class="p">(</span><span class="s">APPEND</span> <span class="s">CMAKE_</span><span class="o">${</span><span class="nv">lang</span><span class="o">}</span><span class="s">_FLAGS_DEBUG_INIT</span> <span class="s2">&#34; -g&#34;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">string</span><span class="p">(</span><span class="s">APPEND</span> <span class="s">CMAKE_</span><span class="o">${</span><span class="nv">lang</span><span class="o">}</span><span class="s">_FLAGS_MINSIZEREL_INIT</span> <span class="s2">&#34; -Os&#34;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">string</span><span class="p">(</span><span class="s">APPEND</span> <span class="s">CMAKE_</span><span class="o">${</span><span class="nv">lang</span><span class="o">}</span><span class="s">_FLAGS_RELEASE_INIT</span> <span class="s2">&#34; -O3&#34;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">string</span><span class="p">(</span><span class="s">APPEND</span> <span class="s">CMAKE_</span><span class="o">${</span><span class="nv">lang</span><span class="o">}</span><span class="s">_FLAGS_RELWITHDEBINFO_INIT</span> <span class="s2">&#34; -O2 -g&#34;</span><span class="p">)</span></span></span></code></pre>
 </div>
-<p>可以知道包名为okhttp3，而不是com.squareup.okhttp！</p></div>
+<p>最后可以得出一个结论，cmake 内置了对许多常见 OS 和 compiler 的适配逻辑，包括在这些平台上自动检测 OS，编译器，编译器 id，编译器支持的特性。然而 cmake 对此特性并没有详细的说明</p>
+<h2 id="浅谈-cmake" class="headerLink">
+    <a href="#%e6%b5%85%e8%b0%88-cmake" class="header-mark"></a>浅谈 cmake</h2><h3 id="重新审视跨平台" class="headerLink">
+    <a href="#%e9%87%8d%e6%96%b0%e5%ae%a1%e8%a7%86%e8%b7%a8%e5%b9%b3%e5%8f%b0" class="header-mark"></a>重新审视跨平台</h3><p>一年前的我沉迷于 flutter 的跨平台特性：一份代码部署到 windows、linux、macos、android、ios，如果我写了一个很厉害的 app，可以轻松在各个平台使用。<br>
+在客户端开发岗位实习两个月后我逐渐改变了这个观点，各平台之间的差距实在太大了。稍微深究一下各个平台的差异就能感受到跨平台是一个无底洞。例如打开文件有 C 标准规定的<code>fopen</code>，但在 windows 平台，libc 的<code>fopen</code>可能将路径字符串按照 ANSI 编码解释。同理 windows 将很多 API 都分为了 ANSI 版本和 Unicode 版本，甚至 WIN32 窗口程序的入口函数不是 <code>main</code> 而是 <code>WinMain</code>。</p>
+<p>从近年来 meta、google、腾讯、字节都推出自己的跨平台框架可以看出，跨平台尽管不能真正的跨平台，但仍然是必须的。以我在实习中参与的某个软件开发为例，它跨 windows、linux、macos、android、ios 平台，其中以上平台主要划分为桌面端和移动端，桌面端和移动端尽量复用 UI，但仍然有些 UI 是无法复用的，但业务代码是 100% 复用、100% 跨平台的。我想这就是跨平台的意义：避免为每个平台单独维护一份冗余的代码，提高软件迭代速度。</p>
+<p>一个 v2ex 用户的 <a href="https://v2ex.com/t/1071599#:~:text=%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%B0%B1%E6%98%AF%E5%9C%A8%E5%90%83%E5%B1%8E%EF%BC%8C%E6%A1%86%E6%9E%B6%E5%A4%9A%E5%90%83%E7%82%B9%E4%BD%A0%E5%B0%B1%E5%B0%91%E5%90%83%E7%82%B9%EF%BC%8C%E6%A1%86%E6%9E%B6%E5%B0%91%E5%90%83%E7%82%B9%E4%BD%A0%E5%B0%B1%E5%A4%9A%E5%90%83%E7%82%B9%EF%BC%8C%E6%A1%86%E6%9E%B6%E8%AF%B4%E6%9C%89%E4%BA%9B%E5%B1%8E%E5%AE%9E%E5%9C%A8%E5%92%BD%E4%B8%8D%E4%B8%8B%EF%BC%8C%E4%BD%A0%E5%B0%B1%E8%A6%81%E5%90%AB%E7%9D%80%E6%B3%AA%E5%92%BD%E4%B8%8B%E5%8E%BB%EF%BC%8C%E8%A6%81%E6%98%AF%E4%BD%A0%E4%B9%9F%E5%92%BD%E4%B8%8D%E4%B8%8B%E5%8E%BB%EF%BC%8C%E5%B0%B1%E8%A6%81%E6%B7%B7%E5%9C%A8%E9%A5%AD%E9%87%8C%E7%AB%AF%E7%BB%99%E7%94%A8%E6%88%B7%E4%BA%86" target="_blank" rel="noopener noreferrer">评论</a> 可以准确的概括我对跨平台的看法：“跨平台就是在吃屎，框架多吃点你就少吃点，框架少吃点你就多吃点，框架说有些屎实在咽不下，你就要含着泪咽下去，要是你也咽不下去，就要混在饭里端给用户了”。所谓跨平台框架、跨平台软件，其内部往往在处理很多无聊又琐碎的东西。cmake 也不例外，翻开 cmake 源码就能看到内部对许多如同上古邪神的 OS、编译器的支持，例如 HP-UX、AIX、Solaris、Borland、HP aCC 、Intel C++、IBM XL C/C++等等。</p>
+<h3 id="cmake-成功的原因" class="headerLink">
+    <a href="#cmake-%e6%88%90%e5%8a%9f%e7%9a%84%e5%8e%9f%e5%9b%a0" class="header-mark"></a>cmake 成功的原因</h3><p>cmake 愿意适配各种奇奇怪怪的东西，不仅包括上文提到的很多现在连听都没听说过的 OS 和编译器，还包括 CUDA、STM32、Android NDK、OpenBSD、PowerPC、Windows Phone、Windows CE、apple 的 watchos、tvos 等等。翻开 cmake generator 文档还能看到 cmake 仍然保留了对 codeblock、eclipse、kate、sublime 的支持（在 3.27 版本标记为废弃）。其中我想聊聊 kate，kate 是 KDE 的文本编辑器，KDE 是 linux 三大桌面环境之一。我使用 linux 作为主力 OS 长达两年，kate 是我非常喜欢的一个文本编辑器，他开箱即用又轻便，而且是一个伪装成文本编辑器的 IDE。长期使用过 windows、linux、macos 后我仍然认为 KDE 中许多软件是我认为非常好用的，比如文件管理器 <a href="https://apps.kde.org/dolphin/" target="_blank" rel="noopener noreferrer">dolphin</a>，文本编辑器 <a href="https://kate-editor.org/" target="_blank" rel="noopener noreferrer">kate</a>、终端 <a href="https://konsole.kde.org/" target="_blank" rel="noopener noreferrer">konsole</a> 等等。</p>
+<p>回到话题，虽然大家都说自己是写 C++的，但每个人的方向完全不一样，C++社区就是这样的碎片化，而 cmake 愿意对任何 C++的隐蔽角落去做适配，只要选择 cmake，虽然语法很难看，文档又臭又长，但用它组织构建系统总归是不会遇到问题的。</p>
+<p>除了以上原因，C++社区对要求 C++的构建工具对平台依赖较小，因此 C++的构建工具大概率不会选择主流的高级语言，否则在从自举过程中就可能遇到一个困境：编译 C++项目需要先编译 C++的构建工具，而 C++的构建工具依赖高级语言，高级语言又依赖 C/C++。</p>
+<p>还有一个比较主观的原因，C++社区希望的构建工具应该是足够灵活的，许多大型 C++项目都会在构建过程中使用脚本语言，过去的 linux 传统开源项目常用 perl，现在的项目也许常用 python，我实习时参与的项目则使用 javascript，mentor 介绍时说技术总监对 JS 怀着这样的热情：“一切能用 JS 重写的必将使用 JS 重写”，于是他在项目建立初期便引入了 JS。</p>
+<p>为什么要足够灵活呢？我想原因是因为 C++构建过程本身就是比较复杂的，像是自动调用 wget、git 等工具下载源码，根据文件名条件地编译源文件（例如、*_desktop.cpp 只在桌面端构建时参加编译，*_test.cpp 只在测试时加入编译），还有 flex、bison、qt 都大量的使用了代码生成。那么更进一步，为什么 C++的构建过程这么复杂呢？我对此的理解是，C++反射至今没有标准实现，因此 C++倾向在编译时完成更多的工作。同时因为 C++社区碎片化，导致 C++在工程实践缺少一个公认的约定俗成，在实践中大家都按照自己对最佳实践的理解去组织构建系统。而 cmake 就能在构建阶段做很多事情，比如<code>execute_process</code>，<code>find_programe</code>，<code>configure_file</code>，<code>ExternalProject</code>等等。而 cmake 提供的这些命令也相当于总结 C++工程构建中的常见任务。</p>
+<p>一句话总结，虽然 cmake 自身存在很多问题，但总体而言 cmake 基本符合了 C++社区对 C++构建工具的期望。</p>
+<h3 id="unix-的古老传承" class="headerLink">
+    <a href="#unix-%e7%9a%84%e5%8f%a4%e8%80%81%e4%bc%a0%e6%89%bf" class="header-mark"></a>unix 的古老传承</h3><p>前文提到 cmake 在类 unix 平台使用<code>uname -s</code>检测 OS，使用<code>uname -m</code>检测架构，使用<code>cc</code>作为 C 编译器。这是因为<code>uname</code>是 UNIX 上用于在终端打印机器信息和系统信息的命令，而<code>cc</code>是 unix 的 C Compiler 的名称。在“上古时代”出现了许多 unix 分支，当时的软件交付方式是工程师亲自在目标机器上编译软件，所以类 unix 系统只需做到源码级的兼容而不需要做到二进制级别的兼容。linux 为了能够使用 unix 的软件，选择兼容 unix，其中就包括了模仿 unix 的<code>uname</code>和<code>cc</code>。兼容 unix 后，为 unix 开发的软件不需要修改 Makefile 就能在 linux 编译。随后<code>uname</code>和<code>cc</code>也进入了 POSIX 标准，而 macos 是 POSIX 兼容机，自然也需要有<code>uname</code>和<code>cc</code></p>
+<p>这样的历史一方面让我感受到 unix 的古老传承，不愧是任何 OS 教科书都必讲的 OS，另一方面，也让我感受到 C++是一门非常古老的语言，古老到 C++诞生早于 linux，早于 git。我一直在学习现代的 C++，差点忘了 C++原来是如此古老的语言</p>
+<h2 id="append" class="headerLink">
+    <a href="#append" class="header-mark"></a>append</h2><div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/40dJS_LC6S8?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+</div>
 
         <div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-01-26&nbsp;<a class="git-hash" href="https://github.com/z2z63/z2z63.github.io/commit/c7849309fb504c28a336cf5dbbfd8004e2c17b2b" target="_blank" title="commit by z2z63(vituralfuture@gmail.com) c7849309fb504c28a336cf5dbbfd8004e2c17b2b: update" rel="noopener noreferrer">
-                                    <svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M440.667 182.109l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l14.623-81.891C377.123 38.754 371.468 32 363.997 32h-40.632a12 12 0 0 0-11.813 9.891L296.175 128H197.54l14.623-81.891C213.477 38.754 207.822 32 200.35 32h-40.632a12 12 0 0 0-11.813 9.891L132.528 128H53.432a12 12 0 0 0-11.813 9.891l-7.143 40C33.163 185.246 38.818 192 46.289 192h74.81L98.242 320H19.146a12 12 0 0 0-11.813 9.891l-7.143 40C-1.123 377.246 4.532 384 12.003 384h74.81L72.19 465.891C70.877 473.246 76.532 480 84.003 480h40.632a12 12 0 0 0 11.813-9.891L151.826 384h98.634l-14.623 81.891C234.523 473.246 240.178 480 247.65 480h40.632a12 12 0 0 0 11.813-9.891L315.472 384h79.096a12 12 0 0 0 11.813-9.891l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l22.857-128h79.096a12 12 0 0 0 11.813-9.891zM261.889 320h-98.634l22.857-128h98.634l-22.857 128z"/></svg>c784930</a></span>
+                <span>Updated on 2025-06-04</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -434,17 +496,14 @@
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"/></svg>&nbsp;<a href="/tags/java/">Java</a>,&nbsp;<a href="/tags/jetbrains-ide/">Jetbrains IDE</a></section>
+        <section class="post-tags"></section>
         <section class="print:!tw-hidden">
             <span><button class="tw-text-fgColor-link-muted hover:tw-text-fgColor-link-muted-hover" onclick="window.history.back();">Back</button></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav print:tw-hidden"><a href="/posts/linux-font/" class="prev" rel="prev" title="Linux字体"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>Linux字体</a>
-            <a href="/posts/linux-vmware-setup/" class="next" rel="next" title="Linux使用VMware">Linux使用VMware<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></a></div>
+    <div class="post-nav print:tw-hidden"><a href="/posts/port_fowarding/" class="prev" rel="prev" title="端口转发的妙用"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>端口转发的妙用</a></div>
 </div>
 <div id="comments" class="print:!tw-hidden tw-pt-32 tw-pb-8"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -470,7 +529,7 @@
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 32C114.6 32 0 125.1 0 240c0 49.6 21.4 95 57 130.7C44.5 421.1 2.7 466 2.2 466.5c-2.2 2.3-2.8 5.7-1.5 8.7S4.8 480 8 480c66.3 0 116-31.8 140.6-51.4 32.7 12.3 69 19.4 107.4 19.4 141.4 0 256-93.1 256-208S397.4 32 256 32z"/></svg>
   </a></div>
 <link rel="stylesheet" href="/lib/gitalk/gitalk.min.css">
-<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"Ov23liMtTBdWPdBDJjuQ","clientSecret":"5c5e82f1b10ce323ce7efae32b1b8f0a87773577","id":"2023-09-20T15:29:39+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"Idea配置java项目"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null},"sharerjs":true};</script><script
+<script>window.config={"autocomplete.min.js":"/lib/autocomplete/autocomplete.min.js","comment":{"gitalk":{"admin":["z2z63"],"clientID":"Ov23liMtTBdWPdBDJjuQ","clientSecret":"5c5e82f1b10ce323ce7efae32b1b8f0a87773577","id":"2025-06-04T20:17:20+08:00","owner":"z2z63","repo":"z2z63.github.io","title":"Cmake_build_system"}},"fuse.min.js":"/lib/fuse/fuse.min.js","search":{"distance":null,"findAllMatches":null,"fuseIndexURL":"/index.json","highlightTag":null,"ignoreFieldNorm":null,"ignoreLocation":null,"isCaseSensitive":null,"location":null,"maxResultLength":null,"minMatchCharLength":null,"noResultsFound":"No results found","snippetLength":null,"threshold":null,"type":"fuse","useExtendedSearch":null},"sharerjs":true};</script><script
     src="/lib/sharer/sharer.min.js"
     
   ></script><script
