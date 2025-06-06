@@ -1,5 +1,5 @@
 ---
-title: "Cmake_build_system"
+title: "cmake杂谈"
 author: z2z63
 date: 2025-06-04T20:17:20+08:00
 ---

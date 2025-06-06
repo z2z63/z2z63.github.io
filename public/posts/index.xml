@@ -5,7 +5,7 @@
         <description>All Posts | z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
             <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Wed, 04 Jun 2025 20:17:20 &#43;0800</lastBuildDate><atom:link href="http://blog.z2z63.dev/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Cmake_build_system</title>
+    <title>cmake杂谈</title>
     <link>http://blog.z2z63.dev/posts/cmake_build_system/</link>
     <pubDate>Wed, 04 Jun 2025 20:17:20 &#43;0800</pubDate><author>
         <name>z2z63</name>
