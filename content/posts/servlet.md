@@ -33,7 +33,8 @@ public:
 
 // 请求 /template 返回渲染后的 HTML 
 HttpResponse templateHandler(HttpRequest &request) { 
-    mstch::map data; data["time"] = std::string("111"); 
+    mstch::map data; 
+    data["time"] = std::string("111"); 
     return HttpResponse().render("template.html", data); 
 } 
 
@@ -110,27 +111,31 @@ private:
 
 ```cpp
 std::uniqie_ptr<VectorDataManager> mgr = VectorDataManager::create(table); 
-if(mgt == nullptr){ 
-    // 处理错误。..
+if(mgr == nullptr){ 
+    // 处理错误...
     return -1; 
 } 
 // 正常逻辑
 ```
 
 关键点：
-1.constructor 私有，禁止外部构造，内部不包括资源申请，一定成功
-2.create 公开静态成员函数，内部尝试申请资源，申请资源失败则返回空指针，申请成功则构造（智能指针包裹的）对象并返回
-3.create 是外部唯一用于获取该对象的方法，使用者必须判空，可以使用 std::optional 强制使用者检查
+
+1. constructor 私有，禁止外部构造，内部不包括资源申请，一定成功
+2. `create`公开静态成员函数，内部尝试申请资源，申请资源失败则返回空指针，申请成功则构造（智能指针包裹的）对象并返回
+3. `create`是外部唯一用于获取该对象的方法，使用者必须判空，可以使用`std::optional`强制使用者检查
 
 这个方案还有一个问题，无法返回错误码表示各种错误原因，只需将错误码的引用作为参数传递进 create 就能解决。
 
-当然，rust 的 std::Result 作为返回值也是非常好的解决方法
+当然，rust 的`std::Result`作为返回值也是非常好的解决方法
 
 ```rust
-enum Result<T, E> { Ok(T), Err(E), }
+enum Result<T, E> { 
+    Ok(T),
+    Err(E), 
+}
 ```
 
-补充：C++23 也有和 rust 的`std::Result`相似的`std::expected`了！
+> 补充：C++23 也有和 rust 的`std::Result`相似的`std::expected`了！
 
 ### 二段式构造之于 java
 
