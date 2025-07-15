@@ -4,9 +4,16 @@
         <link>http://blog.z2z63.dev/</link>
         <description>z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Wed, 04 Jun 2025 20:17:20 &#43;0800</lastBuildDate>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Wed, 16 Jul 2025 00:12:04 &#43;0800</lastBuildDate>
             <atom:link href="http://blog.z2z63.dev/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>WebServer、Servlet与二段式构造</title>
+    <link>http://blog.z2z63.dev/posts/servlet/</link>
+    <pubDate>Wed, 16 Jul 2025 00:12:04 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://blog.z2z63.dev/posts/servlet/</guid>
+    <description><![CDATA[<p>提到 servlet 我总是想起 applet、JSP，因为现在学校还在教这种老古董。但在最近学习 spring 的过程中我发现 spring 往下就是 servlet。因此记录一下学习 servlet 中的一些思考</p>]]></description>
+</item><item>
     <title>cmake杂谈</title>
     <link>http://blog.z2z63.dev/posts/cmake_build_system/</link>
     <pubDate>Wed, 04 Jun 2025 20:17:20 &#43;0800</pubDate><author>
@@ -87,12 +94,5 @@
     <a href="#%e5%86%99%e5%9c%a8%e5%89%8d%e9%9d%a2" class="header-mark"></a>写在前面</h2><p>仔细数来快三个月没写博客了，虽然我也能找到各种各样的原因，实习离职、秋招、比赛等等，归根结底还是懈怠了。最近各种事项也基本结束，整天忙着无所事事，是时候重新动笔了</p>
 <p>本文我将围绕即将结束初赛的 oceanbase 数据库大赛展开，但由于我不喜欢向别人讲解我敲的代码如何如何，所以我会偏向这次比赛涉及的理论、设计、想法</p>
 <p>在这次比赛前我因为准备秋招，花了一些时间读了两本书，我认为对比赛帮助非常大，本文提及的很多想法和设计也是参考了这些书</p>]]></description>
-</item><item>
-    <title>第十周：杂谈与碎碎念</title>
-    <link>http://blog.z2z63.dev/posts/week10/</link>
-    <pubDate>Sun, 18 Aug 2024 14:36:32 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/posts/week10/</guid>
-    <description><![CDATA[<p>近来也算看了不少别人的博客，有些文章非常优秀，还有一些很无趣。在我看来，一篇好的博文首先不能是官方文档的复读机，也不能让读者完全看不懂，其次，信息来源应该尽量保持一手。从某方面来说，学习知识-输出知识的过程就好比咀嚼或消化。不知道转了多少手的知识好比被多次咀嚼消化后的粘稠状半消化物，多少令人反胃。我曾经也是被百度与CSDN之流坑过，所以看到 <a href="https://csdiy.wiki/%E5%BF%85%E5%AD%A6%E5%B7%A5%E5%85%B7/workflow/#_1" target="_blank" rel="noopener noreferrer">csdiy.wiki</a> 中相同的观点时，感同身受。</p>]]></description>
 </item></channel>
 </rss>
