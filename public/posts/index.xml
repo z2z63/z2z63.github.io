@@ -4,7 +4,15 @@
         <link>http://blog.z2z63.dev/posts/</link>
         <description>All Posts | z2z63/Virtualfuture&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>virtualfuture@gmail.com (z2z63)</managingEditor>
-            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Wed, 16 Jul 2025 00:12:04 &#43;0800</lastBuildDate><atom:link href="http://blog.z2z63.dev/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>virtualfuture@gmail.com (z2z63)</webMaster><lastBuildDate>Sat, 13 Sep 2025 15:40:48 &#43;0800</lastBuildDate><atom:link href="http://blog.z2z63.dev/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>为什么微服务需要限流</title>
+    <link>http://blog.z2z63.dev/posts/rate_limit/</link>
+    <pubDate>Sat, 13 Sep 2025 15:40:48 &#43;0800</pubDate><author>
+        <name>z2z63</name>
+    </author><guid>http://blog.z2z63.dev/posts/rate_limit/</guid>
+    <description><![CDATA[<p>首先考虑一下这样一个场景：饭点许多学生去食堂吃饭，他们在食堂需要先排队、打饭，然后寻找座位，找到座位后再吃饭。</p>
+<p>食堂的窗口、座位数量都是有限的，也就是说食堂在一段固定时间内服务的学生数量是有限的，饭点涌入食堂的学生很可能超过这个数量。于是食堂很容易人满为患，体现为队伍越来越长，座位越来越难找。</p>]]></description>
+</item><item>
     <title>WebServer、Servlet与二段式构造</title>
     <link>http://blog.z2z63.dev/posts/servlet/</link>
     <pubDate>Wed, 16 Jul 2025 00:12:04 &#43;0800</pubDate><author>
@@ -82,15 +90,5 @@
 不过在回顾之前，我想先宣布一件最近发生的事情</p>
 <h2 id="买了新域名" class="headerLink">
     <a href="#%e4%b9%b0%e4%ba%86%e6%96%b0%e5%9f%9f%e5%90%8d" class="header-mark"></a>买了新域名！</h2>]]></description>
-</item><item>
-    <title>OceanBase 数据库大赛初赛结束之后</title>
-    <link>http://blog.z2z63.dev/posts/miniob/</link>
-    <pubDate>Sun, 10 Nov 2024 15:38:53 &#43;0800</pubDate><author>
-        <name>z2z63</name>
-    </author><guid>http://blog.z2z63.dev/posts/miniob/</guid>
-    <description><![CDATA[<h2 id="写在前面" class="headerLink">
-    <a href="#%e5%86%99%e5%9c%a8%e5%89%8d%e9%9d%a2" class="header-mark"></a>写在前面</h2><p>仔细数来快三个月没写博客了，虽然我也能找到各种各样的原因，实习离职、秋招、比赛等等，归根结底还是懈怠了。最近各种事项也基本结束，整天忙着无所事事，是时候重新动笔了</p>
-<p>本文我将围绕即将结束初赛的 oceanbase 数据库大赛展开，但由于我不喜欢向别人讲解我敲的代码如何如何，所以我会偏向这次比赛涉及的理论、设计、想法</p>
-<p>在这次比赛前我因为准备秋招，花了一些时间读了两本书，我认为对比赛帮助非常大，本文提及的很多想法和设计也是参考了这些书</p>]]></description>
 </item></channel>
 </rss>
