@@ -13,7 +13,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2025-09-13T15:40:48+08:00">
-    <meta property="article:modified_time" content="2025-09-13T15:40:48+08:00">
+    <meta property="article:modified_time" content="2025-09-13T17:16:29+08:00">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="为什么微服务需要限流">
@@ -34,7 +34,7 @@
             "@type": "WebPage",
             "@id": "http://blog.z2z63.dev/posts/rate_limit/"
         },"genre": "posts","wordcount":  1904 ,
-        "url": "http://blog.z2z63.dev/posts/rate_limit/","datePublished": "2025-09-13T15:40:48+08:00","dateModified": "2025-09-13T15:40:48+08:00","publisher": {
+        "url": "http://blog.z2z63.dev/posts/rate_limit/","datePublished": "2025-09-13T15:40:48+08:00","dateModified": "2025-09-13T17:16:29+08:00","publisher": {
             "@type": "Organization",
             "name": "z2z63"},"author": {
                 "@type": "Person",
@@ -210,13 +210,13 @@
 <p>如果下游路由器由于输入队列已满而丢弃分组，上游路由器转发分组的工作也会白费，使得系统中毒不断加深，体现为系统中分组丢弃引发的重传分组占比越来越高，分组丢弃更加频繁，实际转发的有效分组越来越少。</p>
 <h2 id="微服务中的中毒" class="headerLink">
     <a href="#%e5%be%ae%e6%9c%8d%e5%8a%a1%e4%b8%ad%e7%9a%84%e4%b8%ad%e6%af%92" class="header-mark"></a>微服务中的中毒</h2><p>为了应对越来越多的流量，将服务中相对独立的部分拆分成一个个微服务，不同微服务通过 rpc 通信。在这样一个分布式环境下，rpc 超时约等于故障。举一个例子，淘宝的商品列表页中展示了许多商品的缩略图、名称、价格等等，当用户点开商品卡片进入商品详情页后需要展示商品大图。假设 A 服务负责商品详情页，B 服务负责商品大图（通常是商品系统或者商品中心），于是就存在 A 服务调用 B 服务获取商品大图的 rpc 调用关系。作为 C 端核心链路的一部分，A 服务的接口有很苛刻的耗时要求，假设要求 A 服务的接口耗时控制在 500ms 内，而 A 服务选择在 100ms 内完成 B 服务的 rpc 调用，若 100ms 内 B 服务没有返回，则 A 服务认为 B 服务故障，采取降级措施，例如使用商品缩略图（在商品列表页已经有了）代替商品大图，或者干脆不展示商品大图。</p>
-<p>在上述例子中，B 服务对 A 服务来说是弱依赖。再考虑一个强依赖的情况。A 系统需要调用 B 系统，由于各种原因，这个调用可能会失败，但并非严重的错误。而调用 B 服务是 A 服务必须完成的工作，而且这个 rpc 调用不在用户触发的流程中（例如数据维护、数据生产等等），自然也无法做到返回错误让用户稍后重试。于是 A 服务很可能采取这样一个方案：调用失败后间隔一段时间重试若干次。这就好比计算机网络的重传分组。</p>
+<p>在上述例子中，B 服务对 A 服务来说是弱依赖。再考虑一个强依赖的情况。A 系统需要调用 B 系统，由于各种原因，这个调用可能会失败，但并非严重的错误。而调用 B 服务是 A 服务必须完成的工作，而且这个 rpc 调用不在用户触发的流程中（例如定时任务、消息队列等等），自然也无法做到返回错误让用户稍后重试。于是 A 服务很可能采取这样一个方案：调用失败后间隔一段时间重试若干次。这就好比计算机网络的重传分组。</p>
 <p>最后再考虑这样一个情况，饭点对于外卖来说是业务高峰期，如果此时出现了服务超时，用户就会感知到加载时间变长，烦躁的用户可能反复进出页面、点击按钮，发起更多网络请求。假设每秒有 x 个用户涌入外卖平台，每个用户平均 3min 完成下单。那么可以简单的认为同时有 <code>3 * 60 * x</code> 个用户停留在平台中，由于服务的超时，用户平均下单耗时也显著增长，停留在平台的用户也越来越多，使得系统超时加剧，最坏的情况就是系统中充斥着烦躁的用户反复进出页面、点击按钮发起的请求，而单位时间内下单越来越少，最终体现为虽然系统负载很高，但下单量很低，服务近似不可用</p>
 <p>为了避免微服务这样的分布式系统出现中毒，首先在设计时就要对 rpc 进行限流，不仅仅要对调用发起方限流，也要对被调用方限流。其次，不同于计算机网络中的路由器，微服务中超时的服务可以灵活的扩容，这也是出现超时后的事后应对方法。</p>
 <h2 id="google-的限流" class="headerLink">
     <a href="#google-%e7%9a%84%e9%99%90%e6%b5%81" class="header-mark"></a>google 的限流</h2><p>说到限流就不得不提及 google 大名鼎鼎的令牌桶限流算法了, 但我不想重复八股，有兴趣的读者可以读一下令牌桶算法的 <a href="https://github.com/google/guava/blob/master/guava/src/com/google/common/util/concurrent/SmoothRateLimiter.java#L31" target="_blank" rel="noopener noreferrer">实现</a>，非常简洁，不想读源码的读者也可以看看这篇 <a href="https://zhuanlan.zhihu.com/p/601374678" target="_blank" rel="noopener noreferrer">文章</a>，我想提及两点有意思的地方</p>
 <ol>
-<li>令牌桶的桶大小和路由器的输入队列长度很相似，都能控制排队请求的数量</li>
+<li>令牌桶的桶大小和路由器的输入队列长度很相似，都能控制请求积压的规模</li>
 <li>google 的平滑暖机限流器在系统负载低时允许的 QPS 较低，而随着系统负载逐渐升高，限流器允许的 QPS 也逐步升高。<br>
 “暖机”反映了从微服务往下到硬件的整个计算机体系中缓存的大量应用（微服务本地缓存、JIT、数据库缓存、redis 缓存、操作系统缓存、磁盘缓冲区、CPU cache等等）</li>
 </ol>
@@ -228,7 +228,9 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2025-09-13</span>
+                <span>Updated on 2025-09-13&nbsp;<a class="git-hash" href="https://github.com/z2z63/z2z63.github.io/commit/ff9932de0ffcf8c6cbfdbcf1a673a25b71b58d39" target="_blank" title="commit by z2z63(vituralfuture@gmail.com) ff9932de0ffcf8c6cbfdbcf1a673a25b71b58d39: update" rel="noopener noreferrer">
+                                    <svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M440.667 182.109l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l14.623-81.891C377.123 38.754 371.468 32 363.997 32h-40.632a12 12 0 0 0-11.813 9.891L296.175 128H197.54l14.623-81.891C213.477 38.754 207.822 32 200.35 32h-40.632a12 12 0 0 0-11.813 9.891L132.528 128H53.432a12 12 0 0 0-11.813 9.891l-7.143 40C33.163 185.246 38.818 192 46.289 192h74.81L98.242 320H19.146a12 12 0 0 0-11.813 9.891l-7.143 40C-1.123 377.246 4.532 384 12.003 384h74.81L72.19 465.891C70.877 473.246 76.532 480 84.003 480h40.632a12 12 0 0 0 11.813-9.891L151.826 384h98.634l-14.623 81.891C234.523 473.246 240.178 480 247.65 480h40.632a12 12 0 0 0 11.813-9.891L315.472 384h79.096a12 12 0 0 0 11.813-9.891l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l22.857-128h79.096a12 12 0 0 0 11.813-9.891zM261.889 320h-98.634l22.857-128h98.634l-22.857 128z"/></svg>ff9932d</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
